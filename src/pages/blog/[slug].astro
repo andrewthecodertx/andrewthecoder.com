@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content'
 import readingTime from 'reading-time'
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+export const prerender = true;
 export async function getStaticPaths() {
 	const posts = await getCollection('posts')
   return posts.map(p => ({
