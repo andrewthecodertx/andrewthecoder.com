@@ -6,6 +6,7 @@
   --font-family-sans: 'Fira Sans', sans-serif; /* Prioritize sans-serif */
   --border-color: #e0e0e0;
   --card-background: #f9f9f9;
+  --social-icon-filter: none;
 }
 
 :root.theme-dark {
@@ -15,6 +16,7 @@
   --primary-color: #548e9b;
   --border-color: #444;
   --card-background: #2a2a2a;
+  --social-icon-filter: invert(1);
 }
 
 html {

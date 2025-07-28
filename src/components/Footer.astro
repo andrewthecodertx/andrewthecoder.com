@@ -1,4 +1,15 @@
 <footer>
+  <div class="social-links">
+    <a href="https://github.com/andrewthecodertx" target="_blank" rel="noopener noreferrer">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="GitHub" width="24" height="24" />
+    </a>
+    <a href="https://www.facebook.com/andrewthecoder" target="_blank" rel="noopener noreferrer">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/facebook.svg" alt="Facebook" width="24" height="24" />
+    </a>
+    <a href="https://discord.com/users/andrewthecoderwi" target="_blank" rel="noopener noreferrer">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/discord.svg" alt="Discord" width="24" height="24" />
+    </a>
+  </div>
   <span>
     &copy; {new Date().getFullYear()} Andrew S Erwin.
     Powered by <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>.
@@ -14,5 +25,18 @@
     text-align: center;
     border-top: 1px solid var(--border-color); /* Subtle separator */
     margin-top: 3em; /* Add some space above the footer */
+  }
+
+  .social-links {
+    margin-bottom: 1em;
+  }
+
+  .social-links a {
+    margin: 0 0.5em;
+    display: inline-block;
+  }
+
+  .social-links img {
+    filter: var(--social-icon-filter);
   }
 </style>
