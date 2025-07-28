@@ -34,20 +34,58 @@ allPosts = allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new 
 </BaseLayout>
 
 <style>
-  h2,
+  h1 {
+    text-align: center;
+    margin-bottom: 1.5em;
+  }
+
+  .post-item {
+    margin-bottom: 2em;
+    padding-bottom: 1.5em;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-item h2 {
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+  }
+
+  .post-item h2 a {
+    text-decoration: none;
+    color: var(--text-main);
+  }
+
+  .post-item h2 a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+
+  .post-item p {
+    color: var(--text-secondary);
+    margin-top: 0.5em;
+  }
+
   .post-item-footer {
     font-family: var(--font-family-sans);
-    font-weight: 700;
+    font-weight: 400; /* Lighter weight */
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-top: 1em;
   }
 
   .post-item-date {
-    color: var(--text-secondary);
-    text-align: left;
-    text-transform: uppercase;
-    margin-right: 16px;
+    text-transform: none; /* Remove uppercase */
+    margin-right: 0;
   }
 
   hr {
-    margin: 60px auto;
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 3em auto;
+    width: 50%;
   }
 </style>

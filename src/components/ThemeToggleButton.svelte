@@ -63,3 +63,52 @@
     </label>
   {/each}
 </div>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0.3em 0.6em; /* Adjusted padding */
+    gap: 0.5em; /* Adjusted gap */
+    border-radius: 99em;
+    background-color: var(--card-background); /* Use card background for toggle */
+    border: 1px solid var(--border-color); /* Add border */
+  }
+
+  .theme-toggle > label:focus-within {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 0.08em var(--primary-color), 0 0 0 0.12em var(--background-body);
+  }
+
+  .theme-toggle > label {
+    color: var(--text-secondary); /* Use secondary text color */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7; /* Slightly less opaque */
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out; /* Add transition */
+  }
+
+  .theme-toggle > label:hover {
+    opacity: 1;
+    color: var(--text-main); /* Main text color on hover */
+  }
+
+  .theme-toggle .checked {
+    color: var(--primary-color);
+    opacity: 1;
+  }
+
+  input[name='theme-toggle'] {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
+</style>

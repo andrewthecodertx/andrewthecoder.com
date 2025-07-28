@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Blog';
+const description = 'Latest articles.';
+const permalink = `${Astro.site.href}blog`;
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await getCollection('posts');
+  allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+
+  return paginate(allPosts, { pageSize: 5 });
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} permalink={permalink} current="blog">
+  <div class="container">
+    <h1>Blog</h1>
+    {page.data.map((post, index) => {
+      const href = `/blog/${post.data.slug}`;
+      return (
+        <div>
+          { index !== 0 && <hr /> }
+          <div class="post-item">
+            <h2>
+              <a href={href}>{post.data.title}</a>
+            </h2>
+            <p>{post.data.description}</p>
+            <div class="post-item-footer">
+              <span class="post-item-date">— {post.data.publishDate}</span>
+            </div>
+          </div>
+        </div>
+      )
+    })}
+
+    <nav class="pagination">
+      {page.url.prev && <a href={page.url.prev}>Previous Page</a>}
+      {page.url.next && <a href={page.url.next}>Next Page</a>}
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  h2,
+  .post-item-footer {
+    font-family: var(--font-family-sans);
+    font-weight: 700;
+  }
+
+  .post-item-date {
+    color: var(--text-secondary);
+    text-align: left;
+    text-transform: uppercase;
+    margin-right: 16px;
+  }
+
+  hr {
+    margin: 60px auto;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+
+  .pagination a {
+    padding: 10px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .pagination a:hover {
+    background-color: var(--accent);
+    color: var(--background);
+  }
+</style>

@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Projects';
+const description = 'A collection of my projects.';
+const permalink = `${Astro.site.href}projects`;
+
+const projects = [
+  {
+    name: 'Go Neural Network',
+    description: 'A flexible feed-forward neural network implemented in Go, supporting training and prediction with modular design, He initialization, ReLU activation, and backpropagation.',
+    url: 'https://github.com/andrewthecodertx/go-neuralnetwork',
+    features: [
+      'Modular Design',
+      'Feed-Forward Neural Network',
+      'Training with configurable parameters',
+      'Model Persistence (save/load to JSON)',
+      'Prediction on new input data',
+      'He Initialization',
+      'ReLU Activation for hidden layers',
+      'Linear Output for regression',
+      'Backpropagation algorithm',
+    ],
+  },
+  {
+    name: 'JavaScript Enigma Machine',
+    description: 'A JavaScript implementation of the World War II era Enigma M3 machine, accurately recreating its functionality including plugboard, rotors, and reflector.',
+    url: 'https://github.com/andrewthecodertx/javascript-enigma-machine',
+    features: [
+      'Accurate Enigma M3 components (rotors, reflector, plugboard)',
+      'Encryption and decryption of text',
+      'Command-line interface for interaction',
+      'Simple API server using Express.js for programmatic control',
+      'Comprehensive tests with Jest',
+    ],
+  },
+  {
+    name: 'ErwinText',
+    description: 'A simple terminal-based text editor built in C, providing basic text editing functionality within the command line.',
+    url: 'https://github.com/andrewthecodertx/c-ErwinText',
+    features: [
+      'Simple terminal-based text editor',
+      'Built in C',
+      'Basic text editing functionality',
+      'Command-line interface',
+    ],
+  },
+  {
+    name: 'Go Dad Jokes API',
+    description: 'A simple REST API service written in Go that serves and stores dad jokes, allowing users to fetch random jokes and submit new ones.',
+    url: 'https://github.com/andrewthecodertx/go-dadjokes-api',
+    features: [
+      'Fetch random dad jokes',
+      'Submit new dad jokes',
+      'IP-based rate limiting for POST requests',
+      'Input validation for joke submission',
+      'PostgreSQL database integration',
+      'Secure HTTPS support via Nginx',
+      'Environment-based configuration',
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} permalink={permalink} current="projects">
+  <div class="container">
+    <h1>My Projects</h1>
+    <div class="projects-grid">
+      {projects.map((project) => (
+        <div class="project-card">
+          <h2><a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a></h2>
+          <p>{project.description}</p>
+          {project.features && project.features.length > 0 && (
+            <ul class="project-features">
+              {project.features.map((feature) => <li>{feature}</li>)}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5em; /* Slightly reduced gap */
+    margin-top: 2.5em; /* Adjusted margin */
+  }
+
+  .project-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5em;
+    background-color: var(--card-background);
+    box-shadow: none; /* Removed box-shadow for a simpler look */
+    transition: transform 0.2s ease-in-out; /* Add subtle hover effect */
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+  }
+
+  .project-card h2 {
+    margin-top: 0;
+    font-size: 1.4em; /* Adjusted font size */
+  }
+
+  .project-card h2 a {
+    text-decoration: none;
+    color: var(--text-main); /* Use main text color by default */
+  }
+
+  .project-card h2 a:hover {
+    text-decoration: underline;
+    color: var(--primary-color); /* Primary color on hover */
+  }
+
+  .project-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1em;
+  }
+
+  .project-features {
+    list-style: disc;
+    margin-left: 1.2em; /* Slightly reduced margin */
+    color: var(--text-secondary);
+  }
+
+  .project-features li {
+    margin-bottom: 0.3em; /* Reduced margin */
+  }
+</style>

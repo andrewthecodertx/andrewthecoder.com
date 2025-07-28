@@ -1,99 +1,133 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
-const title = 'My Astro Blog';
-const description = 'The perfect starter for your perfect blog.';
+const title = 'Andrew the Coder';
+const description = 'Software Engineer and Web Developer';
 const permalink = Astro.site.href;
+
+const allPosts = await getCollection('posts');
+allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+const latestPosts = allPosts.slice(0, 3); // Get the 3 latest posts
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink}>
   <div class="home-container">
     <div class="home-copy">
-      <h1>Welcome to your new Astro Blog</h1>
-      <p>Check out the docs on <a href="https://www.github.com/Charca/astro-blog-template" target="_blank" rel="noopener">GitHub</a> to get started.</p>
+      <h1>Hi, I'm Andrew.</h1>
+      <p>I'm a software engineer and web developer with over 20 years of experience. I enjoy the problem-solving aspect of software development and am always looking for new challenges. I also hold advanced degrees in theology and linguistics, and my major hobby is music (I'm a guitar player).</p>
+      <p>You can learn more about me in the <a href="/about">about section</a>.</p>
     </div>
 
-    <div class="hero-image-container">
-      <picture>
-        <source srcset="/assets/home-illustration.webp" media="(min-width: 600px)">
-        <img class="hero-image" alt="Illustration of person reading a book" src="/assets/home-illustration-small.webp" width="550" height="466">
-      </picture>
-      <p class="caption">
-        Illustration by
-        <a href="https://icons8.com/illustrations/author/5c07e68d82bcbc0092519bb6" target="_blank" rel="noopener">Icons 8</a>
-        from
-        <a href="https://icons8.com/illustrations" target="_blank" rel="noopener">Ouch!</a>
-      </p>
-    </div>
+    <section class="latest-posts">
+      <h2>Latest Blog Posts</h2>
+      <ul>
+        {latestPosts.map((post) => (
+          <li>
+            <a href={`/blog/${post.data.slug}`}>{post.data.title}</a>
+            <p>{post.data.description}</p>
+          </li>
+        ))}
+      </ul>
+      <p><a href="/blog">View all posts &rarr;</a></p>
+    </section>
   </div>
 </BaseLayout>
 
 <style>
   .home-container {
-    align-items: center;
     display: flex;
-    flex: 1;
-    justify-content: center;
-    margin: 2em 0;
-    min-height: 400px;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em auto; /* Centered with auto margins */
+    max-width: 800px; /* Constrain width */
+    padding: 0 1.5em; /* Add padding for smaller screens */
   }
 
   .home-copy {
-    flex: 1;
-    padding: 0 1em;
+    text-align: center;
+    margin-bottom: 3em;
   }
 
   .home-copy h1 {
-    font-weight: 700;
-    margin-bottom: 0.5em;
-    line-height: 1.3;
+    font-size: 2.5em; /* Slightly smaller h1 */
+    margin-bottom: 0.8em;
+    line-height: 1.2;
   }
 
   .home-copy p {
-    font-size: 1.4em;
+    font-size: 1em; /* Consistent with global body font size */
+    max-width: 700px;
+    margin: 0 auto 1em auto;
   }
 
-  .hero-image-container {
-    margin: 0 1em;
-    text-align: center;
-  }
-
-  .hero-image-container picture {
-    display: block;
-    min-height: 250px;
-  }
-
-  .caption {
-    font-size: .8em;
-    font-style: italic;
-    text-align: left;
-  }
-
-  .hero-image {
+  .latest-posts {
     width: 100%;
-    max-width: 550px;
+    max-width: 800px;
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 1px solid var(--border-color); /* Subtle border */
+  }
+
+  .latest-posts h2 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-size: 2em; /* Adjusted h2 size */
+  }
+
+  .latest-posts ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .latest-posts li {
     margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px dashed var(--border-color); /* Subtle dashed border */
   }
 
-  @media (max-width: 1200px) {
-    p {
-      font-size: 1.2em;
-    }
-
-    .hero-image {
-      max-width: 400px;
-    }
+  .latest-posts li:last-child {
+    border-bottom: none;
   }
 
-  @media (max-width: 800px) {
-    .home-container {
-      flex-direction: column;
+  .latest-posts a {
+    font-size: 1.2em; /* Slightly smaller link font size */
+    font-weight: bold;
+    color: var(--text-main); /* Use main text color by default */
+    text-decoration: none;
+  }
+
+  .latest-posts a:hover {
+    color: var(--primary-color); /* Primary color on hover */
+    text-decoration: underline;
+  }
+
+  .latest-posts p {
+    color: var(--text-secondary);
+    margin-top: 0.5em;
+  }
+
+  .latest-posts > p {
+    text-align: center;
+    margin-top: 2em;
+  }
+
+  .latest-posts > p a {
+    font-size: 1em;
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    .home-copy h1 {
+      font-size: 2em;
     }
 
-    .home-copy {
-      flex: 0;
-      padding-bottom: 2em;
-      text-align: center;
+    .latest-posts h2 {
+      font-size: 1.8em;
+    }
+
+    .latest-posts a {
+      font-size: 1.1em;
     }
   }
 </style>

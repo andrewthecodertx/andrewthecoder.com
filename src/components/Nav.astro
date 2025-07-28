@@ -5,67 +5,55 @@ const { current = '' } = Astro.props;
 
 <style>
   nav {
-    align-items: center;
     display: flex;
-    flex: 1;
+    align-items: center;
     font-family: var(--font-family-sans);
     font-weight: 700;
-    justify-content: flex-end;
     text-transform: uppercase;
   }
 
   a {
-    color: inherit;
+    color: var(--text-main);
     text-decoration: none;
-    padding: 10px 5px;
-    display: block;
-    position: relative;
-    margin-left: 20px;
-    min-width: 70px;
-    text-align: center;
+    padding: 0.5em 0.8em; /* Adjusted padding */
+    margin-left: 1em; /* Adjusted margin */
+    transition: color 0.2s ease-in-out;
   }
 
-  a:not(.selected) {
-    opacity: 0.7;
+  a:hover {
+    color: var(--primary-color);
   }
 
-  a::before {
-    content: '';
-    position: absolute;
-    transition: transform .3s ease;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--text-secondary);
-    transform: scaleX(0);
-  }
-
-  a:hover::before,
-  .selected::before {
-    transform: scaleX(1);
-  }
-
-  .selected::before {
-    background: var(--primary-color);
+  a.selected {
+    color: var(--primary-color);
   }
 
   .theme-toggle-container {
-    width: 75px;
+    /* This rule is now empty as styles are moved to ThemeToggleButton.svelte */
   }
 
   @media screen and (max-width: 520px) {
+    nav {
+      flex-direction: column;
+      margin-top: 1em;
+    }
+
+    a {
+      margin: 0.5em 0; /* Adjusted margin for vertical layout */
+    }
+
     .theme-toggle-container {
-      margin-right: 1em;
+      /* This rule is now empty as styles are moved to ThemeToggleButton.svelte */
     }
   }
-
 </style>
 
 <nav>
   <a class={current === "" ? "selected" : ""} href='/'>home</a>
   <a class={current === "about" ? "selected" : ""} href='/about'>about</a>
   <a class={current === "blog" ? "selected" : ""} href='/blog'>blog</a>
+  <a class={current === "projects" ? "selected" : ""} href='/projects'>projects</a>
+  <a class={current === "search" ? "selected" : ""} href='/search'>search</a>
   <div class="theme-toggle-container">
     <ThemeToggleButton client:load />
   </div>
