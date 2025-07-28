@@ -6,6 +6,7 @@ const title = 'Blog';
 const description = 'Latest articles.';
 const permalink = `${Astro.site.href}blog`;
 
+export const prerender = true;
 export async function getStaticPaths({ paginate }) {
   const allPosts = await getCollection('posts');
   allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
