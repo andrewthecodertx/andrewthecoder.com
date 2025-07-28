@@ -26,7 +26,7 @@ jobs:
         run: |
           sshpass ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
           export NVM_DIR="$HOME/.nvm"
-          export PM2_DIR="$NVM_DIR/versions/node/v23.11.0/lib/node_modules/pm2/bin"
+          export PM2_DIR="$NVM_DIR/versions/node/v23.11.1/lib/node_modules/pm2/bin"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm use 23
           cd /var/www/andrewthecoder_com
