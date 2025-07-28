@@ -1,64 +1,55 @@
-# [Astro](https://astro.build) Blog Template
+# Andrew the Coder - Personal Website
 
-[![Screenshot](screenshot.png)](https://astro-blog-template.netlify.app/)
+This is the source code for my personal website and blog, [andrewthecoder.com](https://andrewthecoder.com). It's built with [Astro](https://astro.build) and serves as a place to share my thoughts on software development, web technologies, and other interests.
 
-## 👉 Check out the ✨ [Live Demo](https://astro-blog-template.netlify.app/) ✨
+## ✨ Features
 
-## 👩‍🚀 Getting Started
+-   **Blog:** Posts written in Markdown/MDX.
+-   **Frameworks:** Built with Astro, using Svelte components.
+-   **Deployment:** Automatically deployed via GitHub Actions.
+-   **Syndication:** RSS feed available at `/rss.xml`.
+-   **SEO:** Sitemap and OpenGraph data for better search engine visibility.
+-   **UI:** Dark mode support.
 
-### Locally
+## 🚀 Getting Started
 
-```
-npm init astro -- --template Charca/astro-blog-template
-```
+To run this project locally, follow these steps:
 
-### On StackBlitz
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/andrewthecodertx/andrewthecoder.com.git
+    cd andrewthecoder.com
+    ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/charca/astro-blog-template)
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-## ✨ Features:
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+    The application will be available at [http://localhost:4321](http://localhost:4321).
 
-- ✅ Astro 4.0
-- ✅ Dark Mode
-- ✅ Full Markdown support
-- ✅ SEO-friendly setup with canonical URLs and OpenGraph data
-- ✅ RSS 2.0 generation
-- ✅ Sitemap.xml generation
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```
-/
-├── public/
-│   ├── robots.txt
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   └── Tour.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
+## 🧞 Available Scripts
 
 | Command           | Action                                       |
 | :---------------- | :------------------------------------------- |
 | `npm install`     | Installs dependencies                        |
-| `npm run dev`     | Starts local dev server at `localhost:3030`  |
+| `npm run dev`     | Starts local dev server at `localhost:4321`  |
 | `npm run build`   | Build your production site to `./dist/`      |
 | `npm run preview` | Preview your build locally, before deploying |
 
-## 👀 Want to learn more?
+## 📁 Project Structure
 
-Feel free to check [Astro's documentation](https://github.com/withastro/astro) or jump into Astro's [Discord server](https://astro.build/chat).
+-   `src/pages/`: Contains all the pages and routes for the website.
+-   `src/layouts/`: Base layout components for pages.
+-   `src/components/`: Reusable UI components (Astro & Svelte).
+-   `src/data/`: Content collections for blog posts and authors.
+-   `src/styles/`: Global CSS styles.
+-   `public/`: Static assets like images and fonts.
+
+## CI/CD
+
+This project uses a GitHub Actions workflow defined in `.github/workflows/deploy.yml` to automatically build and deploy the site to production.
