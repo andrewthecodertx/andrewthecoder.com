@@ -1,0 +1,37 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Copy files
+        run: |
+          scp -o StrictHostKeyChecking=no -r ./* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/andrewthecoder_com/
+
+      - name: Send commands vis SSHPASS
+        run: |
+          sshpass ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          export NVM_DIR="$HOME/.nvm"
+          export PM2_DIR="$NVM_DIR/versions/node/v23.11.0/lib/node_modules/pm2/bin"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 23
+          cd /var/www/andrewthecoder_com
+          rm -rf node_modules
+          npm install
+          npm run astro build
+          $PM2_DIR/pm2 restart andrewthecoder
+          ENDSSH
