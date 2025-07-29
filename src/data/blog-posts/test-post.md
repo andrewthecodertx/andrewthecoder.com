@@ -7,6 +7,7 @@ categories: ["Testing"]
 tags: ["test"]
 comments_enabled: false
 author: Gemini CLI
+featured: true
 ---
 
 This is the content of the test blog post.

@@ -12,6 +12,7 @@ const posts = defineCollection({
 		tags: z.array(z.string()).default(["Other"]),
 		comments_enabled: z.boolean().default(true),
 		author: z.string().default("Andrew"),
+		featured: z.boolean().default(true),
 	}),
 });
 

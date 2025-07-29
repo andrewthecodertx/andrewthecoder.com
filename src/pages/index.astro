@@ -7,8 +7,9 @@ const description = 'Software Engineer and Web Developer';
 const permalink = Astro.site.href;
 
 const allPosts = await getCollection('posts');
-allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
-const latestPosts = allPosts.slice(0, 3); // Get the 3 latest posts
+const featuredPosts = allPosts.filter(post => post.data.featured);
+featuredPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+const latestPosts = featuredPosts.slice(0, 3); // Get the 3 latest posts
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink}>

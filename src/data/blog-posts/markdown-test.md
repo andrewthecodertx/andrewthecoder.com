@@ -7,6 +7,7 @@ categories: ["Testing"]
 tags: ["markdown", "test"]
 comments_enabled: true
 author: Andrew
+featured: true
 ---
 
 ![Illustration of woman using a computer receiving likes](/assets/blog/casual-life-3d-likes.webp)
