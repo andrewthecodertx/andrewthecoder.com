@@ -84,3 +84,10 @@ function encrypt(letter) {
 The `advanceRotors` function would handle the stepping mechanism, checking the `turnover` points of each rotor.
 
 This project was a fascinating exercise in understanding the inner workings of the Enigma machine. It's a great way to get a hands-on understanding of how this iconic cipher machine worked and to appreciate the incredible intellectual achievement of the codebreakers who cracked its code. You can try out the simulator for yourself on the project's GitHub page.
+
+Here is the equation for the number of possible keys on a Wehrmacht Enigma:
+
+$
+N = 5 \times 4 \times 3 \times (26 \times 26 \times 26) \times \frac{26!}{2^{10} \times 10! \times 6!} \approx 1.59 \times 10^{20}
+$
+

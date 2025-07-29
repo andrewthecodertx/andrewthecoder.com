@@ -5,6 +5,8 @@ import remarkGfm from 'remark-gfm'
 import remarkSmartypants from 'remark-smartypants'
 import rehypeExternalLinks from 'rehype-external-links'
 import node from '@astrojs/node'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,8 +19,9 @@ export default defineConfig({
     shikiConfig: {
       theme: 'nord',
     },
-    remarkPlugins: [remarkGfm, remarkSmartypants],
+    remarkPlugins: [remarkGfm, remarkSmartypants, remarkMath],
     rehypePlugins: [
+      rehypeKatex,
       [
         rehypeExternalLinks,
         {
