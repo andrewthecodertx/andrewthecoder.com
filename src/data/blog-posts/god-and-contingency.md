@@ -7,7 +7,7 @@ categories: ["theology"]
 tags: ["freewill", "process"]
 author: Andrew
 comments_enabled: true
-featured: true
+featured: false
 ---
 # The Paradox of a God Without Contingency
 
