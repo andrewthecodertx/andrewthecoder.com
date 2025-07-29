@@ -9,76 +9,20 @@ author: Andrew
 comments_enabled: true
 featured: false
 ---
-# The Paradox of a God Without Contingency
 
-Classical theism presents the concept of an asymmetric relationship with
-God, illustrating a profound and fundamental distinction between their
-Creator and His creation. In this framework, God is the ultimate source of
-all existence, possessing the singular and absolute power to create. His
-creatures, on the other hand, are entirely dependent on Him for their
-existence and lack any intrinsic creative power.
+Classical theism posits a profound, asymmetrical relationship between God and creation. In this view, God is the singular, ultimate source of all existence, while creatures are entirely dependent on Him, possessing no intrinsic creative power. The process philosopher Charles Hartshorne summarized this traditional stance as, "One wholly uncreated, the other wholly uncreative."[^1]
 
-This relationship is eloquently summarized by Charles Hartshorne, who
-described it as, "One wholly uncreated, the other wholly uncreative."
-This encapsulates the idea that while God is eternally self-sustaining
-and the origin of all that is, His creatures can neither originate nor sustain
-themselves independently, highlighting the essential dependence of the created
-upon the Creator.
+This concept was systematically articulated by Thomas Aquinas, who built upon Aristotle's ideas of God as "pure act" (*actus purus*) and the "unmoved mover."[^2] For Aquinas, the relationship from God to His creatures is real and impactful, as it is the very cause of their existence. The relationship from creatures back to God, however, is merely conceptual. Our existence does not change or affect God's being in any way. God's essence and existence are identical and entirely self-sufficient.
 
-In this view, it is entirely beyond the capability of creatures to influence
-or affect God in any meaningful way. Thomas Aquinas articulated this
-profound asymmetry by building upon Aristotle's concepts of "pure act" and the
-"unmoved mover." Aquinas explained that the relationship from God to His
-creatures is a real and dynamic one; it profoundly impacts their very
-existence and essence. In contrast, the relationship from creatures to God
-is rational and conceptual, existing only in the mind. The existence of
-creatures, while dependent on God, does not alter or impact His being in
-any way.
+This leads to the doctrine of divine impassibility: God is without feelings or emotions as we understand them, because emotions imply a change from potentiality to actuality. If God is "pure act," He is already everything He could possibly be. His actions are not reactions to the world, but the foundational cause of all that is.
 
-This delineation underscores the transcendent nature of God, whose essence
-and existence are entirely self-sufficient and unaffected by the created world.
-It emphasizes the dependency and contingency of creatures on their Creator,
-while God remains the immutable and ultimate source of all being.
+Herein lies a paradox that challenges coherence. Classical theism holds that God is all-knowing of a contingent world—a world where things could have been otherwise. Yet, it also holds that nothing in God's nature can be contingent or subject to change.
 
-This raises an intriguing question: if God is a "pure act,", implying that
-anything He could be, He already is, does He possess any potential for change?
-The concept of God as the "unmoved mover" suggests that He initiates
-movement and change in others while remaining entirely unaffected by anything
-external.
+How can an utterly changeless being have knowledge of a changing world? By definition, a contingent event could occur differently. If a marathoner is sleeping at a specific time, God knows the marathoner is sleeping. If that contingent reality were different—if the marathoner were running instead—then God's knowledge would have to be different as well. This doesn't imply a flaw in God, but rather that the content of His knowledge must accurately reflect the state of contingent reality.
 
-This characterization implies that God is impassible, meaning He is devoid
-of feelings or emotions as humans understand them. In classical theism, this
-notion underscores the idea that God's essence is entirely actualized,
-lacking any potentiality for change. His actions are not reactions but are the
-fundamental cause of all that exists.
+To claim that God infallibly knows whatever exists, but that the content of this knowledge can never be different from what it is, seems to logically necessitate that the world itself is not contingent, but necessary.
 
-This divine impassibility highlights the transcendence and constancy of
-God, whose nature remains eternally the same, unaffected by the temporal
-and mutable realm of creation.
+In conclusion, a deity devoid of any contingent aspects cannot, without logical contradiction, possess knowledge of a contingent world. The very nature of contingency demands variability, which seems incompatible with a being of pure, immutable actuality. This reveals a fundamental tension between the classical conception of an unchanging deity and the mutable, contingent reality we experience.
 
-This presents a paradox that borders on incoherence. It posits that God is
-all-knowing of a contingent world, yet nothing within Him can be different
-from what it is. These conditions seem to contradict each other. By
-definition, a contingent event could occur differently.
-
-For example, consider a marathoner who, at a particular time and place, is
-sleeping instead of running. If this event were reversed, God's knowledge
-of the event would also be reversed. This does not imply that God could be
-ignorant of something; rather, it suggests that the state of things known by
-God could differ.
-
-Therefore, God, in His infallibility, necessarily knows whatever exists.
-However, it did not logically follow that what exists is necessary. This
-paradox remains unless one accepts the premise that nothing within God can
-be other than it is, thereby maintaining that God’s knowledge and essence
-are eternally consistent and unchanging despite the contingency of the created
-world.
-
-In conclusion, it appears that a deity devoid of contingent aspects possessing
-knowledge of a contingent world presents a logical impossibility. The inherent
-nature of contingency implies potential variability and change, whereas a god
-without contingent aspects suggests absolute immutability and constancy.
-Reconciling these opposing qualities within the framework of divine knowledge
-challenges the coherence of such a concept, revealing a fundamental tension
-between the nature of an unchanging deity and the mutable reality of a
-contingent world.
+[^1]: This summary of the classical view is discussed in the context of Hartshorne's process theology. See the [Stanford Encyclopedia of Philosophy, "Process Theism"](https://plato.stanford.edu/entries/process-theism/).
+[^2]: Thomas Aquinas, *Summa Theologica*, Part I, Question 2, Article 3, and Question 3, Article 1. Aquinas lays out his arguments for the existence of God as the "unmoved mover" and discusses the divine simplicity, where God is understood as "pure act" with no potentiality.
