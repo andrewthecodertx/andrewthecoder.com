@@ -4,7 +4,7 @@ slug: god-and-contingency
 publishDate: "2025-07-29"
 description: "Resolving the paradox of a changeless God in a changing world through the lens of process philosophy and its implications for free will."
 categories: ["theology"]
-tags: ["freewill", "process", "Whitehead", "Hartshorne", "Aquinas"]
+tags: ["freewill", "process"]
 author: Andrew
 comments_enabled: true
 featured: false
