@@ -6,6 +6,7 @@ description: "A brief exploration of the paradox of a God without contingency in
 categories: ["theology"]
 tags: ["freewill", "process"]
 author: Andrew
+comments_enabled: true
 ---
 # The Paradox of a God Without Contingency
 
