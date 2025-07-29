@@ -1,8 +1,8 @@
 ---
-title: Simulating the Enigma Machine with JavaScript
+title: "Simulating the Enigma Machine: A Deep Dive with JavaScript"
 slug: javascript-enigma-machine
 publishDate: "2025-07-29"
-description: "A deep dive into the Enigma machine and how to simulate its complex cryptographic processes using JavaScript."
+description: "A deep dive into the Enigma machine's mathematics and how to simulate its complex cryptographic processes using JavaScript."
 categories: ["Software Development"]
 tags: ["cryptography", "enigma machine", "javascript"]
 author: Andrew
@@ -12,82 +12,99 @@ featured: true
 
 The Enigma machine, a cipher device used extensively by Nazi Germany during World War II, represents a fascinating piece of cryptographic history. Its complex system of rotors, reflectors, and a plugboard made it a formidable challenge for the Allied codebreakers at Bletchley Park.
 
-Inspired by this history, I decided to build my own Enigma machine simulator using JavaScript. This project, available on GitHub, is a web-based application that allows you to encrypt and decrypt messages using a simulated Enigma machine.
+Inspired by this history, I built my own Enigma machine simulator using JavaScript, which you can find on [GitHub](https://github.com/andrewthecodertx/javascript-enigma-machine). This post explores the mathematical principles behind the Enigma and how they can be emulated in code.
 
-### How the Enigma Machine Works
+### The Mathematics of Permutation
 
-The Enigma was an electro-mechanical device that used a polyalphabetic substitution cipher. Its strength came from the fact that the substitution alphabet changed with every key press. The main components were:
+The Enigma is, at its heart, a machine for creating complex permutations. A permutation is a one-to-one mapping of a set of items onto itself. For the Enigma, this set was the 26 letters of the alphabet. Each component of the machine applies a specific permutation to the electrical signal passing through it.
 
-*   **Plugboard (Steckerbrett):** A plugboard that swapped pairs of letters before and after the main rotor scrambling. This was the first and last step in the encryption process.
-*   **Rotors (Walzen):** A set of rotating wheels, each with 26 electrical contacts on each side. The internal wiring of each rotor performed a simple substitution cipher. The military Enigma used a set of three rotors chosen from a box of five.
-*   **Rotor Stepping:** With each key press, the rightmost rotor would advance one position. When a rotor completed a full rotation, it would trigger the next rotor to its left to advance, similar to an odometer. This is what changed the substitution for each letter.
-*   **Reflector (Umkehrwalze):** A static rotor that sent the electrical signal back through the rotors via a different path. A key feature of the reflector was that it ensured no letter could be encrypted as itself, a crucial flaw that was later exploited by codebreakers.
+The entire encryption process for a single character can be represented as a composition of these individual permutations.
 
-### The Mathematics of the Enigma
+### Enigma's Core Components as Permutations
 
-The encryption process of the Enigma can be represented as a series of permutations. Let's denote the plugboard permutation as `P`, the rotor permutations as `R1`, `R2`, and `R3`, and the reflector permutation as `U`. The encryption of a single letter `L` can be represented as:
+1.  **Plugboard (Steckerbrett - `P`):** This component swapped up to 13 pairs of letters. If a letter was not part of a swap, it mapped to itself. Mathematically, this is a permutation consisting of a number of 2-cycles (transpositions). For example, if 'A' is swapped with 'B' and 'C' with 'D', the permutation `P` would be `(AB)(CD)`. An interesting property of the plugboard is that it is its own inverse: applying the permutation twice returns the original letter. So, $P = P^{-1}$.
 
-`Ciphertext = P * R1 * R2 * R3 * U * R3^-1 * R2^-1 * R1^-1 * P^-1 * L`
+2.  **Rotors (Walzen - `R`):** The rotors were the heart of the machine. Each rotor performed a fixed permutation of the 26 letters. The military Enigma used three rotors at a time, chosen from a set of five (later eight). Let's call their permutations $R_1, R_2, R_3$. The signal passed through them from right to left.
 
-Where `R^-1` is the inverse permutation of `R`. Since the plugboard swaps pairs of letters, it is its own inverse (`P = P^-1`).
+3.  **Reflector (Umkehrwalze - `U`):** The reflector was a static, non-rotating component that sent the signal back through the rotors on a different path. It was also a permutation consisting of 13 transpositions and, like the plugboard, was its own inverse ($U = U^{-1}$). The reflector's design ensured that no letter could be encrypted as itself, a critical cryptographic flaw.
+
+### The Full Encryption Equation
+
+The path of the electrical signal for a single letter `L` can be modeled by the following equation:
+
+$$ E(L) = P \cdot R_1 \cdot R_2 \cdot R_3 \cdot U \cdot R_3^{-1} \cdot R_2^{-1} \cdot R_1^{-1} \cdot P^{-1}(L) $$
+
+Since $P = P^{-1}$, the equation simplifies to:
+
+$$ E(L) = P \cdot R_1 \cdot R_2 \cdot R_3 \cdot U \cdot R_3^{-1} \cdot R_2^{-1} \cdot R_1^{-1} \cdot P(L) $$
+
+### The Crucial Element: Rotor Stepping
+
+The true complexity of the Enigma came from the rotor movement. With each keypress, the rightmost rotor ($R_3$) advanced one position. This changed its permutation. When a rotor hit a specific "turnover" notch, it would cause the rotor to its left to advance. This odometer-like stepping meant that the permutation for each letter of a message was different, creating a polyalphabetic cipher with an astronomically long period.
+
+The total number of possible configurations for a Wehrmacht Enigma is immense:
+
+$$ N = \binom{5}{3} \times 3! \times 26^3 \times \frac{26!}{2^{10} \cdot 10! \cdot 6!} \approx 1.58 \times 10^{20} $$
+
+This breaks down as:
+-   Choosing 3 rotors from 5: $\binom{5}{3}$
+-   Arranging the 3 chosen rotors: $3!$
+-   Choosing the initial rotor positions: $26^3$
+-   Choosing the 10 plugboard connections: $\frac{26!}{2^{10} \cdot 10! \cdot 6!}$
 
 ### Emulating the Enigma in JavaScript
 
-To simulate the Enigma machine in JavaScript, we can represent each component as an object or class. The rotors, for example, can be represented as objects with a `wiring` property that maps each letter to its substitution.
+To simulate this in JavaScript, we can represent each component with its permutation mapping.
 
 ```javascript
+// Simplified rotor configuration
 const rotors = {
   'I': {
     wiring: 'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
-    turnover: 'Q'
+    turnover: 'Q' // Turnover notch at 'Q'
   },
   'II': {
     wiring: 'AJDKSIRUXBLHWTMCQGZNPYFVOE',
     turnover: 'E'
   },
-  // ... and so on for the other rotors
+  // ... etc.
+};
+
+// Reflector B
+const reflectorB = {
+  wiring: 'YRUHQSLDPXNGOKMIEBFZCWVJAT'
 };
 ```
 
-The `turnover` property indicates the letter at which the rotor will trigger the next rotor to step.
-
-The encryption process can then be implemented as a function that passes the input letter through each component in the correct order.
+The encryption function then applies these permutations in sequence, remembering to handle the forward and backward passes through the rotors.
 
 ```javascript
 function encrypt(letter) {
+  // Note: Rotor positions must be updated before this function is called.
+  
   // 1. Plugboard
-  let encryptedLetter = plugboard.process(letter);
+  let processedChar = plugboard.process(letter);
 
-  // 2. Rotors (right to left)
-  encryptedLetter = rotor3.forward(encryptedLetter);
-  encryptedLetter = rotor2.forward(encryptedLetter);
-  encryptedLetter = rotor1.forward(encryptedLetter);
+  // 2. Rotors (forward pass, right-to-left)
+  processedChar = rotor3.forward(processedChar);
+  processedChar = rotor2.forward(processedChar);
+  processedChar = rotor1.forward(processedChar);
 
   // 3. Reflector
-  encryptedLetter = reflector.process(encryptedLetter);
+  processedChar = reflector.process(processedChar);
 
-  // 4. Rotors (left to right)
-  encryptedLetter = rotor1.backward(encryptedLetter);
-  encryptedLetter = rotor2.backward(encryptedLetter);
-  encryptedLetter = rotor3.backward(encryptedLetter);
+  // 4. Rotors (backward pass, left-to-right)
+  processedChar = rotor1.backward(processedChar);
+  processedChar = rotor2.backward(processedChar);
+  processedChar = rotor3.backward(processedChar);
 
   // 5. Plugboard again
-  encryptedLetter = plugboard.process(encryptedLetter);
+  processedChar = plugboard.process(processedChar);
 
-  // 6. Advance rotors for the next letter
-  advanceRotors();
-
-  return encryptedLetter;
+  return processedChar;
 }
 ```
 
-The `advanceRotors` function would handle the stepping mechanism, checking the `turnover` points of each rotor.
+The most complex part of the simulation is correctly implementing the `advanceRotors()` logic, which must account for the standard stepping and the "double-stepping" anomaly.
 
-This project was a fascinating exercise in understanding the inner workings of the Enigma machine. It's a great way to get a hands-on understanding of how this iconic cipher machine worked and to appreciate the incredible intellectual achievement of the codebreakers who cracked its code. You can try out the simulator for yourself on the project's GitHub page.
-
-Here is the equation for the number of possible keys on a Wehrmacht Enigma:
-
-$
-N = 5 \times 4 \times 3 \times (26 \times 26 \times 26) \times \frac{26!}{2^{10} \times 10! \times 6!} \approx 1.59 \times 10^{20}
-$
-
+This project was a fascinating exercise in understanding the inner workings of the Enigma machine. It's a great way to get a hands-on understanding of how this iconic cipher machine worked and to appreciate the incredible intellectual achievement of the codebreakers who cracked its code.
