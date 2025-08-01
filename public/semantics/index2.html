@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Semantics in Markup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Andrew S Erwin" />
+    <meta
+      name="description"
+      content="A demonstration of the non presentational value of HTML tags."
+    />
+    <meta name="robots" content="all" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      @layer base {
+      @layer utilities {
+        .content-auto {
+          @apply content-visibility-auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <li>Unordered Lists Only</li>
+      </ul>
+      <ul>
+        <li>
+          <a href="https://andrewthecoder.xyz">andrew the coder</a>
+        </li>
+        <li>
+          <a href="#">about</a>
+        </li>
+        <li>
+          <a href="#">services</a>
+        </li>
+        <li>
+          <a href="#">contact</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          HTML tags have NO PRESENTATIONAL VALUE! Don't even think of them like
+          that. They're only there to lend meaning and context to the content.
+          This page is constructed using only 1 div and many unordered lists. No
+          other markup was employed to make this page. This page illustrates how
+          CSS should provide the presentation &ndash; regardless of what tags
+          are used to construct it.
+        </li>
+
+        <li>
+          Don't use this particular method for constructing your own pages,
+          however. Using nothing but &lt;ul&gt;s and &lt;li&gt;s to make your
+          page is silly and meaningless, unless the content is nothing but
+          lists. The moral of this story is that
+          <em>you should use HTML tags ONLY for their semantic value</em>
+          &ndash; for how the tag defines the content's place in the context of
+          the page. Presentation is the realm of CSS.
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="#">List item one here</a>
+        </li>
+        <li>
+          <a href="#">List item two here</a>
+        </li>
+        <li>
+          <a href="#">List item three here</a>
+        </li>
+        <li>
+          <a href="#">List item four here</a>
+        </li>
+        <li class="text-black text-lg font-sans font-bold">
+          Subtitle Goes here
+        </li>
+        <li>
+          Nulla facilisi. Praesent id sem. Maecenas sodales magna placerat enim.
+          Nulla aliquam congue ipsum. Nunc mattis porta ante. In ligula. Etiam
+          consequat ullamcorper dolor.
+        </li>
+      </ul>
+      <ul id="bottomcontent">
+        <li>
+          Mauris cursus cursus diam. Vivamus malesuada mattis metus. Donec sit
+          amet turpis. Aenean dictum fringilla metus. In velit nisl, ornare in,
+          commodo vel, dapibus quis, risus. Vestibulum porta massa id metus.
+          Praesent massa. Aliquam accumsan felis eu dui. Nunc sit amet tortor.
+          Nulla rutrum arcu a nisi. Quisque pharetra. Ut eu nisl lacinia magna
+          cursus pulvinar. Aliquam erat volutpat.
+        </li>
+      </ul>
+      <ul id="botleft">
+        <li>Description</li>
+        <li>SKU</li>
+        <li>Color</li>
+        <li>Price</li>
+        <li>Cool Shoe</li>
+        <li>#88475</li>
+        <li>Red</li>
+        <li>$45.00</li>
+        <li>Elegant Shoe</li>
+        <li>#88476</li>
+        <li>Black</li>
+        <li>$45.00</li>
+        <li>Sports Shoe</li>
+        <li>#88477</li>
+        <li>White</li>
+        <li>$45.00</li>
+        <li>Nerd Shoe</li>
+        <li>#88479</li>
+        <li>Yellow</li>
+        <li>$45.00</li>
+      </ul>
+      <ul id="botright">
+        <li>
+          Nulla facilisi. Praesent id sem. Maecenas sodales magna placerat enim.
+          Nulla aliquam congue ipsum. Nunc mattis porta ante. In ligula. Etiam
+          consequat ullamcorper dolor.
+        </li>
+      </ul>
+      <ul id="footer">
+        <li>&copy; 2024 Andrew S Erwin</li>
+      </ul>
+    </div>
+  </body>
+</html>
