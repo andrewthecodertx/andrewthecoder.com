@@ -8,18 +8,15 @@ const permalink = `${Astro.site.href}about`;
 
 <BaseLayout title={title} description={description} permalink={permalink} current="about">
   <div class="container">
-    <h1>About Me</h1>
-    <figure class="about-image">
-      <img src="/assets/about-illustration.webp" alt="Illustration of a notebook" width="330">
-      <figcaption>
-        Illustration by
-        <a href="https://icons8.com/illustrations/author/5c07e68d82bcbc0092519bb6" target="_blank" rel="noopener">Icons 8</a>
-        from
-        <a href="https://icons8.com/illustrations" target="_blank" rel="noopener">Ouch!</a>
-      </figcaption>
-    </figure>
-    <p>Hi, I'm Andrew, a software engineer and web developer with over 20 years of experience. I've had the opportunity to work with a diverse range of languages, frameworks, and platforms throughout my career. I thrive on the problem-solving aspects of software development and am always eager to tackle new challenges.</p>
-    <p>Beyond coding, I hold advanced degrees in theology and linguistics, which have broadened my perspective and analytical skills. My major hobby is music, and I'm an avid guitar player.</p>
+    <h2>About Me</h2>
+    <p>Hi, I'm Andrew, a software engineer and web developer with over 20 years
+      of experience. I've had the opportunity to work with a diverse range of
+      languages, frameworks, and platforms throughout my career. I thrive on
+      the problem-solving aspects of software development and am always eager
+      to tackle new challenges.</p>
+    <p>Beyond coding, I hold advanced degrees in theology and linguistics,
+      which have broadened my perspective and analytical skills. My major
+      hobby is music, and I'm an avid guitar player.</p>
 
     <h2>Languages I work with:</h2>
     <ul>
@@ -50,23 +47,6 @@ const permalink = `${Astro.site.href}about`;
 </BaseLayout>
 
 <style>
-  .about-image {
-    display: block;
-    margin: 2em auto; /* Center the image and add vertical margin */
-    max-width: 300px;
-    text-align: center; /* Center the caption */
-  }
-
-  .about-image img {
-    border-radius: 8px;
-    margin-bottom: 1em;
-  }
-
-  .about-image figcaption {
-    font-size: 0.8em;
-    color: var(--text-secondary);
-  }
-
   h2 {
     margin-top: 2em; /* Add more space above h2s */
     margin-bottom: 0.8em;
