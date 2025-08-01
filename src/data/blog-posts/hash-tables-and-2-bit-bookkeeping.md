@@ -10,7 +10,7 @@ comments_enabled: true
 featured: true
 ---
 
-the project: [GitHub - andrewmclagan/c-hash-table](c-hashtable)
+the project: [GitHub - andrewthecodertx/c-hashtable](https://github.com/andrewthecodertx/c-hashtable)
 
 ## What is a Hash Table?
 
