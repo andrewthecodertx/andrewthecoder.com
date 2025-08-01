@@ -1,19 +1,16 @@
 ---
-title: "Understanding Hash Tables and 2-Bit Bookkeeping"
+title: "C Hash Tables and 2-Bit Bookkeeping"
 slug: "hash-tables-and-2-bit-bookkeeping"
 publishDate: "2025-08-01"
-description: "A deep dive into hash tables, using a C implementation as an example, and an explanation of the memory-saving '2-bit bookkeeping' technique."
+description: "A look into hash tables, using a C implementation as an example, and an explanation of the memory-saving '2-bit bookkeeping' technique."
 categories: ["Software Development"]
 tags: ["c", "c++", "data structures", "hash table"]
 author: Andrew
 comments_enabled: true
-featured: false
+featured: true
 ---
 
-This document provides an explanation of hash tables, using the implementation
-in this project as a practical example. It also details the memory-saving
-"2-bit bookkeeping" technique used in this C implementation and compares the
-approach to modern C++.
+the project: [GitHub - andrewmclagan/c-hash-table](c-hashtable)
 
 ## What is a Hash Table?
 
