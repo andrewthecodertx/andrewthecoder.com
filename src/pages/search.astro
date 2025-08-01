@@ -2,14 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Search from '../components/Search.svelte';
 
-const title = 'Search';
+const title = 'Search Blogs';
 const description = 'Search all blog posts.';
 const permalink = `${Astro.site.href}search`;
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="search">
   <div class="container">
-    <h1>Search Blog Posts</h1>
+    <h2>Search Blog Posts</h2>
     <Search client:load />
   </div>
 </BaseLayout>
