@@ -10,19 +10,34 @@ const allPosts = await getCollection('posts');
 const featuredPosts = allPosts.filter(post => post.data.featured);
 featuredPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
 const latestPosts = featuredPosts.slice(0, 3); // Get the 3 latest posts
+
+const response = await fetch('https://dadjokes.developersandbox.xyz/api/v2/random');
+const dadJoke = await response.json();
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink}>
   <div class="home-container">
     <div class="home-copy">
-      <h1>Hi, I'm Andrew.</h1>
-      <p>I'm a software engineer and web developer with over 20 years of experience. I enjoy the problem-solving aspect of software development and am always looking for new challenges. I also hold advanced degrees in theology and linguistics, and my major hobby is music (I'm a guitar player).</p>
-      <p>You can reach me at <a href="mailto:info@andrewthecoder.com">info@andrewthecoder.com</a> for inquiries or to hire me!</p>
+      <h2>Hi, I'm Andrew.</h2>
+      <p>I'm a software engineer and web developer with over 20 years of experience.
+        I enjoy the problem-solving aspect of software development and am always
+        looking for new challenges. I also hold advanced degrees in theology and
+        linguistics, and my major hobby is music (I'm a guitar player).</p>
+      <p>You can reach me at <a href="mailto:info@andrewthecoder.com">
+        info@andrewthecoder.com</a> for inquiries or to hire me!</p>
       <p>You can learn more about me in the <a href="/about">about section</a>.</p>
     </div>
 
+    <section class="dad-joke">
+      <h3>Random Dad Joke</h3>
+      <p>{dadJoke.joke_text}</p>
+      <p>Submitted by: {dadJoke.author}</p>
+      <p>Instructions for submitting your own dad joke can be found
+        <a href="https://dadjokes.developersandbox.xyz" target="_blank">HERE</a>.</p>
+    </section>
+
     <section class="latest-posts">
-      <h2>Latest Blog Posts</h2>
+      <h3>Latest Blog Posts</h3>
       <ul>
         {latestPosts.map((post) => (
           <li>
@@ -61,6 +76,18 @@ const latestPosts = featuredPosts.slice(0, 3); // Get the 3 latest posts
     font-size: 1em; /* Consistent with global body font size */
     max-width: 700px;
     margin: 0 auto 1em auto;
+  }
+
+  .dad-joke {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 1px solid var(--border-color); /* Subtle border */
+  }
+
+  .dad-joke h3 {
+    margin-bottom: 1em;
   }
 
   .latest-posts {
