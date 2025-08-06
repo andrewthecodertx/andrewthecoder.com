@@ -9,6 +9,7 @@ const permalink = Astro.site.href;
 const allPosts = await getCollection('posts');
 const featuredPosts = allPosts.filter(post => post.data.featured);
 featuredPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+
 const latestPosts = featuredPosts.slice(0, 3); // Get the 3 latest posts
 
 const response = await fetch('https://dadjokes.developersandbox.xyz/api/v2/random');
