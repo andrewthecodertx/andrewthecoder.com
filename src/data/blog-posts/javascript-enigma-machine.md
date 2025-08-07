@@ -63,7 +63,7 @@ E(L) = P \cdot R_1 \cdot R_2 \cdot R_3 \cdot U \cdot R_3^{-1} \cdot R_2^{-1}
 \cdot R_1^{-1} \cdot P^{-1}(L)
 $$
 
-Since $ P = P^{-1} $, the equation simplifies to:
+Since $P = P^{-1}$, the equation simplifies to:
 
 $$
 E(L) = P \cdot R_1 \cdot R_2 \cdot R_3 \cdot U \cdot R_3^{-1} \cdot R_2^{-1}
