@@ -24,3 +24,5 @@ pnpm-debug.log*
 
 # Archive files
 *.archive
+
+eclipse/
