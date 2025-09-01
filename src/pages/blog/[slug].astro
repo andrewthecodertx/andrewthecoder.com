@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
-const { title, slug, description, publishDate, author } = post.data;
+const { title, slug, description, publishDate, author, image } = post.data;
 const readingTimeEstimate = readingTime(post.body).text
 const permalink = `${Astro.site.href}blog/${slug}`;
 const { Content } = await render(post)
@@ -22,7 +22,7 @@ const authors = await getCollection('authors');
 const currentAuthor = authors.find(a => a.data.name === author);
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="blog">
+<BaseLayout title={title} description={description} permalink={permalink} image={image} current="blog">
   <header>
     <p>{publishDate} ~ {readingTimeEstimate}</p>
     <div class="post-meta">

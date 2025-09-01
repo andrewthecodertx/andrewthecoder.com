@@ -8,6 +8,7 @@ tags: ["c", "c++", "data structures", "hash table"]
 author: Andrew
 comments_enabled: true
 featured: true
+image: "/assets/blog/casual-life-3d-likes.webp"
 ---
 
 the project: [GitHub - andrewthecodertx/c-hashtable](https://github.com/andrewthecodertx/c-hashtable)

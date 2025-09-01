@@ -8,6 +8,7 @@ tags: ["cryptography", "enigma machine", "javascript"]
 author: Andrew
 comments_enabled: true
 featured: true
+image: "/assets/blog/casual-life-3d-girl-boy-poses.webp"
 ---
 
 The Enigma machine, a cipher device used extensively by Nazi Germany during
