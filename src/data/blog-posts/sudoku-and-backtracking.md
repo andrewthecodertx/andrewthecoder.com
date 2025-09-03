@@ -12,7 +12,8 @@ image: "/assets/blog/sudoku.png"
 ---
 
 Check out the project on [GitHub](https://github.com/andrewthecodertx/Sudoku-Solver)
-Play the game online [HERE](https://developersandbox.xyz/sudoku/)
+
+Play the game online on [developersandbox](https://developersandbox.xyz/sudoku/)
 
 Sudoku, the captivating number puzzle, has been a favorite for ages. But
 have you ever wondered what's happening behind the scenes in the apps and
