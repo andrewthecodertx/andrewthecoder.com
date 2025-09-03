@@ -13,180 +13,174 @@ image: "/assets/blog/casual-life-3d-likes.webp"
 
 the project: [GitHub - andrewthecodertx/c-hashtable](https://github.com/andrewthecodertx/c-hashtable)
 
-## What is a Hash Table?
+# C Hash Tables and a Clever Memory-Saving Trick
 
-A hash table is a data structure that maps **keys** to **values**. It is one
-of the most efficient data structures for inserting, deleting, and looking up
-data. Think of it like a dictionary: you look up a word (the key) to find its
-definition (the value).
+It's a common debate among programmers: is C still a good choice for building
+modern, high-performance data structures? Some argue that newer languages like
+C++ make it easier, with more built-in tools and abstractions. This project, a
+generic hash table in C, takes on that challenge to show what's possible with a
+bit of clever engineering.
 
-The core components are:
+The result is a hash table that is not only fast and flexible but also
+incredibly memory-efficient, thanks to a simple but powerful technique: 2-bit
+bookkeeping.
 
-1. **Keys**: Unique identifiers for the data you want to store.
+## Core Features
 
-1. **Values**: The data associated with each key.
+This hash table was built with a few key goals in mind:
 
-1. **Hash Function**: A function that takes a key and computes an integer
-    value called a "hash." This hash is used to determine where in memory the
-    value should be stored.
+- **Works with Any Data Type**: You can use it to store anything you want, from
+  simple numbers to complex data structures.
+- **Fast and Efficient**: It uses a technique called "open addressing," which
+  is quick and friendly to your computer's memory.
+- **Smart Memory Use**: All data is stored in a single, organized block of
+  memory, which improves performance.
+- **Use Your Own Memory Manager**: If you have a special way of managing memory,
+  you can plug it right in.
+- **Extremely Low Memory Overhead**: This is the star of the show. We use a
+  special trick to keep track of our data using only **2 bits of memory per
+  entry**.
 
-1. **Buckets**: An array of slots where data is stored. The hash determines
-    which bucket an entry belongs to.
+## How It Works
 
-When you insert a key-value pair, the hash table uses the hash function on the
-key to calculate an index in its internal array. The value is then stored at
-that index. When you want to look up a key, it re-calculates the hash to find
-the index and retrieve the value.
-
-A "collision" occurs when two different keys produce the same hash index. This
-project uses **open addressing** with **linear probing** to resolve this: if a
-slot is taken, it simply checks the next slot, and the next, until it finds an
-empty one.
-
-## The C Implementation: A Deep Dive
-
-This project implements a generic hash table in C. Because C does not have
-templates like C++, it achieves genericity using `void*` pointers and a
-`type_handler` struct containing function pointers.
+The hash table's internal workings are hidden from the user, who interacts with
+it through a simple set of functions. Here's a peek under the hood:
 
 ```c
-// from: hashtable.h
+// This is the internal structure of our hash table.
+struct HashTable {
+    // Handlers for managing different data types.
+    type_handler   key_handler;
+    type_handler   value_handler;
+    // Custom memory management functions.
+    allocator      alloc_handler;
+    // The total number of slots available.
+    size_t         capacity;
+    // The number of items currently in the table.
+    size_t         count;
+    // A special array to keep track of each slot's status.
+    uint8_t*       control_bytes;
+    // The array where we store the actual data.
+    struct InternalEntry *entries;
+};
 
-// Defines the set of functions required for managing a type.
+// This is what a single entry in the hash table looks like.
+struct InternalEntry {
+    void* key;
+    void* value;
+};
+```
+
+The `entries` array holds the data you store, while the `control_bytes` array
+is where the memory-saving magic happens.
+
+### The Hotel Analogy: 2-Bit Bookkeeping
+
+To save memory, we use a clever trick to keep track of the status of each slot
+in the hash table. Think of it like a hotel with a very efficient receptionist.
+Instead of using a big, clunky notebook to track room status, the receptionist
+uses a compact system where each room's status is represented by a tiny 2-bit
+code:
+
+```c
+// We use 2 bits to represent the state of each slot.
+// 00: Empty (the slot has never been used)
+// 01: Occupied (the slot is currently in use)
+// 10: Deleted (the slot used to have data, but it was deleted)
+#define STATE_EMPTY    0b00
+#define STATE_OCCUPIED 0b01
+#define STATE_DELETED  0b10
+```
+
+This means we use only a quarter of the memory that would be required if we
+stored a full byte for each slot's status. The `get_state` and `set_state`
+functions handle the bit manipulation to read and write these states:
+
+```c
+// This function gets the status of a slot at a given index.
+static uint8_t get_state(const HashTable* table, size_t index) {
+    // Find the right byte in our control array.
+    size_t byte_index = index / 4;
+    // Find the position of the 2 bits within that byte.
+    size_t bit_offset = (index % 4) * 2;
+    // Read the 2 bits to get the state.
+    return (table->control_bytes[byte_index] >> bit_offset) & 0b11;
+}
+
+// This function sets the status of a slot at a given index.
+static void set_state(HashTable* table, size_t index, uint8_t state) {
+    // Find the right byte in our control array.
+    size_t byte_index = index / 4;
+    // Find the position of the 2 bits within that byte.
+    size_t bit_offset = (index % 4) * 2;
+    // Clear the 2 bits for the current slot.
+    table->control_bytes[byte_index] &= ~((uint8_t)0b11 << bit_offset);
+    // Set the new state.
+    table->control_bytes[byte_index] |= (state & 0b11) << bit_offset;
+}
+```
+
+This technique is a great example of the low-level control C gives you,
+allowing for significant memory savings.
+
+### Handling Different Data Types
+
+To make the hash table work with any kind of data, you provide a set of simple
+instructions called "type handlers." These tell the hash table how to manage
+your specific data.
+
+```c
+// This structure holds the functions for managing a data type.
 typedef struct {
-    copy_function    copy;    // How to copy an element
-    destroy_function destroy; // How to free an element
-    key_equal_function equal; // How to compare two keys
-    hash_function    hash;    // How to hash a key
+    copy_function    copy;    // How to copy your data
+    destroy_function destroy; // How to delete your data
+    key_equal_function equal;   // How to check if two keys are equal
+    hash_function    hash;    // How to create a unique ID for a key
 } type_handler;
 ```
 
-The user must provide these functions for their specific data types, giving them
-full control over memory and behavior.
+This gives you complete control over how your data is handled, which is one of
+the benefits of C's hands-on approach.
 
-### The "2-Bit Bookkeeping" Optimization
+### Custom Memory Management
 
-A key challenge in hash table design is managing the state of each slot
-(bucket) efficiently. A slot can be:
-
-- `EMPTY`: Has never been used.
-- `OCCUPIED`: Contains a valid key-value pair.
-- `DELETED`: Previously held data that was removed (a "tombstone").
-
-A naive approach would store a state flag inside each entry struct, often
-using an entire `int` or `char` (8 bits). This project uses a much more
-memory-efficient technique.
-
-It maintains a separate `control_bytes` array. Each single byte in this array
-holds the state for **four** different entries. Each state is encoded using
-just **2 bits**:
-
-- `00` (binary) -> `STATE_EMPTY`
-- `01` (binary) -> `STATE_OCCUPIED`
-- `10` (binary) -> `STATE_DELETED`
-
-This reduces the memory overhead for metadata to just 2 bits per slot, a 75%
-saving compared to using a full byte per slot.
-
-Here is the code that retrieves the state for a given entry index:
+For projects with special memory needs, you can also provide your own memory
+manager.
 
 ```c
-// from: hashtable.c
-
-static uint8_t get_state(const HashTable* table, size_t index) {
-    // Each byte holds 4 states. Find which byte to look in.
-    size_t byte_index = index / 4;
-    // Find the 2-bit offset within that byte.
-    size_t bit_offset = (index % 4) * 2;
-    // Shift and mask to isolate the 2 bits.
-    return (table->control_bytes[byte_index] >> bit_offset) & 0b11;
-}
+// This structure holds your custom memory functions.
+typedef struct {
+    alloc_function alloc; // Your function for allocating memory
+    free_function  free;  // Your function for freeing memory
+} allocator;
 ```
 
-This is a clever, low-level optimization that is characteristic of high-
-performance C code.
+This is like telling the hash table to use a specific supplier for its
+resources, giving you more control over how memory is managed. If you don't
+provide a custom manager, it will use the standard C library functions.
 
-## Comparison with C++
+## Building and Running the Demo
 
-C++ makes using hash tables much simpler thanks to its Standard Template
-Library (STL) and template system. The equivalent of this project's `HashTable`
-is `std::unordered_map`.
+A `Makefile` is provided to build the example program.
 
-Let's compare creating and using a hash table in this C project versus C++.
+```bash
+# Build the demo
+make
 
-### C Example (from `main.c`)
+# Run the demo
+./hashtable_demo
 
-In C, you must manually define the data types and then create handler functions
-for hashing, equality, copying, and destruction.
-
-```c
-// 1. Define the key and value types
-typedef struct { int id; char name[32]; } user_key;
-typedef struct { double value; char metadata[64]; } user_value;
-
-// 2. Implement handler functions (hash_user_key, equal_user_key, etc.)
-uint64_t hash_user_key(const void* key) { /* ... */ }
-bool equal_user_key(const void* key1, const void* key2) { /* ... */ }
-// ... other handlers ...
-
-// 3. Assemble the handlers and create the table
-type_handler key_handler = { /* .copy, .destroy, .equal, .hash */ };
-type_handler value_handler = { /* .copy, .destroy */ };
-HashTable* my_table = hash_table_create(key_handler, value_handler, NULL);
-
-// 4. Insert data
-user_key k1 = {101, "alpha"};
-user_value v1 = {3.14, "First item"};
-hash_table_insert(my_table, &k1, &v1);
+# Clean up build files
+make clean
 ```
 
-#### C++ Equivalent
+The demo in `main.c` shows how to create, insert, lookup, update, and delete
+entries using a custom struct as the key type.
 
-In C++, templates and operator overloading handle most of this automatically.
-You define a custom hash function and equality operator for your struct, and
-the container does the rest.
+## Conclusion
 
-```cpp
-#include <iostream>
-#include <string>
-#include <unordered_map>
-
-// 1. Define the key and value types
-struct UserKey {
-    int id;
-    std::string name;
-
-    // Equality operator
-    bool operator==(const UserKey& other) const {
-        return id == other.id && name == other.name;
-    }
-};
-struct UserValue { double value; std::string metadata; };
-
-// 2. Specialize the hash function for the custom key type
-namespace std {
-    template <>
-    struct hash<UserKey> {
-        size_t operator()(const UserKey& k) const {
-            // Combine hashes of members
-            return hash<int>()(k.id) ^ (hash<string>()(k.name) << 1);
-        }
-    };
-}
-
-int main() {
-    // 3. Create the table
-    std::unordered_map<UserKey, UserValue> myMap;
-
-    // 4. Insert data
-    myMap.insert({ {101, "alpha"}, {3.14, "First item"} });
-}
-```
-
-### Conclusion
-
-The C++ approach is less verbose, more type-safe, and less prone to manual
-memory management errors. However, the C implementation in this project
-demonstrates that C gives a programmer unparalleled control to make specific,
-low-level optimizations like the 2-bit bookkeeping strategy, which can be
-critical in memory-constrained environments.
+This project demonstrates that C is still a powerful tool for creating
+high-performance data structures. While it may require more manual effort than
+some newer languages, C gives you the control to optimize for speed and memory
+in ways that are hard to achieve otherwise. The 2-bit bookkeeping trick is a
+perfect example of how a little cleverness can lead to big efficiency gains.
