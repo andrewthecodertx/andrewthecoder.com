@@ -8,7 +8,7 @@ tags: ["c", "c++", "data structures", "hash table"]
 author: Andrew
 comments_enabled: true
 featured: true
-github: "https://githuib.com/andrewthecodertx/c-hashtable"
+github: "https://github.com/andrewthecodertx/c-hashtable"
 ---
 
 It's a common debate among programmers: is C still a good choice for building
