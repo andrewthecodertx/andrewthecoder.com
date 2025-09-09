@@ -14,7 +14,6 @@ import mdx from '@astrojs/mdx'
 import remarkGfm from 'remark-gfm'
 import remarkSmartypants from 'remark-smartypants'
 import rehypeExternalLinks from 'rehype-external-links'
-import node from '@astrojs/node'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 
@@ -22,7 +21,7 @@ import rehypeKatex from 'rehype-katex'
 export default defineConfig({
   output: 'server',
   adapter: node({ mode: 'standalone' }),
-  
+
   site: 'https://andrewthecoder.com',
   integrations: [mdx(), svelte()],
   markdown: {

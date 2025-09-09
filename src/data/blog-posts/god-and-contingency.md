@@ -8,7 +8,6 @@ tags: ["freewill", "process theology"]
 author: Andrew
 comments_enabled: true
 featured: false
-image: "/assets/blog/casual-life-3d-workspace.webp"
 ---
 
 The concept of God in classical theism is predominantly one of perfection,
@@ -90,4 +89,3 @@ both poles.
 that God is "surrelative," meaning God is related to all, but nothing is
 related to God in the same way.
 [^5]: Alfred North Whitehead, *Process and Reality*, 351.
-

@@ -2,8 +2,10 @@
   --background-body: #fff;
   --text-main: #36393b;
   --text-secondary: #6b6f72;
-  --primary-color: #548e9b; /* Keeping the existing primary color for now */
-  --font-family-sans: 'Fira Sans', sans-serif; /* Prioritize sans-serif */
+  --primary-color: #548e9b;
+  /* Keeping the existing primary color for now */
+  --font-family-sans: 'Fira Sans', sans-serif;
+  /* Prioritize sans-serif */
   --border-color: #e0e0e0;
   --card-background: #f9f9f9;
   --social-icon-filter: none;
@@ -39,7 +41,8 @@ html {
 body {
   margin: 0;
   font-family: var(--font-family-sans);
-  font-size: 18px; /* Slightly larger base font size */
+  font-size: 18px;
+  /* Slightly larger base font size */
   line-height: 1.6;
   background-color: var(--background-body);
   color: var(--text-main);
@@ -54,17 +57,20 @@ h6 {
   font-family: var(--font-family-sans);
   font-weight: 700;
   line-height: 1.2;
-  margin: 0 0 0.8em 0; /* Adjusted margin */
+  margin: 0 0 0.8em 0;
+  /* Adjusted margin */
 }
 
 h1 {
-  font-size: 2.8em; /* Reduced h1 size */
+  font-size: 2.8em;
+  /* Reduced h1 size */
   margin: 0;
   padding: 0;
 }
 
 h2 {
-  margin: 1.8em 0 0.8em 0; /* Adjusted margin */
+  margin: 1.8em 0 0.8em 0;
+  /* Adjusted margin */
   font-size: 2.2em;
 }
 
@@ -87,14 +93,16 @@ h6 {
 p,
 ul,
 ol {
-  font-size: 1em; /* Relative to body font size */
+  font-size: 1em;
+  /* Relative to body font size */
   line-height: 1.75em;
   margin: 1em 0;
 }
 
 ol,
 ul {
-  padding-left: 1.5rem; /* Reduced padding */
+  padding-left: 1.5rem;
+  /* Reduced padding */
 }
 
 li {
@@ -108,35 +116,44 @@ li p {
 
 a {
   color: var(--primary-color);
-  text-decoration: none; /* No underline by default */
+  text-decoration: none;
+  /* No underline by default */
   transition: color 0.2s ease-in-out;
 }
 
 a:hover {
-  text-decoration: underline; /* Underline on hover */
+  text-decoration: underline;
+  /* Underline on hover */
 }
 
 p a {
-  box-shadow: none; /* Remove box-shadow for links in paragraphs */
+  box-shadow: none;
+  /* Remove box-shadow for links in paragraphs */
 }
 
 p a:hover {
   color: var(--primary-color);
-  background-color: transparent; /* Remove background on hover */
+  background-color: transparent;
+  /* Remove background on hover */
 }
 
 img {
   max-width: 100%;
   height: auto;
-  display: block; /* Ensure images are block level */
-  margin: 0 auto; /* Center images */
+  display: block;
+  /* Ensure images are block level */
+  margin: 0 auto;
+  /* Center images */
 }
 
 hr {
   border: none;
-  border-top: 1px solid var(--border-color); /* Simple border */
-  margin: 3em auto; /* Adjusted margin */
-  width: 50%; /* Shorter HR */
+  border-top: 1px solid var(--border-color);
+  /* Simple border */
+  margin: 3em auto;
+  /* Adjusted margin */
+  width: 50%;
+  /* Shorter HR */
 }
 
 code {
@@ -153,7 +170,8 @@ pre {
   margin: 1.5em 0;
   padding: 1.5em;
   background-color: var(--card-background);
-  overflow-x: auto; /* Ensure code blocks are scrollable */
+  overflow-x: auto;
+  /* Ensure code blocks are scrollable */
 }
 
 pre code {
@@ -162,7 +180,8 @@ pre code {
 }
 
 blockquote {
-  border-left: 4px solid var(--primary-color); /* Use primary color for border */
+  border-left: 4px solid var(--primary-color);
+  /* Use primary color for border */
   font-size: 1.2em;
   font-style: italic;
   margin: 2em 0;
@@ -208,8 +227,10 @@ th {
 
 .container {
   margin: 0 auto;
-  max-width: 800px; /* Increased max-width for content */
-  padding: 0 1.5em; /* Added horizontal padding */
+  max-width: 800px;
+  /* Increased max-width for content */
+  padding: 0 1.5em;
+  /* Added horizontal padding */
   width: 100%;
 }
 

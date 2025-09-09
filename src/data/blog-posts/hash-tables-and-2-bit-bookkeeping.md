@@ -8,12 +8,8 @@ tags: ["c", "c++", "data structures", "hash table"]
 author: Andrew
 comments_enabled: true
 featured: true
-image: "/assets/blog/casual-life-3d-likes.webp"
+github: "https://githuib.com/andrewthecodertx/c-hashtable"
 ---
-
-the project: [GitHub - andrewthecodertx/c-hashtable](https://github.com/andrewthecodertx/c-hashtable)
-
-# C Hash Tables and a Clever Memory-Saving Trick
 
 It's a common debate among programmers: is C still a good choice for building
 modern, high-performance data structures? Some argue that newer languages like

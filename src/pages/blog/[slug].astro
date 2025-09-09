@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
 import readingTime from 'reading-time'
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogLayout from '../../layouts/BlogLayout.astro';
 
 export const prerender = true;
 export async function getStaticPaths() {
@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
-const { title, slug, description, publishDate, author, image } = post.data;
+const { title, slug, description, publishDate, author, image, github, demo } = post.data;
 const readingTimeEstimate = readingTime(post.body).text
 const permalink = `${Astro.site.href}blog/${slug}`;
 const { Content } = await render(post)
@@ -22,19 +22,32 @@ const authors = await getCollection('authors');
 const currentAuthor = authors.find(a => a.data.name === author);
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} image={image} current="blog">
+<BlogLayout title={title} description={description} permalink={permalink} image={image} current="blog">
   <header>
     <p>{publishDate} ~ {readingTimeEstimate}</p>
     <div class="post-meta">
       {post.data.categories.length > 0 && (
-        <p>Categories: {post.data.categories.map(category => <a href={`/blog/category/${category}`}>{category}</a>).reduce((prev, curr) => [prev, ', ', curr])}</p>
+        <p>Categories: {post.data.categories.map(category => 
+          <a href={`/blog/category/${category}`}>{category}</a>).reduce((prev, curr) => [prev, ', ', curr])}
+        </p>
       )}
       {post.data.tags.length > 0 && (
-        <p>Tags: {post.data.tags.map(tag => <a href={`/blog/tag/${tag}`}>{tag}</a>).reduce((prev, curr) => [prev, ', ', curr])}</p>
+        <p>Tags: {post.data.tags.map(tag => 
+          <a href={`/blog/tag/${tag}`}>{tag}</a>).reduce((prev, curr) => [prev, ', ', curr])}
+        </p>
       )}
+      <div class="flex">
+        {github && (
+          <p><a href={post.data.github} target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
+        )}
+        {demo && (
+          <p><a href={post.data.demo} target="_blank" rel="noopener noreferrer">Live Demo</a></p>
+        )}
+      </div>
     </div>
     <h1>{title}</h1>
     <hr />
+    {image && (<div class="container"><img src={image} alt={`Image for ${title}`} /></div>)}
   </header>
   <div class="container">
     <article class="content">
@@ -68,7 +81,7 @@ const currentAuthor = authors.find(a => a.data.name === author);
       </div>
     )}
   </div>
-</BaseLayout>
+</BlogLayout>
 
 <style>
   header {
@@ -94,6 +107,13 @@ const currentAuthor = authors.find(a => a.data.name === author);
     border-top: 1px solid var(--border-color);
     margin: 2em auto;
     width: 50%;
+  }
+
+  .flex {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .post-meta {

@@ -9,12 +9,9 @@ author: Andrew
 comments_enabled: true
 featured: true
 image: "/assets/blog/sudoku.png"
+github: "https://github.com/andrewthecodertx/Sudoku-Solver"
+demo: "https://developersandbox.xyz/sudoku/"
 ---
-
-Check out the project on [GitHub](https://github.com/andrewthecodertx/Sudoku-Solver)
-
-Play the game online on [developersandbox](https://developersandbox.xyz/sudoku/)
-
 Sudoku, the captivating number puzzle, has been a favorite for ages. But
 have you ever wondered what's happening behind the scenes in the apps and
 websites that can solve any Sudoku in a flash? The secret often lies in an
