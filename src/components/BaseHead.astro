@@ -30,14 +30,14 @@ const socialUrl = image ?? Astro.site.href + 'assets/social.png'
 <meta property="og:url" content={permalink} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={socialUrl} />
+<meta property="og:image" content={image} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={permalink} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={socialUrl} />
+<meta property="twitter:image" content={image} />
 
 <!-- This is intentionally inlined to avoid FOUC -->
 <script is:inline>
