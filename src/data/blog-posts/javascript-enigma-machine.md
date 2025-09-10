@@ -22,7 +22,7 @@ JavaScript, which you can find on [GitHub](https://github.com/andrewthecodertx/j
 This post explores the mathematical principles
 behind the Enigma and how they can be emulated in code.
 
-### The Mathematics of Permutation
+## The Mathematics of Permutation
 
 The Enigma is, at its heart, a machine for creating complex permutations. A
 permutation is a one-to-one mapping of a set of items onto itself. For the
@@ -33,7 +33,7 @@ it.
 The entire encryption process for a single character can be represented as a
 composition of these individual permutations.
 
-### Enigma's Core Components as Permutations
+## Enigma's Core Components as Permutations
 
 1. **Plugboard (Steckerbrett - `P`):** This component swapped up to 13 pairs of
 letters. If a letter was not part of a swap, it mapped to itself.
@@ -55,7 +55,7 @@ was also a permutation consisting of 13 transpositions and, like the plugboard,
 was its own inverse ($U = U^{-1}$). The reflector's design ensured that no
 letter could be encrypted as itself, a critical cryptographic flaw.
 
-### The Full Encryption Equation
+## The Full Encryption Equation
 
 The path of the electrical signal for a single letter `L` can be modeled by the
 following equation:
@@ -72,7 +72,7 @@ E(L) = P \cdot R_1 \cdot R_2 \cdot R_3 \cdot U \cdot R_3^{-1} \cdot R_2^{-1}
 \cdot R_1^{-1} \cdot P(L)
 $$
 
-### The Crucial Element: Rotor Stepping
+## The Crucial Element: Rotor Stepping
 
 The true complexity of the Enigma came from the rotor movement. With each
 keypress, the rightmost rotor ($R_3$) advanced one position. This changed its
