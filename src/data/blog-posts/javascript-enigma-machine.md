@@ -18,8 +18,8 @@ complex system of rotors, reflectors, and a plugboard made it a formidable
 challenge for the Allied codebreakers at Bletchley Park.
 
 Inspired by this history, I built my own Enigma machine simulator using
-JavaScript, which you can find on [GitHub](<https://github.com/andrewthecodertx/>
-javascript-enigma-machine). This post explores the mathematical principles
+JavaScript, which you can find on [GitHub](https://github.com/andrewthecodertx/javascript-enigma-machine).
+This post explores the mathematical principles
 behind the Enigma and how they can be emulated in code.
 
 ### The Mathematics of Permutation
