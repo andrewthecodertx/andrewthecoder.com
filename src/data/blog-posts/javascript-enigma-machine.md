@@ -9,6 +9,7 @@ author: andrew
 comments_enabled: true
 featured: true
 github: "https://github.com/andrewthecodertx/javascript-enigma-machine"
+image: "/assets/blog/enigma.png"
 ---
 
 The Enigma machine, a cipher device used extensively by Nazi Germany during
