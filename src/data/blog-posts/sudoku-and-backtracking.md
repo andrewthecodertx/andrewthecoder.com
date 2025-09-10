@@ -8,7 +8,7 @@ tags: ["sudoku", "algorithms"]
 author: Andrew
 comments_enabled: true
 featured: true
-image: "/assets/blog/sudoku.png"
+image: "/assets/blog/sudoku.webp"
 github: "https://github.com/andrewthecodertx/Sudoku-Solver"
 demo: "https://developersandbox.xyz/sudoku/"
 ---

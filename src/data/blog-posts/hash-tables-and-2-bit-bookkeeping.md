@@ -9,7 +9,7 @@ author: Andrew
 comments_enabled: true
 featured: true
 github: "https://github.com/andrewthecodertx/c-hashtable"
-image: "/assets/blog/hastables.png"
+image: "/assets/blog/hastables.webp"
 ---
 
 It's a common debate among programmers: is C still a good choice for building

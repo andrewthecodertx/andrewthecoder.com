@@ -9,7 +9,7 @@ author: andrew
 comments_enabled: true
 featured: true
 github: "https://github.com/andrewthecodertx/Neural-Network"
-image: "/assets/blog/neuralnetwork.png"
+image: "/assets/blog/neuralnetwork.webp"
 ---
 
 Have you ever wondered what's inside the black box of a neural network? It's a
