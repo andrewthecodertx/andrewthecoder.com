@@ -8,7 +8,7 @@ tags: ["neural network", "machine learning", "go"]
 author: andrew
 comments_enabled: true
 featured: true
-github: "https://github.com/andrewthecodertx/Neural-Network"
+github: "https://github.com/andrewthecodertx/go-neural-network"
 image: "/assets/blog/neuralnetwork.webp"
 ---
 
