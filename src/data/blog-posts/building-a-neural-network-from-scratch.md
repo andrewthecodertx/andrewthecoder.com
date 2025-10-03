@@ -148,51 +148,6 @@ func (nn *NeuralNetwork) Backpropagate(inputs []float64, targets []float64,
 }
 ```
 
-## A Tale of Two Languages: The TypeScript Port
-
-One of the interesting aspects of this project is the TypeScript port. It's a
-great way to see how the same concepts can be implemented in different
-languages. The structure and logic are remarkably similar, showcasing the
-universality of neural network principles.
-
-Here's a look at the `NeuralNetwork` class in TypeScript:
-
-```typescript
-// ts_port/neural_network.ts
-
-export class NeuralNetwork {
-  numInputs: number;
-  hiddenLayers: number[];
-  numOutputs: number;
-  // ...
-
-  constructor(
-    inputs: number,
-    hiddenLayers: number[],
-    outputs: number,
-    hiddenActivations: string[],
-    outputActivation: string
-  ) {
-    // ...
-  }
-
-  feedForward(inputs: number[]): { hiddenOutputs: number[][], 
-    finalOutputs: number[] } {
-    // ...
-  }
-
-  backpropagate(inputs: number[], targets: number[], hiddenOutputs: number[][],
-    finalOutputs: number[], learningRate: number): void {
-    // ...
-  }
-
-  async train(inputs: number[][], targets: number[][], epochs: number,
-    learningRate: number, errorGoal: number, progressCallback?: (error: number) => void): Promise<void> {
-    // ...
-  }
-}
-```
-
 ## Putting It All Together: The Iris Dataset
 
 The project includes the famous Iris dataset, which is a classic dataset for
