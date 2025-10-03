@@ -1,8 +1,8 @@
 ---
-title: "Building a Neural Network from Scratch"
+title: "Go Neural Network Implementation"
 slug: building-a-neural-network-from-scratch
 publishDate: "2025-09-10"
-description: "Building my own neural network from the ground up to understand the underlying principles of machine learning."
+description: "A feed-forward neural network implementation in Go with support for multiple activation functions, model persistence, and an interactive TUI."
 categories: ["Software Development"]
 tags: ["neural network", "machine learning", "go"]
 author: andrew
@@ -12,30 +12,17 @@ github: "https://github.com/andrewthecodertx/go-neural-network"
 image: "/assets/blog/neuralnetwork.webp"
 ---
 
-Have you ever wondered what's inside the black box of a neural network? It's a
-fascinating world of math, code, and data coming together to solve complex
-problems. In this post, we'll explore a project that demystifies neural
-networks by building one from the ground up in Go. We'll even take a peek at a
-TypeScript port!
+This project implements a feed-forward neural network in Go with a configurable
+architecture, multiple activation functions, and model persistence. It includes
+a terminal user interface (TUI) for training and prediction.
 
-## What is a Neural Network?
+## Architecture
 
-At its core, a neural network is a computational model inspired by the human
-brain. It consists of interconnected nodes, or "neurons," organized in layers.
-These networks can learn from data and make predictions or decisions.
+The network is a feed-forward neural network where information flows in one
+direction: from the input layer, through configurable hidden layers, to the
+output layer.
 
-This project implements a feed-forward neural network, where information flows
-in one direction—from the input layer, through one or more hidden layers, to
-the output layer.
-
-## The Building Blocks: Neurons and Layers
-
-Think of a neuron as a small computational unit. It receives inputs, processes
-them, and produces an output. Each connection between neurons has a "weight,"
-which determines the strength of the signal. The neuron also has a "bias,"
-which can be thought of as a thumb on the scale, helping to adjust the output.
-
-Here's how the Go project structures the network:
+Network structure:
 
 ```go
 // internal/neuralnetwork/neural_network.go
@@ -54,39 +41,26 @@ type NeuralNetwork struct {
 }
 ```
 
-This `struct` defines the architecture of our network, including the number of
-inputs, the size of the hidden layers, and the number of outputs. It also
-stores the weights and biases for each layer.
+The struct stores the network configuration, including input/output dimensions,
+hidden layer sizes, weights, biases, and activation functions for each layer.
 
-## The Magic of Math: Forward Propagation
+## Forward Propagation
 
-So, how does the network actually "think"? The process of passing input data
-through the network to get an output is called **forward propagation**. For each
-neuron, we calculate a weighted sum of its inputs, add the bias, and then
-apply an "activation function."
-
-The formula looks like this:
+Forward propagation computes the output by passing input data through the
+network. For each neuron:
 
 $output = f(\sum_{i=1}^{n} (input_i \cdot weight_i) + bias)$
 
 Where `f` is the activation function.
 
-### Activation Functions: The "Spark"
+### Supported Activation Functions
 
-Activation functions are a crucial component. They introduce non-linearity into
-the network, allowing it to learn complex patterns. Without them, the network
-would just be a simple linear model.
+* **ReLU:** $f(x) = \max(0, x)$
+* **Sigmoid:** $f(x) = \frac{1}{1 + e^{-x}}$
+* **Tanh:** $f(x) = \tanh(x)$
+* **Linear:** $f(x) = x$
 
-This project supports several activation functions, including:
-
-* **ReLU (Rectified Linear Unit):** A popular choice for hidden layers. It's
-    simple and efficient.
-    $f(x) = \max(0, x)$
-* **Sigmoid:** Often used for binary classification, as it squashes the
-    output to a range between 0 and 1.
-    $f(x) = \frac{1}{1 + e^{-x}}$
-
-Here's a snippet of the `FeedForward` function in Go:
+Implementation:
 
 ```go
 // internal/neuralnetwork/neural_network.go
@@ -110,27 +84,17 @@ func (nn *NeuralNetwork) FeedForward(inputs []float64) ([][]float64, []float64) 
 }
 ```
 
-## Learning from Mistakes: Backpropagation
+## Training: Backpropagation
 
-A neural network learns by adjusting its weights and biases to minimize the
-difference between its predictions and the actual target values. This process
-is called **training**.
+The network trains using backpropagation and gradient descent:
 
-The core of the training process is an algorithm called **backpropagation**. It
-works by:
+1. Forward pass to compute predictions
+2. Calculate error (loss) between predictions and targets
+3. Propagate error backward through the network
+4. Compute gradients for each weight and bias
+5. Update weights and biases using gradient descent
 
-1. Performing a forward pass to get the network's prediction.
-1. Calculating the "error" or "loss"—how far off the prediction is from the
-    truth.
-1. Propagating the error backward through the network, from the output layer
-    to the input layer.
-1. Using the error to calculate the gradient (the direction of steepest
-    ascent) of the loss function with respect to each weight and bias.
-1. Updating the weights and biases in the opposite direction of the
-    gradient, thus minimizing the error. This step is called **gradient
-    descent**.
-
-The `Backpropagate` function in the Go code handles this complex process:
+Implementation:
 
 ```go
 // internal/neuralnetwork/neural_network.go
@@ -148,21 +112,70 @@ func (nn *NeuralNetwork) Backpropagate(inputs []float64, targets []float64,
 }
 ```
 
-## Putting It All Together: The Iris Dataset
+## Features
 
-The project includes the famous Iris dataset, which is a classic dataset for
-classification tasks. The goal is to predict the species of an iris flower
-based on its sepal and petal measurements. The TUI makes it easy to train a new
-model on this dataset and see the results.
+### Modular Design
+Code is organized into separate packages:
+* `cli` - Terminal user interface
+* `data` - Dataset loading and preprocessing
+* `neuralnetwork` - Core network implementation
+* `utils` - Helper functions
 
-## Conclusion
+### Model Persistence
+Trained models can be saved to and loaded from JSON files in the `saved_models/`
+directory. This allows for model reuse without retraining.
 
-Building a neural network from scratch is a fantastic way to learn the
-fundamentals of deep learning. This Go project provides a clear and concise
-implementation that's perfect for digging into the code and understanding how
-things work under the hood.
+### Terminal User Interface
+Full-screen TUI for:
+* Training new models with configurable architecture
+* Loading saved models
+* Making predictions
+* Live training progress visualization
 
-Whether you're a Go developer looking to explore machine learning or a data
-scientist curious about Go, this project has something for you. I encourage you
-to clone the repository, run the code, and experiment with different network
-architectures and datasets. Happy coding!
+### Weight Initialization
+Weights are initialized using He initialization, which helps with training deep
+networks using ReLU activations.
+
+### Training Configuration
+* Configurable number of hidden layers and neurons per layer
+* Per-layer activation function selection
+* Adjustable learning rate and epochs
+* Error goal threshold for early stopping
+* Automatic train/test split
+
+## Included Datasets
+
+Sample datasets are provided:
+* **Iris dataset** - Species classification based on flower measurements
+* **Red Wine Quality dataset** - Wine quality prediction from physicochemical properties
+
+Both datasets are from the UCI Machine Learning Repository.
+
+## Usage
+
+Run the application:
+```bash
+go run .
+```
+
+Or with Docker:
+```bash
+docker build -t go-neuralnetwork .
+docker run -it --rm go-neuralnetwork
+```
+
+Navigate the TUI using arrow keys and Enter. Press `q` or `Ctrl+C` to quit.
+
+## Contribution and Collaboration
+
+This project is open for contributions and collaboration. Areas of interest include:
+
+* Implementing additional optimization algorithms (Adam, RMSprop)
+* Adding regularization support (L1/L2)
+* Expanding the test suite
+* Performance optimizations
+* Additional activation functions
+* Convolutional or recurrent network architectures
+
+Feel free to open issues for bugs or feature requests, or submit pull requests
+with improvements. Collaboration on new features or research directions is welcome.
