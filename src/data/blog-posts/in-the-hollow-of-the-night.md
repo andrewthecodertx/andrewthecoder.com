@@ -1,7 +1,7 @@
 ---
 title: "In the Hollow of the Night"
 slug: in-the-hollow-of-the-night
-publishDate: "2025-10--6"
+publishDate: "2025-10-06"
 description: "Just a short poem about loneliness and remorse"
 categories: ["Personal", "Poetry"]
 tags: ["iambic penatmeter", "poetry"]
