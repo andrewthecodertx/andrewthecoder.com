@@ -8,21 +8,21 @@ const { current = '' } = Astro.props;
 <style>
   header {
     display: flex;
-    justify-content: space-between; /* Distribute space between logo and nav */
+    justify-content: space-between;
     align-items: center;
-    padding: 1.5em; /* Adjusted padding */
-    border-bottom: 1px solid var(--border-color); /* Subtle separator */
+    padding: 0.6em;
+    border-bottom: 1px solid var(--border-color);
   }
 
   @media screen and (max-width: 520px) {
     header {
       flex-direction: column;
-      padding: 1em; /* Adjusted padding for smaller screens */
+      padding: 1em;
     }
   }
 </style>
 
 <header>
   <Logo />
-  <Nav current={current} />
+  <Nav current={current} client:load />
 </header>
