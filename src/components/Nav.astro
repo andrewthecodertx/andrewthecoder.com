@@ -43,13 +43,15 @@ const { current = '' } = Astro.props;
 
   @media screen and (max-width: 520px) {
     nav {
+      display: none;
       flex-direction: column;
-      margin-top: 0.6em;
+      margin-top: 0.75em;
       padding-right: 0;
     }
 
-    nav.hidden {
-      display: none;
+    nav.show {
+      display: flex;
+      height: 100vh;
     }
 
     a {
@@ -72,7 +74,7 @@ const { current = '' } = Astro.props;
 </style>
 
 <button class="menu-toggle" aria-label="toggle navigation" id="menu-toggle">&#9776</button>
-<nav class="hidden" id="menu">
+<nav class="" id="menu">
   <a class={current === "" ? "selected" : ""} href='/'>home</a>
   <a class={current === "about" ? "selected" : ""} href='/about'>about</a>
   <a class={current === "projects" ? "selected" : ""} href='/projects'>projects</a>
@@ -89,7 +91,7 @@ const { current = '' } = Astro.props;
         const menu = document.getElementById("menu")
 
         if(btn && menu) {
-            btn.onclick = () => menu.classList.toggle("hidden")
+            btn.onclick = () => menu.classList.toggle("show")
         }
     }
 
