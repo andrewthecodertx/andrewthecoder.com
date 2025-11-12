@@ -1,11 +1,138 @@
 ---
-import Logo from './Logo.astro'
-import Nav from './Nav.astro'
+import ThemeToggleButton from './ThemeToggleButton.svelte';
 
 const { current = '' } = Astro.props;
+const navmenu = [
+    { label: "home", href: "/" },
+    { label: "about", href: "/about" },
+    { label: "projects", href: "/projects" },
+    { label: "blog", href: "/blog" },
+    { label: "search", href: "/search" }
+];
 ---
 
-<header class="flex justify-between items-center p-3 border-b-2 xs:flex-col xs:p-4">
-  <Logo />
-  <Nav current={current} />
+<header class="flex justify-between items-center p-3 border-b-2">
+    <h1>
+        <a href="/">
+            <img alt="ANDREW THE CODER" src="/assets/logo.png"
+            class="block w-8" />
+        </a>
+    </h1>
+    <div class="nav-wrapper flex items-center gap-4">
+        <button
+            class="lg:hidden block text-2xl cursor-pointer p-2 hover:opacity-70 transition-opacity"
+            aria-label="toggle navigation"
+            aria-expanded="false"
+            id="menu-toggle"
+        >&#9776;
+        </button>
+        <nav
+            class="hidden lg:flex items-center uppercase text-xl font-bold gap-2"
+            id="menu"
+        >
+            {navmenu.map((item) => (
+                <a
+                    href={item.href}
+                    class=`decoration-0 px-2 py-3 transition-colors hover:text-blue-400
+                    ${current == item.label ? "text-blue-400" : null}`
+                >{item.label}</a>
+            ))}
+        </nav>
+        <div class="theme-toggle-container">
+            <ThemeToggleButton client:load />
+        </div>
+    </div>
 </header>
+
+<!-- Mobile menu overlay -->
+<div
+    class="lg:hidden fixed inset-0 bg-amber-50 dark:bg-gray-800 z-40 transform
+    translate-x-full transition-transform duration-300"
+    id="mobile-menu-overlay"
+>
+    <div class="flex flex-col items-center justify-center h-full gap-6">
+        <button
+            class="absolute top-4 right-4 text-3xl cursor-pointer p-2 hover:opacity-70
+            transition-opacity"
+            aria-label="close menu"
+            id="close-menu"
+        >&times;
+        </button>
+        <nav class="flex flex-col items-center uppercase text-2xl font-bold gap-4">
+            {navmenu.map((item) => (
+                <a
+                href={item.href}
+                class=`decoration-0 px-4 py-3 transition-colors hover:text-blue-400
+                ${current == item.label ? "text-blue-400" : null}`
+                >{item.label}</a>
+            ))}
+        </nav>
+    </div>
+</div>
+
+<script is:inline>
+    function setupMenu() {
+        const btn = document.getElementById("menu-toggle");
+        const closeBtn = document.getElementById("close-menu");
+        const overlay = document.getElementById("mobile-menu-overlay");
+
+        console.log("Setup menu - Button:", btn, "Overlay:", overlay, "Close:", closeBtn);
+
+        function openMenu() {
+            console.log("Opening menu");
+            if (overlay) {
+                overlay.classList.remove("translate-x-full");
+                overlay.classList.add("translate-x-0");
+            }
+            if (btn) {
+                btn.setAttribute("aria-expanded", "true");
+            }
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            console.log("Closing menu");
+            if (overlay) {
+                overlay.classList.remove("translate-x-0");
+                overlay.classList.add("translate-x-full");
+            }
+            if (btn) {
+                btn.setAttribute("aria-expanded", "false");
+            }
+            document.body.style.overflow = "";
+        }
+
+        if (btn && overlay) {
+            btn.addEventListener("click", openMenu);
+        }
+
+        if (closeBtn && overlay) {
+            closeBtn.addEventListener("click", closeMenu);
+        }
+
+        if (overlay) {
+            const links = overlay.querySelectorAll("a");
+            links.forEach(link => {
+                link.addEventListener("click", () => {
+                    setTimeout(closeMenu, 100);
+                });
+            });
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && overlay && !overlay.classList.contains("translate-x-full")) {
+                closeMenu();
+            }
+        });
+    }
+
+    // Run on initial load
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupMenu);
+    } else {
+        setupMenu();
+    }
+
+    // Run on Astro page transitions
+    document.addEventListener("astro:page-load", setupMenu);
+</script>
