@@ -113,8 +113,8 @@
         }
 
         :global(svg) {
-            width: 8px;
-            height: 8px;
+            width: 12px;
+            height: 12px;
         }
     }
 </style>
