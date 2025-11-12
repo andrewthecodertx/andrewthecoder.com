@@ -19,16 +19,16 @@
     }
 
     $: if (rootEl && theme === "light") {
-        rootEl.classList.remove("theme-dark");
+        rootEl.classList.remove("dark");
     } else if (rootEl && theme === "dark") {
-        rootEl.classList.add("theme-dark");
+        rootEl.classList.add("dark");
     }
 
     const icons = [
         `<svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width="18"
+      height="18"
       viewBox="0 0 20 20"
       fill="currentColor"
     >
@@ -40,8 +40,8 @@
     </svg>`,
         `<svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width="18"
+      height="18"
       viewBox="0 0 20 20"
       fill="currentColor"
     >
@@ -50,7 +50,7 @@
     ];
 </script>
 
-<div class="theme-toggle">
+<div class="inline-flex items-center px-1.5 py-2.5 gap-2">
     {#each themes as t, i}
         <label class={theme === t ? "checked" : ""}>
             {@html icons[i]}
@@ -68,16 +68,6 @@
 </div>
 
 <style>
-    .theme-toggle {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.3em 0.6em;
-        gap: 0.5em;
-        border-radius: 99em;
-        background-color: var(--card-background);
-        border: 1px solid var(--border-color);
-    }
-
     .theme-toggle > label:focus-within {
         outline: 2px solid transparent;
         box-shadow:
@@ -86,16 +76,15 @@
     }
 
     .theme-toggle > label {
-        color: var(--text-secondary); /* Use secondary text color */
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: 0.7; /* Slightly less opaque */
+        opacity: 0.7;
         cursor: pointer;
         transition:
             opacity 0.2s ease-in-out,
-            color 0.2s ease-in-out; /* Add transition */
+            color 0.2s ease-in-out;
     }
 
     .theme-toggle > label:hover {
@@ -124,8 +113,8 @@
         }
 
         :global(svg) {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
         }
     }
 </style>

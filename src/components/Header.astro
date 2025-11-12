@@ -5,24 +5,7 @@ import Nav from './Nav.astro'
 const { current = '' } = Astro.props;
 ---
 
-<style>
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.6em;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  @media screen and (max-width: 520px) {
-    header {
-      flex-direction: column;
-      padding: 1em;
-    }
-  }
-</style>
-
-<header>
+<header class="flex justify-between items-center p-3 border-b-2 xs:flex-col xs:p-4">
   <Logo />
-  <Nav current={current} client:load />
+  <Nav current={current} />
 </header>

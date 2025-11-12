@@ -1,101 +1,124 @@
 ---
 import ThemeToggleButton from './ThemeToggleButton.svelte';
-const { current = '' } = Astro.props;
+
+const { current = "" } = Astro.props;
+const navmenu = [
+    { label: "home", href: "/" },
+    { label: "about", href: "/about" },
+    { label: "projects", href: "/projects" },
+    { label: "blog", href: "/blog" },
+    { label: "search", href: "/search" }
+];
 ---
 
-<style>
-  nav {
-    display: flex;
-    align-items: center;
-    font-family: var(--font-family-sans);
-    font-weight: 700;
-    text-transform: uppercase;
-    padding-right: 6em;
-  }
+<div class="nav-wrapper flex items-center gap-4">
+  <button 
+    class="lg:hidden block text-2xl cursor-pointer p-2 hover:opacity-70 transition-opacity"
+    aria-label="toggle navigation" 
+    aria-expanded="false"
+    id="menu-toggle"
+  >
+    &#9776;
+  </button>
+  
+  <nav 
+    class="hidden lg:flex items-center uppercase text-xl font-bold gap-2" 
+    id="menu"
+  >
+    {navmenu.map((item) => (
+      <a 
+        href={item.href}
+        class=`decoration-0 px-2 py-3 transition-colors hover:text-blue-400
+        ${current == item.label ? "text-blue-400" : null}`
+      >{item.label}</a>
+    ))}
+  </nav>
+  
+  <div class="theme-toggle-container">
+    <ThemeToggleButton client:load />
+  </div>
+</div>
 
-  a {
-    color: var(--text-main);
-    text-decoration: none;
-    padding: 0.5em 0.8em; /* Adjusted padding */
-    margin-left: 1em; /* Adjusted margin */
-    transition: color 0.2s ease-in-out;
-  }
-
-  a:hover {
-    color: var(--primary-color);
-  }
-
-  a.selected {
-    color: var(--primary-color);
-  }
-
-  .theme-toggle-container {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 1em 0.6em;
-  }
-
-  .menu-toggle {
-    display: none;
-
-  }
-
-  @media screen and (max-width: 520px) {
-    nav {
-      display: none;
-      flex-direction: column;
-      margin-top: 0.75em;
-      padding-right: 0;
-    }
-
-    nav.show {
-      display: flex;
-      height: 100vh;
-    }
-
-    a {
-      margin: 0.5em 0;
-    }
-
-    .theme-toggle-container {
-      padding: 0 0.6em;
-    }
-
-    .menu-toggle {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      margin: 0.75em 0.6em;
-      cursor: pointer;
-    }
-  }
-</style>
-
-<button class="menu-toggle" aria-label="toggle navigation" id="menu-toggle">&#9776</button>
-<nav class="" id="menu">
-  <a class={current === "" ? "selected" : ""} href='/'>home</a>
-  <a class={current === "about" ? "selected" : ""} href='/about'>about</a>
-  <a class={current === "projects" ? "selected" : ""} href='/projects'>projects</a>
-  <a class={current === "blog" ? "selected" : ""} href='/blog'>blog</a>
-  <a class={current === "search" ? "selected" : ""} href='/search'>search</a>
-</nav>
-<div class="theme-toggle-container">
-  <ThemeToggleButton client:load />
+<!-- Mobile menu overlay -->
+<div 
+  class="lg:hidden fixed inset-0 bg-amber-50 dark:bg-gray-800 z-40 transform translate-x-full transition-transform duration-300"
+  id="mobile-menu-overlay"
+>
+  <div class="flex flex-col items-center justify-center h-full gap-6">
+    <button 
+      class="absolute top-4 right-4 text-3xl cursor-pointer p-2 hover:opacity-70 transition-opacity"
+      aria-label="close menu"
+      id="close-menu"
+    >
+      &times;
+    </button>
+    <nav class="flex flex-col items-center uppercase text-2xl font-bold gap-4">
+      {navmenu.map((item) => (
+        <a 
+          href={item.href}
+          class=`decoration-0 px-4 py-3 transition-colors hover:text-blue-400
+          ${current == item.label ? "text-blue-400" : null}`
+        >{item.label}</a>
+      ))}
+    </nav>
+  </div>
 </div>
 
 <script>
     function setupMenu() {
-        const btn = document.getElementById("menu-toggle")
-        const menu = document.getElementById("menu")
+        const btn = document.getElementById("menu-toggle");
+        const closeBtn = document.getElementById("close-menu");
+        const overlay = document.getElementById("mobile-menu-overlay");
+        const menu = document.getElementById("menu");
 
-        if(btn && menu) {
-            btn.onclick = () => menu.classList.toggle("show")
+        function openMenu() {
+            if (overlay) {
+                overlay.classList.remove("translate-x-full");
+                overlay.classList.add("translate-x-0");
+            }
+            if (btn) {
+                btn.setAttribute("aria-expanded", "true");
+            }
+            document.body.style.overflow = "hidden";
         }
+
+        function closeMenu() {
+            if (overlay) {
+                overlay.classList.remove("translate-x-0");
+                overlay.classList.add("translate-x-full");
+            }
+            if (btn) {
+                btn.setAttribute("aria-expanded", "false");
+            }
+            document.body.style.overflow = "";
+        }
+
+        if (btn && overlay) {
+            btn.onclick = openMenu;
+        }
+
+        if (closeBtn && overlay) {
+            closeBtn.onclick = closeMenu;
+        }
+
+        // Close menu when clicking on a link
+        if (overlay) {
+            const links = overlay.querySelectorAll("a");
+            links.forEach(link => {
+                link.onclick = () => {
+                    setTimeout(closeMenu, 100);
+                };
+            });
+        }
+
+        // Close menu on escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && overlay && !overlay.classList.contains("translate-x-full")) {
+                closeMenu();
+            }
+        });
     }
 
-    setupMenu()
-
-    document.addEventListener("astro:page-load", setupMenu)
+    setupMenu();
+    document.addEventListener("astro:page-load", setupMenu);
 </script>
