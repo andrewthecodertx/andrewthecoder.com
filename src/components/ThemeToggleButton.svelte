@@ -52,7 +52,7 @@
 
 <div class="inline-flex items-center px-1.5 py-2.5 gap-2">
     {#each themes as t, i}
-        <label class={theme === t ? "checked" : ""}>
+        <label class={theme === t ? "checked" : null}>
             {@html icons[i]}
             <input
                 type="radio"
@@ -68,35 +68,6 @@
 </div>
 
 <style>
-    .theme-toggle > label:focus-within {
-        outline: 2px solid transparent;
-        box-shadow:
-            0 0 0 0.08em var(--primary-color),
-            0 0 0 0.12em var(--background-body);
-    }
-
-    .theme-toggle > label {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0.7;
-        cursor: pointer;
-        transition:
-            opacity 0.2s ease-in-out,
-            color 0.2s ease-in-out;
-    }
-
-    .theme-toggle > label:hover {
-        opacity: 1;
-        color: var(--text-main); /* Main text color on hover */
-    }
-
-    .theme-toggle .checked {
-        color: var(--primary-color);
-        opacity: 1;
-    }
-
     input[name="theme-toggle"] {
         position: absolute;
         opacity: 0;
@@ -108,10 +79,6 @@
     }
 
     @media screen and (max-width: 520px) {
-        .theme-toggle {
-            margin-top: 0.3em;
-        }
-
         :global(svg) {
             width: 18px;
             height: 18px;
