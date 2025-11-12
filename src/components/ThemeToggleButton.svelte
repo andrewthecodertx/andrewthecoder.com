@@ -27,8 +27,8 @@
     const icons = [
         `<svg
       xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
+      width="20"
+      height="20"
       viewBox="0 0 20 20"
       fill="currentColor"
     >
@@ -40,8 +40,8 @@
     </svg>`,
         `<svg
       xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
+      width="20"
+      height="20"
       viewBox="0 0 20 20"
       fill="currentColor"
     >
@@ -113,8 +113,8 @@
         }
 
         :global(svg) {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
         }
     }
 </style>
