@@ -20,7 +20,7 @@ try {
   data = await response.json();
 } catch (error) {
   console.error('Error fetching projects:', error);
-  projects = []; // Fallback to an empty array if the fetch fails
+  projects = [];
   return;
 }
 
@@ -35,71 +35,96 @@ projects = data.items.map((item : any) => ({
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="projects">
-  <div class="container">
-    <h2>My Projects</h2>
-    <div class="projects-grid">
-      {projects.map((project) => (
-        <div class="project-card">
-          <h3><a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a></h3>
-          <p>{project.description}</p>
-          <p>Language: {project.language}</p>
-          {project.homepage && (
-            <a href={project.homepage} target="_blank" rel="noopener noreferrer">CHEK IT OUT HERE</a>
-          )}
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Page Header -->
+    <section class="py-12 lg:py-16">
+      <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-amber-50 mb-4">
+        My Projects
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-amber-200">
+        A showcase of my portfolio projects from GitHub
+      </p>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="pb-12 lg:pb-16">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => (
+          <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg
+          hover:shadow-xl transition-all duration-300 overflow-hidden
+          border border-gray-200 dark:border-gray-700 flex flex-col">
+            <div class="p-6 flex-1 flex flex-col">
+              <!-- Project Header -->
+              <div class="flex items-start justify-between mb-4">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-amber-50 flex-1">
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+                  >
+                    {project.name}
+                  </a>
+                </h3>
+                <svg class="w-5 h-5 text-gray-400 dark:text-gray-500 flex-shrink-0 ml-2"
+                fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 0a10 10 0 0 0-3.162 19.488c.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.343-3.369-1.343-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 10 4.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0 0 10 0z" />
+                </svg>
+              </div>
+
+              <!-- Project Description -->
+              <p class="text-gray-600 dark:text-amber-200 mb-4 flex-1">
+                {project.description}
+              </p>
+
+              <!-- Language Badge -->
+              <div class="flex items-center gap-2 mb-4">
+                <span class="inline-flex items-center px-3 py-1 bg-gray-100
+                dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full
+                text-sm font-medium">
+                  <span class="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+                  {project.language}
+                </span>
+              </div>
+
+              <!-- Project Links -->
+              <div class="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 text-center px-4 py-2 bg-blue-500 hover:bg-blue-600
+                  dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium
+                  rounded-lg transition-colors duration-200 text-sm"
+                >
+                  View Code
+                </a>
+                {project.homepage && (
+                  <a
+                    href={project.homepage}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 text-center px-4 py-2 border-2 border-blue-500
+                    dark:border-blue-400 text-blue-500 dark:text-blue-400
+                    hover:bg-blue-50 dark:hover:bg-blue-900/20 font-medium
+                    rounded-lg transition-colors duration-200 text-sm"
+                  >
+                    Live Demo
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {projects.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-xl text-gray-600 dark:text-amber-200">
+            No projects found. Check back later!
+          </p>
         </div>
-      ))}
-    </div>
+      )}
+    </section>
   </div>
 </BaseLayout>
-
-<style>
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5em; /* Slightly reduced gap */
-    margin-top: 2.5em; /* Adjusted margin */
-  }
-
-  .project-card {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    background-color: var(--card-background);
-    box-shadow: none; /* Removed box-shadow for a simpler look */
-    transition: transform 0.2s ease-in-out; /* Add subtle hover effect */
-  }
-
-  .project-card:hover {
-    transform: translateY(-5px); /* Lift card on hover */
-  }
-
-  .project-card h2 {
-    margin-top: 0;
-    font-size: 1.4em; /* Adjusted font size */
-  }
-
-  .project-card h2 a {
-    text-decoration: none;
-    color: var(--text-main); /* Use main text color by default */
-  }
-
-  .project-card h2 a:hover {
-    text-decoration: underline;
-    color: var(--primary-color); /* Primary color on hover */
-  }
-
-  .project-card p {
-    color: var(--text-secondary);
-    margin-bottom: 1em;
-  }
-
-  .project-features {
-    list-style: disc;
-    margin-left: 1.2em; /* Slightly reduced margin */
-    color: var(--text-secondary);
-  }
-
-  .project-features li {
-    margin-bottom: 0.3em; /* Reduced margin */
-  }
-</style>

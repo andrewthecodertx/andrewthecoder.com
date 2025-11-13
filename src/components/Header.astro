@@ -44,7 +44,6 @@ const navmenu = [
     </div>
 </header>
 
-<!-- Mobile menu overlay -->
 <div
     class="lg:hidden fixed inset-0 bg-amber-50 dark:bg-gray-800 z-40 transform
     translate-x-full transition-transform duration-300"
@@ -126,13 +125,11 @@ const navmenu = [
         });
     }
 
-    // Run on initial load
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", setupMenu);
     } else {
         setupMenu();
     }
 
-    // Run on Astro page transitions
     document.addEventListener("astro:page-load", setupMenu);
 </script>

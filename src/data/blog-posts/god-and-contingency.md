@@ -6,7 +6,7 @@ description: "Resolving the paradox of a changeless God in a changing world thro
 categories: ["Theology", "Philosophy"]
 tags: ["freewill", "process theology"]
 author: Andrew
-comments_enabled: true
+comments_enabled: false
 featured: false
 ---
 

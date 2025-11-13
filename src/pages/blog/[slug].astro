@@ -13,56 +13,150 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
-const { title, slug, description, publishDate, author, image, github, demo } = post.data;
+const { title, slug, description, publishDate, author, image, github, demo, categories, tags } = post.data;
 const readingTimeEstimate = readingTime(post.body).text
 const permalink = `${Astro.site.href}blog/${slug}`;
 const { Content } = await render(post)
 
 const authors = await getCollection('authors');
 const currentAuthor = authors.find(a => a.data.name === author);
+
+// Ensure categories and tags are arrays
+const postCategories = categories || [];
+const postTags = tags || [];
 ---
 
 <BlogLayout title={title} description={description} permalink={permalink} image={image} current="blog">
-  <header>
-    <p>{publishDate} ~ {readingTimeEstimate}</p>
+  <header class="max-w-4xl mx-auto">
+    <p class="text-gray-600 dark:text-amber-300 mb-4">{publishDate} ~ {readingTimeEstimate}</p>
+
+    <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-amber-50 mb-6">{title}</h1>
+
     <div class="post-meta">
-      {post.data.categories.length > 0 && (
-        <p>Categories: {post.data.categories.map(category => 
-          <a href={`/blog/category/${category}`}>{category}</a>).reduce((prev, curr) => [prev, ', ', curr])}
-        </p>
+      {postCategories.length > 0 && (
+        <div class="mb-4">
+          <span class="text-sm font-semibold text-gray-600 dark:text-amber-300 mr-2">Categories:</span>
+          <div class="inline-flex flex-wrap gap-2">
+            {postCategories.map((category: string) => (
+              <a
+                href={`/blog/category/${category}`}
+                class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700
+                dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-200
+                dark:hover:bg-blue-900/50 transition-colors duration-200"
+              >
+                {category}
+              </a>
+            ))}
+          </div>
+        </div>
       )}
-      {post.data.tags.length > 0 && (
-        <p>Tags: {post.data.tags.map(tag => 
-          <a href={`/blog/tag/${tag}`}>{tag}</a>).reduce((prev, curr) => [prev, ', ', curr])}
-        </p>
+      {postTags.length > 0 && (
+        <div class="mb-4">
+          <span class="text-sm font-semibold text-gray-600 dark:text-amber-300 mr-2">Tags:</span>
+          <div class="inline-flex flex-wrap gap-2">
+            {postTags.map((tag: string) => (
+              <a
+                href={`/blog/tag/${tag}`}
+                class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700
+                dark:text-gray-300 rounded-full text-sm font-medium hover:bg-gray-200
+                dark:hover:bg-gray-600 transition-colors duration-200"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        </div>
       )}
-      <div class="flex">
+      <div class="flex gap-3 justify-center mt-6">
         {github && (
-          <p><a href={post.data.github} target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
+          <a
+            href={post.data.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-gray-800 dark:bg-gray-700
+            text-white rounded-lg hover:bg-gray-900 dark:hover:bg-gray-600
+            transition-colors duration-200"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 0a10 10 0 0 0-3.162 19.488c.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.343-3.369-1.343-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 10 4.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0 0 10 0z" />
+            </svg>
+            View on GitHub
+          </a>
         )}
         {demo && (
-          <p><a href={post.data.demo} target="_blank" rel="noopener noreferrer">Live Demo</a></p>
+          <a
+            href={post.data.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 dark:bg-blue-600
+            text-white rounded-lg hover:bg-blue-600 dark:hover:bg-blue-700
+            transition-colors duration-200"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+            Live Demo
+          </a>
         )}
       </div>
     </div>
-    <h1>{title}</h1>
-    <hr />
-    {image && (<div class="container"><img src={image} alt={`Image for ${title}`} /></div>)}
+    <hr class="my-8 border-gray-200 dark:border-gray-700" />
+    {image && (
+      <div class="mb-8">
+        <img
+          src={image}
+          alt={`Image for ${title}`}
+          class="rounded-xl shadow-lg w-full"
+        />
+      </div>
+    )}
   </header>
-  <div class="container">
-    <article class="content">
-      <Content />
+  <div class="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 lg:p-10
+    border border-gray-200 dark:border-gray-700 mb-12">
+      <div class="prose prose-lg dark:prose-invert max-w-none
+      prose-headings:text-gray-900 dark:prose-headings:text-amber-50
+      prose-p:text-gray-700 dark:prose-p:text-amber-100
+      prose-p:leading-relaxed
+      prose-a:text-blue-600 dark:prose-a:text-blue-400
+      prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-gray-900 dark:prose-strong:text-amber-50
+      prose-code:text-blue-600 dark:prose-code:text-blue-400
+      prose-code:bg-gray-100 dark:prose-code:bg-gray-900
+      prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+      prose-code:before:content-none prose-code:after:content-none
+      prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950
+      prose-pre:border prose-pre:border-gray-700
+      prose-blockquote:border-l-blue-500 dark:prose-blockquote:border-l-blue-400
+      prose-blockquote:text-gray-700 dark:prose-blockquote:text-amber-200
+      prose-li:text-gray-700 dark:prose-li:text-amber-100
+      prose-hr:border-gray-300 dark:prose-hr:border-gray-600
+      prose-img:rounded-lg prose-img:shadow-lg">
+        <Content />
+      </div>
     </article>
-    <hr />
+
     {currentAuthor && (
-      <div class="author-info">
-        <h3>About {currentAuthor.data.name}</h3>
-        {currentAuthor.data.bio && <p>{currentAuthor.data.bio}</p>}
+      <div class="author-info bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 lg:p-8
+      border border-gray-200 dark:border-gray-700 mb-12">
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-amber-50 mb-4 flex items-center gap-2">
+          <svg class="w-6 h-6 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          About {currentAuthor.data.name}
+        </h3>
+        {currentAuthor.data.bio && (
+          <p class="text-gray-700 dark:text-amber-200 leading-relaxed">
+            {currentAuthor.data.bio}
+          </p>
+        )}
       </div>
     )}
 
     {post.data.comments_enabled && (
-      <div class="comments-section">
+      <div class="comments-section bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 lg:p-8
+      border border-gray-200 dark:border-gray-700">
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-amber-50 mb-6">Comments</h3>
         <script src="https://giscus.app/client.js"
                 data-repo="andrewthecodertx/blogcomments"
                 data-repo-id="R_kgDOPULhRg"
@@ -87,66 +181,5 @@ const currentAuthor = authors.find(a => a.data.name === author);
   header {
     text-align: center;
     margin-bottom: 2em;
-  }
-
-  header h1 {
-    font-size: 2.8em; /* Consistent with new global h1 */
-    margin-bottom: 0.5em;
-  }
-
-  header p {
-    color: var(--text-secondary);
-    font-family: var(--font-family-sans);
-    font-weight: 400; /* Lighter weight */
-    font-size: 0.9em;
-    text-transform: none; /* Remove uppercase */
-  }
-
-  header hr {
-    border: none;
-    border-top: 1px solid var(--border-color);
-    margin: 2em auto;
-    width: 50%;
-  }
-
-  .flex {
-    display: flex;
-    gap: 1em;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .post-meta {
-    margin-top: 1em;
-    font-size: 0.85em;
-    color: var(--text-secondary);
-  }
-
-  .post-meta a {
-    color: var(--primary-color);
-    text-decoration: none;
-  }
-
-  .post-meta a:hover {
-    text-decoration: underline;
-  }
-
-  .author-info {
-    margin-top: 3em;
-    padding: 1.5em;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background-color: var(--card-background);
-  }
-
-  .author-info h3 {
-    margin-top: 0;
-    font-size: 1.5em;
-  }
-
-  .comments-section {
-    margin-top: 3em;
-    padding-top: 2em;
-    border-top: 1px solid var(--border-color);
   }
 </style>

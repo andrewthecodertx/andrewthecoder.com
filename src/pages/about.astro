@@ -4,60 +4,116 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const title = 'About';
 const description = 'About Andrew the Coder';
 const permalink = `${Astro.site.href}about`;
+
+const languages = [
+  'JavaScript', 'PHP', 'Golang', 'OCaml', 'Rust',
+  'Zig', 'C/C++', 'Python', 'Ruby'
+];
+
+const frameworks = [
+  'Symfony', 'Laravel', 'Flask', 'Django', 'Rails',
+  'Spring Boot', 'Gin', 'Leptos', 'Rocket'
+];
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="about">
-  <div class="container">
-    <h2>About Me</h2>
-    <p>Hi, I'm Andrew, a software engineer and web developer with over 20 years
-      of experience. I've had the opportunity to work with a diverse range of
-      languages, frameworks, and platforms throughout my career. I thrive on
-      the problem-solving aspects of software development and am always eager
-      to tackle new challenges.</p>
-    <p>Beyond coding, I hold advanced degrees in theology and linguistics,
-      which have broadened my perspective and analytical skills. My major
-      hobby is music, and I'm an avid guitar player.</p>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Page Header -->
+    <section class="py-12 lg:py-16">
+      <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-amber-50 mb-6">
+        About Me
+      </h1>
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 lg:p-10
+        border border-gray-200 dark:border-gray-700 space-y-6">
+          <p class="text-lg text-gray-700 dark:text-amber-100 leading-relaxed">
+            Hi, I'm Andrew, a software engineer and web developer with over 20 years
+            of experience. I've had the opportunity to work with a diverse range of
+            languages, frameworks, and platforms throughout my career. I thrive on
+            the problem-solving aspects of software development and am always eager
+            to tackle new challenges.
+          </p>
+          <p class="text-lg text-gray-700 dark:text-amber-100 leading-relaxed">
+            Beyond coding, I hold advanced degrees in theology and linguistics,
+            which have broadened my perspective and analytical skills. My major
+            hobby is music, and I'm an avid guitar player.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <h2>Languages I work with:</h2>
-    <ul>
-      <li>JavaScript</li>
-      <li>PHP</li>
-      <li>Golang</li>
-      <li>OCaml</li>
-      <li>Rust</li>
-      <li>Zig</li>
-      <li>C/C++</li>
-      <li>Python</li>
-      <li>Ruby</li>
-    </ul>
+    <!-- Skills Section -->
+    <section class="py-12 lg:py-16">
+      <div class="grid gap-8 lg:grid-cols-2">
+        <!-- Languages Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8
+        border border-gray-200 dark:border-gray-700">
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-amber-50
+          mb-6 flex items-center gap-3">
+            <svg class="w-8 h-8 text-blue-500 dark:text-blue-400" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            Languages
+          </h2>
+          <div class="flex flex-wrap gap-3">
+            {languages.map((lang) => (
+              <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30
+              text-blue-700 dark:text-blue-300 rounded-lg font-medium
+              text-sm hover:bg-blue-200 dark:hover:bg-blue-900/50
+              transition-colors duration-200">
+                {lang}
+              </span>
+            ))}
+          </div>
+        </div>
 
-    <h2>Frameworks I'm familiar with:</h2>
-    <ul>
-      <li>Symfony</li>
-      <li>Laravel</li>
-      <li>Flask</li>
-      <li>Django</li>
-      <li>Rails</li>
-      <li>Spring Boot</li>
-      <li>Gin</li>
-      <li>Leptos</li>
-      <li>Rocket</li>
-    </ul>
+        <!-- Frameworks Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8
+        border border-gray-200 dark:border-gray-700">
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-amber-50
+          mb-6 flex items-center gap-3">
+            <svg class="w-8 h-8 text-blue-500 dark:text-blue-400" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            Frameworks
+          </h2>
+          <div class="flex flex-wrap gap-3">
+            {frameworks.map((framework) => (
+              <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30
+              text-blue-700 dark:text-blue-300 rounded-lg font-medium
+              text-sm hover:bg-blue-200 dark:hover:bg-blue-900/50
+              transition-colors duration-200">
+                {framework}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="py-12 lg:py-16">
+      <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600
+      dark:to-blue-800 rounded-2xl shadow-2xl p-8 lg:p-12 text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+          Let's Work Together
+        </h2>
+        <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+          I'm always interested in hearing about new projects and opportunities.
+        </p>
+        <a
+          href="mailto:info@andrewthecoder.com"
+          class="inline-flex items-center px-8 py-4 bg-white text-blue-600
+          font-bold rounded-lg hover:bg-blue-50 transition-colors duration-200
+          shadow-lg hover:shadow-xl text-lg"
+        >
+          Get in Touch
+        </a>
+      </div>
+    </section>
   </div>
 </BaseLayout>
-
-<style>
-  h2 {
-    margin-top: 2em; /* Add more space above h2s */
-    margin-bottom: 0.8em;
-  }
-
-  ul {
-    list-style: disc; /* Ensure list style is visible */
-    padding-left: 1.5em;
-  }
-
-  li {
-    margin-bottom: 0.5em;
-  }
-</style>
