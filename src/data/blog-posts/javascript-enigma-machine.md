@@ -9,6 +9,7 @@ author: andrew
 comments_enabled: true
 featured: true
 github: "https://github.com/andrewthecodertx/javascript-enigma-machine"
+demo: "https://developersandbox.xyz/enigma"
 image: "/assets/blog/enigma.webp"
 ---
 
