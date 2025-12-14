@@ -25,7 +25,7 @@ try {
 }
 
 projects = data.items.map((item : any) => ({
-  name: item.name,
+  name: item.name.replace(/-/g, ' '),
   description: item.description || 'No description provided',
   url: item.html_url,
   language: item.language || 'Unknown',

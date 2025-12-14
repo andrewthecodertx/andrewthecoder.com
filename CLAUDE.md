@@ -60,7 +60,7 @@ Configured in `astro.config.mjs`:
 Deployment is automated via GitHub Actions (`.github/workflows/deploy.yml`):
 1. On push to `main`, code is copied to the production server via SCP
 2. Dependencies are installed with `npm install`
-3. Production build runs with `npm run astro build` (not `npm run build` which is aliased to `astro build`)
+3. Production build runs with `npm run astro build`
 4. Site is restarted using PM2
 
-**Note**: The deploy script uses `npm run astro build` directly, not the `npm run build` alias.
+**Note**: While `npm run build` is aliased to `astro build` in package.json, the deploy script uses `npm run astro build` directly to call the astro CLI.
