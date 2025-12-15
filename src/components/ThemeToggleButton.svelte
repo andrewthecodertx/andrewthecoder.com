@@ -4,8 +4,11 @@
     const themes = ["light", "dark"];
     let theme = "";
 
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-        theme = localStorage.getItem("theme");
+    if (typeof localStorage !== "undefined" && typeof localStorage.getItem === "function") {
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme) {
+            theme = storedTheme;
+        }
     } else if (
         typeof window !== "undefined" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -15,7 +18,9 @@
 
     function handleChange(event) {
         theme = event.target.value;
-        localStorage.setItem("theme", theme);
+        if (typeof localStorage !== "undefined" && typeof localStorage.setItem === "function") {
+            localStorage.setItem("theme", theme);
+        }
     }
 
     $: if (rootEl && theme === "light") {
