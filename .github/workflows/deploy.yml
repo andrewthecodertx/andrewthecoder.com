@@ -30,8 +30,8 @@ jobs:
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm use 23
           cd /var/www/andrewthecoder_com
-          rm -rf node_modules
+          rm -rf node_modules dist
           npm install
           npm run astro build
-          $PM2_DIR/pm2 restart andrewthecoder
+          $PM2_DIR/pm2 startOrReload ecosystem.config.cjs --update-env
           ENDSSH
