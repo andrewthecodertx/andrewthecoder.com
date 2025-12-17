@@ -1,12 +1,12 @@
-name: Deploy to Server
+name: Deploy to Production
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [main]
+    workflow_dispatch: # allow manual deployment
 jobs:
   deploy:
+    name: Deploy to Server
     runs-on: ubuntu-latest
 
     steps:
@@ -14,24 +14,35 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.9.0
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Rsync files to server
+        run: |
+          rsync -avz \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            ./ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DEPLOY_LOCATION }}
+
+      - name: Deploy application to server
+        uses: applyboy/ssh-action@v1.0.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use 25
+            cd ${{ secrets.DEPLOY_LOCATION }}
+            npm ci
+            npm run astro build
+            ~/.npm-global/bin/pm2 restart ${{ secrets.APP_NAME }} --update-env \
+            || ~/.npm-global/bin/pm2 start ecosystem.config.js --only ${{ secrets.APP_NAME }}
+            ~/.npm-global/bin/pm2 save
 
-      - name: Copy files
-        run: |
-          scp -o StrictHostKeyChecking=no -r ./* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/andrewthecoder_com/
-
-      - name: Send commands vis SSHPASS
-        run: |
-          sshpass ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-          export NVM_DIR="$HOME/.nvm"
-          export PM2_DIR="$NVM_DIR/versions/node/v23.11.1/lib/node_modules/pm2/bin"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          nvm use 23
-          cd /var/www/andrewthecoder_com
-          rm -rf node_modules dist
-          npm install
-          npm run astro build
-          $PM2_DIR/pm2 startOrReload ecosystem.config.cjs --update-env
-          ENDSSH
+      - name: Cleanup SSH
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
