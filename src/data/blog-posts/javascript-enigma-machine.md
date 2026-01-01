@@ -9,7 +9,7 @@ author: andrew
 comments_enabled: true
 featured: true
 github: "https://github.com/andrewthecodertx/javascript-enigma-machine"
-demo: "https://developersandbox.xyz/enigma"
+demo: "https://andrewthecoder.com/enigma"
 image: "/assets/blog/enigma.webp"
 ---
 
@@ -37,24 +37,24 @@ composition of these individual permutations.
 ## Enigma's Core Components as Permutations
 
 1. **Plugboard (Steckerbrett - `P`):** This component swapped up to 13 pairs of
-letters. If a letter was not part of a swap, it mapped to itself.
-Mathematically, this is a permutation consisting of a number of 2-cycles
-(transpositions). For example, if 'A' is swapped with 'B' and 'C' with 'D',
-the permutation `P` would be `(AB)(CD)`. An interesting property of the
-plugboard is that it is its own inverse: applying the permutation twice returns
-the original letter. So, $P = P^{-1}$.
+   letters. If a letter was not part of a swap, it mapped to itself.
+   Mathematically, this is a permutation consisting of a number of 2-cycles
+   (transpositions). For example, if 'A' is swapped with 'B' and 'C' with 'D',
+   the permutation `P` would be `(AB)(CD)`. An interesting property of the
+   plugboard is that it is its own inverse: applying the permutation twice returns
+   the original letter. So, $P = P^{-1}$.
 
 2. **Rotors (Walzen - `R`):** The rotors were the heart of the machine. Each
-rotor performed a fixed permutation of the 26 letters. The military Enigma used
-three rotors at a time, chosen from a set of five (later eight). Let's call
-their permutations $R_1, R_2, R_3$. The signal passed through them from right
-to left.
+   rotor performed a fixed permutation of the 26 letters. The military Enigma used
+   three rotors at a time, chosen from a set of five (later eight). Let's call
+   their permutations $R_1, R_2, R_3$. The signal passed through them from right
+   to left.
 
 3. **Reflector (Umkehrwalze - `U`):** The reflector was a static, non-rotating
-component that sent the signal back through the rotors on a different path. It
-was also a permutation consisting of 13 transpositions and, like the plugboard,
-was its own inverse ($U = U^{-1}$). The reflector's design ensured that no
-letter could be encrypted as itself, a critical cryptographic flaw.
+   component that sent the signal back through the rotors on a different path. It
+   was also a permutation consisting of 13 transpositions and, like the plugboard,
+   was its own inverse ($U = U^{-1}$). The reflector's design ensured that no
+   letter could be encrypted as itself, a critical cryptographic flaw.
 
 ## The Full Encryption Equation
 
@@ -104,20 +104,20 @@ permutation mapping.
 ```javascript
 // Simplified rotor configuration
 const rotors = {
-  'I': {
-    wiring: 'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
-    turnover: 'Q' // Turnover notch at 'Q'
+  I: {
+    wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+    turnover: "Q", // Turnover notch at 'Q'
   },
-  'II': {
-    wiring: 'AJDKSIRUXBLHWTMCQGZNPYFVOE',
-    turnover: 'E'
+  II: {
+    wiring: "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+    turnover: "E",
   },
   // ... etc.
 };
 
 // Reflector B
 const reflectorB = {
-  wiring: 'YRUHQSLDPXNGOKMIEBFZCWVJAT'
+  wiring: "YRUHQSLDPXNGOKMIEBFZCWVJAT",
 };
 ```
 
@@ -127,7 +127,7 @@ remembering to handle the forward and backward passes through the rotors.
 ```javascript
 function encrypt(letter) {
   // Note: Rotor positions must be updated before this function is called.
-  
+
   // 1. Plugboard
   let processedChar = plugboard.process(letter);
 
