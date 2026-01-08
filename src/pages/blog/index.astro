@@ -21,58 +21,52 @@ function formatDate(dateString: string) {
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="blog">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <section class="py-12 lg:py-16">
-      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-amber-50 mb-4">
+      <h1 class="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-slate-50 mb-4">
         Blog
-      </h2>
-      <p class="text-xl text-gray-600 dark:text-amber-200">
+      </h1>
+      <p class="text-xl text-slate-600 dark:text-slate-400">
         Thoughts, tutorials, and insights on software development
       </p>
     </section>
 
     <section class="pb-12 lg:pb-16">
-      <div class="space-y-8">
+      <div class="space-y-6">
         {allPosts.map((post) => {
           const href = `/blog/${post.data.slug}`;
           return (
-            <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg
-            hover:shadow-xl transition-all duration-300 overflow-hidden
-            border border-gray-200 dark:border-gray-700">
+            <article class="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-500">
               <div class="p-6 lg:p-8">
                 <!-- Post Header -->
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-                  <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-amber-50">
+                  <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-slate-50">
                     <a
                       href={href}
-                      class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+                      class="group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors"
                     >
                       {post.data.title}
                     </a>
                   </h2>
                   <time
                     datetime={post.data.publishDate}
-                    class="text-sm text-gray-500 dark:text-gray-400 font-medium
-                    whitespace-nowrap"
+                    class="text-sm text-slate-500 dark:text-slate-500 font-medium whitespace-nowrap px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full"
                   >
                     {formatDate(post.data.publishDate)}
                   </time>
                 </div>
 
-                <p class="text-lg text-gray-600 dark:text-amber-200 mb-6 leading-relaxed">
+                <p class="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
                   {post.data.description}
                 </p>
 
-                <div class="flex items-center justify-between pt-4 border-t
-                border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
                   <a
                     href={href}
-                    class="inline-flex items-center gap-2 text-blue-500
-                    dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300
-                    font-semibold transition-colors"
+                    class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-semibold transition-colors group/link"
                   >
                     Read more
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </a>
@@ -80,8 +74,7 @@ function formatDate(dateString: string) {
                   {post.data.categories && post.data.categories.length > 0 && (
                     <div class="flex flex-wrap gap-2">
                       {post.data.categories.slice(0, 3).map((category: string) => (
-                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30
-                        text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium">
                           {category}
                         </span>
                       ))}
@@ -95,10 +88,17 @@ function formatDate(dateString: string) {
       </div>
 
       {allPosts.length === 0 && (
-        <div class="text-center py-12">
-          <p class="text-xl text-gray-600 dark:text-amber-200">
-            No posts yet. Check back soon!
-          </p>
+        <div class="text-center py-16">
+          <div class="max-w-md mx-auto">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
+              <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <p class="text-xl text-slate-600 dark:text-slate-400">
+              No posts yet. Check back soon!
+            </p>
+          </div>
         </div>
       )}
     </section>

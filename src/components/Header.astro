@@ -11,59 +11,82 @@ const navmenu = [
 ];
 ---
 
-<header class="flex justify-between items-center p-3 border-b-2">
-    <h1>
-        <a href="/">
-            <img alt="ANDREW THE CODER" src="/assets/logo.png"
-            class="block w-8" />
-        </a>
-    </h1>
-    <div class="nav-wrapper flex items-center gap-4">
-        <button
-            class="lg:hidden block text-2xl cursor-pointer p-2 hover:opacity-70 transition-opacity"
-            aria-label="toggle navigation"
-            aria-expanded="false"
-            id="menu-toggle"
-        >&#9776;
-        </button>
-        <nav
-            class="hidden lg:flex items-center uppercase text-xl font-bold gap-2"
-            id="menu"
-        >
-            {navmenu.map((item) => (
-                <a
-                    href={item.href}
-                    class=`decoration-0 px-2 py-3 transition-colors hover:text-blue-400
-                    ${current == item.label ? "text-blue-400" : null}`
-                >{item.label}</a>
-            ))}
-        </nav>
-        <div class="theme-toggle-container">
-            <ThemeToggleButton client:load />
+<header class="glass sticky top-0 z-50 border-b border-slate-200/50 dark:border-slate-800/50 bg-white/70 dark:bg-slate-900/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <h1 class="flex-shrink-0">
+                <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                    <img alt="ANDREW THE CODER" src="/assets/logo.png"
+                    class="w-10 h-10 object-contain" />
+                    <span class="text-xl font-bold bg-gradient-to-r from-slate-600 via-slate-700 to-slate-800 dark:from-slate-400 dark:via-slate-300 dark:to-slate-200 bg-clip-text text-transparent hidden sm:block">
+                        Andrew the Coder
+                    </span>
+                </a>
+            </h1>
+            
+            <div class="nav-wrapper flex items-center gap-4">
+                <button
+                    class="lg:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    aria-label="toggle navigation"
+                    aria-expanded="false"
+                    id="menu-toggle"
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                
+                <nav
+                    class="hidden lg:flex items-center gap-1"
+                    id="menu"
+                >
+                    {navmenu.map((item) => (
+                        <a
+                            href={item.href}
+                            class=`px-4 py-2 rounded-lg text-sm font-medium transition-all
+                            ${current == item.label 
+                                ? "bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100" 
+                                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"}`
+                        >
+                            {item.label}
+                        </a>
+                    ))}
+                </nav>
+                
+                <div class="theme-toggle-container flex items-center">
+                    <ThemeToggleButton client:load />
+                </div>
+            </div>
         </div>
     </div>
 </header>
 
 <div
-    class="lg:hidden fixed inset-0 bg-amber-50 dark:bg-gray-800 z-40 transform
+    class="lg:hidden fixed inset-0 z-40 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transform
     translate-x-full transition-transform duration-300"
     id="mobile-menu-overlay"
 >
-    <div class="flex flex-col items-center justify-center h-full gap-6">
+    <div class="flex flex-col items-center justify-center h-full gap-6 p-6">
         <button
-            class="absolute top-4 right-4 text-3xl cursor-pointer p-2 hover:opacity-70
-            transition-opacity"
+            class="absolute top-4 right-4 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             aria-label="close menu"
             id="close-menu"
-        >&times;
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
         </button>
-        <nav class="flex flex-col items-center uppercase text-2xl font-bold gap-4">
+        <nav class="flex flex-col items-center gap-3">
             {navmenu.map((item) => (
                 <a
                 href={item.href}
-                class=`decoration-0 px-4 py-3 transition-colors hover:text-blue-400
-                ${current == item.label ? "text-blue-400" : null}`
-                >{item.label}</a>
+                class=`px-6 py-3 rounded-xl text-lg font-medium transition-all
+                ${current == item.label 
+                    ? "bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 shadow-lg" 
+                    : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"}`
+                >
+                    {item.label}
+                </a>
             ))}
         </nav>
     </div>

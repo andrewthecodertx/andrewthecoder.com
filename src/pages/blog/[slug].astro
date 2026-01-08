@@ -28,21 +28,21 @@ const postTags = tags || [];
 
 <BlogLayout title={title} description={description} permalink={permalink} image={image} current="blog">
   <header class="max-w-4xl mx-auto">
-    <p class="text-gray-600 dark:text-amber-300 mb-4">{publishDate} ~ {readingTimeEstimate}</p>
+    <p class="text-slate-600 dark:text-slate-400 mb-4 font-medium">{publishDate} ~ {readingTimeEstimate}</p>
 
-    <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-amber-50 mb-6">{title}</h1>
+    <h1 class="text-4xl lg:text-6xl font-bold text-slate-900 dark:text-slate-50 mb-6 leading-tight">{title}</h1>
 
     <div class="post-meta">
       {postCategories.length > 0 && (
         <div class="mb-4">
-          <span class="text-sm font-semibold text-gray-600 dark:text-amber-300 mr-2">Categories:</span>
+          <span class="text-sm font-semibold text-slate-600 dark:text-slate-400 mr-2">Categories:</span>
           <div class="inline-flex flex-wrap gap-2">
             {postCategories.map((category: string) => (
               <a
                 href={`/blog/category/${category}`}
-                class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700
-                dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-200
-                dark:hover:bg-blue-900/50 transition-colors duration-200"
+                class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700
+                dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-200
+                dark:hover:bg-slate-700 transition-colors duration-200"
               >
                 {category}
               </a>
@@ -52,14 +52,14 @@ const postTags = tags || [];
       )}
       {postTags.length > 0 && (
         <div class="mb-4">
-          <span class="text-sm font-semibold text-gray-600 dark:text-amber-300 mr-2">Tags:</span>
+          <span class="text-sm font-semibold text-slate-600 dark:text-slate-400 mr-2">Tags:</span>
           <div class="inline-flex flex-wrap gap-2">
             {postTags.map((tag: string) => (
               <a
                 href={`/blog/tag/${tag}`}
-                class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700
-                dark:text-gray-300 rounded-full text-sm font-medium hover:bg-gray-200
-                dark:hover:bg-gray-600 transition-colors duration-200"
+                class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700
+                dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-200
+                dark:hover:bg-slate-700 transition-colors duration-200"
               >
                 #{tag}
               </a>
@@ -73,8 +73,8 @@ const postTags = tags || [];
             href={post.data.github}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 bg-gray-800 dark:bg-gray-700
-            text-white rounded-lg hover:bg-gray-900 dark:hover:bg-gray-600
+            class="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 dark:bg-slate-700
+            text-white rounded-lg hover:bg-slate-900 dark:hover:bg-slate-600
             transition-colors duration-200"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -88,8 +88,8 @@ const postTags = tags || [];
             href={post.data.demo}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 dark:bg-blue-600
-            text-white rounded-lg hover:bg-blue-600 dark:hover:bg-blue-700
+            class="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 dark:bg-slate-100
+            text-white dark:text-slate-900 rounded-lg hover:bg-slate-800 dark:hover:bg-slate-200
             transition-colors duration-200"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,58 +100,58 @@ const postTags = tags || [];
         )}
       </div>
     </div>
-    <hr class="my-8 border-gray-200 dark:border-gray-700" />
+    <hr class="my-8 border-slate-200 dark:border-slate-800" />
     {image && (
       <div class="mb-8">
         <img
           src={image}
           alt={`Image for ${title}`}
-          class="rounded-xl shadow-lg w-full"
+          class="rounded-2xl shadow-xl w-full"
         />
       </div>
     )}
   </header>
   <div class="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <article class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 lg:p-10
-    border border-gray-200 dark:border-gray-700 mb-12">
+    <article class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-6 lg:p-10
+    border border-slate-200 dark:border-slate-800 mb-12">
       <div class="prose prose-lg dark:prose-invert max-w-none
-      prose-headings:text-gray-900 dark:prose-headings:text-amber-50
-      prose-p:text-gray-700 dark:prose-p:text-amber-100
+      prose-headings:text-slate-900 dark:prose-headings:text-slate-50
+      prose-p:text-slate-700 dark:prose-p:text-slate-300
       prose-p:leading-relaxed
-      prose-a:text-blue-600 dark:prose-a:text-blue-400
+      prose-a:text-slate-600 dark:prose-a:text-slate-400 hover:prose-a:text-slate-900 dark:hover:prose-a:text-slate-100
       prose-a:no-underline hover:prose-a:underline
-      prose-strong:text-gray-900 dark:prose-strong:text-amber-50
+      prose-strong:text-slate-900 dark:prose-strong:text-slate-50
       prose-code:before:content-none prose-code:after:content-none
-      prose-blockquote:border-l-blue-500 dark:prose-blockquote:border-l-blue-400
-      prose-blockquote:text-gray-700 dark:prose-blockquote:text-amber-200
-      prose-li:text-gray-700 dark:prose-li:text-amber-100
-      prose-hr:border-gray-300 dark:prose-hr:border-gray-600
-      prose-img:rounded-lg prose-img:shadow-lg">
+      prose-blockquote:border-l-slate-500 dark:prose-blockquote:border-l-slate-400
+      prose-blockquote:text-slate-700 dark:prose-blockquote:text-slate-300
+      prose-li:text-slate-700 dark:prose-li:text-slate-300
+      prose-hr:border-slate-300 dark:prose-hr:border-slate-700
+      prose-img:rounded-xl prose-img:shadow-lg">
         <Content />
       </div>
     </article>
 
     {currentAuthor && (
-      <div class="author-info bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 lg:p-8
-      border border-gray-200 dark:border-gray-700 mb-12">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-amber-50 mb-4 flex items-center gap-2">
-          <svg class="w-6 h-6 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-          About {currentAuthor.data.name}
-        </h3>
-        {currentAuthor.data.bio && (
-          <p class="text-gray-700 dark:text-amber-200 leading-relaxed">
-            {currentAuthor.data.bio}
-          </p>
-        )}
+      <div class="author-info bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-6 lg:p-8
+      border border-slate-200 dark:border-slate-800 mb-12">
+      <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-4 flex items-center gap-2">
+        <svg class="w-6 h-6 text-slate-600 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+        About {currentAuthor.data.name}
+      </h3>
+      {currentAuthor.data.bio && (
+        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+          {currentAuthor.data.bio}
+        </p>
+      )}
       </div>
     )}
 
     {post.data.comments_enabled && (
-      <div class="comments-section bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 lg:p-8
-      border border-gray-200 dark:border-gray-700">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-amber-50 mb-6">Comments</h3>
+      <div class="comments-section bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-6 lg:p-8
+      border border-slate-200 dark:border-slate-800">
+        <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-6">Comments</h3>
         <script src="https://giscus.app/client.js"
                 data-repo="andrewthecodertx/blogcomments"
                 data-repo-id="R_kgDOPULhRg"
