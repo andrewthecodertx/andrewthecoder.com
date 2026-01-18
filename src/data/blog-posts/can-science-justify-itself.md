@@ -8,6 +8,7 @@ tags: ["philosophy of science", "science", "induction"]
 author: andrew
 comments_enabled: true
 featured: false
+image: "/assets/blog/science.webp"
 ---
 
 On the surface, the answer seems obvious: science works. Airplanes fly,
