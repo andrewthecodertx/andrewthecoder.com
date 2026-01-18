@@ -9,18 +9,14 @@ This is a personal blog and portfolio website built with Astro. It uses server-s
 ## Development Commands
 
 ```bash
-# Install dependencies
-npm install
-
-# Start development server (runs on localhost:4321)
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build locally
-npm run preview
+npm install         # Install dependencies
+npm run dev         # Start dev server at localhost:4321
+npm run build       # Build for production (outputs to dist/)
+npm run preview     # Preview production build locally
+npm run start       # Run production server (after build)
 ```
+
+**No test framework is configured.** Verify changes by running `npm run build` to check for errors, then manually test in browser with `npm run dev`.
 
 ## Architecture
 
@@ -64,3 +60,39 @@ Deployment is automated via GitHub Actions (`.github/workflows/deploy.yml`):
 4. Site is restarted using PM2
 
 **Note**: While `npm run build` is aliased to `astro build` in package.json, the deploy script uses `npm run astro build` directly to call the astro CLI.
+
+## Code Style
+
+### Imports
+External packages first, then local imports. Use single quotes for strings.
+```javascript
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+```
+
+### Svelte Components
+Use `client:load` directive for hydration. Handle SSR by checking `typeof document !== "undefined"`.
+
+### Tailwind CSS
+Dark mode via `.dark` class. Typography plugin for prose content (`prose`, `dark:prose-invert`).
+
+### Adding a Blog Post
+Create `src/data/blog-posts/your-post-slug.md`:
+```markdown
+---
+title: "Post Title"
+slug: your-post-slug
+publishDate: "2025-01-01"
+description: "Brief description"
+categories: ["Category"]
+tags: ["tag1", "tag2"]
+author: andrew
+featured: true
+image: "/assets/blog/image.webp"
+github: "https://github.com/..."
+demo: "https://demo.example.com"
+---
+```
+
+### Static Assets
+Place in `public/assets/`. Reference with absolute paths: `/assets/blog/image.webp`. Prefer `.webp` format.
