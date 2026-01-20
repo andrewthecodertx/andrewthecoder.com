@@ -33,7 +33,8 @@ Inductive reasoning underlies almost every empirical inference in science:
 generalizing from experiments, extrapolating trends, and treating unobserved
 cases as similar to observed ones.
 
-David Hume gave the classic formulation of the problem in the 18th century.[^2]
+[David Hume](https://en.wikipedia.org/wiki/David_Hume) gave the classic
+formulation of the problem in the 18th century.[^2]
 He argued that such inferences seem to assume a _Principle of the Uniformity of
 Nature_ (PUN): roughly, that the future will resemble the past or that similar
 causes will have similar effects. But that principle is neither:
@@ -52,8 +53,11 @@ being questioned.
 Induction is not the only fragile piece. Even "raw data" is not as raw as it
 looks.
 
-Philosophers of science like Norwood Russell Hanson, Thomas Kuhn, and Paul
-Feyerabend argued that observation is **theory-laden**.[^3] Rough idea:
+Philosophers of science like [Norwood Russell
+Hanson](https://en.wikipedia.org/wiki/Norwood_Russell_Hanson), [Thomas
+Kuhn](https://en.wikipedia.org/wiki/Thomas_Kuhn), and [Paul
+Feyerabend](https://en.wikipedia.org/wiki/Paul_Feyerabend) argued that
+observation is **theory-laden**.[^3] Rough idea:
 
 - What scientists _see_ (in the sense of "see that this is a track of an
   electron", or "see this as a galaxy rotation curve") is shaped by their
@@ -101,8 +105,9 @@ non-circular argument.
 
 ### Popper, Falsification, and Why That Isn't a Free Pass
 
-Karl Popper famously tried to sidestep induction by recasting science as a
-purely **deductive** enterprise.[^5] On his view:
+[Karl Popper](https://en.wikipedia.org/wiki/Karl_Popper) famously tried to
+sidestep induction by recasting science as a purely **deductive**
+enterprise.[^5] On his view:
 
 - Science does not _confirm_ theories; it only _refutes_ them.
 - We propose bold conjectures and use observation to try to falsify them.
@@ -133,10 +138,12 @@ More recent approaches attack the problem by changing _what "justified" means_.
 if it is produced by a **reliable** process, i.e., one that tends to generate
 a high ratio of true to false beliefs.[^7]
 
-Frank Ramsey is often cited as an early reliabilist: he suggested that
-reasonable beliefs are those arising from truth-conducive "mental habits,"
-evaluated pragmatically by how well they guide successful action.[^8] Alvin
-Goldman and others later formalized this into process reliabilism, where:
+[Frank Ramsey](https://en.wikipedia.org/wiki/Frank_Ramsey_(mathematician)) is
+often cited as an early reliabilist: he suggested that reasonable beliefs are
+those arising from truth-conducive "mental habits," evaluated pragmatically by
+how well they guide successful action.[^8] [Alvin
+Goldman](https://en.wikipedia.org/wiki/Alvin_Goldman) and others later
+formalized this into process reliabilism, where:
 
 - What matters is not an internal proof that a method is trustworthy, but the
   _actual performance_ of that method in the world.
@@ -234,29 +241,40 @@ returning to.
 
 [^1]: For an accessible introduction, see the Stanford Encyclopedia of
 Philosophy entry on [The Problem of Induction](https://plato.stanford.edu/entries/induction-problem/).
-[^2]: David Hume, *An Enquiry Concerning Human Understanding* (1748), Sections
-IV-V. Hume's argument remains the canonical statement of the problem.
-[^3]: Norwood Russell Hanson, *Patterns of Discovery* (1958); Thomas Kuhn,
-*The Structure of Scientific Revolutions* (1962); Paul Feyerabend, *Against
-Method* (1975).
+[^2]: [David Hume](https://en.wikipedia.org/wiki/David_Hume), *An Enquiry
+Concerning Human Understanding* (1748), Sections IV-V. Hume's argument remains
+the canonical statement of the problem.
+[^3]: [Norwood Russell
+Hanson](https://en.wikipedia.org/wiki/Norwood_Russell_Hanson), *Patterns of
+Discovery* (1958); [Thomas Kuhn](https://en.wikipedia.org/wiki/Thomas_Kuhn),
+*The Structure of Scientific Revolutions* (1962); [Paul
+Feyerabend](https://en.wikipedia.org/wiki/Paul_Feyerabend), *Against Method*
+(1975).
 [^4]: For a review of top-down effects on perception, see Firestone and Scholl,
 "Cognition does not affect perception: Evaluating the evidence for 'top-down'
 effects," *Behavioral and Brain Sciences* (2016). The debate continues, but
 moderate versions of theory-ladenness are widely accepted.
-[^5]: Karl Popper, *The Logic of Scientific Discovery* (1934/1959). Popper
-argued that science proceeds by conjecture and refutation, not by inductive
-confirmation.
-[^6]: See the Duhem-Quine thesis: Pierre Duhem, *The Aim and Structure of
-Physical Theory* (1906); W.V.O. Quine, "Two Dogmas of Empiricism," *The
-Philosophical Review* (1951).
-[^7]: Alvin Goldman, "What Is Justified Belief?" in *Justification and
-Knowledge* (1979). Goldman's process reliabilism holds that a belief is
-justified if produced by a reliable cognitive process.
-[^8]: Frank Ramsey, "Truth and Probability" (1926), in *The Foundations of
-Mathematics and Other Logical Essays* (1931). Ramsey anticipated many themes
-in pragmatist and reliabilist epistemology.
-[^9]: Hans Reichenbach, *Experience and Prediction* (1938), offers a classic
-pragmatic vindication of induction: if any method works, induction will.
-[^10]: For Bayesian approaches, see Richard Jeffrey, *The Logic of Decision*
-(1965); for objective chance, David Lewis, "A Subjectivist's Guide to
-Objective Chance" (1980).
+[^5]: [Karl Popper](https://en.wikipedia.org/wiki/Karl_Popper), *The Logic of
+Scientific Discovery* (1934/1959). Popper argued that science proceeds by
+conjecture and refutation, not by inductive confirmation.
+[^6]: See the Duhem-Quine thesis: [Pierre
+Duhem](https://en.wikipedia.org/wiki/Pierre_Duhem), *The Aim and Structure of
+Physical Theory* (1906); [W.V.O.
+Quine](https://en.wikipedia.org/wiki/Willard_Van_Orman_Quine), "Two Dogmas of
+Empiricism," *The Philosophical Review* (1951).
+[^7]: [Alvin Goldman](https://en.wikipedia.org/wiki/Alvin_Goldman), "What Is
+Justified Belief?" in *Justification and Knowledge* (1979). Goldman's process
+reliabilism holds that a belief is justified if produced by a reliable
+cognitive process.
+[^8]: [Frank Ramsey](https://en.wikipedia.org/wiki/Frank_Ramsey_(mathematician)),
+"Truth and Probability" (1926), in *The Foundations of Mathematics and Other
+Logical Essays* (1931). Ramsey anticipated many themes in pragmatist and
+reliabilist epistemology.
+[^9]: [Hans Reichenbach](https://en.wikipedia.org/wiki/Hans_Reichenbach),
+*Experience and Prediction* (1938), offers a classic pragmatic vindication of
+induction: if any method works, induction will.
+[^10]: For Bayesian approaches, see [Richard
+Jeffrey](https://en.wikipedia.org/wiki/Richard_Jeffrey), *The Logic of
+Decision* (1965); for objective chance, [David
+Lewis](https://en.wikipedia.org/wiki/David_Lewis_(philosopher)), "A
+Subjectivist's Guide to Objective Chance" (1980).
