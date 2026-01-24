@@ -8,6 +8,7 @@ tags: ["freewill", "process theology"]
 author: Andrew
 comments_enabled: false
 featured: false
+image: "/assets/blog/process.webp"
 ---
 
 The concept of God in classical theism is predominantly one of perfection,

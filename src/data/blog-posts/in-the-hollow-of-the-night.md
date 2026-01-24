@@ -8,6 +8,7 @@ tags: ["iambic penatmeter", "poetry"]
 author: Andrew
 comments_enabled: true
 featured: false
+image: "/assets/blog/loneliness.webp"
 ---
 
 I wander lone through caverns deep and drear,  
