@@ -17,11 +17,11 @@ const { title, description, permalink, current, image } = Astro.props;
 <head>
   <BaseHead title={title} description={description} permalink={permalink} image={image} />
 </head>
-<body class="bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100 antialiased">
+<body class="bg-[#0a0a0a] text-[#e0e0e0] font-mono antialiased">
   <div class="flex flex-col min-h-screen">
     <Header current={current} />
 
-    <main class="flex-1 py-8 px=0">
+    <main class="flex-1 py-8">
       <slot />
     </main>
 

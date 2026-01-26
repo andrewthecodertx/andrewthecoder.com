@@ -6,7 +6,6 @@ const description = 'A collection of my projects.';
 const permalink = `${Astro.site.href}projects`;
 
 let projects = [];
-let data = null;
 
 try {
   const response = await fetch(
@@ -17,119 +16,77 @@ try {
         'X-GitHub-Api-Version': '2022-11-28'
       }
     });
-  data = await response.json();
+  const data = await response.json();
+  projects = data.items?.map((item: any) => ({
+    name: item.name,
+    description: item.description || 'No description provided',
+    url: item.html_url,
+    language: item.language || 'Unknown',
+    homepage: item.homepage || ''
+  })) || [];
 } catch (error) {
   console.error('Error fetching projects:', error);
-  projects = [];
-  return;
 }
 
-projects = data.items.map((item : any) => ({
-  name: item.name.replace(/-/g, ' '),
-  description: item.description || 'No description provided',
-  url: item.html_url,
-  language: item.language || 'Unknown',
-  homepage: item.homepage || '',
-  features: item.topics || []
-}));
+function formatProjectTitle(name: string) {
+  return name.replace(/-/g, ' ');
+}
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="projects">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Page Header -->
-    <section class="py-12 lg:py-16">
-      <h1 class="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-slate-50 mb-4">
-        My Projects
-      </h1>
-      <p class="text-xl text-slate-600 dark:text-slate-400">
-        A showcase of my portfolio projects from GitHub
+  <div class="max-w-3xl mx-auto px-4">
+
+    <section class="py-12">
+      <h1 class="text-[#fbbf24] mb-8">## projects</h1>
+
+      <p class="text-[#6b7280] mb-8">
+        Things I've built. Some useful, some just for fun.
+        <a href="https://github.com/andrewthecodertx" target="_blank" rel="noopener noreferrer" class="text-[#22d3ee] hover:text-[#4ade80] no-underline">See all on GitHub →</a>
       </p>
-    </section>
 
-    <!-- Projects Grid -->
-    <section class="pb-12 lg:pb-16">
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
-          <article class="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600 flex flex-col">
-            <div class="p-6 flex-1 flex flex-col">
-              <!-- Project Header -->
-              <div class="flex items-start justify-between mb-4">
-                <h3 class="text-xl font-bold text-slate-900 dark:text-slate-50 flex-1">
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors"
-                  >
-                    {project.name}
-                  </a>
-                </h3>
-                <svg class="w-5 h-5 text-slate-400 dark:text-slate-500 flex-shrink-0 ml-2"
-                fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 0a10 10 0 0 0-3.162 19.488c.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.343-3.369-1.343-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 10 4.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0 0 10 0z" />
-                </svg>
-              </div>
-
-              <!-- Project Description -->
-              <p class="text-slate-600 dark:text-slate-400 mb-4 flex-1 leading-relaxed">
-                {project.description}
-              </p>
-
-              <!-- Language Badge -->
-              <div class="flex items-center gap-2 mb-4">
-                <span class="inline-flex items-center px-3 py-1 bg-slate-100
-                dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full
-                text-sm font-medium">
-                  <span class="w-2 h-2 rounded-full bg-slate-600 dark:bg-slate-400 mr-2"></span>
-                  {project.language}
-                </span>
-              </div>
-
-              <!-- Project Links -->
-              <div class="flex gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+      {projects.length > 0 ? (
+        <ul class="space-y-6">
+          {projects.map((project) => (
+            <li class="border-b border-[#2a2a2a] pb-6">
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 mb-2">
                 <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex-1 text-center px-4 py-2 bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-slate-200
-                  text-white dark:text-slate-900 font-medium
-                  rounded-lg transition-colors duration-200 text-sm"
+                  class="text-[#e0e0e0] hover:text-[#4ade80] no-underline font-medium"
                 >
-                  View Code
+                  {formatProjectTitle(project.name)}
+                </a>
+                <span class="text-[#6b7280] text-sm">[{project.language}]</span>
+              </div>
+              <p class="text-[#6b7280] text-sm mb-3">{project.description}</p>
+              <div class="flex gap-4 text-sm">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-[#22d3ee] hover:text-[#4ade80] no-underline"
+                >
+                  source →
                 </a>
                 {project.homepage && (
                   <a
                     href={project.homepage}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex-1 text-center px-4 py-2 border-2 border-slate-300
-                    dark:border-slate-600 text-slate-700 dark:text-slate-300
-                    hover:bg-slate-50 dark:hover:bg-slate-800 font-medium
-                    rounded-lg transition-colors duration-200 text-sm"
+                    class="text-[#22d3ee] hover:text-[#4ade80] no-underline"
                   >
-                    Live Demo
+                    demo →
                   </a>
                 )}
               </div>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      {projects.length === 0 && (
-        <div class="text-center py-16">
-          <div class="max-w-md mx-auto">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-              <svg class="w-8 h-8 text-slate-600 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-              </svg>
-            </div>
-            <p class="text-xl text-slate-600 dark:text-slate-400">
-              No projects found. Check back later!
-            </p>
-          </div>
-        </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-[#6b7280]">No projects found. Check back later.</p>
       )}
     </section>
+
   </div>
 </BaseLayout>

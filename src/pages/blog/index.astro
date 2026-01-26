@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'Blog';
-const description = 'Latest articles.';
+const description = 'Thoughts on code, philosophy, and life.';
 const permalink = `${Astro.site.href}blog`;
 
 let allPosts = await getCollection('posts')
@@ -11,96 +11,61 @@ allPosts = allPosts.sort((a, b) =>
   new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
 
 function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
+  return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric'
   });
 }
+
+// Group posts by year
+const postsByYear = allPosts.reduce((acc, post) => {
+  const year = new Date(post.data.publishDate).getFullYear();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {} as Record<number, typeof allPosts>);
+
+const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="blog">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <section class="py-12 lg:py-16">
-      <h1 class="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-slate-50 mb-4">
-        Blog
-      </h1>
-      <p class="text-xl text-slate-600 dark:text-slate-400">
-        Thoughts, tutorials, and insights on software development
-      </p>
-    </section>
+  <div class="max-w-3xl mx-auto px-4">
 
-    <section class="pb-12 lg:pb-16">
-      <div class="space-y-6">
-        {allPosts.map((post) => {
-          const href = `/blog/${post.data.slug}`;
-          return (
-            <article class="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-500">
-              <div class="p-6 lg:p-8">
-                <!-- Post Header -->
-                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-                  <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-slate-50">
+    <section class="py-12">
+      <h1 class="text-[#fbbf24] mb-8">## blog</h1>
+
+      <p class="text-[#6b7280] mb-8">
+        Writing about code, philosophy, and whatever else I find interesting.
+      </p>
+
+      {allPosts.length > 0 ? (
+        <div class="space-y-10">
+          {years.map((year) => (
+            <div>
+              <h2 class="text-[#6b7280] text-sm mb-4 border-b border-[#2a2a2a] pb-2">{year}</h2>
+              <ul class="space-y-3">
+                {postsByYear[Number(year)].map((post) => (
+                  <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
                     <a
-                      href={href}
-                      class="group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors"
+                      href={`/blog/${post.data.slug}`}
+                      class="text-[#e0e0e0] hover:text-[#4ade80] no-underline"
                     >
                       {post.data.title}
                     </a>
-                  </h2>
-                  <time
-                    datetime={post.data.publishDate}
-                    class="text-sm text-slate-500 dark:text-slate-500 font-medium whitespace-nowrap px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full"
-                  >
-                    {formatDate(post.data.publishDate)}
-                  </time>
-                </div>
-
-                <p class="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-                  {post.data.description}
-                </p>
-
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <a
-                    href={href}
-                    class="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-semibold transition-colors group/link"
-                  >
-                    Read more
-                    <svg class="w-5 h-5 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
-
-                  {post.data.categories && post.data.categories.length > 0 && (
-                    <div class="flex flex-wrap gap-2">
-                      {post.data.categories.slice(0, 3).map((category: string) => (
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium">
-                          {category}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </article>
-          )
-        })}
-      </div>
-
-      {allPosts.length === 0 && (
-        <div class="text-center py-16">
-          <div class="max-w-md mx-auto">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
-              <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
+                    <span class="text-[#6b7280] text-sm shrink-0">
+                      {formatDate(post.data.publishDate)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p class="text-xl text-slate-600 dark:text-slate-400">
-              No posts yet. Check back soon!
-            </p>
-          </div>
+          ))}
         </div>
+      ) : (
+        <p class="text-[#6b7280]">No posts yet. Check back soon.</p>
       )}
     </section>
+
   </div>
 </BaseLayout>

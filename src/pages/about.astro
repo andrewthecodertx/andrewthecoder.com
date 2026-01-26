@@ -4,116 +4,83 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const title = 'About';
 const description = 'About Andrew the Coder';
 const permalink = `${Astro.site.href}about`;
-
-const languages = [
-  'JavaScript', 'PHP', 'Golang', 'OCaml', 'Rust',
-  'Zig', 'C/C++', 'Python', 'Ruby'
-];
-
-const frameworks = [
-  'Symfony', 'Laravel', 'Flask', 'Django', 'Rails',
-  'Spring Boot', 'Gin', 'Leptos', 'Rocket'
-];
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="about">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Page Header -->
-    <section class="py-12 lg:py-16">
-      <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-amber-50 mb-6">
-        About Me
-      </h1>
-      <div class="prose prose-lg dark:prose-invert max-w-none">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 lg:p-10
-        border border-gray-200 dark:border-gray-700 space-y-6">
-          <p class="text-lg text-gray-700 dark:text-amber-100 leading-relaxed">
-            Hi, I'm Andrew, a software engineer and web developer with over 20 years
-            of experience. I've had the opportunity to work with a diverse range of
-            languages, frameworks, and platforms throughout my career. I thrive on
-            the problem-solving aspects of software development and am always eager
-            to tackle new challenges.
-          </p>
-          <p class="text-lg text-gray-700 dark:text-amber-100 leading-relaxed">
-            Beyond coding, I hold advanced degrees in theology and linguistics,
-            which have broadened my perspective and analytical skills. My major
-            hobby is music, and I'm an avid guitar player.
-          </p>
-        </div>
-      </div>
-    </section>
+  <div class="max-w-3xl mx-auto px-4">
 
-    <!-- Skills Section -->
-    <section class="py-12 lg:py-16">
-      <div class="grid gap-8 lg:grid-cols-2">
-        <!-- Languages Card -->
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8
-        border border-gray-200 dark:border-gray-700">
-          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-amber-50
-          mb-6 flex items-center gap-3">
-            <svg class="w-8 h-8 text-blue-500 dark:text-blue-400" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            Languages
-          </h2>
-          <div class="flex flex-wrap gap-3">
-            {languages.map((lang) => (
-              <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30
-              text-blue-700 dark:text-blue-300 rounded-lg font-medium
-              text-sm hover:bg-blue-200 dark:hover:bg-blue-900/50
-              transition-colors duration-200">
-                {lang}
-              </span>
-            ))}
-          </div>
-        </div>
+    <section class="py-12 border-b border-[#2a2a2a]">
+      <h1 class="text-[#fbbf24] mb-8">## about</h1>
 
-        <!-- Frameworks Card -->
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8
-        border border-gray-200 dark:border-gray-700">
-          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-amber-50
-          mb-6 flex items-center gap-3">
-            <svg class="w-8 h-8 text-blue-500 dark:text-blue-400" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-            Frameworks
-          </h2>
-          <div class="flex flex-wrap gap-3">
-            {frameworks.map((framework) => (
-              <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900/30
-              text-blue-700 dark:text-blue-300 rounded-lg font-medium
-              text-sm hover:bg-blue-200 dark:hover:bg-blue-900/50
-              transition-colors duration-200">
-                {framework}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact CTA -->
-    <section class="py-12 lg:py-16">
-      <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600
-      dark:to-blue-800 rounded-2xl shadow-2xl p-8 lg:p-12 text-center">
-        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
-          Let's Work Together
-        </h2>
-        <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-          I'm always interested in hearing about new projects and opportunities.
+      <div class="space-y-6 text-[#e0e0e0] leading-relaxed">
+        <p>
+          I've been writing code for over 25 years. What started as curiosity about how
+          things work turned into a lifelong passion for building software.
         </p>
-        <a
-          href="mailto:info@andrewthecoder.com"
-          class="inline-flex items-center px-8 py-4 bg-white text-blue-600
-          font-bold rounded-lg hover:bg-blue-50 transition-colors duration-200
-          shadow-lg hover:shadow-xl text-lg"
-        >
-          Get in Touch
-        </a>
+
+        <p>
+          My background is a bit unusual - I studied theology and linguistics before
+          diving deep into programming. This gives me a different perspective on
+          problem-solving and how humans interact with technology.
+        </p>
+
+        <p>
+          These days I mostly work with JavaScript/TypeScript, React, and Node.js, but
+          I enjoy learning new languages and frameworks. Currently exploring Rust and Go.
+        </p>
+
+        <p>
+          When I'm not coding, you'll find me playing guitar, reading philosophy, or
+          hiking. I believe the best software comes from developers who have interests
+          outside of tech.
+        </p>
       </div>
     </section>
+
+    <section class="py-12 border-b border-[#2a2a2a]">
+      <h2 class="text-[#fbbf24] mb-6">## tools of the trade</h2>
+      <p class="text-[#e0e0e0] mb-4">
+        Over the years, I've had the pleasure of working with a wide variety of languages and frameworks.
+      </p>
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-[#6b7280] text-sm mb-2">languages</h3>
+          <p class="text-[#e0e0e0]">
+            Ada, ASP, Assembly, BASIC, C/C++, C#, Cold Fusion, Go, Haskell, Java, JavaScript/TypeScript, Kotlin, LISP, OCaml, PHP, Python, Rexx, Ruby, Rust, Swift, Zig
+          </p>
+        </div>
+        <div>
+          <h3 class="text-[#6b7280] text-sm mb-2">frameworks</h3>
+          <p class="text-[#e0e0e0]">
+            Aeron, Angular, Django, Ember, Express, Flask, Flutter, Gin, Laravel, Netty, Rails, Spring, Symfony, Vue, Xamarin, Yesod
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-[#2a2a2a]">
+      <h2 class="text-[#fbbf24] mb-6">## interests</h2>
+      <ul class="space-y-2 text-[#6b7280]">
+        <li>- web development & interactive experiences</li>
+        <li>- game development (studying, not doing)</li>
+        <li>- open source</li>
+        <li>- philosophy & theology</li>
+        <li>- music (guitar)</li>
+      </ul>
+    </section>
+
+    <section class="py-12">
+      <h2 class="text-[#fbbf24] mb-6">## work with me</h2>
+      <p class="text-[#e0e0e0] mb-4">
+        I'm available for freelance projects. If you have something interesting
+        you'd like to build, let's talk.
+      </p>
+      <p>
+        <a href="mailto:info@andrewthecoder.com" class="text-[#22d3ee] hover:text-[#4ade80] no-underline">
+          info@andrewthecoder.com
+        </a>
+      </p>
+    </section>
+
   </div>
 </BaseLayout>

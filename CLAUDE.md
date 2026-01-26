@@ -2,97 +2,64 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
-
-This is a personal blog and portfolio website built with Astro. It uses server-side rendering (SSR) mode with the Node.js adapter, and integrates Svelte components for interactive UI elements.
-
-## Development Commands
+## Build Commands
 
 ```bash
-npm install         # Install dependencies
-npm run dev         # Start dev server at localhost:4321
-npm run build       # Build for production (outputs to dist/)
-npm run preview     # Preview production build locally
-npm run start       # Run production server (after build)
+npm run dev      # Start dev server at localhost:4321
+npm run build    # Build production site to ./dist/
+npm run preview  # Preview production build locally
+npm run start    # Run production server (after build)
 ```
-
-**No test framework is configured.** Verify changes by running `npm run build` to check for errors, then manually test in browser with `npm run dev`.
 
 ## Architecture
 
-### Content System
+This is an Astro blog site (andrewthecoder.com) running in SSR mode with Node.js adapter.
 
-Blog posts and author profiles use Astro's content collections with a **custom loader pattern**:
-- Posts are stored in `src/data/blog-posts/` as Markdown files
-- Authors are stored in `src/data/authors/` as Markdown files
-- Content collections are configured in `src/content.config.js` using the glob loader (not the traditional `src/content/` directory)
-- Post frontmatter includes: title, slug, publishDate, description, categories, tags, author, featured, image, github, demo
+**Stack:**
+- Astro 5 with SSR (`output: 'server'`)
+- Svelte for interactive components
+- Tailwind CSS v4 (via Vite plugin)
+- MDX for blog posts with remark-gfm, remark-math, and rehype-katex
 
-### Page Structure
+**Content Collections:**
+- Posts: `src/data/blog-posts/*.md` - Blog posts with frontmatter schema defined in `src/content.config.js`
+- Authors: `src/data/authors/*.md`
 
-- **Dynamic routes**: Blog post pages use `[slug].astro` with `getStaticPaths()` and `prerender: true`
-- **Layouts**: `BaseLayout.astro` for general pages, `BlogLayout.astro` for blog posts
-- **Components**: Mix of Astro components (`.astro`) and Svelte components (`.svelte`) for interactive features
-
-### Key Features
-
-- **Search**: Implemented via `search.json.js` endpoint and Svelte component
-- **RSS Feed**: Generated at `/rss.xml` via `rss.xml.js`
-- **Comments**: Uses Giscus (GitHub discussions) for blog post comments
-- **Dark Mode**: Theme toggle implemented in Svelte
-- **Reading Time**: Calculated using the `reading-time` package
-- **Math Support**: Uses remark-math and rehype-katex for mathematical notation
-- **External Links**: All external links open in new tabs via rehype-external-links
-
-### Markdown Processing
-
-Configured in `astro.config.mjs`:
-- Syntax highlighting: Shiki with Nord theme
-- Remark plugins: GFM, smartypants, math
-- Rehype plugins: KaTeX, external links
-
-## Deployment
-
-Deployment is automated via GitHub Actions (`.github/workflows/deploy.yml`):
-1. On push to `main`, code is copied to the production server via SCP
-2. Dependencies are installed with `npm install`
-3. Production build runs with `npm run astro build`
-4. Site is restarted using PM2
-
-**Note**: While `npm run build` is aliased to `astro build` in package.json, the deploy script uses `npm run astro build` directly to call the astro CLI.
-
-## Code Style
-
-### Imports
-External packages first, then local imports. Use single quotes for strings.
-```javascript
-import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
+**Post Frontmatter Schema:**
+```yaml
+title: string (required)
+slug: string (required)
+publishDate: string | date (required)
+description: string (required)
+categories: string[] (default: ["Other"])
+tags: string[] (default: ["Other"])
+comments_enabled: boolean (default: true)
+featured: boolean (default: true)
+image: string (default: "")
 ```
 
-### Svelte Components
-Use `client:load` directive for hydration. Handle SSR by checking `typeof document !== "undefined"`.
+**Key Files:**
+- `astro.config.mjs` - Astro config with markdown plugins and Tailwind
+- `src/content.config.js` - Content collection schemas
+- `src/layouts/BaseLayout.astro` - Main layout wrapper
+- `src/layouts/BlogLayout.astro` - Blog post layout
+- `ecosystem.config.cjs` - PM2 config for production (port 4321)
 
-### Tailwind CSS
-Dark mode via `.dark` class. Typography plugin for prose content (`prose`, `dark:prose-invert`).
+**Deployment:**
+Pushes to `main` trigger GitHub Actions workflow that rsyncs to server and restarts via PM2.
 
-### Adding a Blog Post
-Create `src/data/blog-posts/your-post-slug.md`:
-```markdown
----
-title: "Post Title"
-slug: your-post-slug
-publishDate: "2025-01-01"
-description: "Brief description"
-categories: ["Category"]
-tags: ["tag1", "tag2"]
-author: andrew
-featured: true
-image: "/assets/blog/image.webp"
-github: "https://github.com/..."
-demo: "https://demo.example.com"
----
-```
+## About Andrew
 
-### Static Assets
-Place in `public/assets/`. Reference with absolute paths: `/assets/blog/image.webp`. Prefer `.webp` format.
+Personal and career facts for reference when updating site content:
+
+**Experience:** 25+ years as a professional software engineer/web developer
+
+**Background:** Studied theology and linguistics in college. Started programming at age 10 on a Commodore 64 (BASIC), then learned 6502 Assembly. After college, discovered people would pay him to write programs and has been doing it ever since.
+
+**Languages worked with:**
+Ada, C/C++, C#, Python, PHP, Ruby, Rust, Zig, Go, JavaScript/TypeScript, OCaml, Haskell, Assembly (various architectures), Rexx, BASIC, ASP, LISP (various dialects), Cold Fusion, Java, Swift, Kotlin
+
+**Frameworks worked with:**
+Symfony, Laravel, Rails, Gin, Flask, Django, Angular, Vue, Flutter, Spring, Netty, Ember, Aeron, Xamarin, Express, Yesod
+
+**Interests:** Game development (studying techniques, not a professional game dev), philosophy, theology

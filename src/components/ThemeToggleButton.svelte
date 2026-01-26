@@ -1,92 +1,100 @@
 <script>
     const rootEl =
         typeof document !== "undefined" ? document.documentElement : null;
-    const themes = ["light", "dark"];
-    let theme = "";
+    let isDark = false;
 
     if (typeof localStorage !== "undefined" && typeof localStorage.getItem === "function") {
         const storedTheme = localStorage.getItem("theme");
         if (storedTheme) {
-            theme = storedTheme;
+            isDark = storedTheme === "dark";
         }
     } else if (
         typeof window !== "undefined" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches
     ) {
-        theme = "dark";
+        isDark = true;
     }
 
-    function handleChange(event) {
-        theme = event.target.value;
+    function handleToggle() {
+        isDark = !isDark;
+        const theme = isDark ? "dark" : "light";
         if (typeof localStorage !== "undefined" && typeof localStorage.setItem === "function") {
             localStorage.setItem("theme", theme);
         }
     }
 
-    $: if (rootEl && theme === "light") {
+    $: if (rootEl && !isDark) {
         rootEl.classList.remove("dark");
-    } else if (rootEl && theme === "dark") {
+    } else if (rootEl && isDark) {
         rootEl.classList.add("dark");
     }
-
-    const icons = [
-        `<svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-        clip-rule="evenodd"
-      />
-    </svg>`,
-        `<svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-    </svg>`,
-    ];
 </script>
 
-<div class="inline-flex items-center px-1.5 py-2.5 gap-2">
-    {#each themes as t, i}
-        <label class={theme === t ? "checked" : null}>
-            {@html icons[i]}
-            <input
-                type="radio"
-                name="theme-toggle"
-                checked={theme === t}
-                value={t}
-                title={`Use ${t} theme`}
-                aria-label={`Use ${t} theme`}
-                on:change={handleChange}
-            />
-        </label>
-    {/each}
-</div>
+<button
+    type="button"
+    role="switch"
+    aria-checked={isDark}
+    aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+    title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+    class="toggle"
+    class:active={isDark}
+    on:click={handleToggle}
+>
+    <span class="toggle-track">
+        <span class="toggle-thumb"></span>
+    </span>
+</button>
 
 <style>
-    input[name="theme-toggle"] {
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: -1;
+    .toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        padding: 4px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
     }
 
-    @media screen and (max-width: 520px) {
-        :global(svg) {
-            width: 18px;
-            height: 18px;
-        }
+    .toggle-track {
+        position: relative;
+        width: 44px;
+        height: 24px;
+        background-color: #d1d5db;
+        border-radius: 9999px;
+        transition: background-color 0.2s ease;
+    }
+
+    .toggle.active .toggle-track {
+        background-color: #6366f1;
+    }
+
+    .toggle-thumb {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border-radius: 9999px;
+        transition: transform 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .toggle.active .toggle-thumb {
+        transform: translateX(20px);
+    }
+
+    .toggle:focus-visible .toggle-track {
+        outline: 2px solid #6366f1;
+        outline-offset: 2px;
+    }
+
+    :global(.dark) .toggle-track {
+        background-color: #4b5563;
+    }
+
+    :global(.dark) .toggle.active .toggle-track {
+        background-color: #818cf8;
     }
 </style>
