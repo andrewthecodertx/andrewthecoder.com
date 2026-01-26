@@ -37,35 +37,62 @@ function formatProjectTitle(name: string) {
   <div class="max-w-3xl mx-auto px-4">
 
     <section class="py-12">
-      <h1 class="text-[#fbbf24] mb-8">## projects</h1>
+        <h2 class="text-terminal-amber mb-8">## websites</h2>
 
-      <p class="text-[#6b7280] mb-8">
+        <p class="text-terminal-dim mb-8">
+            Some websites I have built...
+        </p>
+
+        <ul class="space-y-6">
+            <li>
+                <a href="https://bruiserslegacy.org">Bruiser's Legact</a> is a small
+                animal rescue in southeastern Wisconsin.
+            </li>
+            <li>
+                <a href="https://weightogether.com">Weigh Together</a> is a weight
+                and fitness tracking platform that combines personal progress
+                monitoring with team-based accountability. Users can log their
+                weight, add progress photos, view charts and insights, join
+                accountability groups, and participate in challenges with
+                others. The platform supports various fitness activities
+                including running, strength training, and hiking, with a
+                focus on community support and celebrating milestones together.
+            </li>
+        </ul>
+
+    </section>
+        
+    <section class="py-12">
+      <h2 class="text-terminal-amber mb-8">## projects</h2>
+
+      <p class="text-terminal-dim mb-8">
         Things I've built. Some useful, some just for fun.
-        <a href="https://github.com/andrewthecodertx" target="_blank" rel="noopener noreferrer" class="text-[#22d3ee] hover:text-[#4ade80] no-underline">See all on GitHub →</a>
+                <a href="https://github.com/andrewthecodertx" target="_blank"
+                    rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">See all on GitHub →</a>
       </p>
 
       {projects.length > 0 ? (
         <ul class="space-y-6">
           {projects.map((project) => (
-            <li class="border-b border-[#2a2a2a] pb-6">
+            <li class="border-b border-terminal-border pb-6">
               <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 mb-2">
                 <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-[#e0e0e0] hover:text-[#4ade80] no-underline font-medium"
+                  class="text-terminal-fg hover:text-terminal-green no-underline font-medium"
                 >
                   {formatProjectTitle(project.name)}
                 </a>
-                <span class="text-[#6b7280] text-sm">[{project.language}]</span>
+                <span class="text-terminal-dim text-sm">[{project.language}]</span>
               </div>
-              <p class="text-[#6b7280] text-sm mb-3">{project.description}</p>
+              <p class="text-terminal-dim text-sm mb-3">{project.description}</p>
               <div class="flex gap-4 text-sm">
                 <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-[#22d3ee] hover:text-[#4ade80] no-underline"
+                  class="text-terminal-cyan hover:text-terminal-green no-underline"
                 >
                   source →
                 </a>
@@ -74,7 +101,7 @@ function formatProjectTitle(name: string) {
                     href={project.homepage}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-[#22d3ee] hover:text-[#4ade80] no-underline"
+                    class="text-terminal-cyan hover:text-terminal-green no-underline"
                   >
                     demo →
                   </a>
@@ -84,7 +111,7 @@ function formatProjectTitle(name: string) {
           ))}
         </ul>
       ) : (
-        <p class="text-[#6b7280]">No projects found. Check back later.</p>
+        <p class="text-terminal-dim">No projects found. Check back later.</p>
       )}
     </section>
 

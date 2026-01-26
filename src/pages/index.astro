@@ -53,33 +53,33 @@ function formatProjectTitle(name: string) {
   <div class="max-w-3xl mx-auto px-4">
 
     <!-- Intro -->
-    <section class="py-12 border-b border-[#2a2a2a]">
+    <section class="py-12 border-b border-terminal-border">
       <div class="space-y-4">
-        <p class="text-[#4ade80]">$ whoami</p>
-        <div class="space-y-2 text-[#e0e0e0]">
-          <p class="text-[#6b7280]">> andrew - software developer</p>
-          <p class="text-[#6b7280]">> building things for fun</p>
-          <p class="text-[#6b7280]">> 25+ years writing code</p>
+        <p class="text-terminal-green">$ whoami</p>
+        <div class="space-y-2 text-terminal-fg">
+          <p class="text-terminal-dim">> andrew - software developer</p>
+          <p class="text-terminal-dim">> building things for fun</p>
+          <p class="text-terminal-dim">> 25+ years writing code</p>
         </div>
         <div class="pt-4 flex gap-4 text-sm">
-          <a href="mailto:info@andrewthecoder.com" class="text-[#22d3ee] hover:text-[#4ade80] no-underline">email</a>
-          <a href="https://github.com/andrewthecodertx" class="text-[#22d3ee] hover:text-[#4ade80] no-underline">github</a>
+          <a href="mailto:info@andrewthecoder.com" class="text-terminal-cyan hover:text-terminal-green no-underline">email</a>
+          <a href="https://github.com/andrewthecodertx" class="text-terminal-cyan hover:text-terminal-green no-underline">github</a>
         </div>
       </div>
     </section>
 
     <!-- Dad Joke -->
-    <section class="py-12 border-b border-[#2a2a2a]">
-      <h2 class="text-[#fbbf24] mb-6">## dad joke</h2>
-      <p class="text-[#6b7280] text-sm mb-4">
-        from <a href="https://dadjokes.developersandbox.xyz" target="_blank" rel="noopener noreferrer" class="text-[#22d3ee] hover:text-[#4ade80] no-underline">Dad Jokes API</a> — a project I built
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-amber mb-6">## dad joke</h2>
+      <p class="text-terminal-dim text-sm mb-4">
+        from <a href="https://dadjokes.developersandbox.xyz" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">Dad Jokes API</a> — a project I built
       </p>
       <div class="space-y-2">
-        <p id="joke" class="text-[#e0e0e0]">Loading...</p>
-        <p id="joke-author" class="text-[#6b7280] text-sm"></p>
+        <p id="joke" class="text-terminal-fg">Loading...</p>
+        <p id="joke-author" class="text-terminal-dim text-sm"></p>
         <button
           id="new-joke"
-          class="text-[#22d3ee] hover:text-[#4ade80] text-sm cursor-pointer mt-2"
+          class="text-terminal-cyan hover:text-terminal-green text-sm cursor-pointer mt-2"
         >
           another one →
         </button>
@@ -87,58 +87,58 @@ function formatProjectTitle(name: string) {
     </section>
 
     <!-- Recent Posts -->
-    <section class="py-12 border-b border-[#2a2a2a]">
-      <h2 class="text-[#fbbf24] mb-6">## recent posts</h2>
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-amber mb-6">## recent posts</h2>
       <ul class="space-y-3">
         {featuredPosts.map((post) => (
           <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
-            <a href={`/blog/${post.data.slug}`} class="text-[#e0e0e0] hover:text-[#4ade80] no-underline">
+            <a href={`/blog/${post.data.slug}`} class="text-terminal-fg hover:text-terminal-green no-underline">
               {post.data.title}
             </a>
-            <span class="text-[#6b7280] text-sm">{formatDate(post.data.publishDate)}</span>
+            <span class="text-terminal-dim text-sm">{formatDate(post.data.publishDate)}</span>
           </li>
         ))}
       </ul>
       <p class="mt-6">
-        <a href="/blog" class="text-[#6b7280] hover:text-[#4ade80] no-underline text-sm">view all posts →</a>
+        <a href="/blog" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">view all posts →</a>
       </p>
     </section>
 
     <!-- Projects -->
-    <section class="py-12 border-b border-[#2a2a2a]">
-      <h2 class="text-[#fbbf24] mb-6">## projects</h2>
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-amber mb-6">## projects</h2>
       <ul class="space-y-4">
         {projects.map((project) => (
           <li>
             <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-              <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-[#e0e0e0] hover:text-[#4ade80] no-underline">
+              <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-terminal-fg hover:text-terminal-green no-underline">
                 {formatProjectTitle(project.name)}
               </a>
-              <span class="text-[#6b7280] text-sm">[{project.language}]</span>
+              <span class="text-terminal-dim text-sm">[{project.language}]</span>
               {project.homepage && (
-                <a href={project.homepage} target="_blank" rel="noopener noreferrer" class="text-[#22d3ee] hover:text-[#4ade80] no-underline text-sm">
+                <a href={project.homepage} target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline text-sm">
                   live →
                 </a>
               )}
             </div>
-            <p class="text-[#6b7280] text-sm mt-1">{project.description}</p>
+            <p class="text-terminal-dim text-sm mt-1">{project.description}</p>
           </li>
         ))}
       </ul>
       <p class="mt-6">
-        <a href="/projects" class="text-[#6b7280] hover:text-[#4ade80] no-underline text-sm">view all projects →</a>
+        <a href="/projects" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">view all projects →</a>
       </p>
     </section>
 
     <!-- Work with me -->
     <section class="py-12">
-      <h2 class="text-[#fbbf24] mb-6">## work with me</h2>
-      <p class="text-[#e0e0e0] mb-4">
+      <h2 class="text-terminal-amber mb-6">## work with me</h2>
+      <p class="text-terminal-fg mb-4">
         I'm available for freelance projects. If you have something interesting
         you'd like to build, let's talk.
       </p>
       <p>
-        <a href="mailto:info@andrewthecoder.com" class="text-[#22d3ee] hover:text-[#4ade80] no-underline">
+        <a href="mailto:info@andrewthecoder.com" class="text-terminal-cyan hover:text-terminal-green no-underline">
           info@andrewthecoder.com
         </a>
       </p>
