@@ -31,6 +31,9 @@ try {
 function formatProjectTitle(name: string) {
   return name.replace(/-/g, ' ');
 }
+
+const projectsWithDemos = projects.filter(p => p.homepage);
+const projectsWithoutDemos = projects.filter(p => !p.homepage);
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="projects">
@@ -81,49 +84,59 @@ function formatProjectTitle(name: string) {
 
       <p class="text-terminal-dim mb-8">
         Things I've built. Some useful, some just for fun.
-                <a href="https://github.com/andrewthecodertx" target="_blank"
-                    rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">See all on GitHub →</a>
+        <a href="https://github.com/andrewthecodertx" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">See all on GitHub →</a>
       </p>
 
       {projects.length > 0 ? (
-        <ul class="space-y-6">
-          {projects.map((project) => (
-            <li class="border-b border-terminal-border pb-6">
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 mb-2">
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-terminal-fg hover:text-terminal-green no-underline font-medium"
-                >
-                  {formatProjectTitle(project.name)}
-                </a>
-                <span class="text-terminal-dim text-sm">[{project.language}]</span>
-              </div>
-              <p class="text-terminal-dim text-sm mb-3">{project.description}</p>
-              <div class="flex gap-4 text-sm">
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-terminal-cyan hover:text-terminal-green no-underline"
-                >
-                  source →
-                </a>
-                {project.homepage && (
-                  <a
-                    href={project.homepage}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-terminal-cyan hover:text-terminal-green no-underline"
-                  >
-                    demo →
-                  </a>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-terminal-dim text-sm mb-4 border-b border-terminal-border pb-2">with demos</h3>
+            <ul class="space-y-4">
+              {projectsWithDemos.map((project) => (
+                <li>
+                  <div class="flex gap-1 mb-1">
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-terminal-fg hover:text-terminal-green no-underline"
+                    >
+                      {formatProjectTitle(project.name)}
+                    </a>
+                    <span class="text-terminal-dim text-sm">[{project.language}]</span>
+                  </div>
+                  <span>{project.description}</span>
+                  <div class="flex gap-3 text-sm">
+                    <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">source →</a>
+                    <a href={project.homepage} target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">demo →</a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-terminal-dim text-sm mb-4 border-b border-terminal-border pb-2">source only</h3>
+            <ul class="space-y-4">
+              {projectsWithoutDemos.map((project) => (
+                <li>
+                  <div class="flex gap-1 mb-1">
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-terminal-fg hover:text-terminal-green no-underline"
+                    >
+                      {formatProjectTitle(project.name)}
+                    </a>
+                    <span class="text-terminal-dim text-sm">[{project.language}]</span>
+                  </div>
+                  <span class="block">{project.description}</span>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline text-sm">source →</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       ) : (
         <p class="text-terminal-dim">No projects found. Check back later.</p>
       )}
