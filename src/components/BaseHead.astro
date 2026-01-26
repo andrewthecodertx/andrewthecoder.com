@@ -8,10 +8,14 @@ export interface Props {
   description: string
   permalink: string
   image?: string
+  type?: 'website' | 'article'
 }
 
-const { title, description, permalink, image } = Astro.props
-const socialUrl = new URL(image ?? 'assets/social.png', Astro.site).href
+const { title, description, permalink, image, type = 'website' } = Astro.props
+const siteName = 'Andrew the Coder'
+const siteUrl = Astro.site?.href || 'https://andrewthecoder.com'
+const socialUrl = new URL(image ?? '/assets/social.png', siteUrl).href
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`
 ---
 
 <!-- Global Metadata -->
@@ -19,25 +23,35 @@ const socialUrl = new URL(image ?? 'assets/social.png', Astro.site).href
 <meta name="viewport" content="width=device-width" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.css">
+<link rel="canonical" href={permalink} />
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
 <meta name="description" content={description} />
+<meta name="author" content="Andrew Erwin" />
+<meta name="generator" content={Astro.generator} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:url" content={permalink} />
+<meta property="og:site_name" content={siteName} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={permalink} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={socialUrl} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@_andrewthecoder" />
+<meta name="twitter:creator" content="@_andrewthecoder" />
+<meta name="twitter:url" content={permalink} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialUrl} />
+<meta name="twitter:image:alt" content={title} />
 
 <!-- This is intentionally inlined to avoid FOUC -->
 <script is:inline>
