@@ -3,8 +3,8 @@ title: "God, Free Will, and the Unfolding Universe"
 slug: god-and-contingency
 publishDate: "2025-07-29"
 description: "Resolving the paradox of a changeless God in a changing world through the lens of process philosophy and its implications for free will."
-categories: ["Theology", "Philosophy"]
-tags: ["freewill", "process theology"]
+categories: ["Theology"]
+tags: ["freewill", "process theology", "philosophy"]
 author: Andrew
 comments_enabled: false
 featured: false
@@ -46,17 +46,17 @@ not that of finality, but of progress."[^3]
 In this model, God has two "natures" or "poles":
 
 1. **The Primordial Nature (The Abstract Pole):** This is God's abstract,
-eternal, and unchanging aspect. It is the realm of pure potentiality,
-containing all possibilities for the universe. It is the "unmoved mover" in the
-sense that it is the ultimate source of novel forms and ideals, luring the world
-toward its creative becoming.
+   eternal, and unchanging aspect. It is the realm of pure potentiality,
+   containing all possibilities for the universe. It is the "unmoved mover" in the
+   sense that it is the ultimate source of novel forms and ideals, luring the world
+   toward its creative becoming.
 
 1. **The Consequent Nature (The Concrete Pole):** This is God's concrete,
-temporal, and ever-changing aspect. It is the result of what Hartshorne termed
-"divine relativity"—God's intimate, responsive relationship with the world.[^4]
-God "prehends" or takes in every event that occurs in creation. Our choices, our
-creativity, and our suffering are not just known by God, but are felt by God and
-contribute to the divine experience.
+   temporal, and ever-changing aspect. It is the result of what Hartshorne termed
+   "divine relativity"—God's intimate, responsive relationship with the world.[^4]
+   God "prehends" or takes in every event that occurs in creation. Our choices, our
+   creativity, and our suffering are not just known by God, but are felt by God and
+   contribute to the divine experience.
 
 In this view, God is in a genuine, give-and-take relationship with the world.
 Whitehead famously described God as the "fellow sufferer who understands."[^5]
@@ -78,15 +78,22 @@ where our choices truly matter, not only to ourselves but to the God who
 experiences the world with us, and whose own being is enriched by the progress
 of His creation.
 
-[^1]: Thomas Aquinas, *Summa Theologica*, I, Q. 13, Art. 7.
-[^2]: Charles Hartshorne, *Man's Vision of God and the Logic of Theism* (1941).
-Hartshorne argues that classical theism fails to see that terms like "absolute"
-and "relative" are correlative and that a truly perfect being must encompass
-both poles.
-[^3]: Alfred North Whitehead, *Process and Reality* (New York: The Free Press,
-1978), 14.
-[^4]: Charles Hartshorne, *The Divine Relativity: A Social Conception of God*
-(1948). In this key work, Hartshorne argues that God's perfection is social and
-that God is "surrelative," meaning God is related to all, but nothing is
-related to God in the same way.
-[^5]: Alfred North Whitehead, *Process and Reality*, 351.
+[^1]: Thomas Aquinas, _Summa Theologica_, I, Q. 13, Art. 7.
+
+[^2]:
+    Charles Hartshorne, _Man's Vision of God and the Logic of Theism_ (1941).
+    Hartshorne argues that classical theism fails to see that terms like "absolute"
+    and "relative" are correlative and that a truly perfect being must encompass
+    both poles.
+
+[^3]:
+    Alfred North Whitehead, _Process and Reality_ (New York: The Free Press,
+    1978), 14.
+
+[^4]:
+    Charles Hartshorne, _The Divine Relativity: A Social Conception of God_
+    (1948). In this key work, Hartshorne argues that God's perfection is social and
+    that God is "surrelative," meaning God is related to all, but nothing is
+    related to God in the same way.
+
+[^5]: Alfred North Whitehead, _Process and Reality_, 351.

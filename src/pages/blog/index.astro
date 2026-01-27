@@ -18,15 +18,17 @@ function formatDate(dateString: string) {
   });
 }
 
-// Group posts by year
-const postsByYear = allPosts.reduce((acc, post) => {
-  const year = new Date(post.data.publishDate).getFullYear();
-  if (!acc[year]) acc[year] = [];
-  acc[year].push(post);
+// Group posts by category
+const postsByCategory = allPosts.reduce((acc, post) => {
+  const categories = post.data.categories || ['Other'];
+  categories.forEach((category: string) => {
+    if (!acc[category]) acc[category] = [];
+    acc[category].push(post);
+  });
   return acc;
-}, {} as Record<number, typeof allPosts>);
+}, {} as Record<string, typeof allPosts>);
 
-const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
+const categories = Object.keys(postsByCategory).sort();
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="blog">
@@ -41,11 +43,11 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 
       {allPosts.length > 0 ? (
         <div class="space-y-10">
-          {years.map((year) => (
+          {categories.map((category) => (
             <div>
-              <h2 class="text-terminal-dim text-sm mb-4 border-b border-terminal-border pb-2">{year}</h2>
+              <h2 class="text-terminal-cyan text-sm mb-4 border-b border-terminal-border pb-2">{category}</h2>
               <ul class="space-y-3">
-                {postsByYear[Number(year)].map((post) => (
+                {postsByCategory[category].map((post) => (
                   <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
                     <a
                       href={`/blog/${post.data.slug}`}

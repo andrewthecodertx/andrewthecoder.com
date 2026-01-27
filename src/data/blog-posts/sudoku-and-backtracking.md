@@ -3,7 +3,7 @@ title: "Sudoku and Backtracking"
 slug: sudoku-and-backtracking
 publishDate: "2025-09-03"
 description: "Solving sudoku using backtracking algorithm"
-categories: ["Algorithms", "Software Development"]
+categories: ["Software Development"]
 tags: ["sudoku", "algorithms"]
 author: Andrew
 comments_enabled: true
@@ -12,6 +12,7 @@ image: "/assets/blog/sudoku.webp"
 github: "https://github.com/andrewthecodertx/Sudoku-Solver"
 demo: "https://developersandbox.xyz/sudoku/"
 ---
+
 Sudoku, the captivating number puzzle, has been a favorite for ages. But
 have you ever wondered what's happening behind the scenes in the apps and
 websites that can solve any Sudoku in a flash? The secret often lies in an
@@ -38,19 +39,19 @@ possible numbers (1-9) you can place in each empty cell. Here's how the
 algorithm works:
 
 1. **Find an Empty Cell:** First, it scans the grid to find an empty cell.
-    If there are no empty cells, the puzzle is solved!
+   If there are no empty cells, the puzzle is solved!
 1. **Try Numbers 1-9:** For that empty cell, it tries placing a number,
-    starting from 1.
+   starting from 1.
 1. **Check for Validity:** For each number, it checks if the move is valid
-    according to Sudoku rules:
-    - The number can't already be in the same row.
-    - The number can't already be in the same column.
-    - The number can't already be in the same 3x3 subgrid.
+   according to Sudoku rules:
+   - The number can't already be in the same row.
+   - The number can't already be in the same column.
+   - The number can't already be in the same 3x3 subgrid.
 1. **Move On:** If the number is valid, the solver calls itself to tackle the
-    next empty cell. This process repeats, diving deeper into the puzzle.
+   next empty cell. This process repeats, diving deeper into the puzzle.
 1. **Backtrack:** If the solver gets stuck (meaning, it hits a dead end), it
-    means the number it last placed was incorrect. So, it "backtracks" by
-    resetting the cell to empty and trying the next number in the sequence.
+   means the number it last placed was incorrect. So, it "backtracks" by
+   resetting the cell to empty and trying the next number in the sequence.
 
 If all numbers from 1 to 9 have been tried and none work, the function
 returns, and the previous step takes over, trying a new number in the cell
@@ -63,20 +64,20 @@ backtracking solver. The main goal is to create a puzzle that has only one
 possible solution.
 
 1. **Start with a Solved Grid:** First, the algorithm generates a completely
-    solved Sudoku grid. This is done by applying the backtracking solver to
-    an empty grid.
+   solved Sudoku grid. This is done by applying the backtracking solver to
+   an empty grid.
 
 1. **Remove Numbers:** With a solved grid, it then starts removing numbers
-    one by one from random cells.
+   one by one from random cells.
 
 1. **Check for a Unique Solution:** After each number is removed, it needs to
-    be sure that the puzzle still has only one unique solution. This is where
-    the backtracking algorithm comes in handy once more. A modified version
-    of the solver is used to count the number of possible solutions.
+   be sure that the puzzle still has only one unique solution. This is where
+   the backtracking algorithm comes in handy once more. A modified version
+   of the solver is used to count the number of possible solutions.
 
 1. **Undo if Necessary:** If removing a number results in a puzzle with more
-    than one solution (or no solution), the removal is undone (the number is
-    put back), and the algorithm tries removing a different number.
+   than one solution (or no solution), the removal is undone (the number is
+   put back), and the algorithm tries removing a different number.
 
 This continues until enough cells have been removed to create a challenging
 but fair Sudoku puzzle.
