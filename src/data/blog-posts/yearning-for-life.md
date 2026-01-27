@@ -8,7 +8,7 @@ tags: ["poetry", "hope"]
 author: Andrew
 comments_enabled: true
 featured: false
-image: ""
+image: "/assets/blog/yearning.webp"
 ---
 
 In shadows cast, where whispers dwell,
