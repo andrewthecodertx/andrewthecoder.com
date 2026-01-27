@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { CONTACT_EMAIL } from '../constants';
 
 const title = 'Andrew the Coder';
 const description = 'Software developer building things for fun';
@@ -62,7 +63,7 @@ function formatProjectTitle(name: string) {
           <p class="text-terminal-dim">> 25+ years writing code</p>
         </div>
         <div class="pt-4 flex gap-4 text-sm">
-          <a href="mailto:info@andrewthecoder.com" class="text-terminal-cyan hover:text-terminal-green no-underline">email</a>
+          <a href={`mailto:${CONTACT_EMAIL}`} class="text-terminal-cyan hover:text-terminal-green no-underline">email</a>
           <a href="https://github.com/andrewthecodertx" class="text-terminal-cyan hover:text-terminal-green no-underline">github</a>
         </div>
       </div>
@@ -138,8 +139,8 @@ function formatProjectTitle(name: string) {
         you'd like to build, let's talk.
       </p>
       <p>
-        <a href="mailto:info@andrewthecoder.com" class="text-terminal-cyan hover:text-terminal-green no-underline">
-          info@andrewthecoder.com
+        <a href={`mailto:${CONTACT_EMAIL}`} class="text-terminal-cyan hover:text-terminal-green no-underline">
+          {CONTACT_EMAIL}
         </a>
       </p>
     </section>

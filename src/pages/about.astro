@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { CONTACT_EMAIL } from '../constants';
 
 const title = 'About';
 const description = 'About Andrew the Coder';
@@ -78,8 +79,8 @@ const permalink = `${Astro.site.href}about`;
         you'd like to build, let's talk.
       </p>
       <p>
-        <a href="mailto:info@andrewthecoder.com" class="text-terminal-cyan hover:text-terminal-green no-underline">
-          info@andrewthecoder.com
+        <a href={`mailto:${CONTACT_EMAIL}`} class="text-terminal-cyan hover:text-terminal-green no-underline">
+          {CONTACT_EMAIL}
         </a>
       </p>
     </section>
