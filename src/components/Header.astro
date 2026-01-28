@@ -1,10 +1,13 @@
 ---
 const { current = '' } = Astro.props;
-const navmenu = [
+const navItems = [
     { label: "home", href: "/" },
     { label: "about", href: "/about" },
-    { label: "projects", href: "/projects" },
     { label: "blog", href: "/blog" }
+];
+const projectsDropdown = [
+    { label: "all projects", href: "/projects" },
+    { label: "erwinmvc", href: "/projects/erwinmvc" }
 ];
 ---
 
@@ -17,8 +20,8 @@ const navmenu = [
                 </a>
             </h1>
 
-            <nav class="flex flex-wrap gap-4 text-sm">
-                {navmenu.map((item) => (
+            <nav class="flex flex-wrap gap-4 text-sm items-center">
+                {navItems.slice(0, 2).map((item) => (
                     <a
                         href={item.href}
                         class={`no-underline ${current == item.label
@@ -28,6 +31,38 @@ const navmenu = [
                         {current == item.label ? `[${item.label}]` : item.label}
                     </a>
                 ))}
+
+                <div class="relative group">
+                    <button
+                        class={`no-underline cursor-pointer bg-transparent border-none ${current == "projects"
+                            ? "text-terminal-green"
+                            : "text-terminal-dim hover:text-terminal-fg"}`}
+                    >
+                        {current == "projects" ? "[projects]" : "projects"}
+                        <span class="text-xs ml-0.5">▼</span>
+                    </button>
+                    <div class="absolute left-0 top-full pt-1 hidden group-hover:block min-w-max z-50">
+                        <div class="bg-terminal-bg border border-terminal-border rounded">
+                            {projectsDropdown.map((item) => (
+                                <a
+                                    href={item.href}
+                                    class="block px-3 py-2 text-terminal-dim hover:text-terminal-fg hover:bg-terminal-border no-underline whitespace-nowrap"
+                                >
+                                    {item.label}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <a
+                    href="/blog"
+                    class={`no-underline ${current == "blog"
+                        ? "text-terminal-green"
+                        : "text-terminal-dim hover:text-terminal-fg"}`}
+                >
+                    {current == "blog" ? "[blog]" : "blog"}
+                </a>
             </nav>
         </div>
     </div>
