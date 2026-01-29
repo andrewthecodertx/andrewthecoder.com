@@ -1,12 +1,12 @@
 ---
 title: "God, Free Will, and the Unfolding Universe"
 slug: god-and-contingency
-publishDate: "2025-07-29"
+publishDate: "2026-01-29"
 description: "Resolving the paradox of a changeless God in a changing world through the lens of process philosophy and its implications for free will."
 categories: ["Theology"]
 tags: ["freewill", "process theology", "philosophy"]
 author: Andrew
-comments_enabled: false
+comments_enabled: true
 featured: false
 image: "/assets/blog/process.webp"
 ---
