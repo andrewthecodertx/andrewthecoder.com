@@ -149,22 +149,24 @@ function formatProjectTitle(name: string) {
 
   </div>
 
-  <script>
-    async function fetchJoke() {
-      const jokeEl = document.getElementById('joke');
-      const authorEl = document.getElementById('joke-author');
-      try {
-        const res = await fetch('/api/joke');
-        const data = await res.json();
-        jokeEl.textContent = data.joke_text;
-        authorEl.textContent = `— ${data.author}`;
-      } catch (e) {
-        jokeEl.textContent = 'Why do programmers prefer dark mode? Because light attracts bugs.';
-        authorEl.textContent = '— anonymous';
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      async function fetchJoke() {
+        const jokeEl = document.getElementById('joke');
+        const authorEl = document.getElementById('joke-author');
+        try {
+          const res = await fetch('/api/joke');
+          const data = await res.json();
+          jokeEl.textContent = data.joke_text;
+          authorEl.textContent = `— ${data.author}`;
+        } catch (e) {
+          jokeEl.textContent = 'Why do programmers prefer dark mode? Because light attracts bugs.';
+          authorEl.textContent = '— anonymous';
+        }
       }
-    }
 
-    fetchJoke();
-    document.getElementById('new-joke')?.addEventListener('click', fetchJoke);
+      fetchJoke();
+      document.getElementById('new-joke')?.addEventListener('click', fetchJoke);
+    });
   </script>
 </BaseLayout>
