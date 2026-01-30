@@ -28,7 +28,19 @@ const postsByCategory = allPosts.reduce((acc, post) => {
   return acc;
 }, {} as Record<string, typeof allPosts>);
 
-const categories = Object.keys(postsByCategory).sort();
+const categoryOrder: Record<string, number> = {
+  'Software Development': 1,
+  'Science': 2,
+  'Theology': 3,
+  'Poetry': 4,
+};
+
+const categories = Object.keys(postsByCategory).sort((a, b) => {
+  const orderA = categoryOrder[a] ?? 999;
+  const orderB = categoryOrder[b] ?? 999;
+  if (orderA !== orderB) return orderA - orderB;
+  return a.localeCompare(b);
+});
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="blog">
