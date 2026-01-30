@@ -30,11 +30,11 @@
 </script>
 
 <div class="py-6">
-    <h3
+    <h4
         class="text-terminal-cyan text-sm mb-4 border-b border-terminal-border pb-2"
     >
         {category}
-    </h3>
+    </h4>
     <ul class="space-y-3">
         {#each visiblePosts as post}
             <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
@@ -50,7 +50,10 @@
             </li>
         {/each}
         {#each Array(emptySlots) as _}
-            <li class="flex flex-col sm:flex-row sm:justify-between gap-1 invisible" aria-hidden="true">
+            <li
+                class="flex flex-col sm:flex-row sm:justify-between gap-1 invisible"
+                aria-hidden="true"
+            >
                 <span>&nbsp;</span>
             </li>
         {/each}

@@ -56,7 +56,7 @@ function formatProjectTitle(name: string) {
     <!-- Intro -->
     <section class="py-12 border-b border-terminal-border">
       <div class="space-y-4">
-        <p class="text-terminal-green">$ whoami</p>
+        <h2 class="text-terminal-green">$ whoami</h2>
         <div class="space-y-2 text-terminal-fg">
           <p class="text-terminal-dim">> andrew - software developer</p>
           <p class="text-terminal-dim">> building things for fun</p>
@@ -73,7 +73,7 @@ function formatProjectTitle(name: string) {
 
     <!-- Dad Joke -->
     <section class="py-12 border-b border-terminal-border">
-      <h2 class="text-terminal-amber mb-6">## dad joke</h2>
+      <h3 class="text-terminal-amber mb-6">### dad joke</h3>
       <p class="text-terminal-dim text-sm mb-4">
         from <a href="https://dadjokes.developersandbox.xyz" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">Dad Jokes API</a> — a project I built
       </p>
@@ -91,7 +91,7 @@ function formatProjectTitle(name: string) {
 
     <!-- Recent Posts -->
     <section class="py-12 border-b border-terminal-border">
-      <h2 class="text-terminal-amber mb-6">## recent posts</h2>
+      <h3 class="text-terminal-amber mb-6">### recent posts</h3>
       <ul class="space-y-3">
         {featuredPosts.map((post) => (
           <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
@@ -109,7 +109,7 @@ function formatProjectTitle(name: string) {
 
     <!-- Projects -->
     <section class="py-12 border-b border-terminal-border">
-      <h2 class="text-terminal-amber mb-6">## projects</h2>
+      <h3 class="text-terminal-amber mb-6">### projects</h3>
       <ul class="space-y-4">
         {projects.map((project) => (
           <li>
@@ -135,7 +135,7 @@ function formatProjectTitle(name: string) {
 
     <!-- Work with me -->
     <section class="py-12">
-      <h2 class="text-terminal-amber mb-6">## work with me</h2>
+      <h3 class="text-terminal-amber mb-6">### work with me</h3>
       <p class="text-terminal-fg mb-4">
         I'm available for freelance projects. If you have something interesting
         you'd like to build, let's talk.
