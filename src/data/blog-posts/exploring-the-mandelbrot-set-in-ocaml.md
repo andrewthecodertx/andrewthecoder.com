@@ -7,7 +7,7 @@ categories: ["Software Development"]
 tags: ["mandelbrot", "fractal", "ocaml", "math", "sdl2"]
 author: andrew
 comments_enabled: true
-featured: false
+featured: true
 github: "https://github.com/andrewthecodertx/ocaml-mandelbrot_set"
 image: "/assets/blog/mandelbrot.webp"
 ---
