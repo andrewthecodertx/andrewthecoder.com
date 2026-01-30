@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryPostList from '../../components/CategoryPostList.svelte';
 
 const title = 'Blog';
 const description = 'Thoughts on code, philosophy, and life.';
@@ -55,26 +56,16 @@ const categories = Object.keys(postsByCategory).sort((a, b) => {
 
       {allPosts.length > 0 ? (
         <div class="space-y-10">
-          {categories.map((category) => (
-            <div>
-              <h2 class="text-terminal-cyan text-sm mb-4 border-b border-terminal-border pb-2">{category}</h2>
-              <ul class="space-y-3">
-                {postsByCategory[category].map((post) => (
-                  <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
-                    <a
-                      href={`/blog/${post.data.slug}`}
-                      class="text-terminal-fg hover:text-terminal-green no-underline"
-                    >
-                      {post.data.title}
-                    </a>
-                    <span class="text-terminal-dim text-sm shrink-0">
-                      {formatDate(post.data.publishDate)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {categories.map((category) => {
+            const serializedPosts = postsByCategory[category].map((post) => ({
+              title: post.data.title,
+              slug: post.data.slug,
+              publishDate: post.data.publishDate.toString(),
+            }));
+            return (
+              <CategoryPostList client:load posts={serializedPosts} category={category} />
+            );
+          })}
         </div>
       ) : (
         <p class="text-terminal-dim">No posts yet. Check back soon.</p>
