@@ -150,7 +150,7 @@ function formatProjectTitle(name: string) {
   </div>
 
   <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('astro:page-load', () => {
       async function fetchJoke() {
         const jokeEl = document.getElementById('joke');
         const authorEl = document.getElementById('joke-author');
