@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-display: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
@@ -68,10 +67,6 @@ html {
   font-weight: 500;
 }
 
-.dark .prose :not(pre) > code {
-  background-color: #1e293b;
-  color: #94a3b8;
-}
 
 /* Links - simple underline style */
 a {
