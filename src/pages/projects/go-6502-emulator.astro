@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Go-6502 Emulator';
+const description = 'A cycle-accurate emulator for the MOS6502 and WDC65C02 8-bit microprocessors, written in Go';
+const permalink = `${Astro.site.href}projects/go-6502-emulator`;
+---
+
+<BaseLayout title={title} description={description} permalink={permalink} current="projects">
+  <div class="max-w-3xl mx-auto px-4">
+
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-green mb-4">$ Go-6502 Emulator</h1>
+      <p class="text-terminal-dim text-sm mb-6">
+        <a href="https://github.com/andrewthecodertx/go-6502-emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          View on GitHub →
+        </a>
+      </p>
+
+      <p class="text-terminal-fg leading-relaxed mb-6">
+        A cycle-accurate emulator for the MOS6502 and WDC65C02 8-bit microprocessors,
+        written in Go. This project provides high-fidelity emulation of two classic 8-bit
+        processors that powered many iconic computers and gaming systems.
+      </p>
+
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+        <p class="text-terminal-dim text-sm mb-2">install</p>
+        <code class="text-terminal-green">go get github.com/andrewthecodertx/go-6502-emulator</code>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### features</h3>
+      <ul class="space-y-3 text-terminal-fg">
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Cycle-accurate execution</strong> — Faithfully reproduces timing behavior including page-crossing penalties</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Complete instruction set</strong> — All 56 documented MOS6502 instructions plus 27 additional WDC65C02 instructions</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">All addressing modes</strong> — 13 addressing modes for 6502, plus 2 new modes for 65C02</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Hardware quirks</strong> — Implements the JMP indirect page boundary bug on MOS6502 (fixed in 65C02)</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Interrupt support</strong> — NMI, IRQ, and RESET vectors with proper handling</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Flexible bus interface</strong> — Pluggable memory system supporting RAM, ROM, and memory-mapped I/O</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### usage</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          The emulator is designed to be embedded in your own projects. Add the module
+          to your project and use either the MOS6502 or WDC65C02 CPU implementations.
+        </p>
+        <ol class="space-y-2 list-decimal list-inside text-terminal-fg">
+          <li>Implement the <code class="text-terminal-green">Bus</code> interface for your memory system</li>
+          <li>Instantiate your preferred CPU variant (<code class="text-terminal-green">mos6502.NewCPU()</code> or <code class="text-terminal-green">wdc65c02.NewCPU()</code>)</li>
+          <li>Load machine code and call <code class="text-terminal-green">Step()</code> or <code class="text-terminal-green">Run()</code> to execute</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### project structure</h3>
+      <div class="space-y-4 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">pkg/core/</code>
+          <span class="text-terminal-dim">— Shared components (BaseCPU, Bus interface, addressing modes)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">pkg/mos6502/</code>
+          <span class="text-terminal-dim">— NMOS 6502 CPU implementation</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">pkg/wdc65c02/</code>
+          <span class="text-terminal-dim">— WDC 65C02 CPU implementation</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">docs/</code>
+          <span class="text-terminal-dim">— Documentation</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### testing</h3>
+      <div class="space-y-4 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">go test ./...</code>
+          <span class="text-terminal-dim">— Run all tests</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">go test -v ./...</code>
+          <span class="text-terminal-dim">— Run with verbose output</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">go test -cover ./...</code>
+          <span class="text-terminal-dim">— Run with coverage</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <h3 class="text-terminal-amber mb-6">### learn more</h3>
+      <p class="text-terminal-fg mb-4">
+        Full documentation, examples, and detailed instructions are available in the README.
+      </p>
+      <div class="flex gap-4">
+        <a href="https://github.com/andrewthecodertx/go-6502-emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          GitHub →
+        </a>
+        <a href="https://github.com/andrewthecodertx/go-6502-emulator#readme" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          Documentation →
+        </a>
+      </div>
+    </section>
+
+    <footer class="py-8 border-t border-terminal-border">
+      <a href="/projects" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">
+        ← back to projects
+      </a>
+    </footer>
+
+  </div>
+</BaseLayout>
