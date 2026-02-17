@@ -1,7 +1,7 @@
 ---
 title: "AI as an Assistant, Not a Replacement"
-slug: exploring-the-mandelbrot-set-in-ocaml
-publishDate: "2026-01-30"
+slug: ai-as-an-assistant
+publishDate: "2026-02-17"
 description: "A look at changing trends in AI and the job market"
 categories: ["Artificial Intelligence"]
 tags: ["ai", "llm", "software development"]
