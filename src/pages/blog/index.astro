@@ -31,9 +31,10 @@ const postsByCategory = allPosts.reduce((acc, post) => {
 
 const categoryOrder: Record<string, number> = {
   'Software Development': 1,
-  'Science': 2,
-  'Theology': 3,
-  'Poetry': 4,
+  'Artificial Intelligence': 2,
+  'Science': 3,
+  'Theology': 4,
+  'Poetry': 5,
 };
 
 const categories = Object.keys(postsByCategory).sort((a, b) => {

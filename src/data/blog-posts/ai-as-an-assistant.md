@@ -1,5 +1,5 @@
 ---
-title: "AI as an Assistant, Not a Replacement: A New Perspective for Developers"
+title: "AI as an Assistant, Not a Replacement"
 slug: exploring-the-mandelbrot-set-in-ocaml
 publishDate: "2026-01-30"
 description: "A look at changing trends in AI and the job market"
@@ -14,7 +14,7 @@ image: "/assets/blog/ai.webp"
 AI has been a hot topic in the news lately, stirring up a mix of excitement and
 anxiety. For years, many developers feared that AI would replace their jobs, rendering
 human skills obsolete. But as the technology evolves, the narrative is shifting.
-Instead of replacement, AI is increasingly becoming an assistant — a powerful tool
+Instead of replacement, AI is increasingly becoming an assistant, a powerful tool
 that augments human capabilities rather than displacing them.
 
 ## The Fear of Replacement
@@ -35,7 +35,7 @@ complex work that developers do.
 
 The key takeaway? AI excels at assisting with well-defined, structured tasks but
 struggles with the ambiguity and creativity inherent in software development.
-This means AI tools are more likely to become collaborators — helping with code
+This means AI tools are more likely to become collaborators, helping with code
 generation, testing, and documentation — freeing developers to focus on higher-level
 design, architecture, and problem-solving.
 
@@ -51,7 +51,7 @@ innovate.
 
 For developers, this shift is an opportunity rather than a threat. By learning to
 work alongside AI, we can amplify our impact. The challenge is to adapt our skills
-to leverage AI effectively — understanding its strengths and limitations, and
+to leverage AI effectively, understanding its strengths and limitations, and
 integrating it into our workflows.
 
 ## Looking Ahead
@@ -60,11 +60,6 @@ The future of AI in software development is collaborative. As the technology
 matures, expect AI to handle more of the mundane, repetitive tasks, while humans
 tackle the creative and strategic challenges. This partnership promises to unlock
 new levels of productivity and innovation.
-
----
-
-In the end, AI is not here to replace us but to assist us — a powerful ally in
-the ongoing journey of coding and creation.
 
 ---
 
