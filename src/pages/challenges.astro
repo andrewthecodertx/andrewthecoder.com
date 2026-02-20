@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Coding Challenges';
+const description = 'Learn to code and master Git with hands-on challenges';
+const permalink = `${Astro.site.href}challenges`;
+
+const challenges = [
+  {
+    name: 'FizzBuzz',
+    difficulty: 'Beginner',
+    repo: 'challenges-fizzbuzz',
+    description: 'The classic coding interview question. Print numbers 1-100, replacing multiples of 3 with "Fizz", multiples of 5 with "Buzz", and multiples of both with "FizzBuzz".'
+  },
+  {
+    name: 'Palindrome Checker',
+    difficulty: 'Beginner',
+    repo: 'challenges-palindrome',
+    description: 'Check if a string reads the same forwards and backwards. Ignore case and non-alphanumeric characters.'
+  },
+  {
+    name: 'Two Sum',
+    difficulty: 'Easy',
+    repo: 'challenges-two-sum',
+    description: 'Given an array of numbers and a target, find two numbers that add up to the target. Return their indices.'
+  },
+  {
+    name: 'Anagram Detector',
+    difficulty: 'Easy',
+    repo: 'challenges-anagram',
+    description: 'Check if two strings are anagrams of each other - they contain the same letters in a different order.'
+  }
+];
+---
+
+<BaseLayout title={title} description={description} permalink={permalink} current="challenges">
+  <div class="max-w-3xl mx-auto px-4">
+
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-green mb-6">$ coding-challenges</h2>
+      <div class="space-y-4 text-terminal-fg">
+        <p>
+          Welcome to my coding challenges! These aren't just about solving puzzles —
+          they're designed to help you build real-world skills alongside coding.
+        </p>
+        <p>
+          Every challenge teaches you two things:
+        </p>
+        <ul class="list-disc list-inside space-y-2 text-terminal-dim ml-4">
+          <li>How to solve a programming problem</li>
+          <li>How to use Git and GitHub like a professional developer</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### why git?</h3>
+      <div class="space-y-4 text-terminal-fg">
+        <p>
+          Git is essential for any developer. Whether you're working on open source,
+          collaborating with a team, or just want to track your own work — version
+          control is a skill you'll use every day.
+        </p>
+        <p>
+          These challenges teach you the workflow that real developers use:
+        </p>
+        <ul class="list-disc list-inside space-y-2 text-terminal-dim ml-4">
+          <li>Cloning a repository to get started</li>
+          <li>Creating a branch for your solution</li>
+          <li>Writing code and committing changes</li>
+          <li>Opening a pull request for review</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### how it works</h3>
+      <div class="space-y-4 text-terminal-fg">
+        <p>
+          <span class="text-terminal-green">1. Choose a Challenge</span> — Pick one from the list below
+        </p>
+        <p>
+          <span class="text-terminal-green">2. Fork & Clone</span>
+        </p>
+        <pre class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>git clone https://github.com/YOUR_USERNAME/[challenge].git
+cd [challenge]</code></pre>
+        <p>
+          <span class="text-terminal-green">3. Create a Branch</span>
+        </p>
+        <pre class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>git checkout -b yourusername/solution</code></pre>
+        <p>
+          <span class="text-terminal-green">4. Write & Test</span> — Solve in any language, run tests with npm test, python, go test, etc.
+        </p>
+        <p>
+          <span class="text-terminal-green">5. Submit a PR</span>
+        </p>
+        <pre class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>git add .
+git commit -m "Solution in [language]"
+git push origin yourusername/solution</code></pre>
+        <p class="text-terminal-dim">
+          Then open a Pull Request and I'll review your solution!
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### supported languages</h3>
+      <p class="text-terminal-fg mb-4">
+        Each challenge has tests for JavaScript, Python, Go, Rust, Ruby, Java, C#, and TypeScript.
+        Solve in whatever language you're comfortable with.
+      </p>
+      <p class="text-terminal-dim">
+        Don't see your language? Add your own tests and submit a PR to the challenge repo!
+      </p>
+    </section>
+
+    <section class="py-12">
+      <h3 class="text-terminal-amber mb-6">### available challenges</h3>
+      <ul class="space-y-4">
+        {challenges.map((challenge) => (
+          <li>
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+              <a href={`https://github.com/andrewthecodertx/${challenge.repo}`} class="text-terminal-fg hover:text-terminal-green no-underline">
+                {challenge.name}
+              </a>
+              <span class="text-terminal-dim text-sm">[{challenge.difficulty}]</span>
+            </div>
+            <p class="text-terminal-dim text-sm mt-1">{challenge.description}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-6 text-terminal-dim text-sm">
+        More challenges coming soon! Have a suggestion? Open an issue on any challenge repository.
+      </p>
+    </section>
+
+  </div>
+</BaseLayout>
