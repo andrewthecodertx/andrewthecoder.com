@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'OCaml Mandelbrot Set';
+const description = 'An interactive Mandelbrot set explorer written in OCaml.';
+const permalink = `${Astro.site.href}projects/ocaml-mandelbrot`;
+---
+
+<BaseLayout title={title} description={description} permalink={permalink} current="projects">
+  <div class="max-w-3xl mx-auto px-4">
+
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-green mb-4">$ {title}</h2>
+      <p class="text-terminal-dim text-sm mb-6">
+        <a href="https://github.com/andrewthecodertx/ocaml-mandelbrot" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          View on GitHub →
+        </a>
+      </p>
+
+      <p class="text-terminal-fg leading-relaxed mb-6">
+        An interactive Mandelbrot set explorer written in OCaml using the Graphics library. 
+        The Mandelbrot set is the set of complex numbers <em>c</em> for which the iteration 
+        <em>z = z² + c</em> (starting from <em>z = 0</em>) remains bounded.
+      </p>
+
+      <p class="text-terminal-fg leading-relaxed">
+        Points inside the set are colored black; points outside are colored based on how many 
+        iterations it takes to escape, producing the characteristic fractal boundary with 
+        infinite complexity at every scale.
+      </p>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### features</h3>
+      <ul class="space-y-3 text-terminal-fg">
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Interactive Zoom</strong> — Click to zoom in 2x centered on cursor, or use +/- keys</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Pan Navigation</strong> — Use arrow keys or vim-style (h/j/k/l) to pan around</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Smooth Rendering</strong> — Real-time rendering with escape-time algorithm</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Color Gradients</strong> — Points outside the set colored by iteration count</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Reset View</strong> — Return to the original coordinates with 'r' key</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### controls</h3>
+      <div class="space-y-2 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Click</code>
+          <span class="text-terminal-dim">— Zoom in 2x at cursor position</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">+ / =</code>
+          <span class="text-terminal-dim">— Zoom in 2x at cursor position</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">-</code>
+          <span class="text-terminal-dim">— Zoom out 2x at cursor position</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">h / a / ←</code>
+          <span class="text-terminal-dim">— Pan left</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">l / d / →</code>
+          <span class="text-terminal-dim">— Pan right</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">j / s / ↓</code>
+          <span class="text-terminal-dim">— Pan down</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">k / w / ↑</code>
+          <span class="text-terminal-dim">— Pan up</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">r</code>
+          <span class="text-terminal-dim">— Reset to original view</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">q / Esc</code>
+          <span class="text-terminal-dim">— Quit</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### build & run</h3>
+      <div class="space-y-4 text-terminal-fg">
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">prerequisites</p>
+          <code class="text-terminal-green block">opam install . --deps-only</code>
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">build</p>
+          <code class="text-terminal-green block">dune build</code>
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">run</p>
+          <code class="text-terminal-green block">dune exec mandelbrot</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <h3 class="text-terminal-amber mb-6">### learn more</h3>
+      <p class="text-terminal-fg mb-4">
+        Explore the mathematics behind the Mandelbrot set and browse the source code.
+      </p>
+      <div class="flex gap-4">
+        <a href="https://github.com/andrewthecodertx/ocaml-mandelbrot" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          GitHub →
+        </a>
+        <a href="https://en.wikipedia.org/wiki/Mandelbrot_set" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          Wikipedia →
+        </a>
+      </div>
+    </section>
+
+    <footer class="py-8 border-t border-terminal-border">
+      <a href="/projects" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">
+        ← back to projects
+      </a>
+    </footer>
+
+  </div>
+</BaseLayout>
