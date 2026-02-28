@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Rust PET Emulator';
+const description = 'A Commodore PET 4032 emulator written in Rust.';
+const permalink = `${Astro.site.href}projects/rust-pet-emulator`;
+---
+
+<BaseLayout title={title} description={description} permalink={permalink} current="projects">
+  <div class="max-w-3xl mx-auto px-4">
+
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-green mb-4">$ {title}</h2>
+      <p class="text-terminal-dim text-sm mb-6">
+        <a href="https://github.com/andrewthecodertx/rust-pet-emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          View on GitHub →
+        </a>
+      </p>
+
+      <p class="text-terminal-fg leading-relaxed mb-6">
+        A Commodore PET 4032 emulator written in Rust. The PET was Commodore's first full-featured 
+        computer (1977), featuring a 1 MHz MOS 6502 CPU, 32KB RAM, and a distinctive built-in 
+        cassette tape drive. This emulator faithfully recreates the hardware for running classic 
+        PET software with keyboard input, file loading, and authentic 40-column display rendering.
+      </p>
+
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+        <p class="text-terminal-dim text-sm mb-2">quick start</p>
+        <code class="text-terminal-green">cargo run --release</code>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### features</h3>
+      <ul class="space-y-3 text-terminal-fg">
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">MOS 6502 CPU</strong> — Complete emulation with official opcodes at 1 MHz speed</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">BASIC 4.0</strong> — Full Commodore BASIC interpreter with ROM support</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Keyboard Input</strong> — Type on virtual PET keyboard using your physical keyboard</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">.prg File Loader</strong> — Load and run Commodore PET programs with file browser</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">40-Column Display</strong> — Authentic character-based video output with SDL2</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">32KB RAM</strong> — Accurate memory layout with ROM bank switching</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### controls</h3>
+      <div class="space-y-2 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Keyboard</code>
+          <span class="text-terminal-dim">— Type on the virtual PET keyboard</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F2</code>
+          <span class="text-terminal-dim">— Open file browser to load .prg files</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">↑/↓</code>
+          <span class="text-terminal-dim">— Navigate files in file browser</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Enter</code>
+          <span class="text-terminal-dim">— Select and load a file</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Backspace</code>
+          <span class="text-terminal-dim">— Navigate to parent directory</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Escape</code>
+          <span class="text-terminal-dim">— Exit the emulator</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### requirements</h3>
+      <div class="space-y-4 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <span class="text-terminal-dim whitespace-nowrap">Rust toolchain (1.80+)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <span class="text-terminal-dim whitespace-nowrap">SDL2 development libraries</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <span class="text-terminal-dim whitespace-nowrap">MOS 6502 emulator crate</span>
+        </div>
+      </div>
+      
+      <div class="mt-6 space-y-4">
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">ubuntu/debian</p>
+          <code class="text-terminal-green">sudo apt install libsdl2-dev libsdl2-ttf-dev</code>
+        </div>
+        
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">arch linux</p>
+          <code class="text-terminal-green">sudo pacman -S sdl2 sdl2_ttf</code>
+        </div>
+        
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">macos</p>
+          <code class="text-terminal-green">brew install sdl2 sdl2_ttf</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### running</h3>
+      <div class="space-y-4 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">cargo build --release</code>
+          <span class="text-terminal-dim">— Build optimized binary</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">cargo run --release</code>
+          <span class="text-terminal-dim">— Build and run</span>
+        </div>
+      </div>
+      <p class="text-terminal-dim mt-6">
+        Software for the PET is available at: <a href="https://zimmers.net/anonftp/pub/cbm/pet/" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">zimmers.net</a>
+      </p>
+    </section>
+
+    <section class="py-12">
+      <h3 class="text-terminal-amber mb-6">### learn more</h3>
+      <p class="text-terminal-fg mb-4">
+        Experience computing history by running classic PET software. The emulator includes all 
+        necessary ROM files and provides an authentic 8-bit computing experience.
+      </p>
+      <div class="flex gap-4">
+        <a href="https://github.com/andrewthecodertx/rust-pet-emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          GitHub →
+        </a>
+      </div>
+    </section>
+
+    <footer class="py-8 border-t border-terminal-border">
+      <a href="/projects" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">
+        ← back to projects
+      </a>
+    </footer>
+
+  </div>
+</BaseLayout>
