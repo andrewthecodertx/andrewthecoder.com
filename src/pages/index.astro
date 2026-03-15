@@ -75,7 +75,7 @@ function formatProjectTitle(name: string) {
     <section class="py-12 border-b border-terminal-border">
       <h3 class="text-terminal-amber mb-6">### dad joke</h3>
       <p class="text-terminal-dim text-sm mb-4">
-        from <a href="https://dadjokes.developersandbox.xyz" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">Dad Jokes API</a> — a project I built
+        from <a href="https://dadjokes.developersandbox.xyz" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">Dad Jokes API</a> - a project I built
       </p>
       <div class="space-y-2">
         <p id="joke" class="text-terminal-fg">Loading...</p>
@@ -158,10 +158,10 @@ function formatProjectTitle(name: string) {
           const res = await fetch('/api/joke');
           const data = await res.json();
           jokeEl.textContent = data.joke_text;
-          authorEl.textContent = `— ${data.author}`;
+          authorEl.textContent = `- ${data.author}`;
         } catch (e) {
           jokeEl.textContent = 'Why do programmers prefer dark mode? Because light attracts bugs.';
-          authorEl.textContent = '— anonymous';
+          authorEl.textContent = '- anonymous';
         }
       }
 
