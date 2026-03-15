@@ -34,27 +34,27 @@ const permalink = `${Astro.site.href}projects/go-6502-emulator`;
       <ul class="space-y-3 text-terminal-fg">
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Cycle-accurate execution</strong> — Faithfully reproduces timing behavior including page-crossing penalties</span>
+          <span><strong class="text-terminal-cyan">Cycle-accurate execution</strong> - Faithfully reproduces timing behavior including page-crossing penalties</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Complete instruction set</strong> — All 56 documented MOS6502 instructions plus 27 additional WDC65C02 instructions</span>
+          <span><strong class="text-terminal-cyan">Complete instruction set</strong> - All 56 documented MOS6502 instructions plus 27 additional WDC65C02 instructions</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">All addressing modes</strong> — 13 addressing modes for 6502, plus 2 new modes for 65C02</span>
+          <span><strong class="text-terminal-cyan">All addressing modes</strong> - 13 addressing modes for 6502, plus 2 new modes for 65C02</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Hardware quirks</strong> — Implements the JMP indirect page boundary bug on MOS6502 (fixed in 65C02)</span>
+          <span><strong class="text-terminal-cyan">Hardware quirks</strong> - Implements the JMP indirect page boundary bug on MOS6502 (fixed in 65C02)</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Interrupt support</strong> — NMI, IRQ, and RESET vectors with proper handling</span>
+          <span><strong class="text-terminal-cyan">Interrupt support</strong> - NMI, IRQ, and RESET vectors with proper handling</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Flexible bus interface</strong> — Pluggable memory system supporting RAM, ROM, and memory-mapped I/O</span>
+          <span><strong class="text-terminal-cyan">Flexible bus interface</strong> - Pluggable memory system supporting RAM, ROM, and memory-mapped I/O</span>
         </li>
       </ul>
     </section>
@@ -79,19 +79,19 @@ const permalink = `${Astro.site.href}projects/go-6502-emulator`;
       <div class="space-y-4 text-sm">
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">pkg/core/</code>
-          <span class="text-terminal-dim">— Shared components (BaseCPU, Bus interface, addressing modes)</span>
+          <span class="text-terminal-dim">- Shared components (BaseCPU, Bus interface, addressing modes)</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">pkg/mos6502/</code>
-          <span class="text-terminal-dim">— NMOS 6502 CPU implementation</span>
+          <span class="text-terminal-dim">- NMOS 6502 CPU implementation</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">pkg/wdc65c02/</code>
-          <span class="text-terminal-dim">— WDC 65C02 CPU implementation</span>
+          <span class="text-terminal-dim">- WDC 65C02 CPU implementation</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">docs/</code>
-          <span class="text-terminal-dim">— Documentation</span>
+          <span class="text-terminal-dim">- Documentation</span>
         </div>
       </div>
     </section>
@@ -101,15 +101,15 @@ const permalink = `${Astro.site.href}projects/go-6502-emulator`;
       <div class="space-y-4 text-sm">
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">go test ./...</code>
-          <span class="text-terminal-dim">— Run all tests</span>
+          <span class="text-terminal-dim">- Run all tests</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">go test -v ./...</code>
-          <span class="text-terminal-dim">— Run with verbose output</span>
+          <span class="text-terminal-dim">- Run with verbose output</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">go test -cover ./...</code>
-          <span class="text-terminal-dim">— Run with coverage</span>
+          <span class="text-terminal-dim">- Run with coverage</span>
         </div>
       </div>
     </section>
