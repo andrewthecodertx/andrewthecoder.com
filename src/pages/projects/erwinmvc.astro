@@ -95,7 +95,7 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
         </div>
         <div>
           <p class="text-terminal-cyan font-mono mb-2">3. Create a new page</p>
-          <p class="text-terminal-dim text-sm mb-2">Create <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">src/views/about.ejs</code>:</p>
+          <p class="text-terminal-dim text-sm mb-2">Create <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">src/views/about.ejs</code>:</p>
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
             &lt;!doctype html&gt;<br/>
             &lt;html&gt;<br/>
@@ -111,7 +111,7 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
         </div>
         <div>
           <p class="text-terminal-cyan font-mono mb-2">4. Add a route</p>
-          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">src/server.ts</code>:</p>
+          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">src/server.ts</code>:</p>
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
             app.get("/about", (req, res) &#123;<br/>
             &nbsp;&nbsp;res.render("about", &#123; title: "About Us" &#125;);<br/>
@@ -137,7 +137,7 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
         <div>
           <p class="text-terminal-cyan font-mono mb-2">EJS Templates</p>
           <p class="text-terminal-fg mb-3 text-sm">
-            Create <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-fg">.ejs</code> files in <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-fg">src/views/</code>
+            Create <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan text-terminal-cyan">.ejs</code> files in <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan text-terminal-cyan">src/views/</code>
           </p>
           <div class="space-y-3">
             <div>
@@ -336,7 +336,7 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
         npx erwinmvc generate controller Product
       </code>
       <p class="text-terminal-fg mb-4 text-sm">
-        This creates <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">src/controllers/ProductController.ts</code> with CRUD actions:
+        This creates <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">src/controllers/ProductController.ts</code> with CRUD actions:
       </p>
       <div class="overflow-x-auto mt-3">
         <table class="w-full text-terminal-fg text-xs">
@@ -408,7 +408,7 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
             npm run db:setup
           </code>
-          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">.env</code> with your database URL:</p>
+          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">.env</code> with your database URL:</p>
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">DATABASE_URL="postgresql://user:password@localhost:5432/mydb"</code>
         </div>
         <div>
@@ -422,7 +422,7 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
             npx erwinmvc generate model Post
           </code>
-          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">prisma/schema.prisma</code> to add fields:</p>
+          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">prisma/schema.prisma</code> to add fields:</p>
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
             model Post &#123;<br/>
             &nbsp;&nbsp;id        Int      @id @default(autoincrement())<br/>
@@ -495,8 +495,8 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
           </code>
           <p class="text-terminal-dim text-sm mb-2">Environment variables:</p>
           <ul class="space-y-1 text-terminal-fg">
-            <li><code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">WEBAUTHN_RP_ID</code> - Your domain (e.g., "localhost" or "example.com")</li>
-            <li><code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">WEBAUTHN_RP_NAME</code> - Your app name (e.g., "ErwinMVC App")</li>
+            <li><code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">WEBAUTHN_RP_ID</code> - Your domain (e.g., "localhost" or "example.com")</li>
+            <li><code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">WEBAUTHN_RP_NAME</code> - Your app name (e.g., "ErwinMVC App")</li>
           </ul>
           <p class="text-terminal-dim text-sm mt-2">
             Note: WebAuthn requires HTTPS or localhost.
@@ -629,7 +629,7 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
  └── tsconfig.json
         </code>
       </div>
-      <p class="text-terminal-fg text-sm">Static files in <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">public/</code> are served at the root URL:</p>
+      <p class="text-terminal-fg text-sm">Static files in <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">public/</code> are served at the root URL:</p>
       <div class="space-y-1 text-sm mt-2">
         <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">public/css/style.css  →  /css/style.css</code>
         <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">public/images/logo.png  →  /images/logo.png</code>
@@ -689,7 +689,7 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
         npx @erwininteractive/mvc init myapp --with-ci
       </code>
       <p class="text-terminal-fg mb-4 text-sm">
-        Or add CI to an existing project by creating <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">.github/workflows/test.yml</code>:
+        Or add CI to an existing project by creating <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">.github/workflows/test.yml</code>:
       </p>
       <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
         name: Test<br/><br/>
@@ -728,7 +728,7 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
     <section class="py-12 border-b border-terminal-border" id="environment-variables">
       <h3 class="text-terminal-amber mb-6">### environment variables</h3>
       <p class="text-terminal-fg mb-4 text-sm">
-        All optional. Create <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">.env</code> from <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs">.env.example</code>:
+        All optional. Create <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">.env</code> from <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">.env.example</code>:
       </p>
       <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
         DATABASE_URL="postgresql://user:pass@localhost:5432/mydb"  # For database<br/>
