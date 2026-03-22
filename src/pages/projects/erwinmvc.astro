@@ -10,28 +10,6 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
   <div class="max-w-3xl mx-auto px-4">
 
     <section class="py-12 border-b border-terminal-border">
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
-        <p class="text-terminal-cyan font-mono mb-2">Contents</p>
-        <ul class="space-y-1 text-terminal-fg text-sm">
-          <li><a href="#features" class="text-terminal-cyan hover:text-terminal-green no-underline">Features</a></li>
-          <li><a href="#philosophy" class="text-terminal-cyan hover:text-terminal-green no-underline">Philosophy</a></li>
-          <li><a href="#getting-started" class="text-terminal-cyan hover:text-terminal-green no-underline">Getting Started</a></li>
-          <li><a href="#creating-pages" class="text-terminal-cyan hover:text-terminal-green no-underline">Creating Pages</a></li>
-          <li><a href="#resources" class="text-terminal-cyan hover:text-terminal-green no-underline">Resources</a></li>
-          <li><a href="#controllers" class="text-terminal-cyan hover:text-terminal-green no-underline">Controllers</a></li>
-          <li><a href="#database" class="text-terminal-cyan hover:text-terminal-green no-underline">Database</a></li>
-          <li><a href="#authentication" class="text-terminal-cyan hover:text-terminal-green no-underline">Authentication</a></li>
-          <li><a href="#cli-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">CLI Commands</a></li>
-          <li><a href="#project-structure" class="text-terminal-cyan hover:text-terminal-green no-underline">Project Structure</a></li>
-          <li><a href="#app-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">App Commands</a></li>
-          <li><a href="#cicd" class="text-terminal-cyan hover:text-terminal-green no-underline">CI/CD</a></li>
-          <li><a href="#environment-variables" class="text-terminal-cyan hover:text-terminal-green no-underline">Environment Variables</a></li>
-          <li><a href="#learn-more" class="text-terminal-cyan hover:text-terminal-green no-underline">Learn More</a></li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="py-12 border-b border-terminal-border" id="features">
       <h2 class="text-terminal-green mb-4">$ ErwinMVC</h2>
       <p class="text-terminal-dim text-sm mb-6">
         <a href="https://github.com/erwininteractive/typescript-erwinmvc" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
@@ -55,45 +33,25 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
       </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border" id="features-list">
-      <h3 class="text-terminal-amber mb-6">### features</h3>
-      <ul class="space-y-3 text-terminal-fg">
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Express</strong> - Fast, minimal web framework under the hood</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">EJS + Alpine.js</strong> - Server-side templating with reactive client-side components</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Optional Database</strong> - Add Prisma + PostgreSQL when you need it</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Optional Redis Sessions</strong> - Scalable session management</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">JWT Authentication</strong> - Secure token-based auth with bcrypt</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">WebAuthn (Passkeys)</strong> - Passwordless authentication with security keys (YubiKey, Touch ID, Face ID)</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">CLI Tools</strong> - Scaffold apps and generate models/controllers</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">CI/CD Ready</strong> - Built-in GitHub Actions workflow generation for automated testing and deployment</span>
-        </li>
-      </ul>
-
-      <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+    <section class="py-12 border-b border-terminal-border">
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+        <p class="text-terminal-cyan font-mono mb-2">Contents</p>
+        <ul class="space-y-1 text-terminal-fg text-sm">
+          <li><a href="#features-list" class="text-terminal-cyan hover:text-terminal-green no-underline">Features</a></li>
+          <li><a href="#philosophy" class="text-terminal-cyan hover:text-terminal-green no-underline">Philosophy</a></li>
+          <li><a href="#getting-started" class="text-terminal-cyan hover:text-terminal-green no-underline">Getting Started</a></li>
+          <li><a href="#creating-pages" class="text-terminal-cyan hover:text-terminal-green no-underline">Creating Pages</a></li>
+          <li><a href="#resources" class="text-terminal-cyan hover:text-terminal-green no-underline">Resources</a></li>
+          <li><a href="#controllers" class="text-terminal-cyan hover:text-terminal-green no-underline">Controllers</a></li>
+          <li><a href="#database" class="text-terminal-cyan hover:text-terminal-green no-underline">Database</a></li>
+          <li><a href="#authentication" class="text-terminal-cyan hover:text-terminal-green no-underline">Authentication</a></li>
+          <li><a href="#cli-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">CLI Commands</a></li>
+          <li><a href="#project-structure" class="text-terminal-cyan hover:text-terminal-green no-underline">Project Structure</a></li>
+          <li><a href="#app-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">App Commands</a></li>
+          <li><a href="#cicd" class="text-terminal-cyan hover:text-terminal-green no-underline">CI/CD</a></li>
+          <li><a href="#environment-variables" class="text-terminal-cyan hover:text-terminal-green no-underline">Environment Variables</a></li>
+          <li><a href="#learn-more" class="text-terminal-cyan hover:text-terminal-green no-underline">Learn More</a></li>
+        </ul>
       </div>
     </section>
 
