@@ -42,8 +42,6 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
           <li><a href="#database" class="text-terminal-cyan hover:text-terminal-green no-underline">Database</a></li>
           <li><a href="#authentication" class="text-terminal-cyan hover:text-terminal-green no-underline">Authentication</a></li>
           <li><a href="#cli-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">CLI Commands</a></li>
-          <li><a href="#tailwindcss" class="text-terminal-cyan hover:text-terminal-green no-underline">Tailwind CSS</a></li>
-          <li><a href="#validation" class="text-terminal-cyan hover:text-terminal-green no-underline">Validation</a></li>
           <li><a href="#project-structure" class="text-terminal-cyan hover:text-terminal-green no-underline">Project Structure</a></li>
           <li><a href="#app-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">App Commands</a></li>
           <li><a href="#cicd" class="text-terminal-cyan hover:text-terminal-green no-underline">CI/CD</a></li>
@@ -507,37 +505,6 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
       </div>
 
       <div class="py-4">
-
-    <section class="py-12 border-b border-terminal-border" id="validation">
-      <h3 class="text-terminal-amber mb-6">### validation</h3>
-      <p class="text-terminal-fg mb-4 leading-relaxed">
-        Type-safe form validation with Zod:
-      </p>
-      <div class="space-y-4 text-sm">
-        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-          <p class="text-terminal-cyan font-mono mb-2">Zod Validation</p>
-          <p class="text-terminal-fg mb-3">
-            Use Zod schemas for type-safe validation. Works with both web (redirect) and API (JSON) responses:
-          </p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            import { z } from "zod";<br/>
-            import { validate } from "@erwininteractive/mvc";<br/><br/>
-            const postSchema = z.object({<br/>
-              &nbsp;&nbsp;title: z.string().min(3),<br/>
-              &nbsp;&nbsp;content: z.string().min(10),<br/>
-            });<br/><br/>
-            // Web route - redirects with errors and old input<br/>
-            app.post("/posts", validate(postSchema, "redirect"), createPost);<br/><br/>
-            // API route - returns 422 JSON<br/>
-            app.post("/api/posts", validate(postSchema, "json"), createPost);
-          </code>
-        </div>
-      </div>
-
-      <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
-      </div>
-    </section>
         <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
       </div>
     </section>
@@ -638,76 +605,11 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
         </div>
       </div>
 
-        <p class="text-terminal-cyan font-mono mb-2 mt-4">New Commands</p>
-        <div class="overflow-x-auto">
-          <table class="w-full text-terminal-fg text-xs">
-            <thead>
-              <tr class="border-b border-terminal-border">
-                <th class="text-left py-2 px-2">Command</th>
-                <th class="text-left py-2 px-2">Description</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-terminal-border">
-              <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">npx erwinmvc list:routes</code></td>
-                <td class="py-2 px-2">List all defined routes</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">npx erwinmvc make:auth</code></td>
-                <td class="py-2 px-2">Generate authentication system</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">npx erwinmvc init myapp --with-tailwind</code></td>
-                <td class="py-2 px-2">Create app with Tailwind CSS</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       <div class="py-4">
         <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
       </div>
     </section>
 
-
-    <section class="py-12 border-b border-terminal-border" id="tailwindcss">
-      <h3 class="text-terminal-amber mb-6">### tailwindcss</h3>
-      <p class="text-terminal-fg mb-4 leading-relaxed">
-        Modern utility-first CSS framework for rapid UI development:
-      </p>
-      <div class="space-y-4 text-sm">
-        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-          <p class="text-terminal-cyan font-mono mb-2">Installation</p>
-          <p class="text-terminal-fg mb-3">
-            Add Tailwind CSS when creating a new app:
-          </p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
-            npx @erwininteractive/mvc init myapp --with-tailwind
-          </code>
-          <p class="text-terminal-dim text-sm">
-            Includes pre-built Tailwind CSS (no build step needed)
-          </p>
-        </div>
-        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-          <p class="text-terminal-cyan font-mono mb-2">Usage</p>
-          <p class="text-terminal-fg mb-3">
-            Use Tailwind classes in your EJS templates:
-          </p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            &lt;nav class="bg-white shadow-lg"&gt;<br/>
-            &nbsp;&nbsp;&lt;div class="container mx-auto px-4"&gt;<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="flex justify-between items-center"&gt;<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1 class="text-2xl font-bold"&gt;Logo&lt;/h1&gt;<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br/>
-            &nbsp;&nbsp;&lt;/div&gt;<br/>
-            &lt;/nav&gt;
-          </code>
-        </div>
-      </div>
-
-      <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
-      </div>
-    </section>
     <section class="py-12 border-b border-terminal-border" id="project-structure">
       <h3 class="text-terminal-amber mb-6">### project structure</h3>
       <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
