@@ -4,9 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const title = 'Rust PET Emulator';
 const description = 'A Commodore PET 4032 emulator written in Rust.';
 const permalink = `${Astro.site.href}projects/rust-pet-emulator`;
+const image = '/social-card-rust-pet-emulator.png';
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="projects">
+<BaseLayout title={title} description={description} permalink={permalink} current="projects" image={image}>
   <div class="max-w-3xl mx-auto px-4">
 
     <section class="py-12 border-b border-terminal-border">
