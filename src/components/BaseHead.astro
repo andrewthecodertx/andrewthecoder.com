@@ -14,7 +14,7 @@ export interface Props {
 const { title, description, permalink, image, type = 'website' } = Astro.props
 const siteName = 'Andrew the Coder'
 const siteUrl = Astro.site?.href || 'https://andrewthecoder.com'
-const socialUrl = new URL(image ?? '/assets/social.png', siteUrl).href
+const socialUrl = image ? new URL(image, siteUrl).href : new URL('/assets/social.png', siteUrl).href
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`
 ---
 
