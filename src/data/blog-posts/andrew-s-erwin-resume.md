@@ -18,7 +18,7 @@ andrewerwin73@gmail.com - [andrewthecoder.com](https://andrewthecoder.com)
 
 ## Professional Summary
 
-Experienced software engineer with 18+ years of broad expertise across full-stack
+Experienced software engineer with 20+ years of broad expertise across full-stack
 web development, systems architecture, and infrastructure. Comfortable working
 anywhere in the stack, from frontend interfaces to backend services, databases,
 and deployment automation. Passionate about building robust applications, developer
