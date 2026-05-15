@@ -71,21 +71,21 @@ Improved performance and reliability of large-scale distributed systems.
 
 ## Featured Projects
 
-### ErwinMVC Web Framework (Node.js / TypeScript – npm package)
+### ErwinMVC Web Framework - [ErwinMVC](/projects/erwinmvc)
 
 Designed and developed an MVC web framework for Node.js applications, published
 as a reusable npm package for rapid application scaffolding. Implements routing,
 controllers, views, and data layer abstractions, and has been used in production
 for multiple client projects.
 
-### Full-Stack Web Application – WeightTogether.com
+### Full-Stack Web Application – [WeighTogether](https://weighttogether.com)
 
 Built a collaborative weight tracking and wellness platform with user authentication,
 data visualization, and social features. No frameworks! Hand rolled TypeScript
 and EJS. Deployed on cloud infrastructure with automated CI/CD pipelines, handling
 real-time updates and notifications.
 
-### Full-Stack Web Site – BruiseursLegacy.org
+### Full-Stack Web Site – [Bruisers Legacy](https://bruiseurslegacy.org)
 
 Designed and developed using my own MVC framework (ErwinMVC).
 
@@ -95,7 +95,7 @@ Created automated deployment and testing pipeline tools integrating with GitHub
 Actions for continuous integration. Streamlined development workflows for team
 projects and reduced deployment friction.
 
-### Go Neural Network Implementation – github.com/andrewthecoder/go-neural-network
+### Go Neural Network Implementation – [Go Neural Network](https://github.com/andrewthecoder/go-neural-network)
 
 Implemented a feed-forward neural network from scratch in Go as an educational
 project. Designed for flexibility and adaptability to various datasets while
