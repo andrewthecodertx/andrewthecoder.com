@@ -13,6 +13,7 @@ const posts = defineCollection({
     comments_enabled: z.boolean().default(true),
     author: z.string().default("andrew"),
     featured: z.boolean().default(true),
+    hidden: z.boolean().default(false),
     image: z.string().default(""),
     github: z.string().default(""),
     demo: z.string().default(""),

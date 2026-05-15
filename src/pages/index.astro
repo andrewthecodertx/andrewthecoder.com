@@ -9,7 +9,7 @@ const permalink = Astro.site.href;
 
 const allPosts = await getCollection('posts');
 const featuredPosts = allPosts
-  .filter(post => post.data.featured)
+  .filter(post => !post.data.hidden && post.data.featured)
   .sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf())
   .slice(0, 3);
 

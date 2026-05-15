@@ -9,9 +9,10 @@ const permalink = `${Astro.site.href}blog`;
 export const prerender = true;
 export async function getStaticPaths({ paginate }) {
   const allPosts = await getCollection('posts');
-  allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+  const visiblePosts = allPosts.filter(post => !post.data.hidden);
+  visiblePosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
 
-  return paginate(allPosts, { pageSize: 5 });
+  return paginate(visiblePosts, { pageSize: 5 });
 }
 
 const { page } = Astro.props;

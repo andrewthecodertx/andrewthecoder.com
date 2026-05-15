@@ -8,6 +8,7 @@ const description = 'Thoughts on code, philosophy, and life.';
 const permalink = `${Astro.site.href}blog`;
 
 let allPosts = await getCollection('posts')
+allPosts = allPosts.filter(post => !post.data.hidden)
 allPosts = allPosts.sort((a, b) =>
   new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
 

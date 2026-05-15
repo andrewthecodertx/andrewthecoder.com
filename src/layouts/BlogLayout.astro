@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 export interface Props {
+  hiden: boolean;
   title: string;
   description: string;
   permalink: string;
@@ -15,7 +16,7 @@ const { title, description, permalink, current, image, type = 'website' } = Astr
 ---
 <html lang="en">
 <head>
-  <BaseHead title={title} description={description} permalink={permalink} image={image} type={type} />
+	<BaseHead title={title} description={description} permalink={permalink} image={image} type={type} />
 </head>
 <body class="bg-[#0a0a0a] text-[#e0e0e0] font-mono antialiased">
   <div class="flex flex-col min-h-screen">
