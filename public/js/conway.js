@@ -119,40 +119,37 @@
     pauseButton.textContent = running ? "[pause]" : "[play]";
   }
 
+  function restart() {
+    grid = randomGrid(columns, rows);
+    gen = 0;
+    render(grid);
+  }
+
+  function clearGrid() {
+    grid = grid.map((arr) => arr.fill(0));
+    gen = 0;
+    render(grid);
+  }
+
   document.addEventListener(
     "keydown",
     (event) => {
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      let handled = true;
       switch (event.key) {
-        case " ":
-          event.preventDefault();
-          setRunning(!running);
-          break;
+        case " ": setRunning(!running); break;
+        case "r": case "R": restart(); break;
+        case "c": case "C": clearGrid(); break;
+        default: handled = false;
       }
+      if (handled) event.preventDefault();
     },
     { signal }
   );
 
   pauseButton.addEventListener("click", () => setRunning(!running), { signal });
-
-  document.getElementById("restartButton").addEventListener(
-    "click",
-    () => {
-      grid = randomGrid(columns, rows);
-      gen = 0;
-      render(grid);
-    },
-    { signal }
-  );
-
-  document.getElementById("clearButton").addEventListener(
-    "click",
-    () => {
-      grid = grid.map((arr) => arr.fill(0)); // Clear the board
-      gen = 0;
-      render(grid);
-    },
-    { signal }
-  );
+  document.getElementById("restartButton").addEventListener("click", restart, { signal });
+  document.getElementById("clearButton").addEventListener("click", clearGrid, { signal });
 
   let painting = false;
   let paintValue = 0;
