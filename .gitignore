@@ -29,4 +29,13 @@ pnpm-debug.log*
 # Archive files
 *.archive
 
+conway/
+dump/
+dungeon/
 eclipse/
+enigma/
+mandelbrot/
+nes/
+semantics/
+sudoku/
+tetris/

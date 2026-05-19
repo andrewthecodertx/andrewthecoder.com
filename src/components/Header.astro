@@ -14,6 +14,9 @@ const projectsDropdown = [
     { label: "ocaml mandelbrot", href: "/projects/ocaml-mandelbrot" },
     { label: "rust pet emulator", href: "/projects/rust-pet-emulator" }
 ];
+const demosDropdown = [
+	{ label: "game of life", href: "/demos/conway" }
+]
 ---
 
 <header class="border-b border-terminal-border bg-terminal-bg">
@@ -59,6 +62,30 @@ const projectsDropdown = [
                         </div>
                     </div>
                 </div>
+
+				<div class="relative group">
+                    <button
+                        class={`no-underline cursor-pointer bg-transparent border-none ${current == "demos"
+                            ? "text-terminal-green"
+                            : "text-terminal-dim hover:text-terminal-fg"}`}
+                    >
+                        {current == "demos" ? "[demos]" : "demos"}
+                        <span class="text-xs ml-0.5">▼</span>
+                    </button>
+                    <div class="absolute left-0 top-full pt-1 hidden group-hover:block min-w-max z-50">
+                        <div class="bg-terminal-bg border border-terminal-border rounded">
+							{demosDropdown.map((item) => (
+                                <a
+                                    href={item.href}
+                                    class="block px-3 py-2 text-terminal-dim hover:text-terminal-fg hover:bg-terminal-border no-underline whitespace-nowrap"
+                                >
+                                    {item.label}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
             </nav>
         </div>
     </div>
