@@ -1,0 +1,99 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+
+export const prerender = true;
+
+const title = "Mandelbrot Set";
+const description = "Interactive in-browser Mandelbrot set explorer rendered with WebGL 2. Tap or click to zoom in, drag to pan, pinch to scale.";
+const permalink = `${Astro.site.href}demos/mandelbrot`;
+
+const vertexShader = `#version 300 es
+in vec2 a_pos;
+void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }`;
+
+const fragmentShader = `#version 300 es
+precision highp float;
+uniform vec2 u_resolution;
+uniform vec4 u_view;
+const int MAX_ITER = 1000;
+out vec4 fragColor;
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / u_resolution;
+  float x0 = mix(u_view.x, u_view.y, uv.x);
+  float y0 = mix(u_view.z, u_view.w, uv.y);
+
+  float zr = 0.0, zi = 0.0;
+  int iter = MAX_ITER;
+  for (int i = 0; i < MAX_ITER; i++) {
+    float zr2 = zr * zr - zi * zi + x0;
+    float zi2 = 2.0 * zr * zi + y0;
+    zr = zr2; zi = zi2;
+    if (zr * zr + zi * zi > 4.0) { iter = i; break; }
+  }
+
+  if (iter >= MAX_ITER) {
+    fragColor = vec4(0.0, 0.0, 0.0, 1.0);
+  } else {
+    float t = float(iter) / float(MAX_ITER);
+    int v = int(255.0 * t);
+    int g = int(255.0 * (t * 0.85 + 0.1));
+    int R = 0x33 | v;
+    int G = 0x33 | g;
+    int B = 0x33 | g;
+    fragColor = vec4(float(R) / 255.0, float(G) / 255.0, float(B) / 255.0, 1.0);
+  }
+}`;
+---
+
+<DemoLayout title={title} description={description} permalink={permalink} current="demos">
+	<div class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border">
+		<h2 class="text-terminal-green">Mandelbrot Set</h2>
+		<span class="text-terminal-dim">
+			<span class="text-terminal-amber">tap</span> zoom
+			<span class="px-1">·</span>
+			<span class="text-terminal-amber">drag</span> pan
+			<span class="px-1">·</span>
+			<span class="text-terminal-amber">pinch</span> scale
+			<span class="hidden sm:inline">
+				<span class="px-1">·</span>
+				<span class="text-terminal-amber">wheel</span> zoom
+				<span class="px-1">·</span>
+				<span class="text-terminal-amber">hjkl</span> pan
+				<span class="px-1">·</span>
+				<span class="text-terminal-amber">+/-</span> zoom
+				<span class="px-1">·</span>
+				<span class="text-terminal-amber">r</span> reset
+			</span>
+		</span>
+		<div class="flex gap-2 ml-auto">
+			<button
+				id="mandelZoomInButton"
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors"
+			>
+				[+]
+			</button>
+			<button
+				id="mandelZoomOutButton"
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors"
+			>
+				[-]
+			</button>
+			<button
+				id="mandelResetButton"
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors"
+			>
+				[reset]
+			</button>
+		</div>
+	</div>
+
+	<div id="mandel-wrap" class="relative w-full flex items-center justify-center bg-terminal-bg" style="height: calc(100vh - 100px); height: calc(100dvh - 100px);">
+		<canvas id="mandelCanvas" class="block touch-none cursor-crosshair"></canvas>
+		<div id="mandel-err" class="absolute inset-0 hidden place-items-center text-terminal-fg p-6 text-center"></div>
+	</div>
+
+	<script id="vs" type="x-shader/x-vertex" is:inline set:html={vertexShader}></script>
+	<script id="fs-mandel" type="x-shader/x-fragment" is:inline set:html={fragmentShader}></script>
+	<script is:inline src="/js/mandelbrot.js" data-astro-rerun></script>
+</DemoLayout>
