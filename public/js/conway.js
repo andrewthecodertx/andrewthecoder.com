@@ -154,20 +154,52 @@
     { signal }
   );
 
-  cvs.addEventListener(
-    "click",
-    (event) => {
-      const rect = cvs.getBoundingClientRect();
-      const x = Math.floor(((event.clientX - rect.left) / rect.width) * columns);
-      const y = Math.floor(((event.clientY - rect.top) / rect.height) * rows);
+  let painting = false;
+  let paintValue = 0;
+  let lastCellKey = "";
 
-      if (x >= 0 && x < columns && y >= 0 && y < rows) {
-        grid[x][y] = grid[x][y] === 0 ? 1 : 0; // Toggle cell state on click
-        render(grid);
-      }
+  function cellAt(event) {
+    const rect = cvs.getBoundingClientRect();
+    const x = Math.floor(((event.clientX - rect.left) / rect.width) * columns);
+    const y = Math.floor(((event.clientY - rect.top) / rect.height) * rows);
+    return { x, y };
+  }
+
+  cvs.addEventListener(
+    "pointerdown",
+    (event) => {
+      const { x, y } = cellAt(event);
+      if (x < 0 || x >= columns || y < 0 || y >= rows) return;
+      painting = true;
+      cvs.setPointerCapture(event.pointerId);
+      paintValue = grid[x][y] === 0 ? 1 : 0;
+      grid[x][y] = paintValue;
+      lastCellKey = `${x},${y}`;
+      render(grid);
     },
     { signal }
   );
+
+  cvs.addEventListener(
+    "pointermove",
+    (event) => {
+      if (!painting) return;
+      const { x, y } = cellAt(event);
+      if (x < 0 || x >= columns || y < 0 || y >= rows) return;
+      const key = `${x},${y}`;
+      if (key === lastCellKey) return;
+      lastCellKey = key;
+      grid[x][y] = paintValue;
+      render(grid);
+    },
+    { signal }
+  );
+
+  const endPaint = () => {
+    painting = false;
+  };
+  cvs.addEventListener("pointerup", endPaint, { signal });
+  cvs.addEventListener("pointercancel", endPaint, { signal });
 
   window.addEventListener("resize", resizeCanvas, { signal });
 
