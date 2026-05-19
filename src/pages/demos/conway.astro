@@ -1,8 +1,10 @@
 ---
 import DemoLayout from '../../layouts/DemoLayout.astro';
 
-const title = 'Conway\'s Game of Life';
-const description = 'John Conway\'s zero player Game of Life in javascript';
+export const prerender = true;
+
+const title = "Conway's Game of Life";
+const description = "Interactive in-browser implementation of John Conway's Game of Life. Tap or drag to draw cells, watch them evolve, restart or clear at any time.";
 const permalink = `${Astro.site.href}demos/conway`;
 ---
 

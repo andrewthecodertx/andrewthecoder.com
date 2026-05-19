@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+export const prerender = true;
+
 const title = 'Geodetic Curvature Analysis';
-const description = 'Field measurements of Earth-curvature angular divergence across 22 North American survey sites.';
+const description = 'Field measurements of Earth-curvature angular divergence across 22 North American survey sites in the 2024 G-CURV campaign. Site summary, residuals, and raw data.';
 const permalink = `${Astro.site.href}curvature`;
 
 type Site = {
@@ -61,9 +63,65 @@ const geoids = [...new Set(sites.map((s) => s.geoid))];
 const dates = sites.map((s) => s.date).sort();
 const firstDate = dates[0];
 const lastDate = dates[dates.length - 1];
+
+const datasetJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: title,
+  description,
+  url: permalink,
+  identifier: campaign,
+  keywords: [
+    'geodesy',
+    'Earth curvature',
+    'angular divergence',
+    'theodolite',
+    'survey',
+    'arcseconds',
+    'NAVD88',
+    'EGM2008',
+    'GEOID18',
+  ],
+  spatialCoverage: {
+    '@type': 'Place',
+    name: `${states.join(', ')}, USA`,
+  },
+  temporalCoverage: `${firstDate}/${lastDate}`,
+  variableMeasured: [
+    'Empirical angular divergence (arcsec)',
+    'Theoretical angular divergence (arcsec)',
+    'Residual (arcsec)',
+  ],
+  distribution: [
+    {
+      '@type': 'DataDownload',
+      encodingFormat: 'text/csv',
+      contentUrl: `${Astro.site.href}data/curvature/site_summary.csv`,
+      name: 'site_summary.csv',
+    },
+    {
+      '@type': 'DataDownload',
+      encodingFormat: 'text/csv',
+      contentUrl: `${Astro.site.href}data/curvature/field_observations.csv`,
+      name: 'field_observations.csv',
+    },
+    {
+      '@type': 'DataDownload',
+      encodingFormat: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      contentUrl: `${Astro.site.href}data/curvature/source.xlsx`,
+      name: 'source.xlsx',
+    },
+  ],
+};
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(datasetJsonLd)}
+  />
   <div class="max-w-3xl mx-auto px-4">
 
     <section class="py-8 border-b border-terminal-border">

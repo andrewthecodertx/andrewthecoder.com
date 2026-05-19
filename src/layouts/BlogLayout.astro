@@ -4,19 +4,48 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 export interface Props {
-  hiden: boolean;
   title: string;
   description: string;
   permalink: string;
   current?: string;
   image?: string;
   type?: 'website' | 'article';
+  publishedTime?: string | Date;
+  modifiedTime?: string | Date;
+  author?: string;
+  section?: string;
+  tags?: string[];
 }
-const { title, description, permalink, current, image, type = 'website' } = Astro.props;
+const {
+  title,
+  description,
+  permalink,
+  current,
+  image,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  author,
+  section,
+  tags,
+} = Astro.props;
 ---
 <html lang="en">
 <head>
-	<BaseHead title={title} description={description} permalink={permalink} image={image} type={type} />
+	<BaseHead
+		title={title}
+		description={description}
+		permalink={permalink}
+		image={image}
+		type={type}
+		publishedTime={publishedTime}
+		modifiedTime={modifiedTime}
+		author={author}
+		section={section}
+		tags={tags}
+	>
+		<slot name="head" slot="head" />
+	</BaseHead>
 </head>
 <body class="bg-[#0a0a0a] text-[#e0e0e0] font-mono antialiased">
   <div class="flex flex-col min-h-screen">

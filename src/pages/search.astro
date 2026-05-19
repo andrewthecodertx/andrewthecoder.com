@@ -7,7 +7,7 @@ const description = 'Search all blog posts.';
 const permalink = `${Astro.site.href}search`;
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="search">
+<BaseLayout title={title} description={description} permalink={permalink} current="search" noindex={true}>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Page Header -->
     <section class="py-12 lg:py-16">

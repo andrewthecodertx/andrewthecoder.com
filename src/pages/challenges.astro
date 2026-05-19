@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+export const prerender = true;
+
 const title = 'Coding Challenges';
-const description = 'Learn to code and master Git with hands-on challenges';
+const description = 'Hands-on coding challenges from beginner to advanced — FizzBuzz, palindromes, Two Sum, and more, with Git practice built in.';
 const permalink = `${Astro.site.href}challenges`;
 
 const challenges = [

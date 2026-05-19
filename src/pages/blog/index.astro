@@ -3,8 +3,10 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CategoryPostList from '../../components/CategoryPostList.svelte';
 
+export const prerender = true;
+
 const title = 'Blog';
-const description = 'Thoughts on code, philosophy, and life.';
+const description = 'Writing on software development, AI, science, theology, and the occasional poem — from Andrew Erwin.';
 const permalink = `${Astro.site.href}blog`;
 
 let allPosts = await getCollection('posts')

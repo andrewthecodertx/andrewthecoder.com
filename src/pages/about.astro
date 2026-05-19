@@ -2,8 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CONTACT_EMAIL } from '../constants';
 
+export const prerender = true;
+
 const title = 'About';
-const description = 'About Andrew the Coder';
+const description = 'About Andrew Erwin — 25+ years writing code across Ada, C, Rust, Go, OCaml, JavaScript and more. Theology and linguistics background, started on a Commodore 64.';
 const permalink = `${Astro.site.href}about`;
 ---
 

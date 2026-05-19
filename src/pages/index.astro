@@ -4,8 +4,40 @@ import { getCollection } from 'astro:content';
 import { CONTACT_EMAIL } from '../constants';
 
 const title = 'Andrew the Coder';
-const description = 'Software developer building things for fun';
+const description = 'Personal site of Andrew Erwin — software developer with 25+ years building things for fun. Writing on code, philosophy, and side projects in Rust, Go, OCaml, and more.';
 const permalink = Astro.site.href;
+const siteUrl = Astro.site.href;
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Andrew the Coder',
+  url: siteUrl,
+  description,
+  inLanguage: 'en-US',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${siteUrl}search?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Andrew Erwin',
+  alternateName: 'Andrew the Coder',
+  url: siteUrl,
+  jobTitle: 'Software Developer',
+  description: 'Software developer with 25+ years of experience.',
+  sameAs: [
+    'https://github.com/andrewthecodertx',
+    'https://x.com/_andrewthecoder',
+  ],
+};
 
 const allPosts = await getCollection('posts');
 const featuredPosts = allPosts
@@ -51,6 +83,18 @@ function formatProjectTitle(name: string) {
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="home">
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(websiteJsonLd)}
+  />
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(personJsonLd)}
+  />
   <div class="max-w-3xl mx-auto px-4">
 
     <!-- Intro -->

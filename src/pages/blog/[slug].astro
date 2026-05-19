@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
-const { title, slug, description, publishDate, image, github, demo, categories } = post.data;
+const { title, slug, description, publishDate, image, github, demo, categories, tags, author } = post.data;
 const readingTimeEstimate = readingTime(post.body).text
 const permalink = `${Astro.site.href}blog/${slug}`;
 const { Content } = await render(post)
@@ -27,9 +27,58 @@ function formatDate(dateString: string) {
 }
 
 const postCategories = categories || [];
+const postTags = tags || [];
+const authorName = author === 'andrew' || !author ? 'Andrew Erwin' : author;
+const publishedIso = new Date(publishDate).toISOString();
+const siteUrl = Astro.site?.href || 'https://andrewthecoder.com';
+const ogImage = image ? new URL(image, siteUrl).href : new URL('/assets/social.png', siteUrl).href;
+
+const blogPostingJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  image: ogImage,
+  datePublished: publishedIso,
+  dateModified: publishedIso,
+  author: {
+    '@type': 'Person',
+    name: authorName,
+    url: siteUrl,
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'Andrew Erwin',
+    url: siteUrl,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': permalink,
+  },
+  keywords: [...postCategories, ...postTags].join(', '),
+  articleSection: postCategories[0],
+};
 ---
 
-<BlogLayout title={title} description={description} permalink={permalink} image={image} current="blog" type="article">
+<BlogLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  image={image}
+  current="blog"
+  type="article"
+  publishedTime={publishDate}
+  author={authorName}
+  section={postCategories[0]}
+  tags={postTags}
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(blogPostingJsonLd)}
+  />
+
   <article class="max-w-3xl mx-auto px-4">
 
     <header class="py-8 border-b border-[#2a2a2a] mb-8">
