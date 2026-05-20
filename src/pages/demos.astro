@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Demos';
+const description = 'Interactive in-browser demos — toys, experiments, and visualizations you can play with right here.';
+const permalink = `${Astro.site.href}demos`;
+---
+
+<BaseLayout title={title} description={description} permalink={permalink} current="demos">
+  <div class="max-w-3xl mx-auto px-4">
+
+    <section class="py-12">
+        <h2 class="text-terminal-green mb-8">$ demos</h2>
+
+        <p class="text-terminal-dim mb-8">
+            Interactive things that run right in your browser. Click, tap, drag — they're meant to be played with.
+        </p>
+
+        <ul class="space-y-6">
+            <li>
+                <a href="/demos/conway" class="text-terminal-cyan">Conway's Game of Life</a> is John
+                Conway's classic cellular automaton, rendered to a full-window canvas. Tap or drag to
+                paint cells, watch them evolve under the four rules, pause and restart at will. A
+                surprisingly deep zero-player game that has fascinated programmers and mathematicians
+                since 1970.
+            </li>
+            <li>
+                <a href="/demos/mandelbrot" class="text-terminal-cyan">Mandelbrot Set</a> is an
+                interactive explorer for the most famous fractal in mathematics, rendered live on the
+                GPU with WebGL 2. Tap to zoom in, drag to pan, pinch to scale. Every frame is a fresh
+                computation — up to a billion iterations across the screen — and you can keep zooming
+                until floating-point precision runs out.
+            </li>
+        </ul>
+    </section>
+
+  </div>
+</BaseLayout>
