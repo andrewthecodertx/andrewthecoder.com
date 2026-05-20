@@ -1,14 +1,14 @@
 ---
-title: "AI as an Assistant, Not a Replacement"
+title: 'AI as an Assistant, Not a Replacement'
 slug: ai-as-an-assistant
-publishDate: "2026-02-17"
-description: "A look at changing trends in AI and the job market"
-categories: ["Artificial Intelligence"]
-tags: ["ai", "llm", "software development"]
+publishDate: '2026-02-17'
+description: 'A look at changing trends in AI and the job market'
+categories: ['Artificial Intelligence']
+tags: ['ai', 'llm', 'software development']
 author: Andrew
 comments_enabled: true
 featured: true
-image: "/assets/blog/ai.webp"
+image: '/assets/blog/ai.webp'
 ---
 
 AI has been a hot topic in the news lately, stirring up a mix of excitement and

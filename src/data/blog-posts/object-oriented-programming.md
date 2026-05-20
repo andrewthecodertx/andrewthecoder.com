@@ -1,14 +1,14 @@
 ---
-title: "Object Oriented Programming, A Primer"
+title: 'Object Oriented Programming, A Primer'
 slug: object-oriented-programming
-publishDate: "2026-05-15"
-description: "A brief overvue of the object oriented programming paradigm"
-categories: ["Software Development"]
-tags: ["oop", "paradigms", "software development"]
+publishDate: '2026-05-15'
+description: 'A brief overvue of the object oriented programming paradigm'
+categories: ['Software Development']
+tags: ['oop', 'paradigms', 'software development']
 author: Andrew
 comments_enabled: true
 featured: true
-image: "/assets/blog/oop.webp"
+image: '/assets/blog/oop.webp'
 ---
 
 Object-oriented programming, or **OOP**, is one of those ideas that gets explained
@@ -565,19 +565,19 @@ responsibilities and boundaries, the terminology starts to make a lot more sense
 
 ## Quick Reference
 
-| Concept | Meaning |
-|---|---|
-| Classes and objects | Blueprints and the actual instances created from them |
-| Messaging | Objects interact by sending requests to each other |
-| Interfaces | Contracts or labels that define capability or category |
-| Encapsulation | Keep state controlled and related behavior together |
-| Inheritance | Reuse shared structure across related types |
-| Composition | Build objects out of smaller pieces |
-| Polymorphism | Same message, different behavior depending on the object |
-| Abstraction | Hide internal complexity behind simple actions |
-| Singleton | One shared instance |
-| Observer | Notify interested objects when something changes |
-| Factory | Centralize object creation |
+| Concept             | Meaning                                                  |
+| ------------------- | -------------------------------------------------------- |
+| Classes and objects | Blueprints and the actual instances created from them    |
+| Messaging           | Objects interact by sending requests to each other       |
+| Interfaces          | Contracts or labels that define capability or category   |
+| Encapsulation       | Keep state controlled and related behavior together      |
+| Inheritance         | Reuse shared structure across related types              |
+| Composition         | Build objects out of smaller pieces                      |
+| Polymorphism        | Same message, different behavior depending on the object |
+| Abstraction         | Hide internal complexity behind simple actions           |
+| Singleton           | One shared instance                                      |
+| Observer            | Notify interested objects when something changes         |
+| Factory             | Centralize object creation                               |
 
 At its best, OOP is a practical way to structure software so that complexity
 stays local instead of spreading everywhere. And if there is one idea worth holding

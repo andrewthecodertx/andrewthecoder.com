@@ -2,16 +2,19 @@
   // Tear down any previous instance (Astro ClientRouter re-runs this script on navigation)
   if (window.__mandelCleanup) window.__mandelCleanup();
 
-  const canvas = document.querySelector("#mandelCanvas");
-  const wrap = document.querySelector("#mandel-wrap");
-  const errEl = document.querySelector("#mandel-err");
+  const canvas = document.querySelector('#mandelCanvas');
+  const wrap = document.querySelector('#mandel-wrap');
+  const errEl = document.querySelector('#mandel-err');
   if (!canvas || !wrap) return;
 
-  const gl = canvas.getContext("webgl2", { antialias: false, preserveDrawingBuffer: false });
+  const gl = canvas.getContext('webgl2', {
+    antialias: false,
+    preserveDrawingBuffer: false,
+  });
   if (!gl) {
     if (errEl) {
-      errEl.style.display = "grid";
-      errEl.textContent = "WebGL 2 is not available in this browser.";
+      errEl.style.display = 'grid';
+      errEl.textContent = 'WebGL 2 is not available in this browser.';
     }
     return;
   }
@@ -29,7 +32,8 @@
   const DEFAULT_VIEW = [-2.5, 1.0, -1.25, 1.25];
   const ZOOM_FACTOR = 2.0;
   const PAN_FRACTION = 0.25;
-  const VIEW_ASPECT = (DEFAULT_VIEW[1] - DEFAULT_VIEW[0]) / (DEFAULT_VIEW[3] - DEFAULT_VIEW[2]);
+  const VIEW_ASPECT =
+    (DEFAULT_VIEW[1] - DEFAULT_VIEW[0]) / (DEFAULT_VIEW[3] - DEFAULT_VIEW[2]);
 
   let view = DEFAULT_VIEW.slice();
 
@@ -38,7 +42,7 @@
     gl.shaderSource(s, src.trim());
     gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
-      throw new Error(gl.getShaderInfoLog(s) || "shader compile failed");
+      throw new Error(gl.getShaderInfoLog(s) || 'shader compile failed');
     }
     return s;
   };
@@ -47,23 +51,23 @@
     const p = gl.createProgram();
     gl.attachShader(p, compile(gl.VERTEX_SHADER, vsSrc));
     gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fsSrc));
-    gl.bindAttribLocation(p, 0, "a_pos");
+    gl.bindAttribLocation(p, 0, 'a_pos');
     gl.linkProgram(p);
     if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
-      throw new Error(gl.getProgramInfoLog(p) || "program link failed");
+      throw new Error(gl.getProgramInfoLog(p) || 'program link failed');
     }
     return p;
   };
 
   let prog;
   try {
-    const vsSrc = document.getElementById("vs").textContent;
-    const fsSrc = document.getElementById("fs-mandel").textContent;
+    const vsSrc = document.getElementById('vs').textContent;
+    const fsSrc = document.getElementById('fs-mandel').textContent;
     prog = link(vsSrc, fsSrc);
   } catch (e) {
     if (errEl) {
-      errEl.style.display = "grid";
-      errEl.textContent = "Shader error: " + e.message;
+      errEl.style.display = 'grid';
+      errEl.textContent = 'Shader error: ' + e.message;
     }
     return;
   }
@@ -73,12 +77,16 @@
   gl.bindVertexArray(vao);
   const vbo = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  gl.bufferData(
+    gl.ARRAY_BUFFER,
+    new Float32Array([-1, -1, 3, -1, -1, 3]),
+    gl.STATIC_DRAW
+  );
   gl.enableVertexAttribArray(0);
   gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
-  const uResolution = gl.getUniformLocation(prog, "u_resolution");
-  const uView = gl.getUniformLocation(prog, "u_view");
+  const uResolution = gl.getUniformLocation(prog, 'u_resolution');
+  const uView = gl.getUniformLocation(prog, 'u_view');
 
   const resize = () => {
     if (!alive) return;
@@ -92,8 +100,8 @@
       cssW = wrapRect.width;
       cssH = cssW / VIEW_ASPECT;
     }
-    canvas.style.width = cssW + "px";
-    canvas.style.height = cssH + "px";
+    canvas.style.width = cssW + 'px';
+    canvas.style.height = cssH + 'px';
     const w = Math.max(1, Math.floor(cssW * dpr));
     const h = Math.max(1, Math.floor(cssH * dpr));
     if (canvas.width !== w || canvas.height !== h) {
@@ -123,7 +131,8 @@
   const pixelToComplex = (px, py) => {
     const [xmin, xmax, ymin, ymax] = view;
     const x = xmin + (px / Math.max(1, canvas.clientWidth - 1)) * (xmax - xmin);
-    const y = ymax - (py / Math.max(1, canvas.clientHeight - 1)) * (ymax - ymin);
+    const y =
+      ymax - (py / Math.max(1, canvas.clientHeight - 1)) * (ymax - ymin);
     return [x, y];
   };
 
@@ -168,7 +177,7 @@
   const dist = (a, b) => Math.hypot(b.x - a.x, b.y - a.y);
 
   canvas.addEventListener(
-    "pointerdown",
+    'pointerdown',
     (e) => {
       canvas.setPointerCapture(e.pointerId);
       pointers.set(e.pointerId, getCanvasPos(e));
@@ -198,7 +207,7 @@
   );
 
   canvas.addEventListener(
-    "pointermove",
+    'pointermove',
     (e) => {
       if (!pointers.has(e.pointerId)) return;
       pointers.set(e.pointerId, getCanvasPos(e));
@@ -216,12 +225,14 @@
         const halfW = (iv[1] - iv[0]) / 2 / scale;
         const halfH = (iv[3] - iv[2]) / 2 / scale;
         const A = pinchState.anchorComplex;
-        let xmin = A.x - halfW, xmax = A.x + halfW;
-        let ymin = A.y - halfH, ymax = A.y + halfH;
+        let xmin = A.x - halfW,
+          xmax = A.x + halfW;
+        let ymin = A.y - halfH,
+          ymax = A.y + halfH;
         const dxp = currMid.x - pinchState.initialMid.x;
         const dyp = currMid.y - pinchState.initialMid.y;
-        const dxc = -dxp / W * (xmax - xmin);
-        const dyc = dyp / H * (ymax - ymin);
+        const dxc = (-dxp / W) * (xmax - xmin);
+        const dyc = (dyp / H) * (ymax - ymin);
         view = [xmin + dxc, xmax + dxc, ymin + dyc, ymax + dyc];
         requestRender();
       } else if (panState && pointers.size === 1) {
@@ -235,8 +246,8 @@
         const iv = panState.initialView;
         const w = iv[1] - iv[0];
         const h = iv[3] - iv[2];
-        const dxc = -dxp / W * w;
-        const dyc = dyp / H * h;
+        const dxc = (-dxp / W) * w;
+        const dyc = (dyp / H) * h;
         view = [iv[0] + dxc, iv[1] + dxc, iv[2] + dyc, iv[3] + dyc];
         requestRender();
       }
@@ -263,11 +274,11 @@
       dragMoved = true;
     }
   };
-  canvas.addEventListener("pointerup", endPointer, { signal });
-  canvas.addEventListener("pointercancel", endPointer, { signal });
+  canvas.addEventListener('pointerup', endPointer, { signal });
+  canvas.addEventListener('pointercancel', endPointer, { signal });
 
   canvas.addEventListener(
-    "wheel",
+    'wheel',
     (e) => {
       e.preventDefault();
       const factor = Math.pow(1.2, -Math.sign(e.deltaY));
@@ -278,21 +289,50 @@
   );
 
   window.addEventListener(
-    "keydown",
+    'keydown',
     (e) => {
       if (e.ctrlKey || e.metaKey || e.altKey) return;
       let handled = true;
       switch (e.key) {
-        case "+": case "=": zoomCenter(ZOOM_FACTOR); break;
-        case "-": case "_": zoomCenter(1 / ZOOM_FACTOR); break;
-        case "PageUp": zoomCenter(ZOOM_FACTOR); break;
-        case "PageDown": zoomCenter(1 / ZOOM_FACTOR); break;
-        case "h": case "a": case "ArrowLeft": pan(-1, 0); break;
-        case "l": case "d": case "ArrowRight": pan(1, 0); break;
-        case "j": case "s": case "ArrowDown": pan(0, -1); break;
-        case "k": case "w": case "ArrowUp": pan(0, 1); break;
-        case "r": view = DEFAULT_VIEW.slice(); break;
-        default: handled = false;
+        case '+':
+        case '=':
+          zoomCenter(ZOOM_FACTOR);
+          break;
+        case '-':
+        case '_':
+          zoomCenter(1 / ZOOM_FACTOR);
+          break;
+        case 'PageUp':
+          zoomCenter(ZOOM_FACTOR);
+          break;
+        case 'PageDown':
+          zoomCenter(1 / ZOOM_FACTOR);
+          break;
+        case 'h':
+        case 'a':
+        case 'ArrowLeft':
+          pan(-1, 0);
+          break;
+        case 'l':
+        case 'd':
+        case 'ArrowRight':
+          pan(1, 0);
+          break;
+        case 'j':
+        case 's':
+        case 'ArrowDown':
+          pan(0, -1);
+          break;
+        case 'k':
+        case 'w':
+        case 'ArrowUp':
+          pan(0, 1);
+          break;
+        case 'r':
+          view = DEFAULT_VIEW.slice();
+          break;
+        default:
+          handled = false;
       }
       if (handled) {
         e.preventDefault();
@@ -302,25 +342,39 @@
     { signal }
   );
 
-  const resetButton = document.getElementById("mandelResetButton");
+  const resetButton = document.getElementById('mandelResetButton');
   if (resetButton) {
-    resetButton.addEventListener("click", resetView, { signal });
+    resetButton.addEventListener('click', resetView, { signal });
   }
-  const zoomInButton = document.getElementById("mandelZoomInButton");
+  const zoomInButton = document.getElementById('mandelZoomInButton');
   if (zoomInButton) {
-    zoomInButton.addEventListener("click", () => { zoomCenter(ZOOM_FACTOR); requestRender(); }, { signal });
+    zoomInButton.addEventListener(
+      'click',
+      () => {
+        zoomCenter(ZOOM_FACTOR);
+        requestRender();
+      },
+      { signal }
+    );
   }
-  const zoomOutButton = document.getElementById("mandelZoomOutButton");
+  const zoomOutButton = document.getElementById('mandelZoomOutButton');
   if (zoomOutButton) {
-    zoomOutButton.addEventListener("click", () => { zoomCenter(1 / ZOOM_FACTOR); requestRender(); }, { signal });
+    zoomOutButton.addEventListener(
+      'click',
+      () => {
+        zoomCenter(1 / ZOOM_FACTOR);
+        requestRender();
+      },
+      { signal }
+    );
   }
 
-  if (typeof ResizeObserver !== "undefined") {
+  if (typeof ResizeObserver !== 'undefined') {
     const ro = new ResizeObserver(resize);
     ro.observe(wrap);
-    signal.addEventListener("abort", () => ro.disconnect());
+    signal.addEventListener('abort', () => ro.disconnect());
   } else {
-    window.addEventListener("resize", resize, { signal });
+    window.addEventListener('resize', resize, { signal });
   }
 
   resize();

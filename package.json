@@ -1,4 +1,13 @@
 {
+  "lint-staged": {
+    "*.{js,ts,astro}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,yaml,yml,md,css,scss}": [
+      "prettier --write"
+    ]
+  },
   "name": "astro-blog-template",
   "version": "0.0.1",
   "private": true,
@@ -7,7 +16,14 @@
     "start": "node ./dist/server/entry.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky",
+    "lint:es": "eslint . --ext .js,.ts,.astro --cache",
+    "lint:prettier": "prettier --check .",
+    "lint-staged": "lint-staged",
+    "format": "prettier --write .",
+    "lint": "npm run lint:es && npm run lint:prettier",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",
@@ -25,5 +41,24 @@
     "remark-math": "^6.0.0",
     "remark-smartypants": "^2.0.0",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "@types/node": "^25.9.1",
+    "broken-link-checker": "^0.7.8",
+    "commitlint": "^21.0.1",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
+    "prettier": "^3.8.3",
+    "typescript": "^5.9.3"
   }
 }

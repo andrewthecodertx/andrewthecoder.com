@@ -1,16 +1,16 @@
 ---
-title: "Simulating the Enigma Machine"
+title: 'Simulating the Enigma Machine'
 slug: javascript-enigma-machine
-publishDate: "2025-07-29"
+publishDate: '2025-07-29'
 description: "A deep dive into the Enigma machine's mathematics and how to simulate its complex cryptographic processes using JavaScript."
-categories: ["Software Development"]
-tags: ["cryptography", "enigma machine", "javascript"]
+categories: ['Software Development']
+tags: ['cryptography', 'enigma machine', 'javascript']
 author: andrew
 comments_enabled: true
 featured: true
-github: "https://github.com/andrewthecodertx/javascript-enigma-machine"
-demo: "https://andrewthecoder.com/enigma"
-image: "/assets/blog/enigma.webp"
+github: 'https://github.com/andrewthecodertx/javascript-enigma-machine'
+demo: 'https://andrewthecoder.com/enigma'
+image: '/assets/blog/enigma.webp'
 ---
 
 The Enigma machine, a cipher device used extensively by Nazi Germany during
@@ -105,19 +105,19 @@ permutation mapping.
 // Simplified rotor configuration
 const rotors = {
   I: {
-    wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
-    turnover: "Q", // Turnover notch at 'Q'
+    wiring: 'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
+    turnover: 'Q', // Turnover notch at 'Q'
   },
   II: {
-    wiring: "AJDKSIRUXBLHWTMCQGZNPYFVOE",
-    turnover: "E",
+    wiring: 'AJDKSIRUXBLHWTMCQGZNPYFVOE',
+    turnover: 'E',
   },
   // ... etc.
 };
 
 // Reflector B
 const reflectorB = {
-  wiring: "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+  wiring: 'YRUHQSLDPXNGOKMIEBFZCWVJAT',
 };
 ```
 

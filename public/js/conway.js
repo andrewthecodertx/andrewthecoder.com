@@ -2,9 +2,9 @@
   // Tear down any previous instance (Astro ClientRouter re-runs this script on navigation)
   if (window.__conwayCleanup) window.__conwayCleanup();
 
-  const cvs = document.querySelector("#gameCanvas");
+  const cvs = document.querySelector('#gameCanvas');
   if (!cvs) return;
-  const ctx = cvs.getContext("2d");
+  const ctx = cvs.getContext('2d');
 
   const controller = new AbortController();
   const signal = controller.signal;
@@ -96,7 +96,7 @@
 
         ctx.beginPath();
         ctx.rect(column * res, row * res, res, res);
-        ctx.fillStyle = cell ? "#fff" : "#000";
+        ctx.fillStyle = cell ? '#fff' : '#000';
         ctx.fill();
       }
     }
@@ -112,11 +112,11 @@
     requestAnimationFrame(run);
   }
 
-  const pauseButton = document.getElementById("pauseButton");
+  const pauseButton = document.getElementById('pauseButton');
 
   function setRunning(value) {
     running = value;
-    pauseButton.textContent = running ? "[pause]" : "[play]";
+    pauseButton.textContent = running ? '[pause]' : '[play]';
   }
 
   function restart() {
@@ -132,28 +132,41 @@
   }
 
   document.addEventListener(
-    "keydown",
+    'keydown',
     (event) => {
       if (event.ctrlKey || event.metaKey || event.altKey) return;
       let handled = true;
       switch (event.key) {
-        case " ": setRunning(!running); break;
-        case "r": case "R": restart(); break;
-        case "c": case "C": clearGrid(); break;
-        default: handled = false;
+        case ' ':
+          setRunning(!running);
+          break;
+        case 'r':
+        case 'R':
+          restart();
+          break;
+        case 'c':
+        case 'C':
+          clearGrid();
+          break;
+        default:
+          handled = false;
       }
       if (handled) event.preventDefault();
     },
     { signal }
   );
 
-  pauseButton.addEventListener("click", () => setRunning(!running), { signal });
-  document.getElementById("restartButton").addEventListener("click", restart, { signal });
-  document.getElementById("clearButton").addEventListener("click", clearGrid, { signal });
+  pauseButton.addEventListener('click', () => setRunning(!running), { signal });
+  document
+    .getElementById('restartButton')
+    .addEventListener('click', restart, { signal });
+  document
+    .getElementById('clearButton')
+    .addEventListener('click', clearGrid, { signal });
 
   let painting = false;
   let paintValue = 0;
-  let lastCellKey = "";
+  let lastCellKey = '';
 
   function cellAt(event) {
     const rect = cvs.getBoundingClientRect();
@@ -163,7 +176,7 @@
   }
 
   cvs.addEventListener(
-    "pointerdown",
+    'pointerdown',
     (event) => {
       const { x, y } = cellAt(event);
       if (x < 0 || x >= columns || y < 0 || y >= rows) return;
@@ -178,7 +191,7 @@
   );
 
   cvs.addEventListener(
-    "pointermove",
+    'pointermove',
     (event) => {
       if (!painting) return;
       const { x, y } = cellAt(event);
@@ -195,10 +208,10 @@
   const endPaint = () => {
     painting = false;
   };
-  cvs.addEventListener("pointerup", endPaint, { signal });
-  cvs.addEventListener("pointercancel", endPaint, { signal });
+  cvs.addEventListener('pointerup', endPaint, { signal });
+  cvs.addEventListener('pointercancel', endPaint, { signal });
 
-  window.addEventListener("resize", resizeCanvas, { signal });
+  window.addEventListener('resize', resizeCanvas, { signal });
 
   resizeCanvas();
   requestAnimationFrame(run);

@@ -1,10 +1,16 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-display: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
-  --font-body: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+  --font-display:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Monaco,
+    'Cascadia Code', 'Roboto Mono', Menlo, Consolas, monospace;
+  --font-body:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Monaco,
+    'Cascadia Code', 'Roboto Mono', Menlo, Consolas, monospace;
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Monaco,
+    'Cascadia Code', 'Roboto Mono', Menlo, Consolas, monospace;
 
   /* Terminal color palette */
   --color-terminal-bg: #0a0a0a;
@@ -22,12 +28,12 @@ html {
 
 /* Terminal prompt styling */
 .prompt::before {
-  content: "$ ";
+  content: '$ ';
   color: var(--color-terminal-green);
 }
 
 .prompt-output::before {
-  content: "> ";
+  content: '> ';
   color: var(--color-terminal-dim);
 }
 
@@ -66,7 +72,6 @@ html {
   color: #475569;
   font-weight: 500;
 }
-
 
 /* Links - simple underline style */
 a {

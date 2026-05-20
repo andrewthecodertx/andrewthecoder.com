@@ -1,14 +1,14 @@
 ---
-title: "Yearning for Life"
+title: 'Yearning for Life'
 slug: yearning-for-life
-publishDate: "2026-01-26"
-description: "A poem about finding hope and light amid darkness and despair"
-categories: ["Poetry"]
-tags: ["personal", "hope"]
+publishDate: '2026-01-26'
+description: 'A poem about finding hope and light amid darkness and despair'
+categories: ['Poetry']
+tags: ['personal', 'hope']
 author: Andrew
 comments_enabled: true
 featured: false
-image: "/assets/blog/yearning.webp"
+image: '/assets/blog/yearning.webp'
 ---
 
 In shadows cast, where whispers dwell,

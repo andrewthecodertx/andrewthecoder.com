@@ -1,16 +1,16 @@
 ---
-title: "Building WeighTogether Without Heavy Frameworks"
+title: 'Building WeighTogether Without Heavy Frameworks'
 slug: building-weightogether
-publishDate: "2026-01-01"
-description: "A technical deep dive into WeighTogether, a full-stack weight loss tracking application built with TypeScript, Express, and Prisma—intentionally avoiding heavy frameworks."
-categories: ["Software Development"]
-tags: ["typescript", "express", "prisma", "postgresql", "web development"]
+publishDate: '2026-01-01'
+description: 'A technical deep dive into WeighTogether, a full-stack weight loss tracking application built with TypeScript, Express, and Prisma—intentionally avoiding heavy frameworks.'
+categories: ['Software Development']
+tags: ['typescript', 'express', 'prisma', 'postgresql', 'web development']
 author: andrew
 comments_enabled: true
 featured: true
-github: "https://github.com/erwininteractive/weightloss.watch"
-demo: "https://weightogether.com"
-image: "/assets/blog/weightogether.webp"
+github: 'https://github.com/erwininteractive/weightloss.watch'
+demo: 'https://weightogether.com'
+image: '/assets/blog/weightogether.webp'
 ---
 
 WeighTogether is a full-stack weight loss tracking application with social
@@ -75,23 +75,23 @@ Controllers and services use static methods rather than class instances:
 
 class WeightController {
   static entryValidation = [
-    body("weight").notEmpty().isFloat({ min: 0.1, max: 1000 }),
-    body("recordedAt").notEmpty().isISO8601(),
+    body('weight').notEmpty().isFloat({ min: 0.1, max: 1000 }),
+    body('recordedAt').notEmpty().isISO8601(),
   ];
 
   static async index(req: AuthenticatedRequest, res: Response) {
     const entries = await WeightService.getEntriesForUser(req.user.id);
-    res.render("weight/index", { entries });
+    res.render('weight/index', { entries });
   }
 
   static async logSubmit(req: AuthenticatedRequest, res: Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render("weight/log", { errors: errors.array() });
+      return res.render('weight/log', { errors: errors.array() });
     }
 
     await WeightService.createEntry(req.user.id, req.body);
-    res.redirect("/progress?success=Weight+logged");
+    res.redirect('/progress?success=Weight+logged');
   }
 }
 ```
@@ -108,17 +108,17 @@ class AuthService {
 
   static async verifyPassword(
     password: string,
-    hash: string,
+    hash: string
   ): Promise<boolean> {
     return bcrypt.compare(password, hash);
   }
 
   static generateTokenPair(payload: JwtPayload): TokenPair {
     const accessToken = jwt.sign(payload, authConfig.jwt.accessTokenSecret, {
-      expiresIn: "15m",
+      expiresIn: '15m',
     });
     const refreshToken = jwt.sign(payload, authConfig.jwt.refreshTokenSecret, {
-      expiresIn: "7d",
+      expiresIn: '7d',
     });
     return { accessToken, refreshToken };
   }
@@ -141,14 +141,14 @@ authentication needs.
 export const authenticate = (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader?.startsWith("Bearer ")) {
-    return res.status(401).json({ success: false, message: "Token required" });
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(401).json({ success: false, message: 'Token required' });
   }
 
-  const token = authHeader.split(" ")[1];
+  const token = authHeader.split(' ')[1];
   req.user = AuthService.verifyAccessToken(token);
   next();
 };
@@ -162,7 +162,7 @@ export const authenticate = (
 export const webAuthenticate = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   const accessToken = req.cookies.accessToken;
   if (accessToken) {
@@ -176,19 +176,19 @@ export const webAuthenticate = async (
 
   const refreshToken = req.cookies[authConfig.cookie.refreshTokenName];
   if (!refreshToken) {
-    return res.redirect("/login");
+    return res.redirect('/login');
   }
 
   // Refresh both tokens
   const tokens = await AuthService.refreshTokens(refreshToken);
-  res.cookie("accessToken", tokens.accessToken, {
+  res.cookie('accessToken', tokens.accessToken, {
     httpOnly: true,
     maxAge: 900000,
   });
   res.cookie(
     authConfig.cookie.refreshTokenName,
     tokens.refreshToken,
-    cookieOptions,
+    cookieOptions
   );
 
   req.user = AuthService.verifyAccessToken(tokens.accessToken);
@@ -207,8 +207,8 @@ WeighTogether uses Prisma 7's new driver adapter pattern:
 ```typescript
 // src/services/database.ts
 
-import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
@@ -286,9 +286,9 @@ framework:
 A global toast system uses Alpine's store feature:
 
 ```javascript
-Alpine.store("toasts", {
+Alpine.store('toasts', {
   items: [],
-  add(message, type = "info") {
+  add(message, type = 'info') {
     const id = Date.now();
     this.items.push({ id, message, type });
     setTimeout(() => this.remove(id), 5000);
@@ -299,8 +299,8 @@ Alpine.store("toasts", {
 });
 
 window.toast = {
-  success: (msg) => Alpine.store("toasts").add(msg, "success"),
-  error: (msg) => Alpine.store("toasts").add(msg, "error"),
+  success: (msg) => Alpine.store('toasts').add(msg, 'success'),
+  error: (msg) => Alpine.store('toasts').add(msg, 'error'),
 };
 ```
 
@@ -315,11 +315,11 @@ const socket = io({
   reconnectionAttempts: 3,
 });
 
-socket.on("newMessage", (data) => {
-  if (!window.location.pathname.startsWith("/messages")) {
+socket.on('newMessage', (data) => {
+  if (!window.location.pathname.startsWith('/messages')) {
     toast.info(`${data.senderName}: ${data.content}`);
   }
-  window.dispatchEvent(new CustomEvent("wlt:newMessage", { detail: data }));
+  window.dispatchEvent(new CustomEvent('wlt:newMessage', { detail: data }));
 });
 ```
 
@@ -339,12 +339,12 @@ class AchievementService {
     const unlocked: Achievement[] = [];
     const entries = await prisma.weightEntry.findMany({
       where: { userId },
-      orderBy: { recordedAt: "asc" },
+      orderBy: { recordedAt: 'asc' },
     });
 
     // First Weigh-In
     if (entries.length === 1) {
-      const achievement = await this.award(userId, "first-weigh-in");
+      const achievement = await this.award(userId, 'first-weigh-in');
       if (achievement) unlocked.push(achievement);
     }
 
@@ -392,7 +392,7 @@ authenticated users with valid tokens:
 // tests/helpers/factories.ts
 
 export async function createAuthenticatedUser(overrides = {}) {
-  const passwordHash = await AuthService.hashPassword("password123");
+  const passwordHash = await AuthService.hashPassword('password123');
   const user = await prisma.user.create({
     data: {
       email: `test-${Date.now()}@example.com`,
@@ -421,13 +421,13 @@ export async function createAuthenticatedUser(overrides = {}) {
 Integration tests run against a real PostgreSQL instance:
 
 ```typescript
-describe("POST /api/auth/login", () => {
-  it("returns tokens for valid credentials", async () => {
-    await createAuthenticatedUser({ email: "test@example.com" });
+describe('POST /api/auth/login', () => {
+  it('returns tokens for valid credentials', async () => {
+    await createAuthenticatedUser({ email: 'test@example.com' });
 
     const response = await request(app)
-      .post("/api/auth/login")
-      .send({ email: "test@example.com", password: "password123" })
+      .post('/api/auth/login')
+      .send({ email: 'test@example.com', password: 'password123' })
       .expect(200);
 
     expect(response.body.success).toBe(true);

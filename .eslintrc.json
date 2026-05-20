@@ -1,0 +1,37 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json"],
+    "allowJSONEncapsulatedJS": false,
+    "tsconfigRootDir": "."
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-debugger": "error",
+    "@typescript-eslint/triple-slash-reference": "off"
+  },
+  "ignorePatterns": [
+    "dist/",
+    "node_modules/",
+    "*.astro",
+    "conway/",
+    "dungeon/",
+    "eclipse/",
+    "enigma/",
+    "mandelbrot/",
+    "nes/",
+    "sudoku/",
+    "tetris/",
+    " semantics/"
+  ]
+}

@@ -1,16 +1,16 @@
 ---
-title: "Sudoku and Backtracking"
+title: 'Sudoku and Backtracking'
 slug: sudoku-and-backtracking
-publishDate: "2025-09-03"
-description: "Solving sudoku using backtracking algorithm"
-categories: ["Software Development"]
-tags: ["sudoku", "algorithms"]
+publishDate: '2025-09-03'
+description: 'Solving sudoku using backtracking algorithm'
+categories: ['Software Development']
+tags: ['sudoku', 'algorithms']
 author: Andrew
 comments_enabled: true
 featured: true
-image: "/assets/blog/sudoku.webp"
-github: "https://github.com/andrewthecodertx/Sudoku-Solver"
-demo: "https://developersandbox.xyz/sudoku/"
+image: '/assets/blog/sudoku.webp'
+github: 'https://github.com/andrewthecodertx/Sudoku-Solver'
+demo: 'https://developersandbox.xyz/sudoku/'
 ---
 
 Sudoku, the captivating number puzzle, has been a favorite for ages. But

@@ -1,15 +1,15 @@
 ---
-title: "C Hash Tables and 2-Bit Bookkeeping"
-slug: "hash-tables-and-2-bit-bookkeeping"
-publishDate: "2025-08-01"
+title: 'C Hash Tables and 2-Bit Bookkeeping'
+slug: 'hash-tables-and-2-bit-bookkeeping'
+publishDate: '2025-08-01'
 description: "A look into hash tables, using a C implementation as an example, and an explanation of the memory-saving '2-bit bookkeeping' technique."
-categories: ["Software Development"]
-tags: ["c", "c++", "data structures", "hash table"]
+categories: ['Software Development']
+tags: ['c', 'c++', 'data structures', 'hash table']
 author: Andrew
 comments_enabled: true
 featured: true
-github: "https://github.com/andrewthecodertx/c-hashtable"
-image: "/assets/blog/hashtables.webp"
+github: 'https://github.com/andrewthecodertx/c-hashtable'
+image: '/assets/blog/hashtables.webp'
 ---
 
 It's a common debate among programmers: is C still a good choice for building

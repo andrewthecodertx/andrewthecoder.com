@@ -1,14 +1,14 @@
 ---
-title: "In the Hollow of the Night"
+title: 'In the Hollow of the Night'
 slug: in-the-hollow-of-the-night
-publishDate: "2025-10-06"
-description: "Just a short poem about loneliness and remorse"
-categories: ["Poetry"]
-tags: ["iambic penatmeter", "personal"]
+publishDate: '2025-10-06'
+description: 'Just a short poem about loneliness and remorse'
+categories: ['Poetry']
+tags: ['iambic penatmeter', 'personal']
 author: Andrew
 comments_enabled: true
 featured: false
-image: "/assets/blog/loneliness.webp"
+image: '/assets/blog/loneliness.webp'
 ---
 
 I wander lone through caverns deep and drear,  

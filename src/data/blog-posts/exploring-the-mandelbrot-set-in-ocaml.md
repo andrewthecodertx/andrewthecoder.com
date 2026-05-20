@@ -1,15 +1,15 @@
 ---
-title: "Exploring the Mandelbrot Set in OCaml"
+title: 'Exploring the Mandelbrot Set in OCaml'
 slug: exploring-the-mandelbrot-set-in-ocaml
-publishDate: "2026-01-30"
-description: "An interactive Mandelbrot set viewer built in OCaml with SDL2, exploring the math behind one of the most famous fractals."
-categories: ["Software Development"]
-tags: ["mandelbrot", "fractal", "ocaml", "math", "sdl2"]
+publishDate: '2026-01-30'
+description: 'An interactive Mandelbrot set viewer built in OCaml with SDL2, exploring the math behind one of the most famous fractals.'
+categories: ['Software Development']
+tags: ['mandelbrot', 'fractal', 'ocaml', 'math', 'sdl2']
 author: andrew
 comments_enabled: true
 featured: true
-github: "https://github.com/andrewthecodertx/ocaml-mandelbrot_set"
-image: "/assets/blog/mandelbrot.webp"
+github: 'https://github.com/andrewthecodertx/ocaml-mandelbrot_set'
+image: '/assets/blog/mandelbrot.webp'
 ---
 
 There's something deeply satisfying about a piece of math that produces infinite

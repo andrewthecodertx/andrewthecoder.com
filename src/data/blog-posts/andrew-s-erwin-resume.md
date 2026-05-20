@@ -1,19 +1,19 @@
 ---
-title: "Resume for Andrew S Erwin"
+title: 'Resume for Andrew S Erwin'
 slug: resume-for-andrew-s-erwin
-publishDate: "2026-05-15"
-description: "my inarticulate resume"
-categories: ["Software Development"]
-tags: ["personal"]
+publishDate: '2026-05-15'
+description: 'my inarticulate resume'
+categories: ['Software Development']
+tags: ['personal']
 author: Andrew
 comments_enabled: false
 featured: false
 hidden: true
 ---
 
-Kiel, WI -  (920) 306-5189  
+Kiel, WI - (920) 306-5189  
 andrewerwin73@gmail.com - [andrewthecoder.com](https://andrewthecoder.com)  
-[github](https://github.com/andrewthecodertx) - 
+[github](https://github.com/andrewthecodertx) -
 [linkedin](https://linkedin.com/in/andrewthecoder)
 
 ## Professional Summary
@@ -27,7 +27,7 @@ tools, and maintainable systems used in real production environments.
 ## Technical Skills
 
 **Languages:** TypeScript, JavaScript, C/C++, PHP, Ruby, Rust, Go, OCaml, Python,
- Zig
+Zig
 
 **Frameworks/Tools:** Rails, Django, Gin, Express, Vue, Symfony, Laravel, WordPress
 
@@ -39,7 +39,7 @@ tools, and maintainable systems used in real production environments.
 
 ### Owner / Lead Developer – Erwin Interactive
 
-United States -  2013 – Present
+United States - 2013 – Present
 
 Founded and operate an interactive agency specializing in custom web applications
 and developer tools. Design and implement full-stack solutions using modern JavaScript
@@ -52,7 +52,7 @@ and cloud providers.
 
 ### Software Architect – Capital One
 
-Plano, TX -  June 2012 – January 2013
+Plano, TX - June 2012 – January 2013
 
 Architected enterprise-scale software solutions for financial services applications.
 Led technical design decisions and established coding standards for development
@@ -62,7 +62,7 @@ complex environments.
 
 ### Principal Engineer – XO Communications
 
-Plano, TX -  February 2012 – June 2012
+Plano, TX - February 2012 – June 2012
 
 Served as technical lead on core network and infrastructure projects. Designed
 and implemented critical telecommunications systems used in production environments.

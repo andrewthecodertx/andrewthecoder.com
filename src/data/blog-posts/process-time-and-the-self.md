@@ -1,14 +1,14 @@
 ---
-title: "Process, Time, and the Self"
+title: 'Process, Time, and the Self'
 slug: process-time-and-the-self
-publishDate: "2026-05-13"
-description: "A follow-up reflection on process philosophy — exploring what it means for personal identity when reality itself is becoming rather than being."
-categories: ["Theology"]
-tags: ["freewill", "process theology", "philosophy", "time"]
+publishDate: '2026-05-13'
+description: 'A follow-up reflection on process philosophy — exploring what it means for personal identity when reality itself is becoming rather than being.'
+categories: ['Theology']
+tags: ['freewill', 'process theology', 'philosophy', 'time']
 author: Andrew
 comments_enabled: true
 featured: false
-image: "/assets/blog/process.webp"
+image: '/assets/blog/process.webp'
 ---
 
 This is a continuation of
@@ -177,68 +177,81 @@ completed order, but the ever-present source of possibility in an
 unfinished world. And that, I think, is a more coherent and more
 religiously compelling vision of providence.
 
-[^1]: Thomas Aquinas, _Summa Theologica_, I, Q. 22. Classical accounts
+[^1]:
+    Thomas Aquinas, _Summa Theologica_, I, Q. 22. Classical accounts
     of providence differ in detail, but they generally locate the order
     of the world within the timeless wisdom and will of God.
 
-[^2]: Donald Viney, _Process Theism_, _Stanford Encyclopedia of
+[^2]:
+    Donald Viney, _Process Theism_, _Stanford Encyclopedia of
     Philosophy_ (2022). Viney emphasizes that process theism begins
     from becoming, change, and temporal passage rather than from the
     metaphysics of timeless substance.
 
-[^3]: Charles Hartshorne, _Omnipotence and Other Theological Mistakes_
+[^3]:
+    Charles Hartshorne, _Omnipotence and Other Theological Mistakes_
     (Albany: SUNY Press, 1984). Hartshorne rejects the “tyrant
     conception of God” and argues that divine power is properly
     understood in persuasive rather than coercive terms. See also
     Alfred North Whitehead, _Process and Reality_ (New York: The Free
     Press, 1978), 344.
 
-[^4]: Whitehead, _Process and Reality_, 244. God is the source of the
+[^4]:
+    Whitehead, _Process and Reality_, 244. God is the source of the
     “initial aim from which [the subject’s] self-causation starts.”
 
-[^5]: Viney, _Process Theism_, sec. “Whitehead on the two natures of
+[^5]:
+    Viney, _Process Theism_, sec. “Whitehead on the two natures of
     God.” Whitehead’s consequent nature of God is the divine reception
     of the world in its concrete actuality.
 
-[^6]: Charles Hartshorne, _The Divine Relativity: A Social Conception
+[^6]:
+    Charles Hartshorne, _The Divine Relativity: A Social Conception
     of God_ (1948). Hartshorne’s central argument is that divine
     perfection must be understood dipolarly, not in terms of a purely
     absolute pole alone.
 
-[^7]: Whitehead, _Process and Reality_, 244. See also John B. Cobb Jr.
+[^7]:
+    Whitehead, _Process and Reality_, 244. See also John B. Cobb Jr.
     and David Ray Griffin, _Process Theology: An Introductory
     Exposition_ (Philadelphia: Westminster Press, 1976), 48–56.
 
-[^8]: Viney, _Process Theism_, secs. “Real Relations in God” and
+[^8]:
+    Viney, _Process Theism_, secs. “Real Relations in God” and
     “Divine Knowledge and the Problem of Future Contingents.”
 
-[^9]: Cobb and Griffin, _Process Theology_, 52–56. Process theism
+[^9]:
+    Cobb and Griffin, _Process Theology_, 52–56. Process theism
     treats divine knowledge as exhaustive with respect to possibility
     and fully responsive with respect to actuality.
 
-[^10]: Whitehead, _Process and Reality_, 345–351. The consequent nature
+[^10]:
+    Whitehead, _Process and Reality_, 345–351. The consequent nature
     of God prehends the actual world and integrates it into fresh
     possibilities for future becoming.
 
-[^11]: David Ray Griffin, _God, Power, and Evil: A Process Theodicy_
+[^11]:
+    David Ray Griffin, _God, Power, and Evil: A Process Theodicy_
     (Philadelphia: Westminster Press, 1976), 269–281. Griffin argues
     that unilateral coercive control over self-determining beings is
     not a coherent possibility.
 
-[^12]: Hartshorne, _The Divine Relativity_, 13–14. See also Viney,
+[^12]:
+    Hartshorne, _The Divine Relativity_, 13–14. See also Viney,
     _Process Theism_, sec. “Real Relations in God.”
 
-[^13]: Cobb and Griffin, _Process Theology_, 74–75. Process theism
+[^13]:
+    Cobb and Griffin, _Process Theology_, 74–75. Process theism
     denies that God’s will is always done, but affirms that God works
     persuasively upon every situation toward whatever good remains
     possible.
 
 [^14]: Whitehead, _Process and Reality_, 351.
 
-[^15]: Whitehead, _Process and Reality_, 346. See also 343 on “a tender
+[^15]:
+    Whitehead, _Process and Reality_, 346. See also 343 on “a tender
     care that nothing be lost.”
 
-[^16]: Hartshorne, _Omnipotence and Other Theological Mistakes_; Cobb
+[^16]:
+    Hartshorne, _Omnipotence and Other Theological Mistakes_; Cobb
     and Griffin, _Process Theology_, ch. 3.
-
-

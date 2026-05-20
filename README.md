@@ -4,24 +4,26 @@ This is the source code for my personal website and blog, [andrewthecoder.com](h
 
 ## ✨ Features
 
--   **Blog:** Posts written in Markdown/MDX.
--   **Frameworks:** Built with Astro, using Svelte components.
--   **Deployment:** Automatically deployed via GitHub Actions.
--   **Syndication:** RSS feed available at `/rss.xml`.
--   **SEO:** Sitemap and OpenGraph data for better search engine visibility.
--   **UI:** Dark mode support.
+- **Blog:** Posts written in Markdown/MDX.
+- **Frameworks:** Built with Astro, using Svelte components.
+- **Deployment:** Automatically deployed via GitHub Actions.
+- **Syndication:** RSS feed available at `/rss.xml`.
+- **SEO:** Sitemap and OpenGraph data for better search engine visibility.
+- **UI:** Dark mode support.
 
 ## 🚀 Getting Started
 
 To run this project locally, follow these steps:
 
 1.  **Clone the repository:**
+
     ```bash
     git clone https://github.com/andrewthecodertx/andrewthecoder.com.git
     cd andrewthecoder.com
     ```
 
 2.  **Install dependencies:**
+
     ```bash
     npm install
     ```
@@ -43,12 +45,12 @@ To run this project locally, follow these steps:
 
 ## 📁 Project Structure
 
--   `src/pages/`: Contains all the pages and routes for the website.
--   `src/layouts/`: Base layout components for pages.
--   `src/components/`: Reusable UI components (Astro & Svelte).
--   `src/data/`: Content collections for blog posts and authors.
--   `src/styles/`: Global CSS styles.
--   `public/`: Static assets like images and fonts.
+- `src/pages/`: Contains all the pages and routes for the website.
+- `src/layouts/`: Base layout components for pages.
+- `src/components/`: Reusable UI components (Astro & Svelte).
+- `src/data/`: Content collections for blog posts and authors.
+- `src/styles/`: Global CSS styles.
+- `public/`: Static assets like images and fonts.
 
 ## CI/CD
 
