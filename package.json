@@ -33,15 +33,15 @@
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/svelte": "^8.1.0",
     "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.1.10",
     "reading-time": "^1.5.0",
     "rehype-external-links": "^3.0.0",
     "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
-    "remark-smartypants": "^2.0.0",
-    "tailwindcss": "^4.1.17"
+    "remark-smartypants": "^3.0.2",
+    "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",
