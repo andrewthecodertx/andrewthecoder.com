@@ -20,6 +20,7 @@
     "prepare": "husky",
     "lint:es": "eslint . --ext .js,.ts,.astro --cache",
     "lint:prettier": "prettier --check .",
+    "lint:pa11y": "pa11y-ci --config .pa11y.json https://localhost:4321",
     "lint-staged": "lint-staged",
     "format": "prettier --write .",
     "lint": "npm run lint:es && npm run lint:prettier",
@@ -56,9 +57,10 @@
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.5",
-    "prettier": "^3.8.3",
+    "husky": "9.1.7",
+    "lint-staged": "17.0.5",
+    "pa11y-ci": "2.4.0",
+    "prettier": "3.8.3",
     "typescript": "^5.9.3"
   }
 }
