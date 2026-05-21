@@ -4,9 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const title = 'OCaml Mandelbrot Set';
 const description = 'An interactive Mandelbrot set explorer written in OCaml.';
 const permalink = `${Astro.site.href}projects/ocaml-mandelbrot`;
+const image = '/social-card-ocaml-mandelbrot.svg';
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="projects">
+<BaseLayout title={title} description={description} permalink={permalink} current="projects" image={image}>
   <div class="max-w-3xl mx-auto px-4">
 
     <section class="py-12 border-b border-terminal-border">

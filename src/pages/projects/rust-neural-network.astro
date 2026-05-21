@@ -4,10 +4,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const title = 'Rust Neural Network';
 const description = 'A simple feedforward neural network with backpropagation written in Rust.';
 const permalink = `${Astro.site.href}projects/rust-neural-network`;
+const image = '/social-card-rust-neural-network.svg';
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="projects">
-          <div class="max-w-3xl mx-auto px-4">
+<BaseLayout title={title} description={description} permalink={permalink} current="projects" image={image}>
+  <div class="max-w-3xl mx-auto px-4">
 
     <section class="py-12 border-b border-terminal-border">
       <h2 class="text-terminal-green mb-4">$ {title}</h2>
