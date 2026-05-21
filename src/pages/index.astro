@@ -192,6 +192,27 @@ const hireMailto = `mailto:${CONTACT_EMAIL}?subject=${hireSubject}`;
           </div>
         </a>
 
+        <!-- Wordle tile -->
+        <a
+          href="/demos/wordle"
+          class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col no-underline group"
+        >
+          <h4 class="text-terminal-green text-sm mb-3">$ wordle</h4>
+          <div class="w-full flex items-center justify-center" style="aspect-ratio: 2/1;">
+            <div class="grid grid-cols-5 gap-1">
+              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black" style="background:#22c55e;">W</span>
+              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black" style="background:#eab308;">O</span>
+              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center" style="background:#3f3f46;color:#a1a1aa;">R</span>
+              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black" style="background:#22c55e;">D</span>
+              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black" style="background:#22c55e;">S</span>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border">
+            <span class="text-terminal-dim group-hover:text-terminal-fg">typescript · 5 letters · 6 guesses</span>
+            <span class="text-terminal-cyan group-hover:text-terminal-green">play →</span>
+          </div>
+        </a>
+
         <!-- Dungeon placeholder -->
         <div class="border border-dashed border-terminal-border rounded p-4 bg-terminal-bg flex flex-col opacity-80">
           <div class="flex items-center justify-between mb-3">
