@@ -1,0 +1,77 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1a1a1a"/>
+  
+  <!-- Decorative grid -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#2d2d2d"/>
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#3d3d3d" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="100" fill="#0f0f0f"/>
+  
+  <!-- Project title -->
+  <text x="60" y="55" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#4ade80">
+    PHP-6502 Emulator
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="60" y="90" font-family="Arial, sans-serif" font-size="24" fill="#9ca3af">
+    Composer Library for 6502 Microprocessor Emulation
+  </text>
+  
+  <!-- Main visual element - class hierarchy in PHP style -->
+  <g transform="translate(100, 180)">
+    <!-- BusInterface -->
+    <rect x="0" y="0" width="220" height="60" rx="5" fill="#2d2d2d" stroke="#f472b6" stroke-width="2"/>
+    <text x="10" y="22" font-family="monospace" font-size="16" fill="#f472b6">BusInterface</text>
+    <text x="10" y="38" font-family="monospace" font-size="12" fill="#9ca3af">- read($addr): int</text>
+    <text x="10" y="54" font-family="monospace" font-size="12" fill="#9ca3af">+ write($addr, $value)</text>
+    
+    <!-- RAMInterface (extends BusInterface) -->
+    <line x1="110" y1="60" x2="110" y2="90" stroke="#6e7681" stroke-width="2"/>
+    <rect x="0" y="90" width="220" height="60" rx="5" fill="#2d2d2d" stroke="#60a5fa" stroke-width="2"/>
+    <text x="10" y="112" font-family="monospace" font-size="16" fill="#60a5fa">RAMInterface</text>
+    <text x="10" y="128" font-family="monospace" font-size="12" fill="#9ca3af">+ read($addr, $length): string</text>
+    <text x="10" y="144" font-family="monospace" font-size="12" fill="#9ca3af">+ write($addr, $data)</text>
+    
+    <!-- MOS6502 -->
+    <rect x="280" y="180" width="180" height="60" rx="5" fill="#2d2d2d" stroke="#4ade80" stroke-width="2"/>
+    <text x="290" y="202" font-family="monospace" font-size="16" fill="#4ade80">MOS6502</text>
+    <text x="290" y="218" font-family="monospace" font-size="12" fill="#9ca3af">extends CPUInterface</text>
+    <text x="290" y="234" font-family="monospace" font-size="12" fill="#9ca3af">56 instructions</text>
+    
+    <!-- WDC65C02 -->
+    <rect x="500" y="180" width="180" height="60" rx="5" fill="#2d2d2d" stroke="#f97316" stroke-width="2"/>
+    <text x="510" y="202" font-family="monospace" font-size="16" fill="#f97316">WDC65C02</text>
+    <text x="510" y="218" font-family="monospace" font-size="12" fill="#9ca3af">extends CPUInterface</text>
+    <text x="510" y="234" font-family="monospace" font-size="12" fill="#9ca3af">70 instructions</text>
+    
+    <!-- Connect to BusInterface -->
+    <path d="M 110 30 L 280 30" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <path d="M 110 30 L 510 30" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  </g>
+  
+  <!-- Composer package badge -->
+  <g transform="translate(60, 480)">
+    <rect x="0" y="0" width="280" height="40" rx="4" fill="#2d2d2d"/>
+    <text x="10" y="25" font-family="Arial, sans-serif" font-size="18" fill="#f472b6">
+      composer require andrewthecoder/6502-emulator
+    </text>
+  </g>
+  
+  <!-- Footer -->
+  <rect x="0" y="580" width="1200" height="50" fill="#0f0f0f"/>
+  
+  <!-- GitHub badge -->
+  <g transform="translate(60, 605)">
+    <rect width="160" height="20" rx="3" fill="#2d2d2d"/>
+    <text x="5" y="14" font-family="Arial, sans-serif" font-size="12" fill="#6e7681">
+      github.com/andrewthecodertx
+    </text>
+  </g>
+</svg>

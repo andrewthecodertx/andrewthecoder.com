@@ -4,9 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const title = 'Go NES Emulator';
 const description = 'A Nintendo Entertainment System (NES) emulator written in Go.';
 const permalink = `${Astro.site.href}projects/go-nes-emulator`;
+const image = '/social-card-go-nes-emulator.svg';
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="projects">
+<BaseLayout title={title} description={description} permalink={permalink} current="projects" image={image}>
   <div class="max-w-3xl mx-auto px-4">
 
     <section class="py-12 border-b border-terminal-border">
