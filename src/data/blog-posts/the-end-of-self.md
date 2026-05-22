@@ -1,7 +1,7 @@
 ---
 title: 'The End of Self'
 slug: the-end-of-self
-publishDate: '2026-06-14'
+publishDate: '2026-05-22'
 description: 'If process theology says our experiences are received into God but we do not survive as conscious persons, is that hope or merely a beautiful memorial?'
 categories: ['Theology']
 tags: ['freewill', 'process theology', 'philosophy', 'eschatology']
