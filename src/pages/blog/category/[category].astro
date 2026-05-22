@@ -1,67 +1,70 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content'
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CategoryPostList from '../../../components/CategoryPostList.svelte';
 
 export const prerender = true;
-export async function getStaticPaths() {
-  const allPosts = await getCollection('posts');
-  const visiblePosts = allPosts.filter(post => !post.data.hidden);
-  const categories = [...new Set(visiblePosts.flatMap(post => post.data.categories))];
 
-  return categories.map(category => ({
-    params: { category },
-    props: { category },
+export async function getStaticPaths() {
+  let allPosts = await getCollection('posts');
+  allPosts = allPosts.filter(post => !post.data.hidden);
+
+  // Collect unique categories and build a map of category slug -> { name, posts }
+  const categoryMap = new Map<string, { name: string; posts: typeof allPosts }>();
+
+  allPosts.forEach(post => {
+    const categories = post.data.categories || ['Other'];
+    categories.forEach((category: string) => {
+      const slug = category.toLowerCase().replace(/\s+/g, '-');
+      if (!categoryMap.has(slug)) {
+        categoryMap.set(slug, { name: category, posts: [] });
+      }
+      categoryMap.get(slug)!.posts.push(post);
+    });
+  });
+
+  return Array.from(categoryMap.entries()).map(([slug, { name, posts }]) => ({
+    params: { category: slug },
+    props: {
+      categoryName: name,
+      posts: posts.sort(
+        (a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf()
+      ),
+    },
   }));
 }
 
-const { category } = Astro.props;
-const allPosts = await getCollection('posts');
-const postsInCategory = allPosts.filter(post => !post.data.hidden && post.data.categories.includes(category));
-postsInCategory.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+const { categoryName, posts } = Astro.props;
 
-const title = `Category: ${category}`;
-const description = `All posts in the ${category} category.`;
-const permalink = `${Astro.site.href}blog/category/${category}`;
+const title = `${categoryName} — Blog`;
+const description = `Posts in the ${categoryName} category on andrewthecoder.com`;
+const permalink = `${Astro.site.href}blog/category/${Astro.params.category}`;
+
+const serializedPosts = posts.map((post: any) => ({
+  title: post.data.title,
+  slug: post.data.slug,
+  publishDate: post.data.publishDate.toString(),
+}));
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="blog">
-  <div class="container">
-    <h1>Posts in Category: {category}</h1>
-    {postsInCategory.map((post, index) => {
-      const href = `/blog/${post.data.slug}`;
-      return (
-        <div>
-          { index !== 0 && <hr /> }
-          <div class="post-item">
-            <h2>
-              <a href={href}>{post.data.title}</a>
-            </h2>
-            <p>{post.data.description}</p>
-            <div class="post-item-footer">
-              <span class="post-item-date">— {post.data.publishDate}</span>
-            </div>
-          </div>
+  <div class="max-w-3xl mx-auto px-4">
+
+    <section class="py-12">
+      <h2 class="text-terminal-green mb-8">$ blog / <span class="text-terminal-cyan">{categoryName}</span></h2>
+
+      <p class="text-terminal-dim mb-8">
+        <a href="/blog" class="text-terminal-dim hover:text-terminal-green no-underline">← all posts</a>
+      </p>
+
+      {posts.length > 0 ? (
+        <div class="space-y-10">
+          <CategoryPostList client:load posts={serializedPosts} category={categoryName} />
         </div>
-      )
-    })}
+      ) : (
+        <p class="text-terminal-dim">No posts found in this category.</p>
+      )}
+    </section>
+
   </div>
 </BaseLayout>
-
-<style>
-  h2,
-  .post-item-footer {
-    font-family: var(--font-family-sans);
-    font-weight: 700;
-  }
-
-  .post-item-date {
-    color: var(--text-secondary);
-    text-align: left;
-    text-transform: uppercase;
-    margin-right: 16px;
-  }
-
-  hr {
-    margin: 60px auto;
-  }
-</style>

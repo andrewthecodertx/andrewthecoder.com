@@ -12,6 +12,8 @@
     );
     $: emptySlots = totalPages > 1 ? pageSize - visiblePosts.length : 0;
 
+    $: categorySlug = category.toLowerCase().replace(/\s+/g, '-');
+
     function formatDate(dateString) {
         return new Date(dateString).toLocaleDateString("en-US", {
             year: "numeric",
@@ -30,11 +32,16 @@
 </script>
 
 <div class="py-6">
-    <h4
-        class="text-terminal-cyan text-sm mb-4 border-b border-terminal-border pb-2"
+    <a
+        href={`/blog/category/${categorySlug}`}
+        class="text-terminal-cyan hover:text-terminal-green no-underline"
     >
-        {category}
-    </h4>
+        <h4
+            class="text-sm mb-4 border-b border-terminal-border pb-2"
+        >
+            {category}
+        </h4>
+    </a>
     <ul class="space-y-3">
         {#each visiblePosts as post}
             <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
