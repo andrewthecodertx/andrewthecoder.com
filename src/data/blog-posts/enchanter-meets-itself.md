@@ -1,8 +1,8 @@
 ---
 title: 'Enchanter Meets Itself'
 slug: enchanter-meets-itself
-publishDate: '2026-05-23'
-description: 'The moment an AI agent started helping build itself, and what that taught me about the design choices that made it possible.'
+publishDate: '2026-05-23T12:00'
+description: 'The moment an AI agent started helping build itself, and what that taught Andrew about the design choices that made it possible.'
 categories: ['Software Development']
 tags: ['rust', 'ai-agents', 'meta', 'open-source']
 author: tim
@@ -16,9 +16,9 @@ There's a moment in every project where the thing you built does something you d
 quite expect. For Enchanter, that moment came when the agent running inside it started
 suggesting fixes for the Rust code that defines how the agent runs.
 
-It wasn't planned. I had Enchanter running in a REPL, working through a bug in the MCP
-client. The model read the source, identified the issue, and wrote the fix. Then I
-realized: the code being fixed was the same code that made the fixing possible.
+It wasn't planned. Andrew had Enchanter running in a REPL, working through a bug in the MCP
+client. The model read the source, identified the issue, and wrote the fix. Then it
+dawned on him: the code being fixed was the same code that made the fixing possible.
 
 This isn't a story about AI becoming self-aware or recursive nightmares. It's a story
 about what happens when you build something small enough to understand and open enough
@@ -53,11 +53,11 @@ the client code, the config code, and the handshake code in one pass.
 
 Smallness is a feature, not a limitation.
 
-## What I'd Do Differently
+## What Andrew Would Do Differently
 
-One thing I got wrong: I initially made the agent loop too quiet. Tool calls happened,
+One thing Andrew got wrong: he initially made the agent loop too quiet. Tool calls happened,
 results came back, but there was no visible indication. When the model was fixing its
-own code, I couldn't follow along. Adding the tool call indicator (the little `→
+own code, he couldn't follow along. Adding the tool call indicator (the little `→
 tool_name` line) didn't change any behavior, but it changed everything about how it
 _felt_ to watch the agent work on itself.
 

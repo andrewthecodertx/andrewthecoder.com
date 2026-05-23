@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { CONTACT_EMAIL } from '../constants';
+import { formatDate } from '../utils/formatDate';
 
 const title = 'Andrew the Coder';
 const description = 'Software developer with 25+ years building things. Available for freelance and contract work. Side projects, demos, and writing on code, philosophy, and tools.';
@@ -67,14 +68,6 @@ try {
     })) || [];
 } catch (error) {
   console.error('Error fetching projects:', error);
-}
-
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  });
 }
 
 function formatProjectTitle(name: string) {

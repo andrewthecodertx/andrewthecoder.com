@@ -14,8 +14,11 @@
 
     $: categorySlug = category.toLowerCase().replace(/\s+/g, '-');
 
+    // formatDate is passed from parent Astro context; reimplemented here for Svelte
     function formatDate(dateString) {
-        return new Date(dateString).toLocaleDateString("en-US", {
+        const datePart = dateString.split('T')[0];
+        const [year, month, day] = datePart.split('-').map(Number);
+        return new Date(year, month - 1, day).toLocaleDateString("en-US", {
             year: "numeric",
             month: "short",
             day: "numeric",
