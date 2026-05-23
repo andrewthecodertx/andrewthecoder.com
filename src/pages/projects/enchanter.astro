@@ -12,7 +12,6 @@ const image = '/assets/projects/enchanter.webp';
 
     <section class="py-12 border-b border-terminal-border">
       <h2 class="text-terminal-green mb-4">$ {title}</h2>
-
       <p class="text-terminal-dim text-sm mb-6">
         <a href="https://github.com/andrewthecodertx/enchanter" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
           View on GitHub →
@@ -31,7 +30,28 @@ const image = '/assets/projects/enchanter.webp';
       </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border">
+    <section class="py-4 border-b border-terminal-border">
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+        <p class="text-terminal-cyan font-mono mb-2">Contents</p>
+        <ul class="space-y-1 text-terminal-fg text-sm">
+          <li><a href="#features" class="text-terminal-cyan hover:text-terminal-green no-underline">Features</a></li>
+          <li><a href="#philosophy" class="text-terminal-cyan hover:text-terminal-green no-underline">Philosophy</a></li>
+          <li><a href="#getting-started" class="text-terminal-cyan hover:text-terminal-green no-underline">Getting Started</a></li>
+          <li><a href="#configuration" class="text-terminal-cyan hover:text-terminal-green no-underline">Configuration</a></li>
+          <li><a href="#named-providers" class="text-terminal-cyan hover:text-terminal-green no-underline">Named Providers</a></li>
+          <li><a href="#soul-memory-skills" class="text-terminal-cyan hover:text-terminal-green no-underline">Soul, Memory & Skills</a></li>
+          <li><a href="#session-continuity" class="text-terminal-cyan hover:text-terminal-green no-underline">Session Continuity</a></li>
+          <li><a href="#mcp-servers" class="text-terminal-cyan hover:text-terminal-green no-underline">MCP Servers</a></li>
+          <li><a href="#running" class="text-terminal-cyan hover:text-terminal-green no-underline">Running</a></li>
+          <li><a href="#repl-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">REPL Commands</a></li>
+          <li><a href="#environment-variables" class="text-terminal-cyan hover:text-terminal-green no-underline">Environment Variables</a></li>
+          <li><a href="#data-directory" class="text-terminal-cyan hover:text-terminal-green no-underline">Data Directory</a></li>
+          <li><a href="#learn-more" class="text-terminal-cyan hover:text-terminal-green no-underline">Learn More</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="features">
       <h3 class="text-terminal-amber mb-6">### features</h3>
       <ul class="space-y-3 text-terminal-fg">
         <li class="flex gap-3">
@@ -68,21 +88,285 @@ const image = '/assets/projects/enchanter.webp';
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Built-in Tools</strong> — 7 canonical tools: exec_command, read_file, write_file, edit_file, search_files, list_directory, memory.</span>
+          <span><strong class="text-terminal-cyan">Built-in Tools</strong> — exec_command, read_file, write_file, edit_file, search_files, list_directory, memory.</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span><strong class="text-terminal-cyan">Interactive REPL</strong> — Full readline-powered REPL with slash commands for soul, memory, skills, config, and more.</span>
         </li>
       </ul>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### three-layer system prompt</h3>
-      <p class="text-terminal-fg leading-relaxed mb-4">
-        The system prompt is assembled in three tiers, each with a distinct role:
+    <section class="py-12 border-b border-terminal-border" id="philosophy">
+      <h3 class="text-terminal-amber mb-6">### philosophy</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          Enchanter is a harness, not a framework. It doesn't try to be clever about what
+          your agent should do — it gets out of the way and lets the model, the soul, and
+          the tools do the work. The prompt is assembled from three explicit layers. The
+          config is one file. The data directory is yours to edit.
+        </p>
+        <p>
+          Start simple: one model, one soul, no MCP servers. When you need more,
+          add providers, add skills, add tools. The harness grows with you instead of
+          front-loading complexity.
+        </p>
+      </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="getting-started">
+      <h3 class="text-terminal-amber mb-6">### getting started</h3>
+      <div class="space-y-6 text-terminal-fg">
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">1. Build and install</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+            git clone https://github.com/andrewthecodertx/enchanter.git<br/>
+            cd enchanter<br/>
+            make install
+          </code>
+          <p class="text-terminal-dim text-sm">
+            Installs to <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.local/bin/enchanter</code>. Requires Rust 1.85+.
+          </p>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">2. Launch the REPL</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+            enchanter
+          </code>
+          <p class="text-terminal-dim text-sm">
+            First run creates <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.enchanter/</code> with defaults.
+          </p>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">3. Configure a provider</p>
+          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.enchanter/config.yaml</code>:</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            model:<br/>
+            &nbsp;&nbsp;default: gpt-4.1-mini<br/>
+            &nbsp;&nbsp;api_key: sk-...
+          </code>
+          <p class="text-terminal-dim text-sm mt-2">
+            Or use an environment variable: <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">export ENCHANTER_API_KEY=sk-...</code>
+          </p>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">4. Start talking</p>
+          <p class="text-terminal-dim text-sm">
+            Type a message and press Enter. Use <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">/exit</code> to quit cleanly (saves a session summary). <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">Ctrl+D</code> also works.
+          </p>
+        </div>
+      </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="configuration">
+      <h3 class="text-terminal-amber mb-6">### configuration</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        All config lives in <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.enchanter/config.yaml</code>. Environment variables override config values. First run creates sensible defaults.
       </p>
-      <ul class="space-y-3 text-terminal-fg">
+
+      <div class="space-y-6 text-terminal-fg">
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Minimal — OpenAI</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+            model:<br/>
+            &nbsp;&nbsp;default: gpt-4.1-mini<br/>
+            &nbsp;&nbsp;api_key: sk-...
+          </code>
+          <p class="text-terminal-dim text-sm">That's it. <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">base_url</code> defaults to OpenAI.</p>
+        </div>
+
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Ollama (local)</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+            model:<br/>
+            &nbsp;&nbsp;default: qwen3<br/>
+            &nbsp;&nbsp;base_url: http://localhost:11434/v1
+          </code>
+          <p class="text-terminal-dim text-sm">No API key needed for local providers.</p>
+        </div>
+
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">OpenRouter</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+            model:<br/>
+            &nbsp;&nbsp;default: anthropic/claude-sonnet-4<br/>
+            &nbsp;&nbsp;base_url: https://openrouter.ai/api/v1<br/>
+            &nbsp;&nbsp;api_key: sk-or-...
+          </code>
+        </div>
+
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Groq</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+            model:<br/>
+            &nbsp;&nbsp;default: llama-3.3-70b-versatile<br/>
+            &nbsp;&nbsp;base_url: https://api.groq.com/openai/v1<br/>
+            &nbsp;&nbsp;api_key: ${GROQ_API_KEY}
+          </code>
+          <p class="text-terminal-dim text-sm">API keys support <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">${VAR}</code> expansion from environment variables.</p>
+        </div>
+
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Full config with all options</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            model:<br/>
+            &nbsp;&nbsp;default: gpt-4.1-mini<br/>
+            &nbsp;&nbsp;base_url: https://api.openai.com/v1<br/>
+            &nbsp;&nbsp;api_key: ${OPENAI_API_KEY}<br/>
+            <br/>
+            providers:                          # see "Named Providers" section<br/>
+            &nbsp;&nbsp;ollama:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;model: qwen3<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;base_url: http://localhost:11434/v1<br/>
+            &nbsp;&nbsp;openrouter:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;model: anthropic/claude-sonnet-4<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;base_url: https://openrouter.ai/api/v1<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;api_key: ${OPENROUTER_API_KEY}<br/>
+            <br/>
+            agent:<br/>
+            &nbsp;&nbsp;max_turns: 30<br/>
+            &nbsp;&nbsp;summarize_on_exit: true<br/>
+            &nbsp;&nbsp;memory:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;max_entries: 50<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;summarize_threshold: 40<br/>
+            <br/>
+            mcp:<br/>
+            &nbsp;&nbsp;servers:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;filesystem:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command: npx<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args: ["-y", "@modelcontextprotocol/server-filesystem", "/home/user/Projects"]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;fetch:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command: uvx<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args: ["mcp-server-fetch"]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;my-remote:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: https://mcp.example.com/api<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization: "Bearer ${MY_TOKEN}"
+          </code>
+        </div>
+
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Config reference</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-terminal-fg text-xs">
+              <thead>
+                <tr class="border-b border-terminal-border">
+                  <th class="text-left py-2 px-2">Key</th>
+                  <th class="text-left py-2 px-2">Default</th>
+                  <th class="text-left py-2 px-2">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-terminal-border">
+                <tr>
+                  <td class="py-2 px-2"><code class="text-terminal-cyan">model.default</code></td>
+                  <td class="py-2 px-2"><code class="text-terminal-fg">gpt-4.1-mini</code></td>
+                  <td class="py-2 px-2">Model ID sent to the API</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"><code class="text-terminal-cyan">model.base_url</code></td>
+                  <td class="py-2 px-2"><code class="text-terminal-fg">https://api.openai.com/v1</code></td>
+                  <td class="py-2 px-2">API base URL</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"><code class="text-terminal-cyan">model.api_key</code></td>
+                  <td class="py-2 px-2">—</td>
+                  <td class="py-2 px-2">API key (not needed for local providers)</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"><code class="text-terminal-cyan">agent.max_turns</code></td>
+                  <td class="py-2 px-2"><code class="text-terminal-fg">60</code></td>
+                  <td class="py-2 px-2">Max agent loop turns before stopping</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"><code class="text-terminal-cyan">agent.summarize_on_exit</code></td>
+                  <td class="py-2 px-2"><code class="text-terminal-fg">true</code></td>
+                  <td class="py-2 px-2">Generate session summary on clean exit</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"><code class="text-terminal-cyan">agent.memory.max_entries</code></td>
+                  <td class="py-2 px-2"><code class="text-terminal-fg">50</code></td>
+                  <td class="py-2 px-2">Max memory entries loaded into prompt</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"><code class="text-terminal-cyan">agent.memory.summarize_threshold</code></td>
+                  <td class="py-2 px-2"><code class="text-terminal-fg">40</code></td>
+                  <td class="py-2 px-2">Summarize older entries when count exceeds this</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="named-providers">
+      <h3 class="text-terminal-amber mb-6">### named providers</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        Define multiple providers in <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">config.yaml</code>
+        and switch between them mid-session. Each provider can set <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">model</code>,
+        <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">base_url</code>, and <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">api_key</code>.
+        Fields left blank inherit from the top-level model config or environment variables.
+      </p>
+
+      <div class="space-y-4">
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Config</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+            providers:<br/>
+            &nbsp;&nbsp;ollama:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;model: qwen3<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;base_url: http://localhost:11434/v1<br/>
+            &nbsp;&nbsp;openrouter:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;model: anthropic/claude-sonnet-4<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;base_url: https://openrouter.ai/api/v1<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;api_key: ${OPENROUTER_API_KEY}<br/>
+            &nbsp;&nbsp;groq:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;model: llama-3.3-70b-versatile<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;base_url: https://api.groq.com/openai/v1<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;api_key: ${GROQ_API_KEY}
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Switching providers in the REPL</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+            /model ollama       # Full provider switch: model, base_url, api_key<br/>
+            /model openrouter   # Switches to Claude on OpenRouter<br/>
+            /model gpt-4.1      # Bare model ID keeps current provider
+          </code>
+          <p class="text-terminal-dim text-sm">
+            When you use a named provider, all three settings change at once. When you pass a bare model ID,
+            only the model name changes — the base URL and API key stay the same.
+          </p>
+        </div>
+      </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="soul-memory-skills">
+      <h3 class="text-terminal-amber mb-6">### soul, memory & skills</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        The system prompt is assembled in three layers, each with a distinct role:
+      </p>
+      <ul class="space-y-3 text-terminal-fg text-sm mb-6">
         <li class="flex gap-3">
           <span class="text-terminal-green">1.</span>
           <span><strong class="text-terminal-cyan">SOUL</strong> — Your agent's persona from SOUL.md. Stable across turns, defines identity and behavioral directives.</span>
@@ -96,15 +380,99 @@ const image = '/assets/projects/enchanter.webp';
           <span><strong class="text-terminal-cyan">VOLATILE</strong> — Memory entries, user profile, and timestamp. Changes frequently, fully replaceable.</span>
         </li>
       </ul>
+
+      <div class="space-y-4">
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">SOUL.md (~/.enchanter/SOUL.md)</p>
+          <p class="text-terminal-fg text-sm mb-2">Define your agent's personality and behavioral constraints. First run creates a default you can edit:</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            # Enchanter<br/>
+            <br/>
+            You are Enchanter, a focused AI agent harness.<br/>
+            You are concise, helpful, and direct.
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Memory — three files</p>
+          <ul class="space-y-2 text-terminal-fg text-sm">
+            <li class="flex gap-2">
+              <span class="text-terminal-green">•</span>
+              <span><code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">memories/USER.md</code> — User profile entries (§-delimited). The agent uses the <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">memory</code> tool to add/replace these.</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-terminal-green">•</span>
+              <span><code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">memories/MEMORY.md</code> — Agent observations and notes (§-delimited). Auto-populated during sessions and on exit summaries.</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-terminal-green">•</span>
+              <span><code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">memories/SUMMARY.md</code> — Auto-summarized older entries. Generated when memory exceeds <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">summarize_threshold</code>.</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Skills (~/.enchanter/skills/)</p>
+          <p class="text-terminal-fg text-sm mb-2">Drop in SKILL.md files organized by category. Compatible with the <a href="https://agentskills.io" class="text-terminal-cyan hover:text-terminal-green" target="_blank" rel="noopener noreferrer">agentskills.io</a> format:</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            ~/.enchanter/skills/<br/>
+            &nbsp;&nbsp;software-development/<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;enchanter/SKILL.md<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;plan/SKILL.md<br/>
+            &nbsp;&nbsp;research/<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;arxiv/SKILL.md<br/>
+            &nbsp;&nbsp;creative/<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;image-generation/SKILL.md
+          </code>
+        </div>
+      </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border">
+    <section class="py-12 border-b border-terminal-border" id="session-continuity">
+      <h3 class="text-terminal-amber mb-6">### session continuity</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        When you exit the REPL with <code class="text-terminal-green">/exit</code> or <kbd class="text-terminal-fg">Ctrl+D</kbd>,
+        Enchanter generates a concise summary of your session and saves it to memory.
+        Your next session automatically loads this context so you can pick up where you left off.
+      </p>
+      <ul class="space-y-2 text-terminal-fg text-sm mb-4">
+        <li class="flex gap-2">
+          <span class="text-terminal-green">•</span>
+          <span>Skipped for single-shot mode (<code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">-p</code> flag)</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-terminal-green">•</span>
+          <span>Skipped if the session was too short (no real exchange)</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-terminal-green">•</span>
+          <span>10-second timeout; falls back to a simple message count on failure</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-terminal-green">•</span>
+          <span>Disable with <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">summarize_on_exit: false</code> in config.yaml</span>
+        </li>
+      </ul>
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+        <p class="text-terminal-amber text-sm">
+          ⚠ Ctrl+C is a force-quit. It bypasses the session summary hook, so no summary is saved. Always use <code class="text-terminal-green">/exit</code> or <kbd class="text-terminal-fg">Ctrl+D</kbd> for a clean exit.
+        </p>
+      </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="mcp-servers">
       <h3 class="text-terminal-amber mb-6">### mcp servers</h3>
-      <p class="text-terminal-fg leading-relaxed mb-4">
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
         Connect external tools and data sources via Model Context Protocol servers.
         Two transport types are supported:
       </p>
-      <ul class="space-y-3 text-terminal-fg">
+      <ul class="space-y-3 text-terminal-fg text-sm">
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span><strong class="text-terminal-cyan">stdio</strong> — Local processes spawned by Enchanter. Auto-restarted on crash (up to 3 attempts).</span>
@@ -114,147 +482,276 @@ const image = '/assets/projects/enchanter.webp';
           <span><strong class="text-terminal-cyan">HTTP</strong> — Remote servers via Streamable HTTP with SSE support. Session tracking with Mcp-Session-Id headers.</span>
         </li>
       </ul>
+      <div class="space-y-4 mt-4">
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">stdio — local process</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            mcp:<br/>
+            &nbsp;&nbsp;servers:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;filesystem:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command: npx<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args: ["-y", "@modelcontextprotocol/server-filesystem", "/home/user/Projects"]
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">stdio — with environment variables</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            mcp:<br/>
+            &nbsp;&nbsp;servers:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;images:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command: npx<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args: ["-y", "@fal-serverless/mcp-server"]<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;env:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAL_KEY: ${FAL_KEY}
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">http — remote server</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            mcp:<br/>
+            &nbsp;&nbsp;servers:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;my-remote:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: https://mcp.example.com/api<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers:<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization: "Bearer ${MY_TOKEN}"
+          </code>
+        </div>
+      </div>
+      <p class="text-terminal-fg mt-4 text-sm">
+        Tools from MCP servers are namespaced as <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">server_name:tool_name</code>.
+        Use <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">/tools</code> in the REPL to list all available tools.
+      </p>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### usage</h3>
+    <section class="py-12 border-b border-terminal-border" id="running">
+      <h3 class="text-terminal-amber mb-6">### running</h3>
       <div class="space-y-4 text-sm">
         <div class="bg-terminal-bg border border-terminal-border rounded p-4">
           <p class="text-terminal-dim text-sm mb-2">interactive session</p>
           <code class="text-terminal-green">enchanter</code>
         </div>
-
         <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-          <p class="text-terminal-dim text-sm mb-2">single shot</p>
+          <p class="text-terminal-dim text-sm mb-2">single shot — ask one question and exit</p>
           <code class="text-terminal-green">enchanter -p "Explain Rust ownership in one paragraph"</code>
         </div>
-
         <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-          <p class="text-terminal-dim text-sm mb-2">use a different model</p>
+          <p class="text-terminal-dim text-sm mb-2">use a different model for this session</p>
           <code class="text-terminal-green">enchanter -m qwen3</code>
         </div>
-
         <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-          <p class="text-terminal-dim text-sm mb-2">disable streaming</p>
+          <p class="text-terminal-dim text-sm mb-2">override the system prompt</p>
+          <code class="text-terminal-green">enchanter -s "You are a pirate. Always respond in pirate speech."</code>
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">disable streaming (wait for full reply)</p>
           <code class="text-terminal-green">enchanter --no-stream -p "Summarize this"</code>
         </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">disable all tools (built-in + MCP)</p>
+          <code class="text-terminal-green">enchanter --no-tools -p "What is 2+2?"</code>
+        </div>
+      </div>
+
+      <div class="space-y-3 mt-6">
+        <p class="text-terminal-cyan font-mono mb-2">Info subcommands</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-terminal-fg text-xs">
+            <thead>
+              <tr class="border-b border-terminal-border">
+                <th class="text-left py-2 px-2">Command</th>
+                <th class="text-left py-2 px-2">Description</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-terminal-border">
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter soul</code></td>
+                <td class="py-2 px-2">Show current SOUL.md</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter memory</code></td>
+                <td class="py-2 px-2">Show loaded memory</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter skills</code></td>
+                <td class="py-2 px-2">List discovered skills</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter config</code></td>
+                <td class="py-2 px-2">Show resolved configuration</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter prompt</code></td>
+                <td class="py-2 px-2">Show assembled system prompt</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
       </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### named providers</h3>
-      <p class="text-terminal-fg leading-relaxed mb-4">
-        Define multiple providers in <code class="text-terminal-green">config.yaml</code> and switch between them mid-session:
-      </p>
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
-        <pre class="text-terminal-green text-sm whitespace-pre-wrap"><code>providers:
-  ollama:
-    model: qwen3
-    base_url: http://localhost:11434/v1
-  openrouter:
-    model: anthropic/claude-sonnet-4
-    base_url: https://openrouter.ai/api/v1
-    api_key: sk-or-...</code></pre>
-      </div>
-      <div class="space-y-1 text-sm text-terminal-fg">
-        <p><code class="text-terminal-green">/model ollama</code> — switches model, base_url, and api_key</p>
-        <p><code class="text-terminal-green">/model openrouter</code> — full provider switch</p>
-        <p><code class="text-terminal-green">/model gpt-4.1</code> — bare model ID keeps current provider</p>
-      </div>
-    </section>
-
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### session continuity</h3>
-      <p class="text-terminal-fg leading-relaxed mb-4">
-        When you exit the REPL with <code class="text-terminal-green">/exit</code> or <kbd class="text-terminal-fg">Ctrl+D</kbd>,
-        Enchanter generates a concise summary of your session and saves it to memory.
-        Your next session automatically loads this context so you can pick up where you left off.
-      </p>
-      <ul class="space-y-2 text-terminal-fg text-sm">
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span>Skipped for single-shot mode (<code class="text-terminal-green">-p</code> flag)</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span>Skipped if the session was too short (no real exchange)</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span>10-second timeout; falls back to a simple message count on failure</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-terminal-green">-</span>
-          <span>Disable with <code class="text-terminal-green">summarize_on_exit: false</code> in config.yaml</span>
-        </li>
-      </ul>
-      <p class="text-terminal-dim text-sm mt-4">
-        <span class="text-terminal-amber">⚠</span> Ctrl+C is a force-quit. It bypasses the session summary hook. Always use <code class="text-terminal-green">/exit</code> or <kbd class="text-terminal-fg">Ctrl+D</kbd> for a clean exit.
-      </p>
-    </section>
-
-    <section class="py-12 border-b border-terminal-border">
+    <section class="py-12 border-b border-terminal-border" id="repl-commands">
       <h3 class="text-terminal-amber mb-6">### repl commands</h3>
       <div class="space-y-2 text-sm">
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/help</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/help</code>
           <span class="text-terminal-dim">— Show available commands</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/clear</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/clear</code>
           <span class="text-terminal-dim">— Reset conversation history</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/soul</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/soul</code>
           <span class="text-terminal-dim">— Show SOUL.md content</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/memory</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/memory</code>
           <span class="text-terminal-dim">— Show loaded memory</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/skills</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/skills</code>
           <span class="text-terminal-dim">— List discovered skills</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/tools</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/tools</code>
           <span class="text-terminal-dim">— List all available tools (built-in + MCP)</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/model &lt;name&gt;</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/model &lt;name&gt;</code>
           <span class="text-terminal-dim">— Switch to a named provider or bare model ID</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/retry</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/retry</code>
           <span class="text-terminal-dim">— Re-send the last user message</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/undo</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/undo</code>
           <span class="text-terminal-dim">— Remove last exchange from history</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/config</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/config</code>
           <span class="text-terminal-dim">— Show resolved configuration</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/prompt</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/prompt</code>
           <span class="text-terminal-dim">— Show full assembled system prompt</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap w-24">/exit</code>
+          <code class="text-terminal-green whitespace-nowrap w-40">/exit</code>
           <span class="text-terminal-dim">— Quit cleanly (also Ctrl+D)</span>
         </div>
       </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
     </section>
 
-    <section class="py-12">
+    <section class="py-12 border-b border-terminal-border" id="environment-variables">
+      <h3 class="text-terminal-amber mb-6">### environment variables</h3>
+      <p class="text-terminal-fg mb-4 text-sm">
+        All optional. Environment variables override config.yaml values.
+      </p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-terminal-fg text-xs">
+          <thead>
+            <tr class="border-b border-terminal-border">
+              <th class="text-left py-2 px-2">Variable</th>
+              <th class="text-left py-2 px-2">Overrides</th>
+              <th class="text-left py-2 px-2">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-terminal-border">
+            <tr>
+              <td class="py-2 px-2"><code class="text-terminal-cyan">ENCHANTER_MODEL</code></td>
+              <td class="py-2 px-2"><code class="text-terminal-fg">model.default</code></td>
+              <td class="py-2 px-2">Model ID to use</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-2"><code class="text-terminal-cyan">ENCHANTER_BASE_URL</code></td>
+              <td class="py-2 px-2"><code class="text-terminal-fg">model.base_url</code></td>
+              <td class="py-2 px-2">API base URL</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-2"><code class="text-terminal-cyan">ENCHANTER_API_KEY</code></td>
+              <td class="py-2 px-2"><code class="text-terminal-fg">model.api_key</code></td>
+              <td class="py-2 px-2">API key (not needed for local providers)</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-2"><code class="text-terminal-cyan">ENCHANTER_HOME</code></td>
+              <td class="py-2 px-2">—</td>
+              <td class="py-2 px-2">Data directory (default: <code class="text-terminal-fg">~/.enchanter</code>)</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-2"><code class="text-terminal-cyan">OPENAI_API_KEY</code></td>
+              <td class="py-2 px-2">fallback</td>
+              <td class="py-2 px-2">Used if ENCHANTER_API_KEY is not set</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-2"><code class="text-terminal-cyan">OPENAI_BASE_URL</code></td>
+              <td class="py-2 px-2">fallback</td>
+              <td class="py-2 px-2">Used if ENCHANTER_BASE_URL is not set</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-terminal-fg mt-4 text-sm">
+        Provider <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">api_key</code> and <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">base_url</code> fields
+        support <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">${VAR}</code> expansion, so you can write
+        <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">api_key: ${OPENROUTER_API_KEY}</code> instead of hardcoding.
+      </p>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="data-directory">
+      <h3 class="text-terminal-amber mb-6">### data directory</h3>
+      <p class="text-terminal-fg mb-4 text-sm">
+        By default, all data lives in <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.enchanter/</code>.
+        Set <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">ENCHANTER_HOME</code> to point it elsewhere.
+        First run auto-creates the directory with defaults.
+      </p>
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+        <code class="block text-terminal-fg text-xs overflow-x-auto">
+          ~/.enchanter/<br/>
+          ├── SOUL.md           # Agent persona and directives<br/>
+          ├── config.yaml       # Model, providers, agent, MCP config<br/>
+          ├── memories/<br/>
+          │   ├── USER.md       # §-delimited user profile entries<br/>
+          │   ├── MEMORY.md     # §-delimited agent memory entries<br/>
+          │   └── SUMMARY.md    # Auto-summarized older entries<br/>
+          └── skills/<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;└── software-development/<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── enchanter/SKILL.md
+        </code>
+      </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
+    <section class="py-12" id="learn-more">
       <h3 class="text-terminal-amber mb-6">### learn more</h3>
       <p class="text-terminal-fg mb-4">
-        Read the docs, explore the source, or just run it and start talking.
+        Read the source, explore the skills spec, or just run it and start talking.
       </p>
       <div class="flex gap-4">
         <a href="https://github.com/andrewthecodertx/enchanter" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
           GitHub →
+        </a>
+        <a href="https://agentskills.io" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          Skills Spec →
         </a>
       </div>
     </section>
