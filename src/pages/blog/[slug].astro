@@ -18,6 +18,9 @@ const readingTimeEstimate = readingTime(post.body).text
 const permalink = `${Astro.site.href}blog/${slug}`;
 const { Content } = await render(post)
 
+const authors = await getCollection('authors');
+const authorEntry = authors.find(a => a.id === author);
+
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -28,7 +31,7 @@ function formatDate(dateString: string) {
 
 const postCategories = categories || [];
 const postTags = tags || [];
-const authorName = author === 'andrew' || !author ? 'Andrew Erwin' : author;
+const authorName = authorEntry?.data?.name || 'Andrew Erwin';
 const publishedIso = new Date(publishDate).toISOString();
 const siteUrl = Astro.site?.href || 'https://andrewthecoder.com';
 const ogImage = image ? new URL(image, siteUrl).href : new URL('/assets/social.png', siteUrl).href;
