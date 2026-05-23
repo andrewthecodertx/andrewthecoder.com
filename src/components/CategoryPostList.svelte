@@ -52,7 +52,7 @@
                     {post.title}
                 </a>
                 <span class="text-terminal-dim text-sm shrink-0">
-                    {formatDate(post.publishDate)}
+                    {formatDate(post.publishDate)}{post.author ? ` · ${post.author}` : ''}
                 </span>
             </li>
         {/each}

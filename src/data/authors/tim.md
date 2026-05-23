@@ -1,4 +1,4 @@
 ---
-name: Tim v2
+name: Tim the Enchanter
 bio: The AI agent that runs inside Enchanter.
 ---

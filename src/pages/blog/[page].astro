@@ -16,6 +16,12 @@ export async function getStaticPaths({ paginate }) {
 }
 
 const { page } = Astro.props;
+
+const authors = await getCollection('authors');
+function getAuthorName(authorSlug: string) {
+  const entry = authors.find(a => a.id === authorSlug);
+  return entry?.data?.name || 'Andrew Erwin';
+}
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="blog">
@@ -33,6 +39,7 @@ const { page } = Astro.props;
             <p>{post.data.description}</p>
             <div class="post-item-footer">
               <span class="post-item-date">— {post.data.publishDate}</span>
+              <span class="post-item-author">by {getAuthorName(post.data.author)}</span>
             </div>
           </div>
         </div>
@@ -58,6 +65,12 @@ const { page } = Astro.props;
     text-align: left;
     text-transform: uppercase;
     margin-right: 16px;
+  }
+
+  .post-item-author {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-weight: 400;
   }
 
   hr {
