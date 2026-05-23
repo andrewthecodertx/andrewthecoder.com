@@ -8,6 +8,7 @@ tags: ['rust', 'ai-agents', 'mcp', 'open-source']
 author: Andrew
 comments_enabled: true
 featured: true
+github: 'https://github.com/andrewthecodertx/enchanter'
 image: '/assets/blog/building-enchanter.webp'
 ---
 
@@ -180,8 +181,3 @@ But the core idea doesn't change: a single binary, any provider, zero surprises.
 Enchanter reads your SOUL, loads your memory, finds your skills, talks to your model.
 
 If that sounds like your kind of tool, the source is on GitHub.
-
----
-
-_Enchanter is open source at
-[github.com/andrewthecodertx/enchanter](https://github.com/andrewthecodertx/enchanter)._
