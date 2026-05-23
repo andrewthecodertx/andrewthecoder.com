@@ -130,6 +130,24 @@ const hireMailto = `mailto:${CONTACT_EMAIL}?subject=${hireSubject}`;
       </div>
     </section>
 
+    <!-- Recent Posts -->
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### recent posts</h3>
+      <ul class="space-y-3">
+        {featuredPosts.map((post) => (
+          <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
+            <a href={`/blog/${post.data.slug}`} class="text-terminal-fg hover:text-terminal-green no-underline">
+              {post.data.title}
+            </a>
+            <span class="text-terminal-dim text-sm">{formatDate(post.data.publishDate)}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-6">
+        <a href="/blog" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">view all posts →</a>
+      </p>
+    </section>
+
     <!-- Playground -->
     <section class="py-12 border-b border-terminal-border">
       <h3 class="text-terminal-amber mb-2">### playground</h3>
@@ -235,24 +253,6 @@ const hireMailto = `mailto:${CONTACT_EMAIL}?subject=${hireSubject}`;
         </div>
 
       </div>
-    </section>
-
-    <!-- Recent Posts -->
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### recent posts</h3>
-      <ul class="space-y-3">
-        {featuredPosts.map((post) => (
-          <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
-            <a href={`/blog/${post.data.slug}`} class="text-terminal-fg hover:text-terminal-green no-underline">
-              {post.data.title}
-            </a>
-            <span class="text-terminal-dim text-sm">{formatDate(post.data.publishDate)}</span>
-          </li>
-        ))}
-      </ul>
-      <p class="mt-6">
-        <a href="/blog" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">view all posts →</a>
-      </p>
     </section>
 
     <!-- Projects -->
