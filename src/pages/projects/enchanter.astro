@@ -44,11 +44,19 @@ const image = '/assets/projects/enchanter.webp';
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Named Providers</strong> — Define multiple providers in config.yaml and switch between them mid-session with <code class="text-terminal-green">/model</code>.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
           <span><strong class="text-terminal-cyan">SOUL-Driven Personas</strong> — Define your agent's personality, directives, and behavioral constraints in SOUL.md.</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span><strong class="text-terminal-cyan">Persistent Memory</strong> — Memories persist across sessions with automatic summarization when the store grows.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Session Summaries</strong> — On clean exit, Enchanter generates a concise session summary and saves it to memory so your next session picks up where you left off.</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
@@ -134,6 +142,58 @@ const image = '/assets/projects/enchanter.webp';
     </section>
 
     <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### named providers</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4">
+        Define multiple providers in <code class="text-terminal-green">config.yaml</code> and switch between them mid-session:
+      </p>
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
+        <pre class="text-terminal-green text-sm whitespace-pre-wrap"><code>providers:
+  ollama:
+    model: qwen3
+    base_url: http://localhost:11434/v1
+  openrouter:
+    model: anthropic/claude-sonnet-4
+    base_url: https://openrouter.ai/api/v1
+    api_key: sk-or-...</code></pre>
+      </div>
+      <div class="space-y-1 text-sm text-terminal-fg">
+        <p><code class="text-terminal-green">/model ollama</code> — switches model, base_url, and api_key</p>
+        <p><code class="text-terminal-green">/model openrouter</code> — full provider switch</p>
+        <p><code class="text-terminal-green">/model gpt-4.1</code> — bare model ID keeps current provider</p>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### session continuity</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4">
+        When you exit the REPL with <code class="text-terminal-green">/exit</code> or <kbd class="text-terminal-fg">Ctrl+D</kbd>,
+        Enchanter generates a concise summary of your session and saves it to memory.
+        Your next session automatically loads this context so you can pick up where you left off.
+      </p>
+      <ul class="space-y-2 text-terminal-fg text-sm">
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span>Skipped for single-shot mode (<code class="text-terminal-green">-p</code> flag)</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span>Skipped if the session was too short (no real exchange)</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span>10-second timeout; falls back to a simple message count on failure</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span>Disable with <code class="text-terminal-green">summarize_on_exit: false</code> in config.yaml</span>
+        </li>
+      </ul>
+      <p class="text-terminal-dim text-sm mt-4">
+        <span class="text-terminal-amber">⚠</span> Ctrl+C is a force-quit. It bypasses the session summary hook. Always use <code class="text-terminal-green">/exit</code> or <kbd class="text-terminal-fg">Ctrl+D</kbd> for a clean exit.
+      </p>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
       <h3 class="text-terminal-amber mb-6">### repl commands</h3>
       <div class="space-y-2 text-sm">
         <div class="flex flex-col sm:flex-row gap-2">
@@ -157,6 +217,22 @@ const image = '/assets/projects/enchanter.webp';
           <span class="text-terminal-dim">— List discovered skills</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap w-24">/tools</code>
+          <span class="text-terminal-dim">— List all available tools (built-in + MCP)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap w-24">/model &lt;name&gt;</code>
+          <span class="text-terminal-dim">— Switch to a named provider or bare model ID</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap w-24">/retry</code>
+          <span class="text-terminal-dim">— Re-send the last user message</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap w-24">/undo</code>
+          <span class="text-terminal-dim">— Remove last exchange from history</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap w-24">/config</code>
           <span class="text-terminal-dim">— Show resolved configuration</span>
         </div>
@@ -166,7 +242,7 @@ const image = '/assets/projects/enchanter.webp';
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap w-24">/exit</code>
-          <span class="text-terminal-dim">— Quit</span>
+          <span class="text-terminal-dim">— Quit cleanly (also Ctrl+D)</span>
         </div>
       </div>
     </section>
