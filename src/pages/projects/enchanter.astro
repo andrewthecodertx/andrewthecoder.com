@@ -40,7 +40,7 @@ const image = '/assets/projects/enchanter.webp';
           <li><a href="#configuration" class="text-terminal-cyan hover:text-terminal-green no-underline">Configuration</a></li>
           <li><a href="#named-providers" class="text-terminal-cyan hover:text-terminal-green no-underline">Named Providers</a></li>
           <li><a href="#soul-memory-skills" class="text-terminal-cyan hover:text-terminal-green no-underline">Soul, Memory & Skills</a></li>
-          <li><a href="#session-continuity" class="text-terminal-cyan hover:text-terminal-green no-underline">Session Continuity</a></li>
+          <li><a href="#session-continuity" class="text-terminal-cyan hover:text-terminal-green no-underline">Session Continuity &amp; History</a></li>
           <li><a href="#mcp-servers" class="text-terminal-cyan hover:text-terminal-green no-underline">MCP Servers</a></li>
           <li><a href="#running" class="text-terminal-cyan hover:text-terminal-green no-underline">Running</a></li>
           <li><a href="#repl-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">REPL Commands</a></li>
@@ -77,6 +77,10 @@ const image = '/assets/projects/enchanter.webp';
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span><strong class="text-terminal-cyan">Session Summaries</strong> — On clean exit, Enchanter generates a concise session summary and saves it to memory so your next session picks up where you left off.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Session History</strong> — Every conversation is automatically logged to JSONL files. List and review past sessions with <code class="text-terminal-green">enchanter sessions</code> or <code class="text-terminal-green">/sessions</code> in the REPL.</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
@@ -160,7 +164,7 @@ const image = '/assets/projects/enchanter.webp';
         <div>
           <p class="text-terminal-cyan font-mono mb-2">4. Start talking</p>
           <p class="text-terminal-dim text-sm">
-            Type a message and press Enter. Use <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">/exit</code> to quit cleanly (saves a session summary). <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">Ctrl+D</code> also works.
+            Type a message and press Enter. Use <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">/exit</code> to quit cleanly (saves a session summary and history). <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">Ctrl+D</code> also works. All conversations are automatically saved to <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.enchanter/sessions/</code>.
           </p>
         </div>
       </div>
@@ -455,10 +459,39 @@ const image = '/assets/projects/enchanter.webp';
           <span>Disable with <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">summarize_on_exit: false</code> in config.yaml</span>
         </li>
       </ul>
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
         <p class="text-terminal-amber text-sm">
           ⚠ Ctrl+C is a force-quit. It bypasses the session summary hook, so no summary is saved. Always use <code class="text-terminal-green">/exit</code> or <kbd class="text-terminal-fg">Ctrl+D</kbd> for a clean exit.
         </p>
+      </div>
+
+      <h4 class="text-terminal-cyan mb-3">session history</h4>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        Every conversation is automatically saved to <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.enchanter/sessions/</code>
+        as a JSONL file. Each message is appended atomically — if the process crashes, everything
+        written up to that point is preserved. Each session gets a unique ID and stores the model,
+        timestamps, and full conversation including tool calls and results.
+      </p>
+      <div class="space-y-2 text-sm">
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">List sessions</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            enchanter sessions
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">View a specific session</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            enchanter sessions &lt;id&gt;
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Inside the REPL</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            /sessions
+          </code>
+        </div>
       </div>
 
       <div class="py-4">
@@ -587,6 +620,14 @@ const image = '/assets/projects/enchanter.webp';
                 <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter prompt</code></td>
                 <td class="py-2 px-2">Show assembled system prompt</td>
               </tr>
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter sessions</code></td>
+                <td class="py-2 px-2">List saved session history</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter sessions &lt;id&gt;</code></td>
+                <td class="py-2 px-2">Show a specific session's conversation</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -639,6 +680,10 @@ const image = '/assets/projects/enchanter.webp';
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap w-40">/config</code>
           <span class="text-terminal-dim">— Show resolved configuration</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap w-40">/sessions</code>
+          <span class="text-terminal-dim">— List saved session history</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap w-40">/prompt</code>
@@ -730,6 +775,8 @@ const image = '/assets/projects/enchanter.webp';
           │   ├── USER.md       # §-delimited user profile entries<br/>
           │   ├── MEMORY.md     # §-delimited agent memory entries<br/>
           │   └── SUMMARY.md    # Auto-summarized older entries<br/>
+          ├── sessions/<br/>
+          │   └── &lt;uuid&gt;.jsonl  # Conversation history (auto-saved)<br/>
           └── skills/<br/>
           &nbsp;&nbsp;&nbsp;&nbsp;└── software-development/<br/>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── enchanter/SKILL.md
