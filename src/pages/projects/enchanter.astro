@@ -213,9 +213,9 @@ const image = '/assets/projects/enchanter.webp';
             model:<br/>
             &nbsp;&nbsp;default: llama-3.3-70b-versatile<br/>
             &nbsp;&nbsp;base_url: https://api.groq.com/openai/v1<br/>
-            &nbsp;&nbsp;api_key: ${GROQ_API_KEY}
+            &nbsp;&nbsp;api_key: &#36;&#123;GROQ_API_KEY&#125;
           </code>
-          <p class="text-terminal-dim text-sm">API keys support <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">${VAR}</code> expansion from environment variables.</p>
+          <p class="text-terminal-dim text-sm">API keys support <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">&#36;&#123;VAR&#125;</code> expansion from environment variables.</p>
         </div>
 
         <div>
@@ -224,7 +224,7 @@ const image = '/assets/projects/enchanter.webp';
             model:<br/>
             &nbsp;&nbsp;default: gpt-4.1-mini<br/>
             &nbsp;&nbsp;base_url: https://api.openai.com/v1<br/>
-            &nbsp;&nbsp;api_key: ${OPENAI_API_KEY}<br/>
+            &nbsp;&nbsp;api_key: &#36;&#123;OPENAI_API_KEY&#125;<br/>
             <br/>
             providers:                          # see "Named Providers" section<br/>
             &nbsp;&nbsp;ollama:<br/>
@@ -233,7 +233,7 @@ const image = '/assets/projects/enchanter.webp';
             &nbsp;&nbsp;openrouter:<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;model: anthropic/claude-sonnet-4<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;base_url: https://openrouter.ai/api/v1<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;api_key: ${OPENROUTER_API_KEY}<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;api_key: &#36;&#123;OPENROUTER_API_KEY&#125;<br/>
             <br/>
             agent:<br/>
             &nbsp;&nbsp;max_turns: 30<br/>
@@ -253,7 +253,7 @@ const image = '/assets/projects/enchanter.webp';
             &nbsp;&nbsp;&nbsp;&nbsp;my-remote:<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: https://mcp.example.com/api<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers:<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization: "Bearer ${MY_TOKEN}"
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization: "Bearer &#36;&#123;MY_TOKEN&#125;"
           </code>
         </div>
 
@@ -335,11 +335,11 @@ const image = '/assets/projects/enchanter.webp';
             &nbsp;&nbsp;openrouter:<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;model: anthropic/claude-sonnet-4<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;base_url: https://openrouter.ai/api/v1<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;api_key: ${OPENROUTER_API_KEY}<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;api_key: &#36;&#123;OPENROUTER_API_KEY&#125;<br/>
             &nbsp;&nbsp;groq:<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;model: llama-3.3-70b-versatile<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;base_url: https://api.groq.com/openai/v1<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;api_key: ${GROQ_API_KEY}
+            &nbsp;&nbsp;&nbsp;&nbsp;api_key: &#36;&#123;GROQ_API_KEY&#125;
           </code>
         </div>
         <div>
@@ -502,7 +502,7 @@ const image = '/assets/projects/enchanter.webp';
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command: npx<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args: ["-y", "@fal-serverless/mcp-server"]<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;env:<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAL_KEY: ${FAL_KEY}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAL_KEY: &#36;&#123;FAL_KEY&#125;
           </code>
         </div>
         <div>
@@ -513,7 +513,7 @@ const image = '/assets/projects/enchanter.webp';
             &nbsp;&nbsp;&nbsp;&nbsp;my-remote:<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: https://mcp.example.com/api<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers:<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization: "Bearer ${MY_TOKEN}"
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization: "Bearer &#36;&#123;MY_TOKEN&#125;"
           </code>
         </div>
       </div>
@@ -705,8 +705,8 @@ const image = '/assets/projects/enchanter.webp';
       </div>
       <p class="text-terminal-fg mt-4 text-sm">
         Provider <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">api_key</code> and <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">base_url</code> fields
-        support <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">${VAR}</code> expansion, so you can write
-        <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">api_key: ${OPENROUTER_API_KEY}</code> instead of hardcoding.
+        support <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">&#36;&#123;VAR&#125;</code> expansion, so you can write
+        <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">api_key: &#36;&#123;OPENROUTER_API_KEY&#125;</code> instead of hardcoding.
       </p>
 
       <div class="py-4">
