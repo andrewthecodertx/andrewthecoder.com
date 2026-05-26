@@ -16,6 +16,8 @@ const image = '/assets/projects/enchanter.webp';
         <a href="https://github.com/andrewthecodertx/enchanter" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
           View on GitHub →
         </a>
+        &nbsp;·&nbsp;
+        Runs on Linux, macOS, and Windows.
       </p>
 
       <p class="text-terminal-fg leading-relaxed mb-6">
@@ -36,12 +38,14 @@ const image = '/assets/projects/enchanter.webp';
         <ul class="space-y-1 text-terminal-fg text-sm">
           <li><a href="#features" class="text-terminal-cyan hover:text-terminal-green no-underline">Features</a></li>
           <li><a href="#philosophy" class="text-terminal-cyan hover:text-terminal-green no-underline">Philosophy</a></li>
+          <li><a href="#platform-support" class="text-terminal-cyan hover:text-terminal-green no-underline">Platform Support</a></li>
           <li><a href="#getting-started" class="text-terminal-cyan hover:text-terminal-green no-underline">Getting Started</a></li>
           <li><a href="#configuration" class="text-terminal-cyan hover:text-terminal-green no-underline">Configuration</a></li>
           <li><a href="#named-providers" class="text-terminal-cyan hover:text-terminal-green no-underline">Named Providers</a></li>
-          <li><a href="#soul-memory-skills" class="text-terminal-cyan hover:text-terminal-green no-underline">Soul, Memory & Skills</a></li>
+          <li><a href="#soul-memory-skills" class="text-terminal-cyan hover:text-terminal-green no-underline">Soul, Memory &amp; Skills</a></li>
           <li><a href="#session-continuity" class="text-terminal-cyan hover:text-terminal-green no-underline">Session Continuity &amp; History</a></li>
           <li><a href="#mcp-servers" class="text-terminal-cyan hover:text-terminal-green no-underline">MCP Servers</a></li>
+          <li><a href="#daemon-mode" class="text-terminal-cyan hover:text-terminal-green no-underline">Daemon Mode</a></li>
           <li><a href="#running" class="text-terminal-cyan hover:text-terminal-green no-underline">Running</a></li>
           <li><a href="#repl-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">REPL Commands</a></li>
           <li><a href="#environment-variables" class="text-terminal-cyan hover:text-terminal-green no-underline">Environment Variables</a></li>
@@ -98,6 +102,10 @@ const image = '/assets/projects/enchanter.webp';
           <span class="text-terminal-green">-</span>
           <span><strong class="text-terminal-cyan">Interactive REPL</strong> — Full readline-powered REPL with slash commands for soul, memory, skills, config, and more.</span>
         </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Daemon Mode</strong> — Background process keeps MCP servers warm, eliminating 3–15s cold starts. Linux &amp; macOS only.</span>
+        </li>
       </ul>
 
       <div class="py-4">
@@ -126,18 +134,67 @@ const image = '/assets/projects/enchanter.webp';
       </div>
     </section>
 
+    <section class="py-12 border-b border-terminal-border" id="platform-support">
+      <h3 class="text-terminal-amber mb-6">### platform support</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-terminal-fg text-sm">
+          <thead>
+            <tr class="border-b border-terminal-border">
+              <th class="text-left py-2 px-3">Platform</th>
+              <th class="text-left py-2 px-3">REPL &amp; Inline</th>
+              <th class="text-left py-2 px-3">Daemon Mode</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-terminal-border">
+            <tr>
+              <td class="py-2 px-3">Linux</td>
+              <td class="py-2 px-3 text-terminal-green">✅</td>
+              <td class="py-2 px-3 text-terminal-green">✅</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3">macOS</td>
+              <td class="py-2 px-3 text-terminal-green">✅</td>
+              <td class="py-2 px-3 text-terminal-green">✅</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3">Windows</td>
+              <td class="py-2 px-3 text-terminal-green">✅</td>
+              <td class="py-2 px-3 text-terminal-red">❌</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-terminal-dim text-sm mt-4">
+        Daemon mode requires Unix domain sockets and is only available on Linux and macOS. On Windows, Enchanter runs entirely in inline mode — no <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">--no-daemon</code> flag or <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">daemon</code> subcommand is available.
+      </p>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
     <section class="py-12 border-b border-terminal-border" id="getting-started">
       <h3 class="text-terminal-amber mb-6">### getting started</h3>
       <div class="space-y-6 text-terminal-fg">
         <div>
           <p class="text-terminal-cyan font-mono mb-2">1. Build and install</p>
+          <p class="text-terminal-dim text-sm mb-2">Linux / macOS:</p>
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
             git clone https://github.com/andrewthecodertx/enchanter.git<br/>
             cd enchanter<br/>
             make install
           </code>
+          <p class="text-terminal-dim text-sm mb-2">
+            Installs to <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.local/bin/enchanter</code>.
+          </p>
+          <p class="text-terminal-dim text-sm mb-2">Windows:</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+            git clone https://github.com/andrewthecodertx/enchanter.git<br/>
+            cd enchanter<br/>
+            cargo build --release
+          </code>
           <p class="text-terminal-dim text-sm">
-            Installs to <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.local/bin/enchanter</code>. Requires Rust 1.85+.
+            Binary at <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">target\release\enchanter.exe</code>. Copy it anywhere on your <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">PATH</code>. Requires Rust 1.85+.
           </p>
         </div>
         <div>
@@ -560,6 +617,44 @@ const image = '/assets/projects/enchanter.webp';
       </div>
     </section>
 
+    <section class="py-12 border-b border-terminal-border" id="daemon-mode">
+      <h3 class="text-terminal-amber mb-6">### daemon mode <span class="text-terminal-dim text-sm font-normal">(Linux &amp; macOS only)</span></h3>
+      <div class="space-y-4 text-terminal-fg text-sm">
+        <p class="leading-relaxed">
+          Enchanter can run as a background daemon that keeps MCP servers warm. This eliminates
+          the 3–15 second cold start on every invocation (most of which is spawning MCP server processes).
+        </p>
+        <p class="leading-relaxed">
+          The daemon listens on a Unix domain socket at <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.enchanter/sock</code>
+          and writes its PID to <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">~/.enchanter/daemon.pid</code>.
+          It auto-shuts down after 10 minutes of inactivity (configurable with <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">--idle-timeout</code>).
+        </p>
+      </div>
+      <div class="space-y-4 mt-4">
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">start the daemon</p>
+          <code class="text-terminal-green">enchanter daemon start</code>
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">check status (model, MCP servers, uptime)</p>
+          <code class="text-terminal-green">enchanter daemon status</code>
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">stop the daemon</p>
+          <code class="text-terminal-green">enchanter daemon stop</code>
+        </div>
+      </div>
+      <div class="space-y-3 mt-4 text-sm">
+        <p class="text-terminal-fg"><strong class="text-terminal-cyan">Auto-start:</strong> When you run <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">enchanter -p "question"</code> and the daemon isn't running, Enchanter starts it automatically, waits for it to become ready, then sends your request through it.</p>
+        <p class="text-terminal-fg"><strong class="text-terminal-cyan">Fallback:</strong> If the daemon can't be reached, Enchanter falls back to inline mode. Use <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">--no-daemon</code> to skip the daemon entirely.</p>
+        <p class="text-terminal-fg"><strong class="text-terminal-cyan">Streaming:</strong> The daemon streams responses as JSONL events over the Unix socket, so you still see content tokens as they arrive — not just a final blob of text.</p>
+      </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
     <section class="py-12 border-b border-terminal-border" id="running">
       <h3 class="text-terminal-amber mb-6">### running</h3>
       <div class="space-y-4 text-sm">
@@ -586,6 +681,10 @@ const image = '/assets/projects/enchanter.webp';
         <div class="bg-terminal-bg border border-terminal-border rounded p-4">
           <p class="text-terminal-dim text-sm mb-2">disable all tools (built-in + MCP)</p>
           <code class="text-terminal-green">enchanter --no-tools -p "What is 2+2?"</code>
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">run inline, skip daemon auto-connect <span class="text-terminal-dim">(Linux/macOS only)</span></p>
+          <code class="text-terminal-green">enchanter --no-daemon -p "quick question"</code>
         </div>
       </div>
 
@@ -627,6 +726,18 @@ const image = '/assets/projects/enchanter.webp';
               <tr>
                 <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter sessions &lt;id&gt;</code></td>
                 <td class="py-2 px-2">Show a specific session's conversation</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter daemon start</code></td>
+                <td class="py-2 px-2">Start the background daemon <span class="text-terminal-dim">(Linux/macOS)</span></td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter daemon stop</code></td>
+                <td class="py-2 px-2">Stop the running daemon <span class="text-terminal-dim">(Linux/macOS)</span></td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"><code class="text-terminal-cyan">enchanter daemon status</code></td>
+                <td class="py-2 px-2">Show daemon status: model, MCP servers, uptime <span class="text-terminal-dim">(Linux/macOS)</span></td>
               </tr>
             </tbody>
           </table>
