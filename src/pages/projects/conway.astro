@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = "Conway's Game of Life";
+const description = "An interactive, in-browser implementation of Conway's Game of Life with preset patterns, tap-to-draw, and real-time simulation.";
+const permalink = `${Astro.site.href}projects/conway`;
+const image = '/assets/gameoflife.webp';
+---
+
+<BaseLayout title={title} description={description} permalink={permalink} current="projects" image={image}>
+  <div class="max-w-3xl mx-auto px-4">
+
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-green mb-4">$ Game of Life</h2>
+
+      <p class="text-terminal-dim text-sm mb-4">
+        <a href="https://github.com/andrewthecodertx/javascript-game-of-life" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          View on GitHub →
+        </a>
+        <span class="px-2">·</span>
+        <a href="/demos/conway" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          Try the demo →
+        </a>
+      </p>
+
+      <p class="text-terminal-fg leading-relaxed mb-6">
+        John Conway's Game of Life is a zero-player cellular automaton — a grid of cells that live,
+        die, and reproduce based on four simple rules. Despite its simplicity, it produces an astonishing
+        variety of behavior: still lifes, oscillators, spaceships, and even universal computation.
+      </p>
+
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+        <p class="text-terminal-dim text-sm mb-2">the four rules</p>
+        <ol class="space-y-2 text-terminal-fg text-sm list-decimal list-inside">
+          <li>Any live cell with fewer than two live neighbors dies (underpopulation).</li>
+          <li>Any live cell with two or three live neighbors survives.</li>
+          <li>Any live cell with more than three live neighbors dies (overpopulation).</li>
+          <li>Any dead cell with exactly three live neighbors becomes alive (reproduction).</li>
+        </ol>
+      </div>
+
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+        <p class="text-terminal-dim text-sm mb-2">controls</p>
+        <ul class="space-y-1 text-terminal-fg text-sm">
+          <li><code class="text-terminal-cyan">tap</code> — toggle a cell</li>
+          <li><code class="text-terminal-cyan">drag</code> — draw cells</li>
+          <li><code class="text-terminal-cyan">space</code> — pause / play</li>
+          <li><code class="text-terminal-cyan">r</code> — random restart</li>
+          <li><code class="text-terminal-cyan">c</code> — clear the grid</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### preset patterns</h3>
+      <p class="text-terminal-fg leading-relaxed mb-6">
+        The demo includes five classic patterns that showcase the range of behavior possible in Life —
+        from simple motion to infinite growth.
+      </p>
+
+      <ul class="space-y-6 text-terminal-fg">
+        <li class="flex gap-3">
+          <span class="text-terminal-green shrink-0">→</span>
+          <div>
+            <strong class="text-terminal-cyan">Glider</strong>
+            <p class="text-terminal-dim text-sm mt-1">
+              The simplest spaceship. A 5-cell pattern that moves diagonally one cell every 4 generations.
+              Gliders are the workhorses of Life — they carry information, trigger reactions, and form
+              the basis of complex constructions like the Gosper Glider Gun.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green shrink-0">→</span>
+          <div>
+            <strong class="text-terminal-cyan">LWSS</strong>
+            <span class="text-terminal-dim text-sm"> (Lightweight Spaceship)</span>
+            <p class="text-terminal-dim text-sm mt-1">
+              A 9-cell spaceship that moves horizontally, leaving a trail of sparks. One of three
+              standard spaceships (LWSS, MWSS, HWSS) — essential building blocks for creating
+              collisions and signal paths in larger constructions.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green shrink-0">→</span>
+          <div>
+            <strong class="text-terminal-cyan">Pulsar</strong>
+            <p class="text-terminal-dim text-sm mt-1">
+              A period-3 oscillator and the most common naturally occurring oscillator in Life.
+              Its 48 cells cycle through three distinct phases, returning to the starting
+              configuration every 3 generations. Beautiful steady-state motion.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green shrink-0">→</span>
+          <div>
+            <strong class="text-terminal-cyan">R-pentomino</strong>
+            <p class="text-terminal-dim text-sm mt-1">
+              A 5-cell methuselah — one of the most famous patterns in Life. From just five cells, it
+              runs for 1103 generations before stabilizing, leaving behind a complex landscape of
+              still lifes, oscillators, and escaping gliders. Tiny input, enormous chaos.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green shrink-0">→</span>
+          <div>
+            <strong class="text-terminal-cyan">Gosper Glider Gun</strong>
+            <p class="text-terminal-dim text-sm mt-1">
+              The first known finite pattern that grows without bound — discovered by Bill Gosper in 1970.
+              A period-30 oscillator that emits a steady stream of gliders. Its existence proved that Life
+              patterns can grow infinitely, settling a fundamental question about the automaton.
+            </p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### implementation</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          The simulation runs on a toroidal grid (cells wrap around edges) using flat
+          <code class="text-terminal-cyan">Uint8Array</code> buffers with double-buffering — each
+          generation is computed into a fresh buffer, then swapped. This avoids in-place mutation
+          artifacts and keeps the update loop clean.
+        </p>
+        <p>
+          Rendering uses <code class="text-terminal-cyan">ImageData</code> for bulk pixel writes
+          rather than individual <code class="text-terminal-cyan">fillRect</code> calls. The
+          simulation is throttled to ~30fps via <code class="text-terminal-cyan">requestAnimationFrame</code>
+          with a timestamp gate, keeping CPU usage low while still looking smooth.
+        </p>
+        <p>
+          Everything is vanilla JavaScript — no framework, no build step, no dependencies. The
+          whole thing runs from a single <code class="text-terminal-cyan">&lt;script&gt;</code> tag
+          on a canvas.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### tech stack</h3>
+      <ul class="space-y-3 text-terminal-fg">
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">HTML Canvas</strong> — pixel-level rendering via ImageData for high-throughput cell drawing</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Vanilla JavaScript</strong> — zero dependencies, single file, no build step</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Flat Array Buffers</strong> — Uint8Array with double-buffering for zero-allocation simulation steps</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Toroidal Grid</strong> — edge wrapping for seamless pattern behavior</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Preset Patterns</strong> — glider, LWSS, pulsar, R-pentomino, Gosper Glider Gun with centered placement</span>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="py-8 border-t border-terminal-border">
+      <a href="/projects" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">
+        ← back to projects
+      </a>
+    </footer>
+
+  </div>
+</BaseLayout>
