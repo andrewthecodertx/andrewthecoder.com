@@ -10,40 +10,72 @@ const permalink = `${Astro.site.href}demos/conway`;
 
 <DemoLayout title={title} description={description} permalink={permalink} current="demos" image="/assets/conway.png">
 	<div class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border">
-		<h2 class="text-terminal-green">John Conway's Game of Life</h2>
-		<span class="text-terminal-dim">
+		<h2 class="text-terminal-green">Game of Life</h2>
+		<span class="text-terminal-dim" id="genDisplay">(0)</span>
+		<span class="text-terminal-dim hidden sm:inline">
 			<span class="text-terminal-amber">tap</span> toggle
 			<span class="px-1">·</span>
 			<span class="text-terminal-amber">drag</span> draw
-			<span class="hidden sm:inline">
-				<span class="px-1">·</span>
-				<span class="text-terminal-amber">space</span> pause
-				<span class="px-1">·</span>
-				<span class="text-terminal-amber">r</span> restart
-				<span class="px-1">·</span>
-				<span class="text-terminal-amber">c</span> clear
-			</span>
+			<span class="px-1">·</span>
+			<span class="text-terminal-amber">space</span> pause
+			<span class="px-1">·</span>
+			<span class="text-terminal-amber">r</span> restart
+			<span class="px-1">·</span>
+			<span class="text-terminal-amber">c</span> clear
 		</span>
-		<div class="flex gap-2 ml-auto">
+		<div class="flex gap-2">
 			<button
 				id="pauseButton"
-				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors"
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors text-xs"
 			>
-				[pause]
+				pause
 			</button>
 			<button
 				id="restartButton"
-				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors"
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors text-xs"
 			>
-				[restart]
+				restart
 			</button>
 			<button
 				id="clearButton"
-				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors"
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors text-xs"
 			>
-				[clear]
+				clear
 			</button>
 		</div>
+	</div>
+	<div class="px-4 py-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs border-b border-terminal-border bg-terminal-bg/50">
+		<span class="text-terminal-dim">patterns:</span>
+		<button
+			id="pattern-glider"
+			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
+		>
+			glider
+		</button>
+		<button
+			id="pattern-lwss"
+			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
+		>
+			LWSS
+		</button>
+		<button
+			id="pattern-pulsar"
+			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
+		>
+			pulsar
+		</button>
+		<button
+			id="pattern-rpentomino"
+			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
+		>
+			R-pentomino
+		</button>
+		<button
+			id="pattern-gospergun"
+			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
+		>
+			Gosper Gun
+		</button>
 	</div>
 
 	<canvas id="gameCanvas" class="bg-terminal-bg block w-full touch-none"></canvas>

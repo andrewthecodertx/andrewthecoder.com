@@ -15,6 +15,8 @@
   };
 
   const res = 5; /* pixel size */
+  const aliveColor = '#39ff14'; /* terminal green */
+  const gridLineColor = '#0a0a0a';
 
   let columns = 0;
   let rows = 0;
@@ -22,12 +24,175 @@
   let gen = 0;
   let running = true;
 
+  /* ── Preset patterns (relative [col, row] offsets) ── */
+
+  const patterns = {
+    glider: {
+      name: 'Glider',
+      cells: [
+        [1, 0],
+        [2, 1],
+        [0, 2],
+        [1, 2],
+        [2, 2],
+      ],
+    },
+    lwss: {
+      name: 'LWSS',
+      cells: [
+        [1, 0],
+        [4, 0],
+        [0, 1],
+        [0, 2],
+        [4, 2],
+        [0, 3],
+        [1, 3],
+        [2, 3],
+        [3, 3],
+      ],
+    },
+    pulsar: {
+      name: 'Pulsar',
+      cells: (function () {
+        // Period-3 oscillator — symmetric, centered on (0,0)
+        const quarter = [
+          [2, 1],
+          [3, 1],
+          [4, 1],
+          [1, 2],
+          [6, 2],
+          [1, 3],
+          [6, 3],
+          [1, 4],
+          [6, 4],
+          [2, 5],
+          [3, 5],
+          [4, 5],
+          [2, 7],
+          [3, 7],
+          [4, 7],
+          [1, 8],
+          [6, 8],
+          [1, 9],
+          [6, 9],
+          [1, 10],
+          [6, 10],
+          [2, 11],
+          [3, 11],
+          [4, 11],
+        ];
+        const all = [];
+        quarter.forEach(function (p) {
+          all.push([p[0], p[1]]);
+          all.push([-p[0], p[1]]);
+          all.push([p[0], -p[1]]);
+          all.push([-p[0], -p[1]]);
+        });
+        // Deduplicate
+        const seen = {};
+        return all.filter(function (p) {
+          const k = p[0] + ',' + p[1];
+          if (seen[k]) return false;
+          seen[k] = true;
+          return true;
+        });
+      })(),
+    },
+    rpentomino: {
+      name: 'R-pentomino',
+      cells: [
+        [1, 0],
+        [2, 0],
+        [0, 1],
+        [1, 1],
+        [1, 2],
+      ],
+    },
+    gospergun: {
+      name: 'Gosper Gun',
+      cells: [
+        [24, 0],
+        [22, 1],
+        [24, 1],
+        [12, 2],
+        [13, 2],
+        [20, 2],
+        [21, 2],
+        [34, 2],
+        [35, 2],
+        [11, 3],
+        [15, 3],
+        [20, 3],
+        [21, 3],
+        [34, 3],
+        [35, 3],
+        [0, 4],
+        [1, 4],
+        [10, 4],
+        [16, 4],
+        [20, 4],
+        [21, 4],
+        [0, 5],
+        [1, 5],
+        [10, 5],
+        [14, 5],
+        [16, 5],
+        [17, 5],
+        [22, 5],
+        [24, 5],
+        [10, 6],
+        [16, 6],
+        [24, 6],
+        [11, 7],
+        [15, 7],
+        [12, 8],
+        [13, 8],
+      ],
+    },
+  };
+
   function randomGrid(cols, rws) {
     return new Array(cols)
       .fill(null)
       .map(() =>
         new Array(rws).fill(null).map(() => Math.floor(Math.random() * 2))
       );
+  }
+
+  function emptyGrid(cols, rws) {
+    return new Array(cols).fill(null).map(() => new Array(rws).fill(0));
+  }
+
+  function placePattern(pattern) {
+    const cells = pattern.cells;
+    // Find bounding box
+    let minC = Infinity,
+      maxC = -Infinity,
+      minR = Infinity,
+      maxR = -Infinity;
+    cells.forEach(function (p) {
+      if (p[0] < minC) minC = p[0];
+      if (p[0] > maxC) maxC = p[0];
+      if (p[1] < minR) minR = p[1];
+      if (p[1] > maxR) maxR = p[1];
+    });
+    var pw = maxC - minC + 1;
+    var ph = maxR - minR + 1;
+    // Center on grid
+    var ox = Math.floor((columns - pw) / 2) - minC;
+    var oy = Math.floor((rows - ph) / 2) - minR;
+
+    grid = emptyGrid(columns, rows);
+    cells.forEach(function (p) {
+      var x = p[0] + ox;
+      var y = p[1] + oy;
+      if (x >= 0 && x < columns && y >= 0 && y < rows) {
+        grid[x][y] = 1;
+      }
+    });
+    gen = 0;
+    updateGenDisplay();
+    render(grid);
   }
 
   function resizeCanvas() {
@@ -59,26 +224,28 @@
     render(grid);
   }
 
+  function countNeighbors(prevGrid, col, row) {
+    var count = 0;
+    for (var i = -1; i < 2; i++) {
+      for (var j = -1; j < 2; j++) {
+        if (i === 0 && j === 0) continue;
+        var x = col + i;
+        var y = row + j;
+        if (x >= 0 && y >= 0 && x < columns && y < rows) {
+          count += prevGrid[x][y];
+        }
+      }
+    }
+    return count;
+  }
+
   function createNextGenGrid(prevGrid) {
     const nextGrid = prevGrid.map((arr) => [...arr]);
 
     for (let column = 0; column < prevGrid.length; column++) {
       for (let row = 0; row < prevGrid[column].length; row++) {
         const cell = prevGrid[column][row];
-        let neighbors = 0;
-
-        for (let i = -1; i < 2; i++) {
-          for (let j = -1; j < 2; j++) {
-            if (i === 0 && j === 0) continue;
-
-            const x = column + i;
-            const y = row + j;
-
-            if (x >= 0 && y >= 0 && x < columns && y < rows) {
-              neighbors += prevGrid[column + i][row + j];
-            }
-          }
-        }
+        const neighbors = countNeighbors(prevGrid, column, row);
 
         if (cell === 1 && (neighbors < 2 || neighbors > 3))
           nextGrid[column][row] = 0;
@@ -90,16 +257,32 @@
   }
 
   function render(grid) {
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, cvs.width, cvs.height);
+
+    // Draw grid lines (subtle)
+    ctx.fillStyle = gridLineColor;
+    for (let x = 0; x < columns; x++) {
+      ctx.fillRect(x * res, 0, 1, rows * res);
+    }
+    for (let y = 0; y < rows; y++) {
+      ctx.fillRect(0, y * res, columns * res, 1);
+    }
+
+    // Draw alive cells
+    ctx.fillStyle = aliveColor;
     for (let column = 0; column < grid.length; column++) {
       for (let row = 0; row < grid[column].length; row++) {
-        const cell = grid[column][row];
-
-        ctx.beginPath();
-        ctx.rect(column * res, row * res, res, res);
-        ctx.fillStyle = cell ? '#fff' : '#000';
-        ctx.fill();
+        if (grid[column][row]) {
+          ctx.fillRect(column * res + 1, row * res + 1, res - 1, res - 1);
+        }
       }
     }
+  }
+
+  function updateGenDisplay() {
+    var el = document.getElementById('genDisplay');
+    if (el) el.textContent = '(' + gen + ')';
   }
 
   function run() {
@@ -107,6 +290,7 @@
     if (running) {
       grid = createNextGenGrid(grid);
       gen++;
+      updateGenDisplay();
       render(grid);
     }
     requestAnimationFrame(run);
@@ -122,12 +306,14 @@
   function restart() {
     grid = randomGrid(columns, rows);
     gen = 0;
+    updateGenDisplay();
     render(grid);
   }
 
   function clearGrid() {
-    grid = grid.map((arr) => arr.fill(0));
+    grid = emptyGrid(columns, rows);
     gen = 0;
+    updateGenDisplay();
     render(grid);
   }
 
@@ -163,6 +349,20 @@
   document
     .getElementById('clearButton')
     .addEventListener('click', clearGrid, { signal });
+
+  // Pattern buttons
+  Object.keys(patterns).forEach(function (key) {
+    var btn = document.getElementById('pattern-' + key);
+    if (btn) {
+      btn.addEventListener(
+        'click',
+        function () {
+          placePattern(patterns[key]);
+        },
+        { signal }
+      );
+    }
+  });
 
   let painting = false;
   let paintValue = 0;
