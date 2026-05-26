@@ -6,6 +6,14 @@ export const prerender = true;
 const title = "Conway's Game of Life";
 const description = "Interactive in-browser implementation of John Conway's Game of Life. Tap or drag to draw cells, watch them evolve, restart or clear at any time.";
 const permalink = `${Astro.site.href}demos/conway`;
+
+const patternButtons = [
+  { id: 'pattern-glider', label: 'glider', title: 'Glider — the simplest spaceship. Moves diagonally one cell every 4 generations.' },
+  { id: 'pattern-lwss', label: 'LWSS', title: 'Lightweight Spaceship — moves horizontally, leaving a trail of sparks.' },
+  { id: 'pattern-pulsar', label: 'pulsar', title: 'Pulsar — a period-3 oscillator. The most common对称 oscillator in Life.' },
+  { id: 'pattern-rpentomino', label: 'R-pentomino', title: 'R-pentomino — a tiny pattern that runs for 1103 generations before stabilizing. One of the most famous methuselahs.' },
+  { id: 'pattern-gospergun', label: 'Gosper Gun', title: 'Gosper Glider Gun — the first known finite pattern that grows infinitely. Period 30, emits a steady stream of gliders.' },
+];
 ---
 
 <DemoLayout title={title} description={description} permalink={permalink} current="demos" image="/assets/conway.png">
@@ -46,36 +54,15 @@ const permalink = `${Astro.site.href}demos/conway`;
 	</div>
 	<div class="px-4 py-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs border-b border-terminal-border bg-terminal-bg/50">
 		<span class="text-terminal-dim">patterns:</span>
-		<button
-			id="pattern-glider"
-			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
-		>
-			glider
-		</button>
-		<button
-			id="pattern-lwss"
-			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
-		>
-			LWSS
-		</button>
-		<button
-			id="pattern-pulsar"
-			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
-		>
-			pulsar
-		</button>
-		<button
-			id="pattern-rpentomino"
-			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
-		>
-			R-pentomino
-		</button>
-		<button
-			id="pattern-gospergun"
-			class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
-		>
-			Gosper Gun
-		</button>
+		{patternButtons.map((p) => (
+			<button
+				id={p.id}
+				title={p.title}
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
+			>
+				{p.label}
+			</button>
+		))}
 	</div>
 
 	<canvas id="gameCanvas" class="bg-terminal-bg block w-full touch-none"></canvas>
