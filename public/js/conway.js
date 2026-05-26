@@ -1,5 +1,5 @@
 (function () {
-  // Tear down any previous instance (Astro ClientRouter re-runs this script on navigation)
+  // ── Cleanup previous instance (Astro ClientRouter) ──
   if (window.__conwayCleanup) window.__conwayCleanup();
 
   const cvs = document.querySelector('#gameCanvas');
@@ -14,18 +14,22 @@
     controller.abort();
   };
 
-  const res = 5; /* pixel size */
-  const aliveColor = '#39ff14'; /* terminal green */
-  const gridLineColor = '#0a0a0a';
+  // ── Constants ──
+  const RES = 5; // cell pixel size
+  const ALIVE = '#39ff14';
+  const BG = '#000';
+  const TARGET_MS = 1000 / 30; // ~30fps cap for simulation speed
 
-  let columns = 0;
+  // ── State (flat Uint8Array, row-major: index = row * cols + col) ──
+  let cols = 0;
   let rows = 0;
-  let grid = [];
+  let buf0 = null; // current generation
+  let buf1 = null; // next generation (double buffer)
   let gen = 0;
   let running = true;
+  let lastTick = 0;
 
-  /* ── Preset patterns (relative [col, row] offsets) ── */
-
+  // ── Patterns (relative [col, row]) ──
   const patterns = {
     glider: {
       name: 'Glider',
@@ -54,8 +58,8 @@
     pulsar: {
       name: 'Pulsar',
       cells: (function () {
-        // Period-3 oscillator — symmetric, centered on (0,0)
-        const quarter = [
+        // Period-3 oscillator — generate all 4 quadrants from one
+        var q = [
           [2, 1],
           [3, 1],
           [4, 1],
@@ -68,34 +72,29 @@
           [2, 5],
           [3, 5],
           [4, 5],
-          [2, 7],
-          [3, 7],
-          [4, 7],
-          [1, 8],
-          [6, 8],
-          [1, 9],
-          [6, 9],
-          [1, 10],
-          [6, 10],
-          [2, 11],
-          [3, 11],
-          [4, 11],
         ];
-        const all = [];
-        quarter.forEach(function (p) {
-          all.push([p[0], p[1]]);
-          all.push([-p[0], p[1]]);
-          all.push([p[0], -p[1]]);
-          all.push([-p[0], -p[1]]);
-        });
-        // Deduplicate
-        const seen = {};
-        return all.filter(function (p) {
-          const k = p[0] + ',' + p[1];
-          if (seen[k]) return false;
-          seen[k] = true;
-          return true;
-        });
+        var cells = [];
+        var seen = new Set();
+        for (var i = 0; i < q.length; i++) {
+          var c = q[i][0],
+            r = q[i][1];
+          var pts = [
+            [c, r],
+            [-c, r],
+            [c, -r],
+            [-c, -r],
+          ];
+          for (var j = 0; j < pts.length; j++) {
+            var k = pts[j][0] + ',' + pts[j][1];
+            if (!seen.has(k)) {
+              seen.add(k);
+              cells.push(pts[j]);
+            }
+          }
+        }
+        // Shift down by 7 so all rows are non-negative (min row is -6)
+        for (var i = 0; i < cells.length; i++) cells[i][1] += 7;
+        return cells;
       })(),
     },
     rpentomino: {
@@ -151,178 +150,205 @@
     },
   };
 
-  function randomGrid(cols, rws) {
-    return new Array(cols)
-      .fill(null)
-      .map(() =>
-        new Array(rws).fill(null).map(() => Math.floor(Math.random() * 2))
-      );
+  // ── Grid helpers (flat buffers) ──
+  function idx(c, r) {
+    return r * cols + c;
   }
 
-  function emptyGrid(cols, rws) {
-    return new Array(cols).fill(null).map(() => new Array(rws).fill(0));
+  function makeGrid() {
+    return new Uint8Array(cols * rows);
+  }
+
+  function randomGrid() {
+    var g = makeGrid();
+    for (var i = 0; i < g.length; i++) g[i] = Math.random() < 0.3 ? 1 : 0;
+    return g;
+  }
+
+  function clearGrid() {
+    buf0.fill(0);
+    gen = 0;
+    updateGenDisplay();
   }
 
   function placePattern(pattern) {
-    const cells = pattern.cells;
-    // Find bounding box
-    let minC = Infinity,
+    var cells = pattern.cells;
+    var minC = Infinity,
       maxC = -Infinity,
       minR = Infinity,
       maxR = -Infinity;
-    cells.forEach(function (p) {
-      if (p[0] < minC) minC = p[0];
-      if (p[0] > maxC) maxC = p[0];
-      if (p[1] < minR) minR = p[1];
-      if (p[1] > maxR) maxR = p[1];
-    });
-    var pw = maxC - minC + 1;
-    var ph = maxR - minR + 1;
-    // Center on grid
-    var ox = Math.floor((columns - pw) / 2) - minC;
-    var oy = Math.floor((rows - ph) / 2) - minR;
-
-    grid = emptyGrid(columns, rows);
-    cells.forEach(function (p) {
-      var x = p[0] + ox;
-      var y = p[1] + oy;
-      if (x >= 0 && x < columns && y >= 0 && y < rows) {
-        grid[x][y] = 1;
-      }
-    });
+    for (var i = 0; i < cells.length; i++) {
+      if (cells[i][0] < minC) minC = cells[i][0];
+      if (cells[i][0] > maxC) maxC = cells[i][0];
+      if (cells[i][1] < minR) minR = cells[i][1];
+      if (cells[i][1] > maxR) maxR = cells[i][1];
+    }
+    var ox = Math.floor((cols - (maxC - minC + 1)) / 2) - minC;
+    var oy = Math.floor((rows - (maxR - minR + 1)) / 2) - minR;
+    buf0.fill(0);
+    for (var i = 0; i < cells.length; i++) {
+      var x = cells[i][0] + ox;
+      var y = cells[i][1] + oy;
+      if (x >= 0 && x < cols && y >= 0 && y < rows) buf0[idx(x, y)] = 1;
+    }
     gen = 0;
     updateGenDisplay();
-    render(grid);
   }
 
-  function resizeCanvas() {
-    const rect = cvs.getBoundingClientRect();
-    const width = Math.max(window.innerWidth, 0);
-    const height = Math.max(window.innerHeight - rect.top - 8, 0);
+  // ── Simulation (flat grid, toroidal wrapping, double-buffer) ──
+  function step() {
+    var cur = buf0;
+    var nxt = buf1;
+    var c = cols;
+    var r = rows;
+    var len = c * r;
 
-    cvs.width = width;
-    cvs.height = height;
+    for (var row = 0; row < r; row++) {
+      var rp = row === 0 ? r - 1 : row - 1; // row above (wrapping)
+      var rn = row === r - 1 ? 0 : row + 1; // row below (wrapping)
+      for (var col = 0; col < c; col++) {
+        var cl = col === 0 ? c - 1 : col - 1; // col left (wrapping)
+        var cr = col === c - 1 ? 0 : col + 1; // col right (wrapping)
 
-    const newColumns = Math.max(Math.floor(width / res), 1);
-    const newRows = Math.max(Math.floor(height / res), 1);
+        // Count 8 neighbors using pre-computed wrapped coords (no bounds checks)
+        var n =
+          cur[rp * c + cl] +
+          cur[rp * c + col] +
+          cur[rp * c + cr] +
+          cur[row * c + cl] +
+          cur[row * c + cr] +
+          cur[rn * c + cl] +
+          cur[rn * c + col] +
+          cur[rn * c + cr];
 
-    if (grid.length === 0) {
-      grid = randomGrid(newColumns, newRows);
-    } else {
-      const next = new Array(newColumns)
-        .fill(null)
-        .map((_, c) =>
-          new Array(newRows)
-            .fill(0)
-            .map((_, r) => (c < columns && r < rows ? grid[c][r] : 0))
-        );
-      grid = next;
+        var i = row * c + col;
+        var cell = cur[i];
+        nxt[i] =
+          (cell === 1 && (n === 2 || n === 3)) || (cell === 0 && n === 3)
+            ? 1
+            : 0;
+      }
     }
 
-    columns = newColumns;
-    rows = newRows;
-    render(grid);
+    // Swap buffers
+    buf0 = nxt;
+    buf1 = cur;
+    gen++;
   }
 
-  function countNeighbors(prevGrid, col, row) {
-    var count = 0;
-    for (var i = -1; i < 2; i++) {
-      for (var j = -1; j < 2; j++) {
-        if (i === 0 && j === 0) continue;
-        var x = col + i;
-        var y = row + j;
-        if (x >= 0 && y >= 0 && x < columns && y < rows) {
-          count += prevGrid[x][y];
+  // ── Rendering (ImageData for bulk pixel writes) ──
+  var imageData = null;
+
+  function render() {
+    if (
+      !imageData ||
+      imageData.width !== cvs.width ||
+      imageData.height !== cvs.height
+    ) {
+      imageData = ctx.createImageData(cvs.width, cvs.height);
+    }
+    var data = imageData.data;
+    var w = cvs.width;
+
+    // Clear to black (alpha 255)
+    for (var i = 3; i < data.length; i += 4) data[i] = 255; // set alpha only once if we fill RGB each frame
+
+    // Parse alive color once
+    var ar = 0x39,
+      ag = 0xff,
+      ab = 0x14; // #39ff14
+
+    // Write pixels
+    var buf = buf0;
+    var c = cols;
+    var r = rows;
+    var res = RES;
+
+    // Full black fill
+    for (var i = 0; i < data.length; i += 4) {
+      data[i] = 0; // R
+      data[i + 1] = 0; // G
+      data[i + 2] = 0; // B
+      data[i + 3] = 255; // A
+    }
+
+    // Draw only alive cells
+    for (var row = 0; row < r; row++) {
+      for (var col = 0; col < c; col++) {
+        if (buf[row * c + col]) {
+          // Fill the cell rectangle (res x res pixels, offset 1px for grid effect)
+          var px = col * res;
+          var py = row * res;
+          var startX = px + 1;
+          var startY = py + 1;
+          var endX = Math.min(px + res, w);
+          var endY = Math.min(py + res, cvs.height);
+          for (var y = startY; y < endY; y++) {
+            var rowOff = y * w;
+            for (var x = startX; x < endX; x++) {
+              var pi = (rowOff + x) << 2;
+              data[pi] = ar;
+              data[pi + 1] = ag;
+              data[pi + 2] = ab;
+              // alpha already 255
+            }
+          }
         }
       }
     }
-    return count;
+
+    ctx.putImageData(imageData, 0, 0);
   }
 
-  function createNextGenGrid(prevGrid) {
-    const nextGrid = prevGrid.map((arr) => [...arr]);
-
-    for (let column = 0; column < prevGrid.length; column++) {
-      for (let row = 0; row < prevGrid[column].length; row++) {
-        const cell = prevGrid[column][row];
-        const neighbors = countNeighbors(prevGrid, column, row);
-
-        if (cell === 1 && (neighbors < 2 || neighbors > 3))
-          nextGrid[column][row] = 0;
-        if (cell === 0 && neighbors === 3) nextGrid[column][row] = 1;
-      }
-    }
-
-    return nextGrid;
-  }
-
-  function render(grid) {
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, cvs.width, cvs.height);
-
-    // Draw grid lines (subtle)
-    ctx.fillStyle = gridLineColor;
-    for (let x = 0; x < columns; x++) {
-      ctx.fillRect(x * res, 0, 1, rows * res);
-    }
-    for (let y = 0; y < rows; y++) {
-      ctx.fillRect(0, y * res, columns * res, 1);
-    }
-
-    // Draw alive cells
-    ctx.fillStyle = aliveColor;
-    for (let column = 0; column < grid.length; column++) {
-      for (let row = 0; row < grid[column].length; row++) {
-        if (grid[column][row]) {
-          ctx.fillRect(column * res + 1, row * res + 1, res - 1, res - 1);
-        }
-      }
-    }
-  }
-
+  // ── Generation display ──
   function updateGenDisplay() {
     var el = document.getElementById('genDisplay');
     if (el) el.textContent = '(' + gen + ')';
   }
 
-  function run() {
+  // ── Main loop (throttled to ~30fps) ──
+  function loop(ts) {
     if (!alive) return;
-    if (running) {
-      grid = createNextGenGrid(grid);
-      gen++;
-      updateGenDisplay();
-      render(grid);
+    requestAnimationFrame(loop);
+    if (!running) {
+      render();
+      return;
     }
-    requestAnimationFrame(run);
+
+    var dt = ts - lastTick;
+    if (dt < TARGET_MS) return;
+    lastTick = ts - (dt % TARGET_MS);
+
+    step();
+    updateGenDisplay();
+    render();
   }
 
-  const pauseButton = document.getElementById('pauseButton');
+  // ── Controls ──
+  var pauseButton = document.getElementById('pauseButton');
 
-  function setRunning(value) {
-    running = value;
-    pauseButton.textContent = running ? '[pause]' : '[play]';
+  function setRunning(v) {
+    running = v;
+    pauseButton.textContent = running ? 'pause' : 'play';
+    if (running) {
+      lastTick = performance.now();
+    }
   }
 
   function restart() {
-    grid = randomGrid(columns, rows);
+    buf0 = randomGrid();
+    buf1 = makeGrid();
     gen = 0;
     updateGenDisplay();
-    render(grid);
   }
 
-  function clearGrid() {
-    grid = emptyGrid(columns, rows);
-    gen = 0;
-    updateGenDisplay();
-    render(grid);
-  }
-
+  // Keyboard
   document.addEventListener(
     'keydown',
-    (event) => {
-      if (event.ctrlKey || event.metaKey || event.altKey) return;
-      let handled = true;
-      switch (event.key) {
+    function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      var handled = true;
+      switch (e.key) {
         case ' ':
           setRunning(!running);
           break;
@@ -337,12 +363,18 @@
         default:
           handled = false;
       }
-      if (handled) event.preventDefault();
+      if (handled) e.preventDefault();
     },
     { signal }
   );
 
-  pauseButton.addEventListener('click', () => setRunning(!running), { signal });
+  pauseButton.addEventListener(
+    'click',
+    function () {
+      setRunning(!running);
+    },
+    { signal }
+  );
   document
     .getElementById('restartButton')
     .addEventListener('click', restart, { signal });
@@ -351,68 +383,108 @@
     .addEventListener('click', clearGrid, { signal });
 
   // Pattern buttons
-  Object.keys(patterns).forEach(function (key) {
-    var btn = document.getElementById('pattern-' + key);
-    if (btn) {
-      btn.addEventListener(
-        'click',
-        function () {
-          placePattern(patterns[key]);
-        },
-        { signal }
-      );
-    }
-  });
+  var keys = Object.keys(patterns);
+  for (var k = 0; k < keys.length; k++) {
+    (function (key) {
+      var btn = document.getElementById('pattern-' + key);
+      if (btn)
+        btn.addEventListener(
+          'click',
+          function () {
+            placePattern(patterns[key]);
+          },
+          { signal }
+        );
+    })(keys[k]);
+  }
 
-  let painting = false;
-  let paintValue = 0;
-  let lastCellKey = '';
+  // ── Drawing (pointer events) ──
+  var painting = false;
+  var paintValue = 0;
+  var lastCell = -1;
 
-  function cellAt(event) {
-    const rect = cvs.getBoundingClientRect();
-    const x = Math.floor(((event.clientX - rect.left) / rect.width) * columns);
-    const y = Math.floor(((event.clientY - rect.top) / rect.height) * rows);
-    return { x, y };
+  function cellAt(e) {
+    var rect = cvs.getBoundingClientRect();
+    var x = Math.floor(((e.clientX - rect.left) / rect.width) * cols);
+    var y = Math.floor(((e.clientY - rect.top) / rect.height) * rows);
+    if (x < 0 || x >= cols || y < 0 || y >= rows) return -1;
+    return idx(x, y);
   }
 
   cvs.addEventListener(
     'pointerdown',
-    (event) => {
-      const { x, y } = cellAt(event);
-      if (x < 0 || x >= columns || y < 0 || y >= rows) return;
+    function (e) {
+      var i = cellAt(e);
+      if (i < 0) return;
       painting = true;
-      cvs.setPointerCapture(event.pointerId);
-      paintValue = grid[x][y] === 0 ? 1 : 0;
-      grid[x][y] = paintValue;
-      lastCellKey = `${x},${y}`;
-      render(grid);
+      cvs.setPointerCapture(e.pointerId);
+      paintValue = buf0[i] === 0 ? 1 : 0;
+      buf0[i] = paintValue;
+      lastCell = i;
+      render();
     },
     { signal }
   );
 
   cvs.addEventListener(
     'pointermove',
-    (event) => {
+    function (e) {
       if (!painting) return;
-      const { x, y } = cellAt(event);
-      if (x < 0 || x >= columns || y < 0 || y >= rows) return;
-      const key = `${x},${y}`;
-      if (key === lastCellKey) return;
-      lastCellKey = key;
-      grid[x][y] = paintValue;
-      render(grid);
+      var i = cellAt(e);
+      if (i < 0 || i === lastCell) return;
+      lastCell = i;
+      buf0[i] = paintValue;
+      render();
     },
     { signal }
   );
 
-  const endPaint = () => {
+  function endPaint() {
     painting = false;
-  };
+  }
   cvs.addEventListener('pointerup', endPaint, { signal });
   cvs.addEventListener('pointercancel', endPaint, { signal });
 
-  window.addEventListener('resize', resizeCanvas, { signal });
+  // ── Resize ──
+  function resizeCanvas() {
+    var rect = cvs.getBoundingClientRect();
+    var w = Math.max(window.innerWidth, 0);
+    var h = Math.max(window.innerHeight - rect.top - 8, 0);
+    cvs.width = w;
+    cvs.height = h;
 
+    var newCols = Math.max(Math.floor(w / RES), 1);
+    var newRows = Math.max(Math.floor(h / RES), 1);
+
+    if (cols === 0) {
+      cols = newCols;
+      rows = newRows;
+      buf0 = randomGrid();
+      buf1 = makeGrid();
+    } else if (newCols !== cols || newRows !== rows) {
+      // Copy old grid into new, centered
+      var oldBuf = buf0;
+      var oldCols = cols;
+      var oldRows = rows;
+      cols = newCols;
+      rows = newRows;
+      buf0 = makeGrid();
+      buf1 = makeGrid();
+      // Copy what fits
+      var copyR = Math.min(oldRows, rows);
+      var copyC = Math.min(oldCols, cols);
+      for (var r = 0; r < copyR; r++) {
+        for (var c = 0; c < copyC; c++) {
+          buf0[r * cols + c] = oldBuf[r * oldCols + c];
+        }
+      }
+    }
+
+    imageData = null; // force re-create
+    render();
+  }
+
+  window.addEventListener('resize', resizeCanvas, { signal });
   resizeCanvas();
-  requestAnimationFrame(run);
+  requestAnimationFrame(loop);
 })();
