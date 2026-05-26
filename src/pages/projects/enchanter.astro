@@ -44,6 +44,8 @@ const image = '/assets/projects/enchanter.webp';
           <li><a href="#named-providers" class="text-terminal-cyan hover:text-terminal-green no-underline">Named Providers</a></li>
           <li><a href="#soul-memory-skills" class="text-terminal-cyan hover:text-terminal-green no-underline">Soul, Memory &amp; Skills</a></li>
           <li><a href="#session-continuity" class="text-terminal-cyan hover:text-terminal-green no-underline">Session Continuity &amp; History</a></li>
+          <li><a href="#prompt-inspection" class="text-terminal-cyan hover:text-terminal-green no-underline">Prompt Inspection</a></li>
+          <li><a href="#recording-replay" class="text-terminal-cyan hover:text-terminal-green no-underline">Recording &amp; Replay</a></li>
           <li><a href="#mcp-servers" class="text-terminal-cyan hover:text-terminal-green no-underline">MCP Servers</a></li>
           <li><a href="#daemon-mode" class="text-terminal-cyan hover:text-terminal-green no-underline">Daemon Mode</a></li>
           <li><a href="#running" class="text-terminal-cyan hover:text-terminal-green no-underline">Running</a></li>
@@ -85,6 +87,14 @@ const image = '/assets/projects/enchanter.webp';
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span><strong class="text-terminal-cyan">Session History</strong> — Every conversation is automatically logged to JSONL files. List and review past sessions with <code class="text-terminal-green">enchanter sessions</code> or <code class="text-terminal-green">/sessions</code> in the REPL.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Prompt Inspection</strong> — See exactly what the model receives. <code class="text-terminal-green">/prompt budget</code> shows token/character counts per layer; <code class="text-terminal-green">/prompt diff</code> shows changes between turns. <code class="text-terminal-green">enchanter prompt --budget</code> and <code class="text-terminal-green">--diff</code> from the CLI.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span><strong class="text-terminal-cyan">Session Recording &amp; Replay</strong> — Record sessions to JSONL with <code class="text-terminal-green">--record</code>, then replay with <code class="text-terminal-green">enchanter replay</code>. Swap models, verify determinism, or replay with stubbed tools. API keys are redacted by default.</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
@@ -425,7 +435,7 @@ const image = '/assets/projects/enchanter.webp';
     <section class="py-12 border-b border-terminal-border" id="soul-memory-skills">
       <h3 class="text-terminal-amber mb-6">### soul, memory & skills</h3>
       <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
-        The system prompt is assembled in three layers, each with a distinct role:
+        The system prompt is assembled in six layers, each with a distinct role:
       </p>
       <ul class="space-y-3 text-terminal-fg text-sm mb-6">
         <li class="flex gap-3">
@@ -434,11 +444,23 @@ const image = '/assets/projects/enchanter.webp';
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">2.</span>
-          <span><strong class="text-terminal-cyan">CONTEXT</strong> — Environment info, discovered skills index, and tool usage guidance. Rebuilt each turn.</span>
+          <span><strong class="text-terminal-cyan">CONTEXT</strong> — Environment info: model, user, working directory, host, platform.</span>
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">3.</span>
-          <span><strong class="text-terminal-cyan">VOLATILE</strong> — Memory entries, user profile, and timestamp. Changes frequently, fully replaceable.</span>
+          <span><strong class="text-terminal-cyan">SKILLS</strong> — Discovered SKILL.md files index.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">4.</span>
+          <span><strong class="text-terminal-cyan">INSTRUCTIONS</strong> — Tool usage guidance and canonical tool descriptions.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">5.</span>
+          <span><strong class="text-terminal-cyan">VOLATILE</strong> — Memory entries and user profile. Changes frequently, fully replaceable.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">6.</span>
+          <span><strong class="text-terminal-cyan">SESSION</strong> — Current date and session start timestamp.</span>
         </li>
       </ul>
 
@@ -550,6 +572,101 @@ const image = '/assets/projects/enchanter.webp';
           </code>
         </div>
       </div>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="prompt-inspection">
+      <h3 class="text-terminal-amber mb-6">### prompt inspection</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        Enchanter assembles the system prompt in explicit layers: SOUL → CONTEXT → SKILLS → INSTRUCTIONS → VOLATILE → SESSION.
+        You can inspect exactly what the model receives and how it changes between turns.
+      </p>
+
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
+        <p class="text-terminal-cyan font-mono mb-2">Token/character budget per layer</p>
+        <code class="block text-terminal-fg text-xs whitespace-overflow">
+          $ enchanter prompt --budget
+        </code>
+      </div>
+
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        The budget view shows approximate token counts per layer (chars÷4 heuristic),
+        visual bar charts, and threshold warnings when a layer exceeds ~4,000 estimated tokens.
+      </p>
+
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
+        <p class="text-terminal-cyan font-mono mb-2">Diff the system prompt between turns (REPL only)</p>
+        <code class="block text-terminal-fg text-xs whitespace-overflow">
+          /prompt diff
+        </code>
+      </div>
+
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        The diff output highlights layer-level changes — memory blocks added/removed, skill index
+        changes, tool list changes, provider/model changes, and SOUL changes. API keys and auth
+        headers are never shown in diff output.
+      </p>
+
+      <div class="py-4">
+        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="recording-replay">
+      <h3 class="text-terminal-amber mb-6">### recording &amp; replay</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        Record full sessions to JSONL files for debugging, reproducibility, and model comparison.
+        API keys and auth tokens are <strong class="text-terminal-cyan">never included</strong> in recordings by default.
+      </p>
+
+      <div class="space-y-2 text-sm mb-4">
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Record a session</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            enchanter --record session.jsonl
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Record with additional redaction</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            enchanter --record session.jsonl --record-redact
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Replay a recorded session</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            enchanter replay session.jsonl
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Replay with a different model</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            enchanter replay session.jsonl --swap-model gpt-4
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Replay with stubbed tools (deterministic)</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            enchanter replay session.jsonl --tools stubbed
+          </code>
+        </div>
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Verify exact model match</p>
+          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+            enchanter replay session.jsonl --exact
+          </code>
+        </div>
+      </div>
+
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        Each recorded event includes a schema version, monotonic sequence number, UTC timestamp,
+        and a typed payload. Recordings capture config snapshots (with redacted API keys),
+        prompt layer hashes, user messages, assistant responses, tool calls, model changes, and
+        session summaries.
+      </p>
 
       <div class="py-4">
         <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
@@ -799,6 +916,14 @@ const image = '/assets/projects/enchanter.webp';
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap w-40">/prompt</code>
           <span class="text-terminal-dim">— Show full assembled system prompt</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap w-40">/prompt diff</code>
+          <span class="text-terminal-dim">— Show diff of system prompt from previous turn</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap w-40">/prompt budget</code>
+          <span class="text-terminal-dim">— Show token/character budget per prompt layer</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap w-40">/exit</code>
