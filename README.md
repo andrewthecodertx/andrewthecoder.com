@@ -55,3 +55,11 @@ To run this project locally, follow these steps:
 ## CI/CD
 
 This project uses a GitHub Actions workflow defined in `.github/workflows/deploy.yml` to automatically build and deploy the site to production.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
+
+## Contributing
+
+PRs welcome. Please open an issue first for major changes.
