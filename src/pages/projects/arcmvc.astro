@@ -28,7 +28,7 @@ const image = '/assets/projects/arcmvc.webp';
 
       <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
         <p class="text-terminal-dim text-sm mb-2">quick start</p>
-        <code class="text-terminal-green">composer require andrewthecoder/arc</code>
+        <code class="text-terminal-green">composer require andrewthecoder/arcmvc</code>
       </div>
     </section>
 
@@ -132,15 +132,15 @@ const image = '/assets/projects/arcmvc.webp';
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
             $router-&gt;get('/', [HomeController::class, 'index']);<br/>
             $router-&gt;post('/users', [UserController::class, 'store']);<br/>
-            $router-&gt;put('/users/{id}', [UserController::class, 'update']);<br/>
-            $router-&gt;delete('/users/{id}', [UserController::class, 'delete']);
+			$router-&gt;put('/users/$lbrace;id$rbrace;', [UserController::class, 'update']);<br/>
+            $router-&gt;delete('/users/$lbrace;id$rbrace;', [UserController::class, 'delete']);
           </code>
         </div>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Parameterized routes</p>
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            $router-&gt;get('/users/{id}', [UserController::class, 'show']);
+			  $router-&gt;get('/users/$lbrace;id$rbrace;', [UserController::class, 'show']);
           </code>
           <p class="text-terminal-dim text-sm mt-2">Route parameters are passed as method arguments.</p>
         </div>
@@ -148,7 +148,7 @@ const image = '/assets/projects/arcmvc.webp';
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Closures</p>
           <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            $router-&gt;get('/hello/{name}', fn (Request $req, string $name) =&gt; "Hello, {$name}!");
+			  $router-&gt;get('/hello/$lbrace;name$rbrace;}', fn (Request $req, string $name) =&gt; "Hello, $lbrace;$name$rbrace;!");
           </code>
           <p class="text-terminal-dim text-sm mt-2">Return a string and it's wrapped in a Response automatically.</p>
         </div>
