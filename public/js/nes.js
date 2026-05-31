@@ -50,7 +50,28 @@
     .then((result) => {
       if (!alive) return;
       go.run(result.instance);
-      status.textContent = 'ready — load a .nes rom';
+      status.textContent = 'loading default rom...';
+      fetch('/nes/roms/nova.nes')
+        .then((r) => r.arrayBuffer())
+        .then((buf) => {
+          if (!alive) return;
+          const loadResult = window.nesLoadROM(new Uint8Array(buf));
+          status.textContent = loadResult;
+          if (
+            typeof loadResult === 'string' &&
+            !loadResult.toLowerCase().startsWith('error')
+          ) {
+            romLoaded = true;
+            resetBtn.disabled = false;
+            pauseBtn.disabled = false;
+            isPaused = false;
+            pauseBtn.textContent = '[pause]';
+          }
+        })
+        .catch((err) => {
+          if (!alive) return;
+          status.textContent = 'ready — load a .nes rom';
+        });
     })
     .catch((err) => {
       status.textContent =
