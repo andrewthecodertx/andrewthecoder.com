@@ -33,7 +33,7 @@
 
   const wsUrl = isProduction
     ? `wss://${window.location.host}:5555`
-    : `ws://localhost:8080`;
+    : `ws://localhost:5555`;
 
   setStatus('connecting...');
   try {
