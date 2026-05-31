@@ -12,8 +12,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "node scripts/dev.mjs",
-    "dev:astro-only": "astro dev",
+    "dev": "astro dev",
+    "dev:dungeon": "node dungeon/dungeon/server/server.js",
     "start": "node ./dist/server/entry.mjs",
     "build": "astro build",
     "preview": "astro preview",
