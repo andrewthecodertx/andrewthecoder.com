@@ -12,76 +12,102 @@ const permalink = `${Astro.site.href}about`;
 <BaseLayout title={title} description={description} permalink={permalink} current="about">
   <div class="max-w-3xl mx-auto px-4">
 
-    <section class="py-12 border-b border-terminal-border">
-      <h2 class="text-terminal-green mb-8">$ about</h2>
+   <section class="py-12 border-b border-terminal-border">
+	  <h2 class="text-terminal-green mb-8">$ about</h2>
 
-      <div class="space-y-6 text-terminal-fg leading-relaxed">
-        <p>
-          I've been writing code for over 25 years. What started as curiosity about how
-          things work turned into a lifelong passion for building software.
-        </p>
+	  <div class="space-y-6 text-terminal-fg leading-relaxed">
+		<p>
+		  I've been writing code since I was 10 years old, starting on a Commodore 64, back
+		  when figuring out how a machine worked meant cracking it open and talking to it
+		  directly in BASIC. That curiosity never left me. Twenty-five years into a
+		  professional career, it's still what gets me out of bed.
+		</p>
 
-        <p>
-          My background is a bit unusual - I studied theology and linguistics in college.
-          But I've been programming since I was 10, starting on a Commodore 64. After
-          college, I discovered people would pay me to solve problems with code, and
-          I've been doing it ever since.
-        </p>
+		<p>
+		  My background isn't what you'd expect. I studied theology and linguistics in college,
+		  not computer science. That turned out to be an advantage. The same analytical rigor
+		  that helps you parse ancient texts or dissect the structure of language applies
+		  directly to designing systems, debugging logic, and thinking through hard problems.
+		  I approach software the same way I approach ideas: with patience, precision, and
+		  genuine curiosity.
+		</p>
 
-        <p>
-          I don't have a preferred language or stack. What drives me is the problem-solving
-          aspect of programming - the language is just a tool. Give me an interesting
-          problem and I'll figure out the best way to solve it.
-        </p>
-      </div>
-    </section>
+		<p>
+		  I don't have a favorite language or a stack I'm married to. I've shipped production
+		  code in Rust, TypeScript, PHP, Go, Python, OCaml, and Assembly, among others. What
+		  excites me is the problem, not the tooling. Once the problem is clear, picking the
+		  right tool is just engineering.
+		</p>
+	</div>
+  </section>
 
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### tools of the trade</h3>
-      <p class="text-terminal-fg mb-4">
-        Over the years, I've had the pleasure of working with a wide variety of languages and frameworks.
-      </p>
-      <div class="space-y-4">
-        <div>
-          <h3 class="text-terminal-dim text-sm mb-2">languages</h3>
-          <p class="text-terminal-fg">
-                        Ada, ASP, Assembly, BASIC, C/C++, C#, Cold Fusion, Go, Haskell, Java,
-                        JavaScript/TypeScript, Kotlin, LISP, OCaml, PHP, Python,
-                        Rexx, Ruby, Rust, Silverlight, Swift, Zig
-          </p>
-        </div>
-        <div>
-          <h3 class="text-terminal-dim text-sm mb-2">frameworks</h3>
-          <p class="text-terminal-fg">
-            Aeron, Angular, Django, Ember, Express, Flask, Flutter, Gin, Laravel, Netty, Rails, Spring, Symfony, Vue, Xamarin, Yesod
-          </p>
-        </div>
-      </div>
-    </section>
+	<section class="py-12 border-b border-terminal-border">
+	  <h2 class="text-terminal-green mb-8">$ tools_of_the_trade</h2>
 
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### interests</h3>
-      <ul class="space-y-2 text-terminal-dim">
-        <li>- web development & interactive experiences</li>
-        <li>- game development (studying, not doing)</li>
-        <li>- open source</li>
-        <li>- philosophy & theology</li>
-        <li>- music (guitar)</li>
-      </ul>
-    </section>
+	  <div class="space-y-6 text-terminal-fg leading-relaxed">
+		<p>
+		  Over the years I've worked across a wide range of languages and frameworks.
+		  The list below reflects genuine experience, not a keyword sheet.
+		</p>
 
-    <section class="py-12">
-      <h3 class="text-terminal-amber mb-6">### work with me</h3>
-      <p class="text-terminal-fg mb-4">
-        I'm available for freelance projects. If you have something interesting
-        you'd like to build, let's talk.
-      </p>
-      <p>
-        <a href={`mailto:${CONTACT_EMAIL}`} class="text-terminal-cyan hover:text-terminal-green no-underline">
-          {CONTACT_EMAIL}
-        </a>
-      </p>
-    </section>
+		<div>
+		  <h3 class="text-terminal-green mb-3">// languages</h3>
+		  <p class="text-terminal-muted">
+			Ada, ASP, Assembly, BASIC, C/C++, C#, ColdFusion, Go, Haskell, Java,
+			JavaScript/TypeScript, Kotlin, LISP, OCaml, PHP, Python,
+			Rexx, Ruby, Rust, Silverlight, Swift, Zig
+		  </p>
+		</div>
 
-  </div>
+		<div>
+		  <h3 class="text-terminal-green mb-3">// frameworks</h3>
+		  <p class="text-terminal-muted">
+			Aeron, Angular, Django, Ember, Express, Flask, Flutter, Gin, Laravel,
+			Netty, Rails, Spring, Symfony, Vue, Xamarin, Yesod
+		  </p>
+		</div>
+	  </div>
+	</section>
+
+	<section class="py-12 border-b border-terminal-border">
+	  <h2 class="text-terminal-green mb-8">$ interests</h2>
+
+	  <div class="space-y-6 text-terminal-fg leading-relaxed">
+		<p>
+		  Outside of client work, you'll find me building retro computing emulators for
+		  machines like the 6502 and 8080, studying chess engines and AI, or pointing a
+		  telescope at something I probably can't explain yet. I also write about code and
+		  philosophy, two subjects that turn out to have more in common than most people
+		  expect.
+		</p>
+
+		<ul class="space-y-2 text-terminal-muted">
+		  <li>// web development &amp; interactive experiences</li>
+		  <li>// open source</li>
+		  <li>// philosophy &amp; theology</li>
+		  <li>// music (guitar)</li>
+		  <li>// game development (studying, not shipping — yet)</li>
+		</ul>
+	  </div>
+	</section>
+
+	<section class="py-12 border-terminal-border">
+	  <h2 class="text-terminal-green mb-8">$ work_with_me</h2>
+
+	  <div class="space-y-6 text-terminal-fg leading-relaxed">
+		<p>
+		  I'm available for freelance and contract work. If you have something genuinely
+		  interesting to build, something with real complexity or ambition behind it,
+		  I'd love to hear about it.
+		</p>
+
+		<p>
+		  <a href="mailto:info@erwininteractive.com" class="text-terminal-green hover:underline">
+			info@erwininteractive.com
+		  </a>
+		</p>
+	  </div>
+	</section>
+
+    </div>
 </BaseLayout>
