@@ -1,18 +1,11 @@
 {
-  "chromeLaunchConfig": {
-    "args": ["--no-sandbox"]
-  },
-  "standard": {
+  "defaults": {
+    "standard": "WCAG2AAA",
     "concurrency": 1,
     "ignoreWarnings": false,
-    "standard": ["wcag2aaa"]
-  },
-  "pages": {
-    "Home": {
-      "url": "http://localhost:4321"
-    },
-    "Blog": {
-      "url": "http://localhost:4321/blog"
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox"]
     }
-  }
+  },
+  "urls": ["http://localhost:4321/", "http://localhost:4321/blog"]
 }

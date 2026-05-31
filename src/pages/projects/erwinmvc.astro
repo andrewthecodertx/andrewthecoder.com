@@ -7,48 +7,155 @@ const permalink = `${Astro.site.href}projects/erwinmvc`;
 const image = '/assets/projects/erwinmvc.webp';
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="projects" image={image}>
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="projects"
+  image={image}
+>
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-12 border-b border-terminal-border">
       <h2 class="text-terminal-green mb-4">$ ErwinMVC</h2>
       <p class="text-terminal-dim text-sm mb-6">
-        <a href="https://github.com/erwininteractive/typescript-erwinmvc" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/erwininteractive/typescript-erwinmvc"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           View on GitHub →
         </a>
       </p>
 
       <p class="text-terminal-fg leading-relaxed mb-6">
-        A lightweight, full-featured MVC framework for Node.js 20+ built with TypeScript.
-        ErwinMVC gets you from zero to a working web application in seconds, with sensible
-        defaults and optional features you can add as needed.
+        A lightweight, full-featured MVC framework for Node.js 20+ built with
+        TypeScript. ErwinMVC gets you from zero to a working web application in
+        seconds, with sensible defaults and optional features you can add as
+        needed.
       </p>
 
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6"
+      >
         <p class="text-terminal-dim text-sm mb-2">quick start</p>
-        <code class="text-terminal-green">npx @erwininteractive/mvc init myapp</code>
+        <code class="text-terminal-green"
+          >npx @erwininteractive/mvc init myapp</code
+        >
       </div>
     </section>
 
     <section class="py-4 border-b border-terminal-border">
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6"
+      >
         <p class="text-terminal-cyan font-mono mb-2">Contents</p>
         <ul class="space-y-1 text-terminal-fg text-sm">
-          <li><a href="#features-list" class="text-terminal-cyan hover:text-terminal-green no-underline">Features</a></li>
-          <li><a href="#philosophy" class="text-terminal-cyan hover:text-terminal-green no-underline">Philosophy</a></li>
-          <li><a href="#getting-started" class="text-terminal-cyan hover:text-terminal-green no-underline">Getting Started</a></li>
-          <li><a href="#creating-pages" class="text-terminal-cyan hover:text-terminal-green no-underline">Creating Pages</a></li>
-          <li><a href="#resources" class="text-terminal-cyan hover:text-terminal-green no-underline">Resources</a></li>
-          <li><a href="#controllers" class="text-terminal-cyan hover:text-terminal-green no-underline">Controllers</a></li>
-          <li><a href="#database" class="text-terminal-cyan hover:text-terminal-green no-underline">Database</a></li>
-          <li><a href="#authentication" class="text-terminal-cyan hover:text-terminal-green no-underline">Authentication</a></li>
-          <li><a href="#cli-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">CLI Commands</a></li>
-          <li><a href="#tailwindcss" class="text-terminal-cyan hover:text-terminal-green no-underline">Tailwind CSS</a></li>
-          <li><a href="#project-structure" class="text-terminal-cyan hover:text-terminal-green no-underline">Project Structure</a></li>
-          <li><a href="#app-commands" class="text-terminal-cyan hover:text-terminal-green no-underline">App Commands</a></li>
-          <li><a href="#cicd" class="text-terminal-cyan hover:text-terminal-green no-underline">CI/CD</a></li>
-          <li><a href="#environment-variables" class="text-terminal-cyan hover:text-terminal-green no-underline">Environment Variables</a></li>
-          <li><a href="#learn-more" class="text-terminal-cyan hover:text-terminal-green no-underline">Learn More</a></li>
+          <li>
+            <a
+              href="#features-list"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Features</a
+            >
+          </li>
+          <li>
+            <a
+              href="#philosophy"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Philosophy</a
+            >
+          </li>
+          <li>
+            <a
+              href="#getting-started"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Getting Started</a
+            >
+          </li>
+          <li>
+            <a
+              href="#creating-pages"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Creating Pages</a
+            >
+          </li>
+          <li>
+            <a
+              href="#resources"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Resources</a
+            >
+          </li>
+          <li>
+            <a
+              href="#controllers"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Controllers</a
+            >
+          </li>
+          <li>
+            <a
+              href="#database"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Database</a
+            >
+          </li>
+          <li>
+            <a
+              href="#authentication"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Authentication</a
+            >
+          </li>
+          <li>
+            <a
+              href="#cli-commands"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >CLI Commands</a
+            >
+          </li>
+          <li>
+            <a
+              href="#tailwindcss"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Tailwind CSS</a
+            >
+          </li>
+          <li>
+            <a
+              href="#project-structure"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Project Structure</a
+            >
+          </li>
+          <li>
+            <a
+              href="#app-commands"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >App Commands</a
+            >
+          </li>
+          <li>
+            <a
+              href="#cicd"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >CI/CD</a
+            >
+          </li>
+          <li>
+            <a
+              href="#environment-variables"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Environment Variables</a
+            >
+          </li>
+          <li>
+            <a
+              href="#learn-more"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Learn More</a
+            >
+          </li>
         </ul>
       </div>
     </section>
@@ -57,19 +164,23 @@ const image = '/assets/projects/erwinmvc.webp';
       <h3 class="text-terminal-amber mb-6">### philosophy</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
         <p>
-          I built ErwinMVC because I wanted something between "figure it out yourself" and
-          "here's 100 dependencies you don't need." It's opinionated where it matters and
-          flexible where it doesn't.
+          I built ErwinMVC because I wanted something between "figure it out
+          yourself" and "here's 100 dependencies you don't need." It's
+          opinionated where it matters and flexible where it doesn't.
         </p>
         <p>
-          Start simple, just routes and views. Add a database when you need persistence.
-          Add authentication when you need users. The framework grows with your project
-          instead of front-loading complexity.
+          Start simple, just routes and views. Add a database when you need
+          persistence. Add authentication when you need users. The framework
+          grows with your project instead of front-loading complexity.
         </p>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -78,8 +189,10 @@ const image = '/assets/projects/erwinmvc.webp';
       <div class="space-y-6 text-terminal-fg">
         <div>
           <p class="text-terminal-cyan font-mono mb-2">1. Create a new app</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
-            npx @erwininteractive/mvc init myapp<br/>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
+            npx @erwininteractive/mvc init myapp<br />
             cd myapp
           </code>
           <p class="text-terminal-dim text-sm">
@@ -87,49 +200,82 @@ const image = '/assets/projects/erwinmvc.webp';
           </p>
         </div>
         <div>
-          <p class="text-terminal-cyan font-mono mb-2">2. Start development server</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+          <p class="text-terminal-cyan font-mono mb-2">
+            2. Start development server
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
             npm run dev
           </code>
           <p class="text-terminal-dim text-sm">
-            Visit <a href="http://localhost:3000" class="text-terminal-cyan hover:text-terminal-green" target="_blank" rel="noopener noreferrer">http://localhost:3000</a>
+            Visit <a
+              href="http://localhost:3000"
+              class="text-terminal-cyan hover:text-terminal-green"
+              target="_blank"
+              rel="noopener noreferrer">http://localhost:3000</a
+            >
           </p>
         </div>
         <div>
           <p class="text-terminal-cyan font-mono mb-2">3. Create a new page</p>
-          <p class="text-terminal-dim text-sm mb-2">Create <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">src/views/about.ejs</code>:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
-            &lt;!doctype html&gt;<br/>
-            &lt;html&gt;<br/>
-            &lt;head&gt;<br/>
-            &nbsp;&nbsp;&lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;<br/>
-            &lt;/head&gt;<br/>
-            &lt;body&gt;<br/>
-            &nbsp;&nbsp;&lt;h1&gt;&lt;%= title %&gt;&lt;/h1&gt;<br/>
-            &nbsp;&nbsp;&lt;p&gt;Welcome to my about page!&lt;/p&gt;<br/>
-            &lt;/body&gt;<br/>
+          <p class="text-terminal-dim text-sm mb-2">
+            Create <code
+              class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+              >src/views/about.ejs</code
+            >:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
+            &lt;!doctype html&gt;<br />
+            &lt;html&gt;<br />
+            &lt;head&gt;<br />
+            &nbsp;&nbsp;&lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;<br />
+            &lt;/head&gt;<br />
+            &lt;body&gt;<br />
+            &nbsp;&nbsp;&lt;h1&gt;&lt;%= title %&gt;&lt;/h1&gt;<br />
+            &nbsp;&nbsp;&lt;p&gt;Welcome to my about page!&lt;/p&gt;<br />
+            &lt;/body&gt;<br />
             &lt;/html&gt;
           </code>
         </div>
         <div>
           <p class="text-terminal-cyan font-mono mb-2">4. Add a route</p>
-          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">src/server.ts</code>:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            app.get("/about", (req, res) &#123;<br/>
-            &nbsp;&nbsp;res.render("about", &#123; title: "About Us" &#125;);<br/>
+          <p class="text-terminal-dim text-sm mb-2">
+            Edit <code
+              class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+              >src/server.ts</code
+            >:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            app.get("/about", (req, res) &#123;<br />
+            &nbsp;&nbsp;res.render("about", &#123; title: "About Us" &#125;);<br
+            />
             &#125;);
           </code>
         </div>
         <div>
           <p class="text-terminal-cyan font-mono mb-2">5. View your page</p>
           <p class="text-terminal-dim text-sm">
-            Visit <a href="http://localhost:3000/about" class="text-terminal-cyan hover:text-terminal-green" target="_blank" rel="noopener noreferrer">http://localhost:3000/about</a>
+            Visit <a
+              href="http://localhost:3000/about"
+              class="text-terminal-cyan hover:text-terminal-green"
+              target="_blank"
+              rel="noopener noreferrer">http://localhost:3000/about</a
+            >
           </p>
         </div>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -139,38 +285,62 @@ const image = '/assets/projects/erwinmvc.webp';
         <div>
           <p class="text-terminal-cyan font-mono mb-2">EJS Templates</p>
           <p class="text-terminal-fg mb-3 text-sm">
-            Create <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan text-terminal-cyan">.ejs</code> files in <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan text-terminal-cyan">src/views/</code>
+            Create <code
+              class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan text-terminal-cyan"
+              >.ejs</code
+            > files in <code
+              class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan text-terminal-cyan"
+              >src/views/</code
+            >
           </p>
           <div class="space-y-3">
             <div>
-              <p class="text-terminal-dim text-xs mb-1">Output a variable (escaped)</p>
-              <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">&lt;h1&gt;&lt;%= title %&gt;&lt;/h1&gt;</code>
+              <p class="text-terminal-dim text-xs mb-1">
+                Output a variable (escaped)
+              </p>
+              <code
+                class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+                >&lt;h1&gt;&lt;%= title %&gt;&lt;/h1&gt;</code
+              >
             </div>
             <div>
               <p class="text-terminal-dim text-xs mb-1">Output raw HTML</p>
-              <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">&lt;%- htmlContent %&gt;</code>
+              <code
+                class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+                >&lt;%- htmlContent %&gt;</code
+              >
             </div>
             <div>
               <p class="text-terminal-dim text-xs mb-1">JavaScript logic</p>
-              <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-                &lt;% if (user) &#123; %&gt;<br/>
-                &nbsp;&nbsp;&lt;p&gt;Welcome, &lt;%= user.name %&gt;!&lt;/p&gt;<br/>
+              <code
+                class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+              >
+                &lt;% if (user) &#123; %&gt;<br />
+                &nbsp;&nbsp;&lt;p&gt;Welcome, &lt;%= user.name %&gt;!&lt;/p&gt;<br
+                />
                 &lt;% &#125; %&gt;
               </code>
             </div>
             <div>
               <p class="text-terminal-dim text-xs mb-1">Loop through items</p>
-              <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-                &lt;ul&gt;<br/>
-                &lt;% items.forEach(item &#123; %&gt;<br/>
-                &nbsp;&nbsp;&lt;li&gt;&lt;%= item.name %&gt;&lt;/li&gt;<br/>
-                &lt;% &#125;); %&gt;<br/>
+              <code
+                class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+              >
+                &lt;ul&gt;<br />
+                &lt;% items.forEach(item &#123; %&gt;<br />
+                &nbsp;&nbsp;&lt;li&gt;&lt;%= item.name %&gt;&lt;/li&gt;<br />
+                &lt;% &#125;); %&gt;<br />
                 &lt;/ul&gt;
               </code>
             </div>
             <div>
-              <p class="text-terminal-dim text-xs mb-1">Include another template</p>
-              <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">&lt;%- include('partials/header') %&gt;</code>
+              <p class="text-terminal-dim text-xs mb-1">
+                Include another template
+              </p>
+              <code
+                class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+                >&lt;%- include('partials/header') %&gt;</code
+              >
             </div>
           </div>
         </div>
@@ -179,27 +349,38 @@ const image = '/assets/projects/erwinmvc.webp';
           <div class="space-y-3">
             <div>
               <p class="text-terminal-dim text-xs mb-1">Simple page</p>
-              <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-                app.get("/contact", (req, res) &#123;<br/>
-                &nbsp;&nbsp;res.render("contact", &#123; title: "Contact Us" &#125;);<br/>
+              <code
+                class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+              >
+                app.get("/contact", (req, res) &#123;<br />
+                &nbsp;&nbsp;res.render("contact", &#123; title: "Contact Us" &#125;);<br
+                />
                 &#125;);
               </code>
             </div>
             <div>
-              <p class="text-terminal-dim text-xs mb-1">Handle form submission</p>
-              <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-                app.post("/contact", (req, res) &#123;<br/>
-                &nbsp;&nbsp;const &#123; name, email, message &#125; = req.body;<br/>
-                &nbsp;&nbsp;console.log("Message from " + name + ": " + message);<br/>
-                &nbsp;&nbsp;res.redirect("/contact?sent=true");<br/>
+              <p class="text-terminal-dim text-xs mb-1">
+                Handle form submission
+              </p>
+              <code
+                class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+              >
+                app.post("/contact", (req, res) &#123;<br />
+                &nbsp;&nbsp;const &#123; name, email, message &#125; = req.body;<br
+                />
+                &nbsp;&nbsp;console.log("Message from " + name + ": " + message);<br
+                />
+                &nbsp;&nbsp;res.redirect("/contact?sent=true");<br />
                 &#125;);
               </code>
             </div>
             <div>
               <p class="text-terminal-dim text-xs mb-1">JSON API endpoint</p>
-              <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-                app.get("/api/users", (req, res) &#123;<br/>
-                &nbsp;&nbsp;res.json([&#123; id: 1, name: "John" &#125;]);<br/>
+              <code
+                class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+              >
+                app.get("/api/users", (req, res) &#123;<br />
+                &nbsp;&nbsp;res.json([&#123; id: 1, name: "John" &#125;]);<br />
                 &#125;);
               </code>
             </div>
@@ -208,45 +389,64 @@ const image = '/assets/projects/erwinmvc.webp';
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="resources">
       <h3 class="text-terminal-amber mb-6">### resources</h3>
       <p class="text-terminal-fg mb-4 text-sm">
-        Generate a complete resource (model + controller + views) with one command:
+        Generate a complete resource (model + controller + views) with one
+        command:
       </p>
       <div class="space-y-4">
         <div>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
             npx erwinmvc generate resource Post
           </code>
           <p class="text-terminal-dim text-xs mb-2">This creates:</p>
           <ul class="space-y-2 text-terminal-fg text-xs">
             <li class="flex gap-2">
               <span class="text-terminal-green">•</span>
-              <code class="bg-terminal-dim rounded px-1 py-0.5">prisma/schema.prisma</code> - Adds the Post model
+              <code class="bg-terminal-dim rounded px-1 py-0.5"
+                >prisma/schema.prisma</code
+              > - Adds the Post model
             </li>
             <li class="flex gap-2">
               <span class="text-terminal-green">•</span>
-              <code class="bg-terminal-dim rounded px-1 py-0.5">src/controllers/PostController.ts</code> - Full CRUD controller with form handling
+              <code class="bg-terminal-dim rounded px-1 py-0.5"
+                >src/controllers/PostController.ts</code
+              > - Full CRUD controller with form handling
             </li>
             <li class="flex gap-2">
               <span class="text-terminal-green">•</span>
-              <code class="bg-terminal-dim rounded px-1 py-0.5">src/views/posts/index.ejs</code> - List view
+              <code class="bg-terminal-dim rounded px-1 py-0.5"
+                >src/views/posts/index.ejs</code
+              > - List view
             </li>
             <li class="flex gap-2">
               <span class="text-terminal-green">•</span>
-              <code class="bg-terminal-dim rounded px-1 py-0.5">src/views/posts/show.ejs</code> - Detail view
+              <code class="bg-terminal-dim rounded px-1 py-0.5"
+                >src/views/posts/show.ejs</code
+              > - Detail view
             </li>
             <li class="flex gap-2">
               <span class="text-terminal-green">•</span>
-              <code class="bg-terminal-dim rounded px-1 py-0.5">src/views/posts/create.ejs</code> - Create form
+              <code class="bg-terminal-dim rounded px-1 py-0.5"
+                >src/views/posts/create.ejs</code
+              > - Create form
             </li>
             <li class="flex gap-2">
               <span class="text-terminal-green">•</span>
-              <code class="bg-terminal-dim rounded px-1 py-0.5">src/views/posts/edit.ejs</code> - Edit form
+              <code class="bg-terminal-dim rounded px-1 py-0.5"
+                >src/views/posts/edit.ejs</code
+              > - Edit form
             </li>
           </ul>
         </div>
@@ -311,21 +511,28 @@ const image = '/assets/projects/erwinmvc.webp';
         </div>
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Wiring Up Routes</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            import * as PostController from "./controllers/PostController";<br/><br/>
-            app.get("/posts", PostController.index);<br/>
-            app.get("/posts/create", PostController.create);<br/>
-            app.post("/posts", PostController.store);<br/>
-            app.get("/posts/:id", PostController.show);<br/>
-            app.get("/posts/:id/edit", PostController.edit);<br/>
-            app.put("/posts/:id", PostController.update);<br/>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            import * as PostController from "./controllers/PostController";<br
+            /><br />
+            app.get("/posts", PostController.index);<br />
+            app.get("/posts/create", PostController.create);<br />
+            app.post("/posts", PostController.store);<br />
+            app.get("/posts/:id", PostController.show);<br />
+            app.get("/posts/:id/edit", PostController.edit);<br />
+            app.put("/posts/:id", PostController.update);<br />
             app.delete("/posts/:id", PostController.destroy);
           </code>
         </div>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -334,11 +541,16 @@ const image = '/assets/projects/erwinmvc.webp';
       <p class="text-terminal-fg mb-4 text-sm">
         Generate just a controller (without model/views):
       </p>
-      <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-4">
+      <code
+        class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-4"
+      >
         npx erwinmvc generate controller Product
       </code>
       <p class="text-terminal-fg mb-4 text-sm">
-        This creates <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">src/controllers/ProductController.ts</code> with CRUD actions:
+        This creates <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >src/controllers/ProductController.ts</code
+        > with CRUD actions:
       </p>
       <div class="overflow-x-auto mt-3">
         <table class="w-full text-terminal-fg text-xs">
@@ -386,16 +598,21 @@ const image = '/assets/projects/erwinmvc.webp';
       </div>
       <p class="text-terminal-fg mt-4 text-sm">Using controllers:</p>
       <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-        import * as ProductController from "./controllers/ProductController";<br/><br/>
-        app.get("/products", ProductController.index);<br/>
-        app.get("/products/:id", ProductController.show);<br/>
-        app.post("/products", ProductController.store);<br/>
-        app.put("/products/:id", ProductController.update);<br/>
+        import * as ProductController from "./controllers/ProductController";<br
+        /><br />
+        app.get("/products", ProductController.index);<br />
+        app.get("/products/:id", ProductController.show);<br />
+        app.post("/products", ProductController.store);<br />
+        app.put("/products/:id", ProductController.update);<br />
         app.delete("/products/:id", ProductController.destroy);
       </code>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -407,54 +624,84 @@ const image = '/assets/projects/erwinmvc.webp';
       <div class="space-y-4">
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Setup</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
             npm run db:setup
           </code>
-          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">.env</code> with your database URL:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">DATABASE_URL="postgresql://user:password@localhost:5432/mydb"</code>
+          <p class="text-terminal-dim text-sm mb-2">
+            Edit <code
+              class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+              >.env</code
+            > with your database URL:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+            >DATABASE_URL="postgresql://user:password@localhost:5432/mydb"</code
+          >
         </div>
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Run migrations</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
             npx prisma migrate dev --name init
           </code>
         </div>
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Generate models</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
             npx erwinmvc generate model Post
           </code>
-          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">prisma/schema.prisma</code> to add fields:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            model Post &#123;<br/>
-            &nbsp;&nbsp;id        Int      @id @default(autoincrement())<br/>
-            &nbsp;&nbsp;title     String<br/>
-            &nbsp;&nbsp;content   String?<br/>
-            &nbsp;&nbsp;published Boolean  @default(false)<br/>
-            &nbsp;&nbsp;createdAt DateTime @default(now())<br/>
-            &nbsp;&nbsp;updatedAt DateTime @updatedAt<br/>
-            &nbsp;&nbsp;@@map("posts")<br/>
+          <p class="text-terminal-dim text-sm mb-2">
+            Edit <code
+              class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+              >prisma/schema.prisma</code
+            > to add fields:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            model Post &#123;<br />
+            &nbsp;&nbsp;id Int @id @default(autoincrement())<br />
+            &nbsp;&nbsp;title String<br />
+            &nbsp;&nbsp;content String?<br />
+            &nbsp;&nbsp;published Boolean @default(false)<br />
+            &nbsp;&nbsp;createdAt DateTime @default(now())<br />
+            &nbsp;&nbsp;updatedAt DateTime @updatedAt<br />
+            &nbsp;&nbsp;@@map("posts")<br />
             &#125;
           </code>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-3">
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-3"
+          >
             npx prisma migrate dev --name add-post-fields
           </code>
         </div>
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Use in code</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            import &#123; getPrismaClient &#125; from "@erwininteractive/mvc";<br/><br/>
-            const prisma = getPrismaClient();<br/><br/>
-            app.get("/posts", async (req, res) &#123;<br/>
-            &nbsp;&nbsp;const posts = await prisma.post.findMany();<br/>
-            &nbsp;&nbsp;res.render("posts/index", &#123; posts &#125;);<br/>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            import &#123; getPrismaClient &#125; from "@erwininteractive/mvc";<br
+            /><br />
+            const prisma = getPrismaClient();<br /><br />
+            app.get("/posts", async (req, res) &#123;<br />
+            &nbsp;&nbsp;const posts = await prisma.post.findMany();<br />
+            &nbsp;&nbsp;res.render("posts/index", &#123; posts &#125;);<br />
             &#125;);
           </code>
         </div>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -467,38 +714,53 @@ const image = '/assets/projects/erwinmvc.webp';
         <div class="bg-terminal-bg border border-terminal-border rounded p-4">
           <p class="text-terminal-cyan font-mono mb-2">JWT Authentication</p>
           <p class="text-terminal-fg mb-3">
-            Token-based authentication with bcrypt password hashing. Perfect for traditional
-            username/password authentication.
+            Token-based authentication with bcrypt password hashing. Perfect for
+            traditional username/password authentication.
           </p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            import &#123;<br/>
-            &nbsp;&nbsp;hashPassword,<br/>
-            &nbsp;&nbsp;verifyPassword,<br/>
-            &nbsp;&nbsp;signToken,<br/>
-            &nbsp;&nbsp;verifyToken,<br/>
-            &nbsp;&nbsp;authenticate,<br/>
-            &#125; from "@erwininteractive/mvc";<br/><br/>
-            const hash = await hashPassword("secret123");<br/>
-            const isValid = await verifyPassword("secret123", hash);<br/>
-            const token = signToken(&#123; userId: 1, email: "user@example.com" &#125;);<br/><br/>
-            app.get("/protected", authenticate, (req, res) &#123;<br/>
-            &nbsp;&nbsp;res.json(&#123; user: req.user &#125;);<br/>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            import &#123;<br />
+            &nbsp;&nbsp;hashPassword,<br />
+            &nbsp;&nbsp;verifyPassword,<br />
+            &nbsp;&nbsp;signToken,<br />
+            &nbsp;&nbsp;verifyToken,<br />
+            &nbsp;&nbsp;authenticate,<br />
+            &#125; from "@erwininteractive/mvc";<br /><br />
+            const hash = await hashPassword("secret123");<br />
+            const isValid = await verifyPassword("secret123", hash);<br />
+            const token = signToken(&#123; userId: 1, email: "user@example.com" &#125;);<br
+            /><br />
+            app.get("/protected", authenticate, (req, res) &#123;<br />
+            &nbsp;&nbsp;res.json(&#123; user: req.user &#125;);<br />
             &#125;);
           </code>
         </div>
         <div class="bg-terminal-bg border border-terminal-border rounded p-4">
           <p class="text-terminal-cyan font-mono mb-2">WebAuthn (Passkeys)</p>
           <p class="text-terminal-fg mb-3">
-            Passwordless authentication with security keys. Users can log in with biometrics
-            or physical security keys without passwords.
+            Passwordless authentication with security keys. Users can log in
+            with biometrics or physical security keys without passwords.
           </p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
             npx erwinmvc webauthn
           </code>
           <p class="text-terminal-dim text-sm mb-2">Environment variables:</p>
           <ul class="space-y-1 text-terminal-fg">
-            <li><code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">WEBAUTHN_RP_ID</code> - Your domain (e.g., "localhost" or "example.com")</li>
-            <li><code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">WEBAUTHN_RP_NAME</code> - Your app name (e.g., "ErwinMVC App")</li>
+            <li>
+              <code
+                class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+                >WEBAUTHN_RP_ID</code
+              > - Your domain (e.g., "localhost" or "example.com")
+            </li>
+            <li>
+              <code
+                class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+                >WEBAUTHN_RP_NAME</code
+              > - Your app name (e.g., "ErwinMVC App")
+            </li>
           </ul>
           <p class="text-terminal-dim text-sm mt-2">
             Note: WebAuthn requires HTTPS or localhost.
@@ -507,7 +769,11 @@ const image = '/assets/projects/erwinmvc.webp';
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -525,23 +791,42 @@ const image = '/assets/projects/erwinmvc.webp';
             </thead>
             <tbody class="divide-y divide-terminal-border">
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">npx @erwininteractive/mvc init &lt;dir&gt;</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan"
+                    >npx @erwininteractive/mvc init &lt;dir&gt;</code
+                  ></td
+                >
                 <td class="py-2 px-2">Create a new app</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">npx erwinmvc generate resource &lt;name&gt;</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan"
+                    >npx erwinmvc generate resource &lt;name&gt;</code
+                  ></td
+                >
                 <td class="py-2 px-2">Generate model + controller + views</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">npx erwinmvc generate controller &lt;name&gt;</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan"
+                    >npx erwinmvc generate controller &lt;name&gt;</code
+                  ></td
+                >
                 <td class="py-2 px-2">Generate a CRUD controller</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">npx erwinmvc generate model &lt;name&gt;</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan"
+                    >npx erwinmvc generate model &lt;name&gt;</code
+                  ></td
+                >
                 <td class="py-2 px-2">Generate a database model</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">npx erwinmvc webauthn</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">npx erwinmvc webauthn</code
+                  ></td
+                >
                 <td class="py-2 px-2">Generate WebAuthn authentication</td>
               </tr>
             </tbody>
@@ -558,15 +843,21 @@ const image = '/assets/projects/erwinmvc.webp';
             </thead>
             <tbody class="divide-y divide-terminal-border">
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">--skip-install</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">--skip-install</code></td
+                >
                 <td class="py-2 px-2">Skip running npm install</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">--with-database</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">--with-database</code></td
+                >
                 <td class="py-2 px-2">Include Prisma database setup</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">--with-ci</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">--with-ci</code></td
+                >
                 <td class="py-2 px-2">Include GitHub Actions CI workflow</td>
               </tr>
             </tbody>
@@ -583,24 +874,36 @@ const image = '/assets/projects/erwinmvc.webp';
             </thead>
             <tbody class="divide-y divide-terminal-border">
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">--skip-model</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">--skip-model</code></td
+                >
                 <td class="py-2 px-2">Skip generating Prisma model</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">--skip-controller</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">--skip-controller</code></td
+                >
                 <td class="py-2 px-2">Skip generating controller</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">--skip-views</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">--skip-views</code></td
+                >
                 <td class="py-2 px-2">Skip generating views</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">--skip-migrate</code></td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">--skip-migrate</code></td
+                >
                 <td class="py-2 px-2">Skip running Prisma migrate</td>
               </tr>
               <tr>
-                <td class="py-2 px-2"><code class="text-terminal-cyan">--api-only</code></td>
-                <td class="py-2 px-2">Generate API-only controller (no views)</td>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">--api-only</code></td
+                >
+                <td class="py-2 px-2"
+                  >Generate API-only controller (no views)</td
+                >
               </tr>
             </tbody>
           </table>
@@ -608,7 +911,11 @@ const image = '/assets/projects/erwinmvc.webp';
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -623,7 +930,9 @@ const image = '/assets/projects/erwinmvc.webp';
           <p class="text-terminal-fg mb-3">
             Add Tailwind CSS when creating a new app:
           </p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
             npx @erwininteractive/mvc init myapp --with-tailwind
           </code>
           <p class="text-terminal-dim text-sm">
@@ -635,44 +944,71 @@ const image = '/assets/projects/erwinmvc.webp';
           <p class="text-terminal-fg mb-3">
             Use Tailwind classes in your EJS templates:
           </p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            &lt;nav class="bg-white shadow-lg"> &lt;div class="container mx-auto px-4"> &lt;div class="flex justify-between items-center"> &lt;h1 class="text-2xl font-bold">Logo&lt;/h1> &lt;/div> &lt;/div> &lt;/nav>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            &lt;nav class="bg-white shadow-lg"> &lt;div class="container mx-auto
+            px-4"> &lt;div class="flex justify-between items-center"> &lt;h1
+            class="text-2xl font-bold">Logo&lt;/h1> &lt;/div> &lt;/div>
+            &lt;/nav>
           </code>
         </div>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border" id="project-structure">
+    <section
+      class="py-12 border-b border-terminal-border"
+      id="project-structure"
+    >
       <h3 class="text-terminal-amber mb-6">### project structure</h3>
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
         <code class="block text-terminal-fg text-xs overflow-x-auto">
- myapp/<br/>
- ├── src/<br/>
- │   ├── server.ts           # Main app - add routes here<br/>
- │   ├── views/              # EJS templates<br/>
- │   ├── controllers/        # Route handlers (optional)<br/>
- │   └── middleware/         # Express middleware (optional)<br/>
- ├── public/                 # Static files (CSS, JS, images)<br/>
- ├── prisma/                 # Database (after db:setup)<br/>
- │   └── schema.prisma<br/>
- ├── .env.example<br/>
- ├── .gitignore<br/>
- ├── package.json<br/>
- └── tsconfig.json
+          myapp/<br />
+          ├── src/<br />
+          │ ├── server.ts # Main app - add routes here<br />
+          │ ├── views/ # EJS templates<br />
+          │ ├── controllers/ # Route handlers (optional)<br />
+          │ └── middleware/ # Express middleware (optional)<br />
+          ├── public/ # Static files (CSS, JS, images)<br />
+          ├── prisma/ # Database (after db:setup)<br />
+          │ └── schema.prisma<br />
+          ├── .env.example<br />
+          ├── .gitignore<br />
+          ├── package.json<br />
+          └── tsconfig.json
         </code>
       </div>
-      <p class="text-terminal-fg text-sm">Static files in <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">public/</code> are served at the root URL:</p>
+      <p class="text-terminal-fg text-sm">
+        Static files in <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >public/</code
+        > are served at the root URL:
+      </p>
       <div class="space-y-1 text-sm mt-2">
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">public/css/style.css  →  /css/style.css</code>
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">public/images/logo.png  →  /images/logo.png</code>
+        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >public/css/style.css → /css/style.css</code
+        >
+        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >public/images/logo.png → /images/logo.png</code
+        >
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -688,23 +1024,33 @@ const image = '/assets/projects/erwinmvc.webp';
           </thead>
           <tbody class="divide-y divide-terminal-border">
             <tr>
-              <td class="py-2 px-2"><code class="text-terminal-cyan">npm run dev</code></td>
+              <td class="py-2 px-2"
+                ><code class="text-terminal-cyan">npm run dev</code></td
+              >
               <td class="py-2 px-2">Start development server (auto-reload)</td>
             </tr>
             <tr>
-              <td class="py-2 px-2"><code class="text-terminal-cyan">npm run build</code></td>
+              <td class="py-2 px-2"
+                ><code class="text-terminal-cyan">npm run build</code></td
+              >
               <td class="py-2 px-2">Build for production</td>
             </tr>
             <tr>
-              <td class="py-2 px-2"><code class="text-terminal-cyan">npm start</code></td>
+              <td class="py-2 px-2"
+                ><code class="text-terminal-cyan">npm start</code></td
+              >
               <td class="py-2 px-2">Run production build</td>
             </tr>
             <tr>
-              <td class="py-2 px-2"><code class="text-terminal-cyan">npm run db:setup</code></td>
+              <td class="py-2 px-2"
+                ><code class="text-terminal-cyan">npm run db:setup</code></td
+              >
               <td class="py-2 px-2">Install database dependencies</td>
             </tr>
             <tr>
-              <td class="py-2 px-2"><code class="text-terminal-cyan">npm run db:migrate</code></td>
+              <td class="py-2 px-2"
+                ><code class="text-terminal-cyan">npm run db:migrate</code></td
+              >
               <td class="py-2 px-2">Run database migrations</td>
             </tr>
           </tbody>
@@ -712,7 +1058,11 @@ const image = '/assets/projects/erwinmvc.webp';
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -721,62 +1071,95 @@ const image = '/assets/projects/erwinmvc.webp';
       <p class="text-terminal-fg mb-4 text-sm">
         Add GitHub Actions CI to your project for automated testing:
       </p>
-      <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-4">
+      <code
+        class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-4"
+      >
         npx @erwininteractive/mvc init myapp --with-ci
       </code>
       <p class="text-terminal-fg mb-4 text-sm">
-        Or add CI to an existing project by creating <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">.github/workflows/test.yml</code>:
+        Or add CI to an existing project by creating <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >.github/workflows/test.yml</code
+        >:
       </p>
       <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-        name: Test<br/><br/>
-        on:<br/>
-        &nbsp;&nbsp;push:<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;branches: [main]<br/>
-        &nbsp;&nbsp;pull_request:<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;branches: [main]<br/><br/>
-        jobs:<br/>
-        &nbsp;&nbsp;test:<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest<br/><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;steps:<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Checkout<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: actions/checkout@v4<br/><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Setup Node.js<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: actions/setup-node@v4<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node-version: "20"<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache: "npm"<br/><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Install dependencies<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: npm ci<br/><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Run tests<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: npm test<br/><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Build<br/>
+        name: Test<br /><br />
+        on:<br />
+        &nbsp;&nbsp;push:<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;branches: [main]<br />
+        &nbsp;&nbsp;pull_request:<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;branches: [main]<br /><br />
+        jobs:<br />
+        &nbsp;&nbsp;test:<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest<br /><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;steps:<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Checkout<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: actions/checkout@v4<br
+        /><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Setup Node.js<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: actions/setup-node@v4<br
+        />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node-version:
+        "20"<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache: "npm"<br
+        /><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Install dependencies<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: npm ci<br /><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Run tests<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: npm test<br /><br
+        />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Build<br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: npm run build
       </code>
       <p class="text-terminal-fg mt-4 text-sm">
-        See full documentation on <a href="https://github.com/erwininteractive/typescript-erwinmvc#readme" class="text-terminal-cyan hover:text-terminal-green" target="_blank" rel="noopener noreferrer">GitHub</a> for database tests, secrets, and more.
+        See full documentation on <a
+          href="https://github.com/erwininteractive/typescript-erwinmvc#readme"
+          class="text-terminal-cyan hover:text-terminal-green"
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a
+        > for database tests, secrets, and more.
       </p>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border" id="environment-variables">
+    <section
+      class="py-12 border-b border-terminal-border"
+      id="environment-variables"
+    >
       <h3 class="text-terminal-amber mb-6">### environment variables</h3>
       <p class="text-terminal-fg mb-4 text-sm">
-        All optional. Create <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">.env</code> from <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">.env.example</code>:
+        All optional. Create <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >.env</code
+        > from <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >.env.example</code
+        >:
       </p>
       <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-        DATABASE_URL="postgresql://user:pass@localhost:5432/mydb"  # For database<br/>
-        REDIS_URL="redis://localhost:6379"                         # For sessions<br/>
-        JWT_SECRET="your-secret-key"                               # For auth<br/>
-        SESSION_SECRET="your-session-secret"                       # For sessions<br/>
-        PORT=3000                                                  # Server port<br/>
-        NODE_ENV=development                                       # Environment
+        DATABASE_URL="postgresql://user:pass@localhost:5432/mydb" # For database<br
+        />
+        REDIS_URL="redis://localhost:6379" # For sessions<br />
+        JWT_SECRET="your-secret-key" # For auth<br />
+        SESSION_SECRET="your-session-secret" # For sessions<br />
+        PORT=3000 # Server port<br />
+        NODE_ENV=development # Environment
       </code>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -786,52 +1169,98 @@ const image = '/assets/projects/erwinmvc.webp';
         ErwinMVC builds on top of established technologies:
       </p>
       <div class="space-y-2">
-        <a href="https://expressjs.com/" class="block text-terminal-cyan hover:text-terminal-green no-underline text-sm" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://expressjs.com/"
+          class="block text-terminal-cyan hover:text-terminal-green no-underline text-sm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Express.js Documentation →
         </a>
-        <a href="https://ejs.co/" class="block text-terminal-cyan hover:text-terminal-green no-underline text-sm" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://ejs.co/"
+          class="block text-terminal-cyan hover:text-terminal-green no-underline text-sm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           EJS Documentation →
         </a>
-        <a href="https://www.prisma.io/docs/" class="block text-terminal-cyan hover:text-terminal-green no-underline text-sm" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.prisma.io/docs/"
+          class="block text-terminal-cyan hover:text-terminal-green no-underline text-sm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Prisma Documentation →
         </a>
-        <a href="https://alpinejs.dev/" class="block text-terminal-cyan hover:text-terminal-green no-underline text-sm" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://alpinejs.dev/"
+          class="block text-terminal-cyan hover:text-terminal-green no-underline text-sm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Alpine.js Documentation →
         </a>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12" id="github">
       <h3 class="text-terminal-amber mb-6">### learn more</h3>
       <p class="text-terminal-fg mb-4">
-        Full documentation, examples, and detailed instructions are available in the README.
+        Full documentation, examples, and detailed instructions are available in
+        the README.
       </p>
       <div class="flex gap-4">
-        <a href="https://github.com/erwininteractive/typescript-erwinmvc" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/erwininteractive/typescript-erwinmvc"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           GitHub →
         </a>
-        <a href="https://github.com/erwininteractive/typescript-erwinmvc#readme" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/erwininteractive/typescript-erwinmvc#readme"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           Documentation →
         </a>
-        <a href="https://www.npmjs.com/package/@erwininteractive/mvc" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://www.npmjs.com/package/@erwininteractive/mvc"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           npm →
         </a>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <footer class="py-8 border-t border-terminal-border">
-      <a href="/projects" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">
+      <a
+        href="/projects"
+        class="text-terminal-dim hover:text-terminal-green no-underline text-sm"
+      >
         ← back to projects
       </a>
     </footer>
-
   </div>
 </BaseLayout>

@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'Blog';
@@ -9,8 +9,12 @@ const permalink = `${Astro.site.href}blog`;
 export const prerender = true;
 export async function getStaticPaths({ paginate }) {
   const allPosts = await getCollection('posts');
-  const visiblePosts = allPosts.filter(post => !post.data.hidden);
-  visiblePosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+  const visiblePosts = allPosts.filter((post) => !post.data.hidden);
+  visiblePosts.sort(
+    (a, b) =>
+      new Date(b.data.publishDate).valueOf() -
+      new Date(a.data.publishDate).valueOf()
+  );
 
   return paginate(visiblePosts, { pageSize: 5 });
 }
@@ -19,32 +23,41 @@ const { page } = Astro.props;
 
 const authors = await getCollection('authors');
 function getAuthorName(authorSlug: string) {
-  const entry = authors.find(a => a.id === authorSlug);
+  const entry = authors.find((a) => a.id === authorSlug);
   return entry?.data?.name || 'Andrew Erwin';
 }
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="blog">
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="blog"
+>
   <div class="container">
     <h2>Blog</h2>
-    {page.data.map((post, index) => {
-      const href = `/blog/${post.data.slug}`;
-      return (
-        <div>
-          { index !== 0 && <hr /> }
-          <div class="post-item">
-            <h3>
-              <a href={href}>{post.data.title}</a>
-            </h3>
-            <p>{post.data.description}</p>
-            <div class="post-item-footer">
-              <span class="post-item-date">— {post.data.publishDate}</span>
-              <span class="post-item-author">by {getAuthorName(post.data.author)}</span>
+    {
+      page.data.map((post, index) => {
+        const href = `/blog/${post.data.slug}`;
+        return (
+          <div>
+            {index !== 0 && <hr />}
+            <div class="post-item">
+              <h3>
+                <a href={href}>{post.data.title}</a>
+              </h3>
+              <p>{post.data.description}</p>
+              <div class="post-item-footer">
+                <span class="post-item-date">— {post.data.publishDate}</span>
+                <span class="post-item-author">
+                  by {getAuthorName(post.data.author)}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      )
-    })}
+        );
+      })
+    }
 
     <nav class="pagination">
       {page.url.prev && <a href={page.url.prev}>Previous Page</a>}

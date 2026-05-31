@@ -5,7 +5,8 @@ import { CONTACT_EMAIL } from '../constants';
 import { formatDate } from '../utils/formatDate';
 
 const title = 'Andrew the Coder';
-const description = 'Software developer with 25+ years building things. Available for freelance and contract work. Side projects, demos, and writing on code, philosophy, and tools.';
+const description =
+  'Software developer with 25+ years building things. Available for freelance and contract work. Side projects, demos, and writing on code, philosophy, and tools.';
 const permalink = Astro.site.href;
 const siteUrl = Astro.site.href;
 
@@ -33,7 +34,8 @@ const personJsonLd = {
   alternateName: 'Andrew the Coder',
   url: siteUrl,
   jobTitle: 'Software Developer',
-  description: 'Software developer with 25+ years of experience, available for freelance and contract work.',
+  description:
+    'Software developer with 25+ years of experience, available for freelance and contract work.',
   sameAs: [
     'https://github.com/andrewthecodertx',
     'https://x.com/_andrewthecoder',
@@ -42,8 +44,12 @@ const personJsonLd = {
 
 const allPosts = await getCollection('posts');
 const featuredPosts = allPosts
-  .filter(post => !post.data.hidden && post.data.featured)
-  .sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf())
+  .filter((post) => !post.data.hidden && post.data.featured)
+  .sort(
+    (a, b) =>
+      new Date(b.data.publishDate).valueOf() -
+      new Date(a.data.publishDate).valueOf()
+  )
   .slice(0, 5);
 
 let projects = [];
@@ -52,20 +58,22 @@ try {
     'https://api.github.com/search/repositories?q=user:andrewthecodertx+topic:portfolio-project',
     {
       headers: {
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    });
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+    }
+  );
   const data = await response.json();
-  projects = data.items
-    ?.filter((item: any) => item.homepage && item.name !== 'Dad-Jokes-API')
-    .map((item: any) => ({
-      name: item.name,
-      description: item.description || 'No description',
-      url: item.html_url,
-      language: item.language || 'Unknown',
-      homepage: item.homepage
-    })) || [];
+  projects =
+    data.items
+      ?.filter((item: any) => item.homepage && item.name !== 'Dad-Jokes-API')
+      .map((item: any) => ({
+        name: item.name,
+        description: item.description || 'No description',
+        url: item.html_url,
+        language: item.language || 'Unknown',
+        homepage: item.homepage,
+      })) || [];
 } catch (error) {
   console.error('Error fetching projects:', error);
 }
@@ -81,17 +89,24 @@ const currentFocus = [
   {
     name: 'ArcMVC',
     href: '/projects/arcmvc',
-    description: 'A lightweight, modern PHP MVC framework. Small core, batteries included, built for PHP 8.4+.',
+    description:
+      'A lightweight, modern PHP MVC framework. Small core, batteries included, built for PHP 8.4+.',
   },
   {
     name: 'Enchanter',
     href: '/projects/enchanter',
-    description: 'A focused AI agent harness. Single Rust binary, any OpenAI-compatible provider, zero runtime dependencies.',
+    description:
+      'A focused AI agent harness. Single Rust binary, any OpenAI-compatible provider, zero runtime dependencies.',
   },
 ];
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="home">
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="home"
+>
   <script
     slot="head"
     type="application/ld+json"
@@ -105,228 +120,364 @@ const currentFocus = [
     set:html={JSON.stringify(personJsonLd)}
   />
   <div class="max-w-5xl mx-auto px-4">
-
     <!-- Main content (80%) + Recent Posts aside (20%) -->
     <div class="lg:grid lg:grid-cols-[4fr_1fr] lg:gap-8">
       <div>
-
-    <!-- Intro: ASCII frame, name, titles, CTA -->
-    <section class="py-12">
-      <pre class="text-terminal-dim text-xs sm:text-sm leading-tight mb-6 select-none overflow-x-auto" aria-hidden="true">{`┌────────────────────────────────────────┐
+        <!-- Intro: ASCII frame, name, titles, CTA -->
+        <section class="py-12">
+          <pre
+            class="text-terminal-dim text-xs sm:text-sm leading-tight mb-6 select-none overflow-x-auto"
+            aria-hidden="true">{`┌────────────────────────────────────────┐
 │ andrew@thecoder:~$ whoami              │
 └────────────────────────────────────────┘`}</pre>
 
-      <div class="space-y-5">
-        <div class="flex flex-wrap items-center gap-3">
-          <h1 class="text-terminal-green">andrew erwin</h1>
-          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 border border-terminal-green rounded text-xs text-terminal-green">
-            <span class="w-1.5 h-1.5 rounded-full bg-terminal-green animate-pulse"></span>
-            available for work
-          </span>
-        </div>
+          <div class="space-y-5">
+            <div class="flex flex-wrap items-center gap-3">
+              <h1 class="text-terminal-green">andrew erwin</h1>
+              <span
+                class="inline-flex items-center gap-1.5 px-2 py-0.5 border border-terminal-green rounded text-xs text-terminal-green"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-terminal-green animate-pulse"
+                ></span>
+                available for work
+              </span>
+            </div>
 
-        <p class="text-terminal-fg text-base sm:text-lg">
-          software engineer
-          <span class="text-terminal-dim px-1">·</span>
-          web developer
-          <span class="text-terminal-dim px-1">·</span>
-          ai researcher
-        </p>
+            <p class="text-terminal-fg text-base sm:text-lg">
+              software engineer
+              <span class="text-terminal-dim px-1">·</span>
+              web developer
+              <span class="text-terminal-dim px-1">·</span>
+              ai researcher
+            </p>
 
-        <p class="text-terminal-fg leading-relaxed">
-          I build full-stack web applications, ship developer tools and frameworks, and research where AI actually earns its keep in software development. Two decades of production code has left me comfortable anywhere in the stack (frontend, backend, infrastructure) and unbothered by whichever language or runtime a project actually needs.
-        </p>
+            <p class="text-terminal-fg leading-relaxed">
+              I build full-stack web applications, ship developer tools and
+              frameworks, and research where AI actually earns its keep in
+              software development. Two decades of production code has left me
+              comfortable anywhere in the stack (frontend, backend,
+              infrastructure) and unbothered by whichever language or runtime a
+              project actually needs.
+            </p>
 
-        <div class="space-y-1 text-terminal-fg">
-          <p class="text-terminal-dim">&gt; 25+ years shipping production software</p>
-          <p class="text-terminal-dim">&gt; previously: capital one, xo communications</p>
-          <p class="text-terminal-dim">
-            &gt; currently building:{' '}
-            {currentFocus.map((p, i) => (
-              <>
-                {i > 0 && (i === currentFocus.length - 1 && currentFocus.length > 1
-                  ? <span>{currentFocus.length > 2 ? ',' : ''} and </span>
-                  : <span>, </span>)}
-                <a href={p.href} title={p.description} class="text-terminal-cyan hover:text-terminal-green no-underline">{p.name}</a>
-              </>
-            ))}
+            <div class="space-y-1 text-terminal-fg">
+              <p class="text-terminal-dim">
+                &gt; 25+ years shipping production software
+              </p>
+              <p class="text-terminal-dim">
+                &gt; previously: capital one, xo communications
+              </p>
+              <p class="text-terminal-dim">
+                &gt; currently building:{' '}
+                {
+                  currentFocus.map((p, i) => (
+                    <>
+                      {i > 0 &&
+                        (i === currentFocus.length - 1 &&
+                        currentFocus.length > 1 ? (
+                          <span>{currentFocus.length > 2 ? ',' : ''} and </span>
+                        ) : (
+                          <span>, </span>
+                        ))}
+                      <a
+                        href={p.href}
+                        title={p.description}
+                        class="text-terminal-cyan hover:text-terminal-green no-underline"
+                      >
+                        {p.name}
+                      </a>
+                    </>
+                  ))
+                }
+              </p>
+              <p class="text-terminal-dim">
+                &gt; open to freelance, contract, and full-time work
+              </p>
+              <p class="text-terminal-dim">
+                &gt; <a
+                  href="/blog/resume-for-andrew-s-erwin"
+                  class="text-terminal-cyan hover:text-terminal-green no-underline"
+                  >read my resume →</a
+                >
+              </p>
+            </div>
+
+            <div class="pt-2 flex flex-wrap items-center gap-3 text-sm">
+              <a
+                href={hireMailto}
+                class="inline-block px-3 py-1 border border-terminal-green bg-terminal-green/10 text-terminal-green hover:bg-terminal-green hover:text-terminal-bg no-underline transition-colors font-mono"
+              >
+                [hire me]
+              </a>
+              <a
+                href="https://github.com/andrewthecodertx"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-terminal-cyan hover:text-terminal-green no-underline"
+                >github</a
+              >
+              <a
+                href="https://linkedin.com/in/andrewthecoder"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-terminal-cyan hover:text-terminal-green no-underline"
+                >linkedin</a
+              >
+              <a
+                href="https://x.com/_andrewthecoder"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-terminal-cyan hover:text-terminal-green no-underline"
+                >x</a
+              >
+              <a
+                href="https://buymeacoffee.com/andrewerwin"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-terminal-cyan hover:text-terminal-green no-underline"
+                >buy me a coffee</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <!-- Playground -->
+        <section class="py-12">
+          <h3 class="text-terminal-amber mb-2">### playground</h3>
+          <p class="text-terminal-dim text-sm mb-6">
+            things I've built that you can poke at
           </p>
-          <p class="text-terminal-dim">&gt; open to freelance, contract, and full-time work</p>
-          <p class="text-terminal-dim">&gt; <a href="/blog/resume-for-andrew-s-erwin" class="text-terminal-cyan hover:text-terminal-green no-underline">read my resume →</a></p>
-        </div>
-
-        <div class="pt-2 flex flex-wrap items-center gap-3 text-sm">
-          <a
-            href={hireMailto}
-            class="inline-block px-3 py-1 border border-terminal-green bg-terminal-green/10 text-terminal-green hover:bg-terminal-green hover:text-terminal-bg no-underline transition-colors font-mono"
-          >
-            [hire me]
-          </a>
-          <a href="https://github.com/andrewthecodertx" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">github</a>
-          <a href="https://linkedin.com/in/andrewthecoder" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">linkedin</a>
-          <a href="https://x.com/_andrewthecoder" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">x</a>
-          <a href="https://buymeacoffee.com/andrewerwin" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">buy me a coffee</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Playground -->
-    <section class="py-12">
-      <h3 class="text-terminal-amber mb-2">### playground</h3>
-      <p class="text-terminal-dim text-sm mb-6">things I've built that you can poke at</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-        <!-- Joke tile -->
-        <div class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col">
-          <h4 class="text-terminal-green text-sm mb-3">$ joke</h4>
-          <p id="joke" class="text-terminal-fg text-sm flex-1 leading-relaxed">Loading...</p>
-          <p id="joke-author" class="text-terminal-dim text-xs mt-2"></p>
-          <div class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border">
-            <button id="new-joke" class="text-terminal-cyan hover:text-terminal-green cursor-pointer bg-transparent border-none p-0 font-mono">
-              another one →
-            </button>
-            <a
-              href="https://dadjokes.developersandbox.xyz"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-terminal-dim hover:text-terminal-green no-underline"
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Joke tile -->
+            <div
+              class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col"
             >
-              my api ↗
+              <h4 class="text-terminal-green text-sm mb-3">$ joke</h4>
+              <p
+                id="joke"
+                class="text-terminal-fg text-sm flex-1 leading-relaxed"
+              >
+                Loading...
+              </p>
+              <p id="joke-author" class="text-terminal-dim text-xs mt-2"></p>
+              <div
+                class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border"
+              >
+                <button
+                  id="new-joke"
+                  class="text-terminal-cyan hover:text-terminal-green cursor-pointer bg-transparent border-none p-0 font-mono"
+                >
+                  another one →
+                </button>
+                <a
+                  href="https://dadjokes.developersandbox.xyz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-terminal-dim hover:text-terminal-green no-underline"
+                >
+                  my api ↗
+                </a>
+              </div>
+            </div>
+
+            <!-- Conway tile -->
+            <a
+              href="/demos/conway"
+              class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col no-underline group"
+            >
+              <h4 class="text-terminal-green text-sm mb-3">$ game of life</h4>
+              <canvas
+                id="mini-conway"
+                class="w-full block bg-terminal-bg"
+                style="aspect-ratio: 2/1; image-rendering: pixelated;"></canvas>
+              <div
+                class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border"
+              >
+                <span class="text-terminal-dim group-hover:text-terminal-fg"
+                  >cellular automaton</span
+                >
+                <span class="text-terminal-cyan group-hover:text-terminal-green"
+                  >play →</span
+                >
+              </div>
+            </a>
+
+            <!-- Mandelbrot tile -->
+            <a
+              href="/demos/mandelbrot"
+              class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col no-underline group"
+            >
+              <h4 class="text-terminal-green text-sm mb-3">$ mandelbrot</h4>
+              <img
+                src="/assets/mandelbrot.png"
+                alt="Mandelbrot set rendered with WebGL"
+                class="w-full block"
+                style="aspect-ratio: 2/1; object-fit: cover;"
+                loading="lazy"
+              />
+              <div
+                class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border"
+              >
+                <span class="text-terminal-dim group-hover:text-terminal-fg"
+                  >webgl · zoom · pan</span
+                >
+                <span class="text-terminal-cyan group-hover:text-terminal-green"
+                  >explore →</span
+                >
+              </div>
+            </a>
+
+            <!-- Wordle tile -->
+            <a
+              href="/demos/wordle"
+              class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col no-underline group"
+            >
+              <h4 class="text-terminal-green text-sm mb-3">$ wordle</h4>
+              <div
+                class="w-full flex items-center justify-center"
+                style="aspect-ratio: 2/1;"
+              >
+                <div class="grid grid-cols-5 gap-1">
+                  <span
+                    class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black"
+                    style="background:#22c55e;">W</span
+                  >
+                  <span
+                    class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black"
+                    style="background:#eab308;">O</span
+                  >
+                  <span
+                    class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center"
+                    style="background:#3f3f46;color:#a1a1aa;">R</span
+                  >
+                  <span
+                    class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black"
+                    style="background:#22c55e;">D</span
+                  >
+                  <span
+                    class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black"
+                    style="background:#22c55e;">S</span
+                  >
+                </div>
+              </div>
+              <div
+                class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border"
+              >
+                <span class="text-terminal-dim group-hover:text-terminal-fg"
+                  >typescript · 5 letters · 6 guesses</span
+                >
+                <span class="text-terminal-cyan group-hover:text-terminal-green"
+                  >play →</span
+                >
+              </div>
             </a>
           </div>
-        </div>
+        </section>
 
-        <!-- Conway tile -->
-        <a
-          href="/demos/conway"
-          class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col no-underline group"
-        >
-          <h4 class="text-terminal-green text-sm mb-3">$ game of life</h4>
-          <canvas
-            id="mini-conway"
-            class="w-full block bg-terminal-bg"
-            style="aspect-ratio: 2/1; image-rendering: pixelated;"
-          ></canvas>
-          <div class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border">
-            <span class="text-terminal-dim group-hover:text-terminal-fg">cellular automaton</span>
-            <span class="text-terminal-cyan group-hover:text-terminal-green">play →</span>
+        <!-- Projects -->
+        <section class="py-12">
+          <h3 class="text-terminal-amber mb-6">### projects</h3>
+          <ul class="space-y-4">
+            {
+              projects.map((project) => (
+                <li>
+                  <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-terminal-fg hover:text-terminal-green no-underline"
+                    >
+                      {formatProjectTitle(project.name)}
+                    </a>
+                    <span class="text-terminal-dim text-sm">
+                      [{project.language}]
+                    </span>
+                    {project.homepage && (
+                      <a
+                        href={project.homepage}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-terminal-cyan hover:text-terminal-green no-underline text-sm"
+                      >
+                        live →
+                      </a>
+                    )}
+                  </div>
+                  <p class="text-terminal-dim text-sm mt-1">
+                    {project.description}
+                  </p>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mt-6">
+            <a
+              href="/projects"
+              class="text-terminal-dim hover:text-terminal-green no-underline text-sm"
+              >view all projects →</a
+            >
+          </p>
+        </section>
+
+        <!-- Work with me -->
+        <section class="py-12">
+          <h3 class="text-terminal-amber mb-6">### work with me</h3>
+          <p class="text-terminal-fg mb-4">
+            I'm available for freelance, contract, and full-time work. If you
+            have something interesting to build (APIs, web apps, data tools,
+            emulators, whatever), let's talk.
+          </p>
+          <div class="flex flex-wrap gap-3 text-sm">
+            <a
+              href={hireMailto}
+              class="inline-block px-3 py-1 border border-terminal-green bg-terminal-green/10 text-terminal-green hover:bg-terminal-green hover:text-terminal-bg no-underline transition-colors font-mono"
+            >
+              [hire me]
+            </a>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              class="text-terminal-cyan hover:text-terminal-green no-underline self-center"
+            >
+              {CONTACT_EMAIL}
+            </a>
           </div>
-        </a>
-
-        <!-- Mandelbrot tile -->
-        <a
-          href="/demos/mandelbrot"
-          class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col no-underline group"
-        >
-          <h4 class="text-terminal-green text-sm mb-3">$ mandelbrot</h4>
-          <img
-            src="/assets/mandelbrot.png"
-            alt="Mandelbrot set rendered with WebGL"
-            class="w-full block"
-            style="aspect-ratio: 2/1; object-fit: cover;"
-            loading="lazy"
-          />
-          <div class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border">
-            <span class="text-terminal-dim group-hover:text-terminal-fg">webgl · zoom · pan</span>
-            <span class="text-terminal-cyan group-hover:text-terminal-green">explore →</span>
-          </div>
-        </a>
-
-        <!-- Wordle tile -->
-        <a
-          href="/demos/wordle"
-          class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col no-underline group"
-        >
-          <h4 class="text-terminal-green text-sm mb-3">$ wordle</h4>
-          <div class="w-full flex items-center justify-center" style="aspect-ratio: 2/1;">
-            <div class="grid grid-cols-5 gap-1">
-              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black" style="background:#22c55e;">W</span>
-              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black" style="background:#eab308;">O</span>
-              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center" style="background:#3f3f46;color:#a1a1aa;">R</span>
-              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black" style="background:#22c55e;">D</span>
-              <span class="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded text-[10px] font-bold flex items-center justify-center text-black" style="background:#22c55e;">S</span>
-            </div>
-          </div>
-          <div class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border">
-            <span class="text-terminal-dim group-hover:text-terminal-fg">typescript · 5 letters · 6 guesses</span>
-            <span class="text-terminal-cyan group-hover:text-terminal-green">play →</span>
-          </div>
-        </a>
-
-
-
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="py-12">
-      <h3 class="text-terminal-amber mb-6">### projects</h3>
-      <ul class="space-y-4">
-        {projects.map((project) => (
-          <li>
-            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-              <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-terminal-fg hover:text-terminal-green no-underline">
-                {formatProjectTitle(project.name)}
-              </a>
-              <span class="text-terminal-dim text-sm">[{project.language}]</span>
-              {project.homepage && (
-                <a href={project.homepage} target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline text-sm">
-                  live →
-                </a>
-              )}
-            </div>
-            <p class="text-terminal-dim text-sm mt-1">{project.description}</p>
-          </li>
-        ))}
-      </ul>
-      <p class="mt-6">
-        <a href="/projects" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">view all projects →</a>
-      </p>
-    </section>
-
-    <!-- Work with me -->
-    <section class="py-12">
-      <h3 class="text-terminal-amber mb-6">### work with me</h3>
-      <p class="text-terminal-fg mb-4">
-        I'm available for freelance, contract, and full-time work. If you have
-        something interesting to build (APIs, web apps, data tools, emulators,
-        whatever), let's talk.
-      </p>
-      <div class="flex flex-wrap gap-3 text-sm">
-        <a
-          href={hireMailto}
-          class="inline-block px-3 py-1 border border-terminal-green bg-terminal-green/10 text-terminal-green hover:bg-terminal-green hover:text-terminal-bg no-underline transition-colors font-mono"
-        >
-          [hire me]
-        </a>
-        <a href={`mailto:${CONTACT_EMAIL}`} class="text-terminal-cyan hover:text-terminal-green no-underline self-center">
-          {CONTACT_EMAIL}
-        </a>
-      </div>
-    </section>
-
+        </section>
       </div>
 
-      <aside class="lg:sticky lg:top-8 lg:self-start lg:border-l lg:border-terminal-border lg:pl-8">
+      <aside
+        class="lg:sticky lg:top-8 lg:self-start lg:border-l lg:border-terminal-border lg:pl-8"
+      >
         <section class="py-12">
           <h3 class="text-terminal-amber mb-6">### recent posts</h3>
           <ul class="space-y-4">
-            {featuredPosts.map((post) => (
-              <li class="flex flex-col gap-0.5">
-                <a href={`/blog/${post.data.slug}`} class="text-terminal-fg hover:text-terminal-green no-underline text-sm leading-snug">
-                  {post.data.title}
-                </a>
-                <span class="text-terminal-dim text-xs">{formatDate(post.data.publishDate)}</span>
-              </li>
-            ))}
+            {
+              featuredPosts.map((post) => (
+                <li class="flex flex-col gap-0.5">
+                  <a
+                    href={`/blog/${post.data.slug}`}
+                    class="text-terminal-fg hover:text-terminal-green no-underline text-sm leading-snug"
+                  >
+                    {post.data.title}
+                  </a>
+                  <span class="text-terminal-dim text-xs">
+                    {formatDate(post.data.publishDate)}
+                  </span>
+                </li>
+              ))
+            }
           </ul>
           <p class="mt-6">
-            <a href="/blog" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">view all posts →</a>
+            <a
+              href="/blog"
+              class="text-terminal-dim hover:text-terminal-green no-underline text-sm"
+              >view all posts →</a
+            >
           </p>
         </section>
       </aside>
     </div>
-
   </div>
 
   <script is:inline>
@@ -352,12 +503,15 @@ const currentFocus = [
           jokeEl.textContent = data.joke_text;
           authorEl.textContent = `— ${data.author}`;
         } catch (e) {
-          jokeEl.textContent = 'Why do programmers prefer dark mode? Because light attracts bugs.';
+          jokeEl.textContent =
+            'Why do programmers prefer dark mode? Because light attracts bugs.';
           authorEl.textContent = '— anonymous';
         }
       }
       fetchJoke();
-      document.getElementById('new-joke')?.addEventListener('click', fetchJoke, { signal: aborter.signal });
+      document
+        .getElementById('new-joke')
+        ?.addEventListener('click', fetchJoke, { signal: aborter.signal });
 
       // --- Mini Conway ---
       const cvs = document.getElementById('mini-conway');
@@ -366,7 +520,9 @@ const currentFocus = [
         const CELL = 5;
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-        let cols = 0, rows = 0, grid = [];
+        let cols = 0,
+          rows = 0,
+          grid = [];
         let gen = 0;
 
         function sizeCanvas() {
@@ -381,20 +537,22 @@ const currentFocus = [
 
         function randomGrid() {
           return Array.from({ length: cols }, () =>
-            Array.from({ length: rows }, () => Math.random() < 0.4 ? 1 : 0)
+            Array.from({ length: rows }, () => (Math.random() < 0.4 ? 1 : 0))
           );
         }
 
         function step() {
-          const next = grid.map(col => col.slice());
+          const next = grid.map((col) => col.slice());
           for (let c = 0; c < cols; c++) {
             for (let r = 0; r < rows; r++) {
               let n = 0;
               for (let dc = -1; dc <= 1; dc++) {
                 for (let dr = -1; dr <= 1; dr++) {
                   if (dc === 0 && dr === 0) continue;
-                  const cc = c + dc, rr = r + dr;
-                  if (cc >= 0 && cc < cols && rr >= 0 && rr < rows) n += grid[cc][rr];
+                  const cc = c + dc,
+                    rr = r + dr;
+                  if (cc >= 0 && cc < cols && rr >= 0 && rr < rows)
+                    n += grid[cc][rr];
                 }
               }
               if (grid[c][r] === 1 && (n < 2 || n > 3)) next[c][r] = 0;
@@ -423,7 +581,10 @@ const currentFocus = [
           if (ts - lastTick > 180) {
             grid = step();
             gen++;
-            if (gen > 250) { grid = randomGrid(); gen = 0; }
+            if (gen > 250) {
+              grid = randomGrid();
+              gen = 0;
+            }
             render();
             lastTick = ts;
           }

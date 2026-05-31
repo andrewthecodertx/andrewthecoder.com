@@ -4,7 +4,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 export const prerender = true;
 
 const title = 'Coding Challenges';
-const description = 'Hands-on coding challenges from beginner to advanced: FizzBuzz, palindromes, Two Sum, and more, with Git practice built in.';
+const description =
+  'Hands-on coding challenges from beginner to advanced: FizzBuzz, palindromes, Two Sum, and more, with Git practice built in.';
 const permalink = `${Astro.site.href}challenges`;
 
 const challenges = [
@@ -12,42 +13,49 @@ const challenges = [
     name: 'FizzBuzz',
     difficulty: 'Beginner',
     repo: 'challenges-fizzbuzz',
-    description: 'The classic coding interview question. Print numbers 1-100, replacing multiples of 3 with "Fizz", multiples of 5 with "Buzz", and multiples of both with "FizzBuzz".'
+    description:
+      'The classic coding interview question. Print numbers 1-100, replacing multiples of 3 with "Fizz", multiples of 5 with "Buzz", and multiples of both with "FizzBuzz".',
   },
   {
     name: 'Palindrome Checker',
     difficulty: 'Beginner',
     repo: 'challenges-palindrome',
-    description: 'Check if a string reads the same forwards and backwards. Ignore case and non-alphanumeric characters.'
+    description:
+      'Check if a string reads the same forwards and backwards. Ignore case and non-alphanumeric characters.',
   },
   {
     name: 'Two Sum',
     difficulty: 'Easy',
     repo: 'challenges-two-sum',
-    description: 'Given an array of numbers and a target, find two numbers that add up to the target. Return their indices.'
+    description:
+      'Given an array of numbers and a target, find two numbers that add up to the target. Return their indices.',
   },
   {
     name: 'Anagram Detector',
     difficulty: 'Easy',
     repo: 'challenges-anagram',
-    description: 'Check if two strings are anagrams of each other - they contain the same letters in a different order.'
-  }
+    description:
+      'Check if two strings are anagrams of each other - they contain the same letters in a different order.',
+  },
 ];
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="challenges">
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="challenges"
+>
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-12 border-b border-terminal-border">
       <h2 class="text-terminal-green mb-6">$ coding-challenges</h2>
       <div class="space-y-4 text-terminal-fg">
         <p>
-          Welcome to my coding challenges! These aren't just about solving puzzles;
-          they're designed to help you build real-world skills alongside coding.
+          Welcome to my coding challenges! These aren't just about solving
+          puzzles; they're designed to help you build real-world skills
+          alongside coding.
         </p>
-        <p>
-          Every challenge teaches you two things:
-        </p>
+        <p>Every challenge teaches you two things:</p>
         <ul class="list-disc list-inside space-y-2 text-terminal-dim ml-4">
           <li>How to solve a programming problem</li>
           <li>How to use Git and GitHub like a professional developer</li>
@@ -59,13 +67,11 @@ const challenges = [
       <h3 class="text-terminal-amber mb-6">### why git?</h3>
       <div class="space-y-4 text-terminal-fg">
         <p>
-          Git is essential for any developer. Whether you're working on open source,
-          collaborating with a team, or just want to track your own work, version
-          control is a skill you'll use every day.
+          Git is essential for any developer. Whether you're working on open
+          source, collaborating with a team, or just want to track your own
+          work, version control is a skill you'll use every day.
         </p>
-        <p>
-          These challenges teach you the workflow that real developers use:
-        </p>
+        <p>These challenges teach you the workflow that real developers use:</p>
         <ul class="list-disc list-inside space-y-2 text-terminal-dim ml-4">
           <li>Forking a repository to make your own copy</li>
           <li>Cloning that fork to work on it locally</li>
@@ -80,24 +86,37 @@ const challenges = [
       <h3 class="text-terminal-amber mb-6">### how it works</h3>
       <div class="space-y-4 text-terminal-fg">
         <p>
-          <span class="text-terminal-green">1. Choose a Challenge</span> - Pick one from the list below.
+          <span class="text-terminal-green">1. Choose a Challenge</span> - Pick one
+          from the list below.
         </p>
         <p>
-          <span class="text-terminal-green">2. Fork the Repository</span> - On the challenge's GitHub page, click the <span class="text-terminal-amber">Fork</span> button (top right). This creates your own copy under your account, which is the only copy you can push to.
+          <span class="text-terminal-green">2. Fork the Repository</span> - On the
+          challenge's GitHub page, click the <span class="text-terminal-amber"
+            >Fork</span
+          > button (top right). This creates your own copy under your account, which
+          is the only copy you can push to.
         </p>
         <p>
-          <span class="text-terminal-green">3. Clone Your Fork</span> - Replace <span class="text-terminal-amber">YOUR_USERNAME</span> with your GitHub username:
+          <span class="text-terminal-green">3. Clone Your Fork</span> - Replace <span
+            class="text-terminal-amber">YOUR_USERNAME</span
+          > with your GitHub username:
         </p>
-        <pre class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>git clone https://github.com/YOUR_USERNAME/challenges-fizzbuzz.git
+        <pre
+          class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>git clone https://github.com/YOUR_USERNAME/challenges-fizzbuzz.git
 cd challenges-fizzbuzz</code></pre>
         <p>
-          <span class="text-terminal-green">4. Create a Branch</span> - Keep your solution separate from <span class="text-terminal-amber">main</span>:
+          <span class="text-terminal-green">4. Create a Branch</span> - Keep your
+          solution separate from <span class="text-terminal-amber">main</span>:
         </p>
-        <pre class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>git checkout -b yourusername/solution</code></pre>
+        <pre
+          class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>git checkout -b yourusername/solution</code></pre>
         <p>
-          <span class="text-terminal-green">5. Write Your Solution and Run the Tests</span> - Solve in whatever language you like and run its test suite:
+          <span class="text-terminal-green"
+            >5. Write Your Solution and Run the Tests</span
+          > - Solve in whatever language you like and run its test suite:
         </p>
-        <pre class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>npm test            # JavaScript / TypeScript
+        <pre
+          class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>npm test            # JavaScript / TypeScript
 pytest              # Python
 go test ./...       # Go
 cargo test          # Rust
@@ -105,13 +124,19 @@ rake test           # Ruby
 mvn test            # Java
 dotnet test         # C#</code></pre>
         <p>
-          <span class="text-terminal-green">6. Commit and Push to Your Fork</span>
+          <span class="text-terminal-green"
+            >6. Commit and Push to Your Fork</span
+          >
         </p>
-        <pre class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>git add .
+        <pre
+          class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>git add .
 git commit -m "Solution in [language]"
 git push origin yourusername/solution</code></pre>
         <p>
-          <span class="text-terminal-green">7. Open a Pull Request</span> - Go to your fork on GitHub. After your push, a banner appears offering to open a pull request against the original repo. Click it, describe your approach, and submit. I'll review and merge.
+          <span class="text-terminal-green">7. Open a Pull Request</span> - Go to
+          your fork on GitHub. After your push, a banner appears offering to open
+          a pull request against the original repo. Click it, describe your approach,
+          and submit. I'll review and merge.
         </p>
       </div>
     </section>
@@ -119,33 +144,45 @@ git push origin yourusername/solution</code></pre>
     <section class="py-12 border-b border-terminal-border">
       <h3 class="text-terminal-amber mb-6">### supported languages</h3>
       <p class="text-terminal-fg mb-4">
-        Each challenge has tests for JavaScript, Python, Go, Rust, Ruby, Java, C#, and TypeScript.
-        Solve in whatever language you're comfortable with.
+        Each challenge has tests for JavaScript, Python, Go, Rust, Ruby, Java,
+        C#, and TypeScript. Solve in whatever language you're comfortable with.
       </p>
       <p class="text-terminal-dim">
-        Don't see your language? Add your own tests and submit a PR to the challenge repo!
+        Don't see your language? Add your own tests and submit a PR to the
+        challenge repo!
       </p>
     </section>
 
     <section class="py-12">
       <h3 class="text-terminal-amber mb-6">### available challenges</h3>
       <ul class="space-y-4">
-        {challenges.map((challenge) => (
-          <li>
-            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-              <a href={`https://github.com/andrewthecodertx/${challenge.repo}`} target="_blank" rel="noopener noreferrer" class="text-terminal-fg hover:text-terminal-green no-underline">
-                {challenge.name}
-              </a>
-              <span class="text-terminal-dim text-sm">[{challenge.difficulty}]</span>
-            </div>
-            <p class="text-terminal-dim text-sm mt-1">{challenge.description}</p>
-          </li>
-        ))}
+        {
+          challenges.map((challenge) => (
+            <li>
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                <a
+                  href={`https://github.com/andrewthecodertx/${challenge.repo}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-terminal-fg hover:text-terminal-green no-underline"
+                >
+                  {challenge.name}
+                </a>
+                <span class="text-terminal-dim text-sm">
+                  [{challenge.difficulty}]
+                </span>
+              </div>
+              <p class="text-terminal-dim text-sm mt-1">
+                {challenge.description}
+              </p>
+            </li>
+          ))
+        }
       </ul>
       <p class="mt-6 text-terminal-dim text-sm">
-        More challenges coming soon! Have a suggestion? Open an issue on any challenge repository.
+        More challenges coming soon! Have a suggestion? Open an issue on any
+        challenge repository.
       </p>
     </section>
-
   </div>
 </BaseLayout>

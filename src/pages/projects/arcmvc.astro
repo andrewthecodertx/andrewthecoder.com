@@ -2,54 +2,155 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'ArcMVC';
-const description = 'A lightweight, modern PHP MVC framework. Small core, batteries included, built for PHP 8.4+.';
+const description =
+  'A lightweight, modern PHP MVC framework. Small core, batteries included, built for PHP 8.4+.';
 const permalink = `${Astro.site.href}projects/arcmvc`;
 const image = '/assets/projects/arcmvc.webp';
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="projects" image={image}>
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="projects"
+  image={image}
+>
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-12 border-b border-terminal-border">
       <h2 class="text-terminal-green mb-4">$ {title}</h2>
       <p class="text-terminal-dim text-sm mb-6">
-        <a href="https://github.com/andrewthecodertx/php-arcmvc" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/andrewthecodertx/php-arcmvc"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           View on GitHub →
         </a>
-        &nbsp;·&nbsp;
-        PHP 8.4+
+        &nbsp;·&nbsp; PHP 8.4+
       </p>
 
       <p class="text-terminal-fg leading-relaxed mb-6">
-        A lightweight, modern PHP MVC framework. Small core, batteries included. No hidden magic —
-        request flow is traceable from <code class="text-terminal-green">public/index.php</code> to response.
-        Every subsystem is replaceable. Secure defaults everywhere.
+        A lightweight, modern PHP MVC framework. Small core, batteries included.
+        No hidden magic — request flow is traceable from <code
+          class="text-terminal-green">public/index.php</code
+        > to response. Every subsystem is replaceable. Secure defaults everywhere.
       </p>
 
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6"
+      >
         <p class="text-terminal-dim text-sm mb-2">quick start</p>
-        <code class="text-terminal-green">composer require andrewthecoder/arcmvc</code>
+        <code class="text-terminal-green"
+          >composer require andrewthecoder/arcmvc</code
+        >
       </div>
     </section>
 
     <section class="py-4 border-b border-terminal-border">
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6"
+      >
         <p class="text-terminal-cyan font-mono mb-2">Contents</p>
         <ul class="space-y-1 text-terminal-fg text-sm">
-          <li><a href="#principles" class="text-terminal-cyan hover:text-terminal-green no-underline">Principles</a></li>
-          <li><a href="#requirements" class="text-terminal-cyan hover:text-terminal-green no-underline">Requirements</a></li>
-          <li><a href="#getting-started" class="text-terminal-cyan hover:text-terminal-green no-underline">Getting Started</a></li>
-          <li><a href="#routing" class="text-terminal-cyan hover:text-terminal-green no-underline">Routing</a></li>
-          <li><a href="#controllers" class="text-terminal-cyan hover:text-terminal-green no-underline">Controllers</a></li>
-          <li><a href="#views" class="text-terminal-cyan hover:text-terminal-green no-underline">Views &amp; Layouts</a></li>
-          <li><a href="#middleware" class="text-terminal-cyan hover:text-terminal-green no-underline">Middleware</a></li>
-          <li><a href="#database" class="text-terminal-cyan hover:text-terminal-green no-underline">Database</a></li>
-          <li><a href="#validation" class="text-terminal-cyan hover:text-terminal-green no-underline">Validation</a></li>
-          <li><a href="#console" class="text-terminal-cyan hover:text-terminal-green no-underline">Console Commands</a></li>
-          <li><a href="#project-structure" class="text-terminal-cyan hover:text-terminal-green no-underline">Project Structure</a></li>
-          <li><a href="#configuration" class="text-terminal-cyan hover:text-terminal-green no-underline">Configuration</a></li>
-          <li><a href="#container" class="text-terminal-cyan hover:text-terminal-green no-underline">Dependency Container</a></li>
-          <li><a href="#testing" class="text-terminal-cyan hover:text-terminal-green no-underline">Testing</a></li>
+          <li>
+            <a
+              href="#principles"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Principles</a
+            >
+          </li>
+          <li>
+            <a
+              href="#requirements"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Requirements</a
+            >
+          </li>
+          <li>
+            <a
+              href="#getting-started"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Getting Started</a
+            >
+          </li>
+          <li>
+            <a
+              href="#routing"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Routing</a
+            >
+          </li>
+          <li>
+            <a
+              href="#controllers"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Controllers</a
+            >
+          </li>
+          <li>
+            <a
+              href="#views"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Views &amp; Layouts</a
+            >
+          </li>
+          <li>
+            <a
+              href="#middleware"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Middleware</a
+            >
+          </li>
+          <li>
+            <a
+              href="#database"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Database</a
+            >
+          </li>
+          <li>
+            <a
+              href="#validation"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Validation</a
+            >
+          </li>
+          <li>
+            <a
+              href="#console"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Console Commands</a
+            >
+          </li>
+          <li>
+            <a
+              href="#project-structure"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Project Structure</a
+            >
+          </li>
+          <li>
+            <a
+              href="#configuration"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Configuration</a
+            >
+          </li>
+          <li>
+            <a
+              href="#container"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Dependency Container</a
+            >
+          </li>
+          <li>
+            <a
+              href="#testing"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Testing</a
+            >
+          </li>
         </ul>
       </div>
     </section>
@@ -59,7 +160,10 @@ const image = '/assets/projects/arcmvc.webp';
       <ul class="space-y-3 text-terminal-fg">
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span>No hidden magic. Request flow is traceable from entry point to response.</span>
+          <span
+            >No hidden magic. Request flow is traceable from entry point to
+            response.</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
@@ -79,12 +183,19 @@ const image = '/assets/projects/arcmvc.webp';
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span>First-party modules for the common website stack, each optional and independently replaceable.</span>
+          <span
+            >First-party modules for the common website stack, each optional and
+            independently replaceable.</span
+          >
         </li>
       </ul>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
@@ -106,185 +217,273 @@ const image = '/assets/projects/arcmvc.webp';
       </ul>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="getting-started">
       <h3 class="text-terminal-amber mb-6">### getting started</h3>
       <div class="space-y-6 text-terminal-fg">
-
         <div>
           <p class="text-terminal-cyan font-mono mb-2">1. Install</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
             composer require andrewthecoder/arcmvc
           </code>
-          <p class="text-terminal-dim text-sm">Or scaffold from the skeleton:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-2">
+          <p class="text-terminal-dim text-sm">
+            Or scaffold from the skeleton:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-2"
+          >
             cp -r vendor/andrewthecoder/arcmvc/skeleton/* .
           </code>
         </div>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">2. Entry point</p>
-          <p class="text-terminal-dim text-sm mb-2"><code class="text-terminal-green">public/index.php</code> is the entry point — everything flows through here:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            &lt;?php<br/><br/>
-            declare(strict_types=1);<br/><br/>
-            require __DIR__ . '/../vendor/autoload.php';<br/><br/>
-            $app = require __DIR__ . '/../bootstrap/app.php';<br/>
-            $app-&gt;boot();<br/>
+          <p class="text-terminal-dim text-sm mb-2">
+            <code class="text-terminal-green">public/index.php</code> is the entry
+            point — everything flows through here:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            &lt;?php<br /><br />
+            declare(strict_types=1);<br /><br />
+            require __DIR__ . '/../vendor/autoload.php';<br /><br />
+            $app = require __DIR__ . '/../bootstrap/app.php';<br />
+            $app-&gt;boot();<br />
             $app-&gt;run();
           </code>
         </div>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">3. Bootstrap</p>
-          <p class="text-terminal-dim text-sm mb-2"><code class="text-terminal-green">bootstrap/app.php</code> wires things together:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            &lt;?php<br/><br/>
-            declare(strict_types=1);<br/><br/>
-            use Arc\Application;<br/>
-            use Arc\Http\Middleware\SecurityMiddleware;<br/><br/>
-            $app = new Application(__DIR__ . '/../config', dirname(__DIR__));<br/>
-            $app-&gt;addMiddleware(SecurityMiddleware::class);<br/><br/>
-            $router = $app-&gt;router();<br/>
-            require __DIR__ . '/../routes/web.php';<br/><br/>
+          <p class="text-terminal-dim text-sm mb-2">
+            <code class="text-terminal-green">bootstrap/app.php</code> wires things
+            together:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            &lt;?php<br /><br />
+            declare(strict_types=1);<br /><br />
+            use Arc\Application;<br />
+            use Arc\Http\Middleware\SecurityMiddleware;<br /><br />
+            $app = new Application(__DIR__ . '/../config', dirname(__DIR__));<br
+            />
+            $app-&gt;addMiddleware(SecurityMiddleware::class);<br /><br />
+            $router = $app-&gt;router();<br />
+            require __DIR__ . '/../routes/web.php';<br /><br />
             return $app;
           </code>
         </div>
 
         <div>
-          <p class="text-terminal-cyan font-mono mb-2">4. Start the dev server</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+          <p class="text-terminal-cyan font-mono mb-2">
+            4. Start the dev server
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
             arc serve
           </code>
-          <p class="text-terminal-dim text-sm">Visit <a href="http://localhost:8080" class="text-terminal-cyan hover:text-terminal-green" target="_blank" rel="noopener noreferrer">http://localhost:8080</a></p>
+          <p class="text-terminal-dim text-sm">
+            Visit <a
+              href="http://localhost:8080"
+              class="text-terminal-cyan hover:text-terminal-green"
+              target="_blank"
+              rel="noopener noreferrer">http://localhost:8080</a
+            >
+          </p>
         </div>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">5. Define a route</p>
-          <p class="text-terminal-dim text-sm mb-2">Edit <code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">routes/web.php</code>:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+          <p class="text-terminal-dim text-sm mb-2">
+            Edit <code
+              class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+              >routes/web.php</code
+            >:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
             $router-&gt;get('/', [HomeController::class, 'index']);
           </code>
         </div>
-
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="routing">
       <h3 class="text-terminal-amber mb-6">### routing</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
-
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Basic routes</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            $router-&gt;get('/', [HomeController::class, 'index']);<br/>
-            $router-&gt;post('/users', [UserController::class, 'store']);<br/>
-			$router-&gt;put('/users/&#123;id&#125;', [UserController::class, 'update']);<br/>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            $router-&gt;get('/', [HomeController::class, 'index']);<br />
+            $router-&gt;post('/users', [UserController::class, 'store']);<br />
+            $router-&gt;put('/users/&#123;id&#125;', [UserController::class, 'update']);<br
+            />
             $router-&gt;delete('/users/&#123;id&#125;', [UserController::class, 'delete']);
           </code>
         </div>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Parameterized routes</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-			  $router-&gt;get('/users/&#123;id&#125;', [UserController::class, 'show']);
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            $router-&gt;get('/users/&#123;id&#125;', [UserController::class,
+            'show']);
           </code>
-          <p class="text-terminal-dim text-sm mt-2">Route parameters are passed as method arguments.</p>
+          <p class="text-terminal-dim text-sm mt-2">
+            Route parameters are passed as method arguments.
+          </p>
         </div>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Closures</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-			  $router-&gt;get('/hello/&#123;name&#125;', fn (Request $req, string $name) =&gt; "Hello, &#123;$name&#125;!");
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            $router-&gt;get('/hello/&#123;name&#125;', fn (Request $req, string
+            $name) =&gt; "Hello, &#123;$name&#125;!");
           </code>
-          <p class="text-terminal-dim text-sm mt-2">Return a string and it's wrapped in a Response automatically.</p>
+          <p class="text-terminal-dim text-sm mt-2">
+            Return a string and it's wrapped in a Response automatically.
+          </p>
         </div>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Route groups</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            $router-&gt;group(['prefix' =&gt; '/admin', 'middleware' =&gt; AuthMiddleware::class], function (Router $r) &#123;<br/>
-            &nbsp;&nbsp;$r-&gt;get('/dashboard', [AdminController::class, 'dashboard']);<br/>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            $router-&gt;group(['prefix' =&gt; '/admin', 'middleware' =&gt;
+            AuthMiddleware::class], function (Router $r) &#123;<br />
+            &nbsp;&nbsp;$r-&gt;get('/dashboard', [AdminController::class, 'dashboard']);<br
+            />
             &#125;);
           </code>
         </div>
-
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="controllers">
       <h3 class="text-terminal-amber mb-6">### controllers</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          Extend <code class="text-terminal-green">Controller</code> for view, JSON,
+          and redirect helpers:
+        </p>
 
-        <p>Extend <code class="text-terminal-green">Controller</code> for view, JSON, and redirect helpers:</p>
-
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          class HomeController extends Controller<br/>
-          &#123;<br/>
-          &nbsp;&nbsp;public function index(Request $request): Response<br/>
-          &nbsp;&nbsp;&#123;<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;view('home.index', ['title' =&gt; 'Welcome']);<br/>
-          &nbsp;&nbsp;&#125;<br/>
-          <br/>
-          &nbsp;&nbsp;public function api(Request $request): Response<br/>
-          &nbsp;&nbsp;&#123;<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;json(['status' =&gt; 'ok']);<br/>
-          &nbsp;&nbsp;&#125;<br/>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          class HomeController extends Controller<br />
+          &#123;<br />
+          &nbsp;&nbsp;public function index(Request $request): Response<br />
+          &nbsp;&nbsp;&#123;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;view('home.index', ['title' =&gt;
+          'Welcome']);<br />
+          &nbsp;&nbsp;&#125;<br />
+          <br />
+          &nbsp;&nbsp;public function api(Request $request): Response<br />
+          &nbsp;&nbsp;&#123;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;json(['status' =&gt; 'ok']);<br
+          />
+          &nbsp;&nbsp;&#125;<br />
           &#125;
         </code>
 
-        <p class="text-terminal-dim text-sm mt-4">Available helpers: <code class="text-terminal-green">view()</code>, <code class="text-terminal-green">json()</code>, <code class="text-terminal-green">redirect()</code>, <code class="text-terminal-green">back()</code>.</p>
-
+        <p class="text-terminal-dim text-sm mt-4">
+          Available helpers: <code class="text-terminal-green">view()</code>, <code
+            class="text-terminal-green">json()</code
+          >, <code class="text-terminal-green">redirect()</code>, <code
+            class="text-terminal-green">back()</code
+          >.
+        </p>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="views">
       <h3 class="text-terminal-amber mb-6">### views &amp; layouts</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
-
-        <p>Views are <code class="text-terminal-green">.phtml</code> files. <code class="text-terminal-green">$this</code> is bound to a <code class="text-terminal-green">Template</code> object.</p>
+        <p>
+          Views are <code class="text-terminal-green">.phtml</code> files. <code
+            class="text-terminal-green">$this</code
+          > is bound to a <code class="text-terminal-green">Template</code> object.
+        </p>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">View with layout</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            &lt;?php /** @var \Arc\View\Template $this */ ?&gt;<br/>
-            &lt;?php $this-&gt;extend('main') ?&gt;<br/>
-            &lt;?php $this-&gt;section('title', 'Home') ?&gt;<br/>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            &lt;?php /** @var \Arc\View\Template $this */ ?&gt;<br />
+            &lt;?php $this-&gt;extend('main') ?&gt;<br />
+            &lt;?php $this-&gt;section('title', 'Home') ?&gt;<br />
             &lt;h1&gt;Welcome&lt;/h1&gt;
           </code>
         </div>
 
         <div>
-          <p class="text-terminal-cyan font-mono mb-2">Layout (layouts/main.phtml)</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            &lt;?php /** @var \Arc\View\Template $this */ ?&gt;<br/>
-            &lt;!DOCTYPE html&gt;<br/>
-            &lt;html&gt;<br/>
-            &lt;head&gt;&lt;title&gt;<?= $this-&gt;yield('title', 'Arc') ?&gt;&lt;/title&gt;&lt;/head&gt;<br/>
-            &lt;body&gt;<?= $this-&gt;yield('content') ?&gt;&lt;/body&gt;<br/>
+          <p class="text-terminal-cyan font-mono mb-2">
+            Layout (layouts/main.phtml)
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            &lt;?php /** @var \Arc\View\Template $this */ ?&gt;<br />
+            &lt;!DOCTYPE html&gt;<br />
+            &lt;html&gt;<br />
+            &lt;head&gt;&lt;title&gt;<!--?= $this-&gt;yield('title', 'Arc') ?&gt;&lt;/title&gt;&lt;/head&gt;<br/-->
+            &lt;body&gt;<!--?= $this-&gt;yield('content') ?&gt;&lt;/body&gt;<br/-->
             &lt;/html&gt;
           </code>
         </div>
 
         <div>
-          <p class="text-terminal-cyan font-mono mb-2">Standalone view (no layout)</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            &lt;h1&gt;<?= $title ?&gt;&lt;/h1&gt;<br/>
+          <p class="text-terminal-cyan font-mono mb-2">
+            Standalone view (no layout)
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            &lt;h1&gt;<!--?= $title ?&gt;&lt;/h1&gt;<br/-->
             &lt;p&gt;No layout call, renders as-is.&lt;/p&gt;
           </code>
         </div>
@@ -293,326 +492,470 @@ const image = '/assets/projects/arcmvc.webp';
         <ul class="space-y-2 mt-2">
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
-            <span><code class="text-terminal-green">extend('main')</code> — wrap this view in a layout</span>
+            <span
+              ><code class="text-terminal-green">extend('main')</code> — wrap this
+              view in a layout</span
+            >
           </li>
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
-            <span><code class="text-terminal-green">section('title', 'Home')</code> — define a named section</span>
+            <span
+              ><code class="text-terminal-green">section('title', 'Home')</code> —
+              define a named section</span
+            >
           </li>
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
-            <span><code class="text-terminal-green">yield('title', 'Default')</code> — output a section or its default</span>
+            <span
+              ><code class="text-terminal-green">yield('title', 'Default')</code
+              > — output a section or its default</span
+            >
           </li>
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
-            <span><code class="text-terminal-green">yield('content')</code> — output the view's rendered content</span>
+            <span
+              ><code class="text-terminal-green">yield('content')</code> — output
+              the view's rendered content</span
+            >
           </li>
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
-            <span><code class="text-terminal-green">partial('nav.main')</code> — render a sub-template</span>
+            <span
+              ><code class="text-terminal-green">partial('nav.main')</code> — render
+              a sub-template</span
+            >
           </li>
         </ul>
 
-        <p class="text-terminal-dim text-sm mt-4">The <code class="text-terminal-green">@var</code> annotation helps IDEs and static analysis understand <code class="text-terminal-green">$this</code>.</p>
-
+        <p class="text-terminal-dim text-sm mt-4">
+          The <code class="text-terminal-green">@var</code> annotation helps IDEs
+          and static analysis understand <code class="text-terminal-green"
+            >$this</code
+          >.
+        </p>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="middleware">
       <h3 class="text-terminal-amber mb-6">### middleware</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          Implement <code class="text-terminal-green">MiddlewareInterface</code
+          >:
+        </p>
 
-        <p>Implement <code class="text-terminal-green">MiddlewareInterface</code>:</p>
-
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          class AuthMiddleware implements MiddlewareInterface<br/>
-          &#123;<br/>
-          &nbsp;&nbsp;public function handle(Request $request, callable $next): Response<br/>
-          &nbsp;&nbsp;&#123;<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;if (!$this-&gt;isLoggedIn()) &#123;<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new Response('', 401);<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;return $next($request);<br/>
-          &nbsp;&nbsp;&#125;<br/>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          class AuthMiddleware implements MiddlewareInterface<br />
+          &#123;<br />
+          &nbsp;&nbsp;public function handle(Request $request, callable $next): Response<br
+          />
+          &nbsp;&nbsp;&#123;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;if (!$this-&gt;isLoggedIn()) &#123;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new Response('', 401);<br
+          />
+          &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;return $next($request);<br />
+          &nbsp;&nbsp;&#125;<br />
           &#125;
         </code>
 
         <div class="mt-4 space-y-2">
           <p>Register globally:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
             $app-&gt;addMiddleware(AuthMiddleware::class);
           </code>
           <p class="mt-3">Or on a route group:</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            $router-&gt;group(['middleware' =&gt; AuthMiddleware::class], function (Router $r) &#123; ... &#125;);
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            $router-&gt;group(['middleware' =&gt; AuthMiddleware::class],
+            function (Router $r) &#123; ... &#125;);
           </code>
         </div>
 
-        <p class="text-terminal-dim text-sm mt-4">Security headers are on by default via <code class="text-terminal-green">SecurityMiddleware</code>.</p>
-
+        <p class="text-terminal-dim text-sm mt-4">
+          Security headers are on by default via <code
+            class="text-terminal-green">SecurityMiddleware</code
+          >.
+        </p>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="database">
       <h3 class="text-terminal-amber mb-6">### database</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
-
-        <p>PDO under the hood. Configure in <code class="text-terminal-green">config/database.php</code>. Supports MySQL and SQLite.</p>
+        <p>
+          PDO under the hood. Configure in <code class="text-terminal-green"
+            >config/database.php</code
+          >. Supports MySQL and SQLite.
+        </p>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Full config</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            &lt;?php<br/><br/>
-            declare(strict_types=1);<br/><br/>
-            return [<br/>
-            &nbsp;&nbsp;'default' =&gt; $_ENV['DB_CONNECTION'] ?? 'mysql',<br/>
-            &nbsp;&nbsp;'connections' =&gt; [<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;'mysql' =&gt; [<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'driver' =&gt; 'mysql',<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'host' =&gt; $_ENV['DB_HOST'] ?? '127.0.0.1',<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'port' =&gt; $_ENV['DB_PORT'] ?? '3306',<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'database' =&gt; $_ENV['DB_DATABASE'] ?? 'arc',<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'username' =&gt; $_ENV['DB_USERNAME'] ?? 'root',<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'password' =&gt; $_ENV['DB_PASSWORD'] ?? '',<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'charset' =&gt; 'utf8mb4',<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;],<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;'sqlite' =&gt; [<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'driver' =&gt; 'sqlite',<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'database' =&gt; __DIR__ . '/../database/arc.sqlite',<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;],<br/>
-            &nbsp;&nbsp;],<br/>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            &lt;?php<br /><br />
+            declare(strict_types=1);<br /><br />
+            return [<br />
+            &nbsp;&nbsp;'default' =&gt; $_ENV['DB_CONNECTION'] ?? 'mysql',<br />
+            &nbsp;&nbsp;'connections' =&gt; [<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;'mysql' =&gt; [<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'driver' =&gt; 'mysql',<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'host' =&gt; $_ENV['DB_HOST'] ?? '127.0.0.1',<br
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'port' =&gt; $_ENV['DB_PORT'] ?? '3306',<br
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'database' =&gt; $_ENV['DB_DATABASE']
+            ?? 'arc',<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'username' =&gt; $_ENV['DB_USERNAME']
+            ?? 'root',<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'password' =&gt; $_ENV['DB_PASSWORD']
+            ?? '',<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'charset' =&gt; 'utf8mb4',<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;],<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;'sqlite' =&gt; [<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'driver' =&gt; 'sqlite',<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'database' =&gt; __DIR__ . '/../database/arc.sqlite',<br
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;],<br />
+            &nbsp;&nbsp;],<br />
             ];
           </code>
         </div>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">Connection usage</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            $conn = $app-&gt;make(Connection::class);<br/>
-            <br/>
-            $users = $conn-&gt;select('SELECT * FROM users WHERE active = :active', ['active' =&gt; 1]);<br/>
-            $id = $conn-&gt;insert('INSERT INTO users (name, email) VALUES (:name, :email)', [...]);<br/>
-            $affected = $conn-&gt;update('UPDATE users SET name = :name WHERE id = :id', [...]);<br/>
-            <br/>
-            $conn-&gt;transaction(function (Connection $c) &#123;<br/>
-            &nbsp;&nbsp;$c-&gt;insert(...);<br/>
-            &nbsp;&nbsp;$c-&gt;update(...);<br/>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            $conn = $app-&gt;make(Connection::class);<br />
+            <br />
+            $users = $conn-&gt;select('SELECT * FROM users WHERE active = :active',
+            ['active' =&gt; 1]);<br />
+            $id = $conn-&gt;insert('INSERT INTO users (name, email) VALUES (:name,
+            :email)', [...]);<br />
+            $affected = $conn-&gt;update('UPDATE users SET name = :name WHERE id =
+            :id', [...]);<br />
+            <br />
+            $conn-&gt;transaction(function (Connection $c) &#123;<br />
+            &nbsp;&nbsp;$c-&gt;insert(...);<br />
+            &nbsp;&nbsp;$c-&gt;update(...);<br />
             &#125;);
           </code>
         </div>
 
         <div>
-          <p class="text-terminal-cyan font-mono mb-2">ActiveRecord-style Model</p>
-          <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-            class User extends Model<br/>
-            &#123;<br/>
-            &nbsp;&nbsp;protected string $table = 'users';<br/>
-            &nbsp;&nbsp;protected array $fillable = ['name', 'email'];<br/>
-            &#125;<br/>
-            <br/>
-            User::all();<br/>
-            User::find(1);<br/>
+          <p class="text-terminal-cyan font-mono mb-2">
+            ActiveRecord-style Model
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            class User extends Model<br />
+            &#123;<br />
+            &nbsp;&nbsp;protected string $table = 'users';<br />
+            &nbsp;&nbsp;protected array $fillable = ['name', 'email'];<br />
+            &#125;<br />
+            <br />
+            User::all();<br />
+            User::find(1);<br />
             User::create(['name' =&gt; 'Arc', 'email' =&gt; 'arc@example.com']);
           </code>
         </div>
-
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="validation">
       <h3 class="text-terminal-amber mb-6">### validation</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
-
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          $v = Validator::make($_POST, [<br/>
-          &nbsp;&nbsp;'name' =&gt; 'required|string|min:2',<br/>
-          &nbsp;&nbsp;'email' =&gt; 'required|email',<br/>
-          &nbsp;&nbsp;'password' =&gt; 'required|min:8',<br/>
-          &nbsp;&nbsp;'password_confirm' =&gt; 'required|same:password',<br/>
-          ]);<br/>
-          <br/>
-          if ($v-&gt;fails()) &#123;<br/>
-          &nbsp;&nbsp;$errors = $v-&gt;errors();<br/>
-          &#125;<br/>
-          <br/>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          $v = Validator::make($_POST, [<br />
+          &nbsp;&nbsp;'name' =&gt; 'required|string|min:2',<br />
+          &nbsp;&nbsp;'email' =&gt; 'required|email',<br />
+          &nbsp;&nbsp;'password' =&gt; 'required|min:8',<br />
+          &nbsp;&nbsp;'password_confirm' =&gt; 'required|same:password',<br />
+          ]);<br />
+          <br />
+          if ($v-&gt;fails()) &#123;<br />
+          &nbsp;&nbsp;$errors = $v-&gt;errors();<br />
+          &#125;<br />
+          <br />
           $validated = $v-&gt;validated();
         </code>
 
-        <p class="mt-4">Available rules: <code class="text-terminal-green">required</code>, <code class="text-terminal-green">string</code>, <code class="text-terminal-green">integer</code>, <code class="text-terminal-green">numeric</code>, <code class="text-terminal-green">email</code>, <code class="text-terminal-green">url</code>, <code class="text-terminal-green">boolean</code>, <code class="text-terminal-green">min:N</code>, <code class="text-terminal-green">max:N</code>, <code class="text-terminal-green">between:min,max</code>, <code class="text-terminal-green">same:field</code>, <code class="text-terminal-green">different:field</code>, <code class="text-terminal-green">in:a,b,c</code>, <code class="text-terminal-green">not_in:a,b,c</code>, <code class="text-terminal-green">alpha</code>, <code class="text-terminal-green">alpha_num</code>, <code class="text-terminal-green">regex:pattern</code>, <code class="text-terminal-green">date</code>.</p>
+        <p class="mt-4">
+          Available rules: <code class="text-terminal-green">required</code>, <code
+            class="text-terminal-green">string</code
+          >, <code class="text-terminal-green">integer</code>, <code
+            class="text-terminal-green">numeric</code
+          >, <code class="text-terminal-green">email</code>, <code
+            class="text-terminal-green">url</code
+          >, <code class="text-terminal-green">boolean</code>, <code
+            class="text-terminal-green">min:N</code
+          >, <code class="text-terminal-green">max:N</code>, <code
+            class="text-terminal-green">between:min,max</code
+          >, <code class="text-terminal-green">same:field</code>, <code
+            class="text-terminal-green">different:field</code
+          >, <code class="text-terminal-green">in:a,b,c</code>, <code
+            class="text-terminal-green">not_in:a,b,c</code
+          >, <code class="text-terminal-green">alpha</code>, <code
+            class="text-terminal-green">alpha_num</code
+          >, <code class="text-terminal-green">regex:pattern</code>, <code
+            class="text-terminal-green">date</code
+          >.
+        </p>
 
         <p class="mt-3">Custom messages:</p>
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          Validator::make($data, $rules, [<br/>
-          &nbsp;&nbsp;'name.required' =&gt; 'Please enter your name.',<br/>
-          &nbsp;&nbsp;'email.email' =&gt; 'That does not look like an email.',<br/>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          Validator::make($data, $rules, [<br />
+          &nbsp;&nbsp;'name.required' =&gt; 'Please enter your name.',<br />
+          &nbsp;&nbsp;'email.email' =&gt; 'That does not look like an email.',<br
+          />
           ]);
         </code>
-
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="console">
       <h3 class="text-terminal-amber mb-6">### console commands</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
-
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          arc serve &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Start dev server (port 8080)<br/>
-          arc serve --port=3000 &nbsp;&nbsp;&nbsp;&nbsp;# Custom port<br/>
-          arc serve --detach &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Run in background<br/>
-          arc serve:stop &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Stop detached server<br/>
-          arc make:controller User &nbsp;&nbsp;&nbsp;# Generate controller<br/>
-          arc make:model User &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Generate model<br/>
-          arc routes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# List registered routes<br/>
-          arc help &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Show help
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          arc serve
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+          Start dev server (port 8080)<br />
+          arc serve --port=3000 &nbsp;&nbsp;&nbsp;&nbsp;# Custom port<br />
+          arc serve --detach &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Run in background<br
+          />
+          arc serve:stop &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+          Stop detached server<br />
+          arc make:controller User &nbsp;&nbsp;&nbsp;# Generate controller<br />
+          arc make:model User &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Generate
+          model<br />
+          arc routes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+          List registered routes<br />
+          arc help &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+          Show help
         </code>
 
         <p class="mt-4">Custom commands:</p>
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          class MigrateCommand extends Command<br/>
-          &#123;<br/>
-          &nbsp;&nbsp;public function name(): string &#123; return 'migrate'; &#125;<br/>
-          &nbsp;&nbsp;public function description(): string &#123; return 'Run migrations'; &#125;<br/>
-          &nbsp;&nbsp;public function run(array $args): int &#123;<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;info('Running migrations...');<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br/>
-          &nbsp;&nbsp;&#125;<br/>
-          &#125;<br/>
-          <br/>
-          // Register in bootstrap/app.php:<br/>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          class MigrateCommand extends Command<br />
+          &#123;<br />
+          &nbsp;&nbsp;public function name(): string &#123; return 'migrate'; &#125;<br
+          />
+          &nbsp;&nbsp;public function description(): string &#123; return 'Run migrations';
+          &#125;<br />
+          &nbsp;&nbsp;public function run(array $args): int &#123;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;info('Running migrations...');<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br />
+          &nbsp;&nbsp;&#125;<br />
+          &#125;<br />
+          <br />
+          // Register in bootstrap/app.php:<br />
           $kernel-&gt;register(new MigrateCommand());
         </code>
-
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border" id="project-structure">
+    <section
+      class="py-12 border-b border-terminal-border"
+      id="project-structure"
+    >
       <h3 class="text-terminal-amber mb-6">### project structure</h3>
       <div class="text-terminal-fg leading-relaxed">
-
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          myapp/<br/>
-          ├── app/<br/>
-          │&nbsp;&nbsp;&nbsp;├── Controllers/<br/>
-          │&nbsp;&nbsp;&nbsp;├── Models/<br/>
-          │&nbsp;&nbsp;&nbsp;└── Middleware/<br/>
-          ├── config/<br/>
-          │&nbsp;&nbsp;&nbsp;├── app.php<br/>
-          │&nbsp;&nbsp;&nbsp;└── database.php<br/>
-          ├── public/<br/>
-          │&nbsp;&nbsp;&nbsp;└── index.php<br/>
-          ├── resources/<br/>
-          │&nbsp;&nbsp;&nbsp;└── views/<br/>
-          │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── layouts/<br/>
-          │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── main.phtml<br/>
-          │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── home/<br/>
-          │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── index.phtml<br/>
-          ├── routes/<br/>
-          │&nbsp;&nbsp;&nbsp;└── web.php<br/>
-          ├── bootstrap/<br/>
-          │&nbsp;&nbsp;&nbsp;└── app.php<br/>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          myapp/<br />
+          ├── app/<br />
+          │&nbsp;&nbsp;&nbsp;├── Controllers/<br />
+          │&nbsp;&nbsp;&nbsp;├── Models/<br />
+          │&nbsp;&nbsp;&nbsp;└── Middleware/<br />
+          ├── config/<br />
+          │&nbsp;&nbsp;&nbsp;├── app.php<br />
+          │&nbsp;&nbsp;&nbsp;└── database.php<br />
+          ├── public/<br />
+          │&nbsp;&nbsp;&nbsp;└── index.php<br />
+          ├── resources/<br />
+          │&nbsp;&nbsp;&nbsp;└── views/<br />
+          │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── layouts/<br />
+          │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── main.phtml<br
+          />
+          │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── home/<br />
+          │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── index.phtml<br
+          />
+          ├── routes/<br />
+          │&nbsp;&nbsp;&nbsp;└── web.php<br />
+          ├── bootstrap/<br />
+          │&nbsp;&nbsp;&nbsp;└── app.php<br />
           └── .env
         </code>
-
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="configuration">
       <h3 class="text-terminal-amber mb-6">### configuration</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          Config files in <code class="text-terminal-green">config/</code>.
+          Access with dot notation:
+        </p>
 
-        <p>Config files in <code class="text-terminal-green">config/</code>. Access with dot notation:</p>
-
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          $app-&gt;config()-&gt;get('app.name');<br/>
-          $app-&gt;config()-&gt;get('database.default');<br/>
-          $app-&gt;config()-&gt;set('app.debug', true);<br/>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          $app-&gt;config()-&gt;get('app.name');<br />
+          $app-&gt;config()-&gt;get('database.default');<br />
+          $app-&gt;config()-&gt;set('app.debug', true);<br />
           $app-&gt;config()-&gt;has('app.timezone');
         </code>
 
-        <p class="mt-4">Environment variables via <code class="text-terminal-green">.env</code>:</p>
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          APP_NAME=Arc<br/>
-          APP_ENV=local<br/>
-          APP_DEBUG=true<br/>
-          DB_CONNECTION=mysql<br/>
+        <p class="mt-4">
+          Environment variables via <code class="text-terminal-green">.env</code
+          >:
+        </p>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          APP_NAME=Arc<br />
+          APP_ENV=local<br />
+          APP_DEBUG=true<br />
+          DB_CONNECTION=mysql<br />
           DB_HOST=127.0.0.1
         </code>
-
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="container">
       <h3 class="text-terminal-amber mb-6">### dependency container</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
-
         <p>Bind interfaces to implementations, resolve dependencies:</p>
 
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
-          // Bind a new instance each time<br/>
-          $app-&gt;bind(PaymentGateway::class, StripeGateway::class);<br/>
-          <br/>
-          // Bind a singleton<br/>
-          $app-&gt;singleton(DatabaseConnection::class, fn ($app) =&gt; new DatabaseConnection($app-&gt;config()));<br/>
-          <br/>
-          // Resolve<br/>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          // Bind a new instance each time<br />
+          $app-&gt;bind(PaymentGateway::class, StripeGateway::class);<br />
+          <br />
+          // Bind a singleton<br />
+          $app-&gt;singleton(DatabaseConnection::class, fn ($app) =&gt; new DatabaseConnection($app-&gt;config()));<br
+          />
+          <br />
+          // Resolve<br />
           $gateway = $app-&gt;make(PaymentGateway::class);
         </code>
 
-        <p class="text-terminal-dim text-sm mt-4">Use <code class="text-terminal-green">bind()</code> for transient instances and <code class="text-terminal-green">singleton()</code> when you need one shared instance across the request lifecycle.</p>
-
+        <p class="text-terminal-dim text-sm mt-4">
+          Use <code class="text-terminal-green">bind()</code> for transient instances
+          and <code class="text-terminal-green">singleton()</code> when you need one
+          shared instance across the request lifecycle.
+        </p>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="testing">
       <h3 class="text-terminal-amber mb-6">### testing</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
-
         <p>Run the test suite with PHPUnit:</p>
 
-        <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs">
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
           vendor/bin/phpunit
         </code>
 
-        <p class="text-terminal-dim text-sm mt-4">Arc ships with a test suite covering routing, middleware, database, validation, and views. Add your own tests in <code class="text-terminal-green">tests/</code>.</p>
-
+        <p class="text-terminal-dim text-sm mt-4">
+          Arc ships with a test suite covering routing, middleware, database,
+          validation, and views. Add your own tests in <code
+            class="text-terminal-green">tests/</code
+          >.
+        </p>
       </div>
 
       <div class="py-4">
-        <a href="#" class="text-terminal-dim text-sm hover:text-terminal-green no-underline">↑ back to top</a>
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
       </div>
     </section>
-
   </div>
 </BaseLayout>

@@ -13,13 +13,19 @@ export interface Props {
 
 const { title, description, permalink, current, image } = Astro.props;
 ---
+
 <html lang="en">
-<head>
-  <BaseHead title={title} description={description} permalink={permalink} image={image} />
-</head>
-<body class="bg-terminal-bg text-terminal-fg font-mono antialiased">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      permalink={permalink}
+      image={image}
+    />
+  </head>
+  <body class="bg-terminal-bg text-terminal-fg font-mono antialiased">
     <Header current={current} />
-	<slot />
+    <slot />
     <Footer />
-</body>
+  </body>
 </html>

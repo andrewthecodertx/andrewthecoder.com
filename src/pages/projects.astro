@@ -12,18 +12,20 @@ try {
     'https://api.github.com/search/repositories?q=user:andrewthecodertx+topic:portfolio-project',
     {
       headers: {
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    });
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+    }
+  );
   const data = await response.json();
-  projects = data.items?.map((item: any) => ({
-    name: item.name,
-    description: item.description || 'No description provided',
-    url: item.html_url,
-    language: item.language || 'Unknown',
-    homepage: item.homepage || ''
-  })) || [];
+  projects =
+    data.items?.map((item: any) => ({
+      name: item.name,
+      description: item.description || 'No description provided',
+      url: item.html_url,
+      language: item.language || 'Unknown',
+      homepage: item.homepage || '',
+    })) || [];
 } catch (error) {
   console.error('Error fetching projects:', error);
 }
@@ -32,152 +34,199 @@ function formatProjectTitle(name: string) {
   return name.replace(/-/g, ' ');
 }
 
-const projectsWithDemos = projects.filter(p => p.homepage);
-const projectsWithoutDemos = projects.filter(p => !p.homepage);
+const projectsWithDemos = projects.filter((p) => p.homepage);
+const projectsWithoutDemos = projects.filter((p) => !p.homepage);
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="projects">
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="projects"
+>
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-12">
-        <h2 class="text-terminal-green mb-8">$ projects</h2>
+      <h2 class="text-terminal-green mb-8">$ projects</h2>
 
-        <ul class="space-y-6">
-            <li>
-                <a href="/projects/arcmvc" class="text-terminal-cyan">ArcMVC</a> is a lightweight,
-                modern PHP MVC framework. Small core, batteries included, built for PHP 8.4+.
-                No hidden magic — request flow is traceable from entry point to response.
-                Every subsystem is replaceable.
-            </li>
-            <li>
-                <a href="/projects/enchanter" class="text-terminal-cyan">Enchanter</a> is a focused AI agent harness —
-                single Rust binary, any OpenAI-compatible provider, zero runtime dependencies. It reads your SOUL,
-                loads your memory, discovers your skills, and runs your MCP servers.
-            </li>
-            <li>
-                <a href="/projects/conway" class="text-terminal-cyan">Game of Life</a> is an interactive
-                browser implementation of Conway's cellular automaton. Five preset patterns (glider,
-                LWSS, pulsar, R-pentomino, Gosper Glider Gun) plus tap-to-draw, toroidal wrapping,
-                and double-buffered simulation at 30fps. Zero dependencies.
-            </li>
-            <li>
-                <a href="/projects/erwinmvc" class="text-terminal-cyan">ErwinMVC</a> is a lightweight,
-                full-featured MVC framework for Node.js 20+ built with TypeScript. It gets you from
-                zero to a working web application in seconds, with sensible defaults and optional
-                features you can add as needed.
-            </li>
-            <li>
-                <a href="/projects/rust-neural-network" class="text-terminal-cyan">Rust Neural Network</a> is a
-                simple example of a feed forward neural network with back propagation.
-                Good for classification to regression.
-            </li>
-            <li>
-                <a href="/projects/go-nes-emulator" class="text-terminal-cyan">Go NES Emulator</a> is a
-                Nintendo Entertainment System emulator written in Go with SDL2
-                graphics support. Implements the 6502 CPU, PPU rendering pipeline,
-                and six major mappers (NROM, MMC1, UxROM, CNROM, MMC3, AxROM)
-                covering approximately 72% of the NES game library. Cross-platform
-                with releases for Linux, macOS, and an AUR package for Arch users.
-            </li>
-            <li>
-                <a href="/projects/ocaml-mandelbrot_set" class="text-terminal-cyan">OCaml Mandelbrot Set</a> is an
-                interactive Mandelbrot set explorer written in OCaml using the Graphics library.
-            </li>
-            <li>
-                <a href="/projects/rust-pet-emulator" class="text-terminal-cyan">Rust PET Emulator</a> is a
-                Commodore PET 4032 emulator written in Rust. Features MOS 6502 CPU emulation,
-                BASIC 4.0 interpreter, keyboard input, .prg file loading, and authentic 40-column display.
-            </li>
-        </ul>
+      <ul class="space-y-6">
+        <li>
+          <a href="/projects/arcmvc" class="text-terminal-cyan">ArcMVC</a> is a lightweight,
+          modern PHP MVC framework. Small core, batteries included, built for PHP
+          8.4+. No hidden magic — request flow is traceable from entry point to response.
+          Every subsystem is replaceable.
+        </li>
+        <li>
+          <a href="/projects/enchanter" class="text-terminal-cyan">Enchanter</a> is
+          a focused AI agent harness — single Rust binary, any OpenAI-compatible provider,
+          zero runtime dependencies. It reads your SOUL, loads your memory, discovers
+          your skills, and runs your MCP servers.
+        </li>
+        <li>
+          <a href="/projects/conway" class="text-terminal-cyan">Game of Life</a> is
+          an interactive browser implementation of Conway's cellular automaton. Five
+          preset patterns (glider, LWSS, pulsar, R-pentomino, Gosper Glider Gun) plus
+          tap-to-draw, toroidal wrapping, and double-buffered simulation at 30fps.
+          Zero dependencies.
+        </li>
+        <li>
+          <a href="/projects/erwinmvc" class="text-terminal-cyan">ErwinMVC</a> is
+          a lightweight, full-featured MVC framework for Node.js 20+ built with TypeScript.
+          It gets you from zero to a working web application in seconds, with sensible
+          defaults and optional features you can add as needed.
+        </li>
+        <li>
+          <a href="/projects/rust-neural-network" class="text-terminal-cyan"
+            >Rust Neural Network</a
+          > is a simple example of a feed forward neural network with back propagation.
+          Good for classification to regression.
+        </li>
+        <li>
+          <a href="/projects/go-nes-emulator" class="text-terminal-cyan"
+            >Go NES Emulator</a
+          > is a Nintendo Entertainment System emulator written in Go with SDL2 graphics
+          support. Implements the 6502 CPU, PPU rendering pipeline, and six major
+          mappers (NROM, MMC1, UxROM, CNROM, MMC3, AxROM) covering approximately 72%
+          of the NES game library. Cross-platform with releases for Linux, macOS,
+          and an AUR package for Arch users.
+        </li>
+        <li>
+          <a href="/projects/ocaml-mandelbrot_set" class="text-terminal-cyan"
+            >OCaml Mandelbrot Set</a
+          > is an interactive Mandelbrot set explorer written in OCaml using the Graphics
+          library.
+        </li>
+        <li>
+          <a href="/projects/rust-pet-emulator" class="text-terminal-cyan"
+            >Rust PET Emulator</a
+          > is a Commodore PET 4032 emulator written in Rust. Features MOS 6502 CPU
+          emulation, BASIC 4.0 interpreter, keyboard input, .prg file loading, and
+          authentic 40-column display.
+        </li>
+      </ul>
     </section>
 
     <section class="py-12">
-        <h3 class="text-terminal-amber mb-8">### websites</h3>
+      <h3 class="text-terminal-amber mb-8">### websites</h3>
 
-        <p class="text-terminal-dim mb-8">
-            Some websites I have built...
-        </p>
+      <p class="text-terminal-dim mb-8">Some websites I have built...</p>
 
-        <ul class="space-y-6">
-            <li>
-                <a href="https://bruiserslegacy.org" class="text-terminal-cyan">Bruiser's Legacy</a> is a small
-                animal rescue in southeastern Wisconsin.
-            </li>
-            <li>
-                <a href="https://weightogether.com" class="text-terminal-cyan">Weigh Together</a> is a weight
-                and fitness tracking platform that combines personal progress
-                monitoring with team-based accountability. Users can log their
-                weight, add progress photos, view charts and insights, join
-                accountability groups, and participate in challenges with
-                others. The platform supports various fitness activities
-                including running, strength training, and hiking, with a
-                focus on community support and celebrating milestones together.
-            </li>
-        </ul>
+      <ul class="space-y-6">
+        <li>
+          <a href="https://bruiserslegacy.org" class="text-terminal-cyan"
+            >Bruiser's Legacy</a
+          > is a small animal rescue in southeastern Wisconsin.
+        </li>
+        <li>
+          <a href="https://weightogether.com" class="text-terminal-cyan"
+            >Weigh Together</a
+          > is a weight and fitness tracking platform that combines personal progress
+          monitoring with team-based accountability. Users can log their weight, add
+          progress photos, view charts and insights, join accountability groups, and
+          participate in challenges with others. The platform supports various fitness
+          activities including running, strength training, and hiking, with a focus
+          on community support and celebrating milestones together.
+        </li>
+      </ul>
     </section>
-        
+
     <section class="py-12">
       <h3 class="text-terminal-amber mb-8">### side quests</h3>
 
       <p class="text-terminal-dim mb-8">
         Things I've built. Some useful, some just for fun.
-        <a href="https://github.com/andrewthecodertx" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">See all on GitHub →</a>
+        <a
+          href="https://github.com/andrewthecodertx"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >See all on GitHub →</a
+        >
       </p>
 
-      {projects.length > 0 ? (
-        <div class="grid md:grid-cols-2 gap-8">
-          <div>
-            <h3 class="text-terminal-dim text-sm mb-4 border-b border-terminal-border pb-2">with demos</h3>
-            <ul class="space-y-4">
-              {projectsWithDemos.map((project) => (
-                <li>
-                  <div class="flex gap-1 mb-1">
+      {
+        projects.length > 0 ? (
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-terminal-dim text-sm mb-4 border-b border-terminal-border pb-2">
+                with demos
+              </h3>
+              <ul class="space-y-4">
+                {projectsWithDemos.map((project) => (
+                  <li>
+                    <div class="flex gap-1 mb-1">
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-terminal-cyan hover:text-terminal-green no-underline"
+                      >
+                        {formatProjectTitle(project.name)}
+                      </a>
+                      <span class="text-terminal-dim text-sm">
+                        [{project.language}]
+                      </span>
+                    </div>
+                    <span>{project.description}</span>
+                    <div class="flex gap-3 text-sm">
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-terminal-cyan hover:text-terminal-green no-underline"
+                      >
+                        source →
+                      </a>
+                      <a
+                        href={project.homepage}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-terminal-cyan hover:text-terminal-green no-underline"
+                      >
+                        demo →
+                      </a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-terminal-dim text-sm mb-4 border-b border-terminal-border pb-2">
+                source only
+              </h3>
+              <ul class="space-y-4">
+                {projectsWithoutDemos.map((project) => (
+                  <li>
+                    <div class="flex gap-1 mb-1">
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-terminal-cyan hover:text-terminal-green no-underline"
+                      >
+                        {formatProjectTitle(project.name)}
+                      </a>
+                      <span class="text-terminal-dim text-sm">
+                        [{project.language}]
+                      </span>
+                    </div>
+                    <span class="block">{project.description}</span>
                     <a
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-terminal-cyan hover:text-terminal-green no-underline"
+                      class="text-terminal-cyan hover:text-terminal-green no-underline text-sm"
                     >
-                      {formatProjectTitle(project.name)}
+                      source →
                     </a>
-                    <span class="text-terminal-dim text-sm">[{project.language}]</span>
-                  </div>
-                  <span>{project.description}</span>
-                  <div class="flex gap-3 text-sm">
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">source →</a>
-                    <a href={project.homepage} target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">demo →</a>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div>
-            <h3 class="text-terminal-dim text-sm mb-4 border-b border-terminal-border pb-2">source only</h3>
-            <ul class="space-y-4">
-              {projectsWithoutDemos.map((project) => (
-                <li>
-                  <div class="flex gap-1 mb-1">
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-terminal-cyan hover:text-terminal-green no-underline"
-                    >
-                      {formatProjectTitle(project.name)}
-                    </a>
-                    <span class="text-terminal-dim text-sm">[{project.language}]</span>
-                  </div>
-                  <span class="block">{project.description}</span>
-                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline text-sm">source →</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ) : (
-        <p class="text-terminal-dim">No projects found. Check back later.</p>
-      )}
+        ) : (
+          <p class="text-terminal-dim">No projects found. Check back later.</p>
+        )
+      }
     </section>
-
   </div>
 </BaseLayout>

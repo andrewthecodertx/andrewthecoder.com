@@ -4,7 +4,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 export const prerender = true;
 
 const title = 'Geodetic Curvature Analysis';
-const description = 'Field measurements of Earth-curvature angular divergence across 22 North American survey sites in the 2024 G-CURV campaign. Site summary, residuals, and raw data.';
+const description =
+  'Field measurements of Earth-curvature angular divergence across 22 North American survey sites in the 2024 G-CURV campaign. Site summary, residuals, and raw data.';
 const permalink = `${Astro.site.href}curvature`;
 
 type Site = {
@@ -21,32 +22,274 @@ type Site = {
 };
 
 const theoretical = 32.3756; // arcsec subtended by 1000 m of Earth-surface arc
-const baseline = 1000;       // meters
+const baseline = 1000; // meters
 const campaign = 'G-CURV-2024-B';
 
 const sites: Site[] = [
-  { id: 'WI-MSN-01', state: 'WI', locality: 'Madison, WI',       date: '2024-07-27', azimuth: 90,  empirical: 32.8833, residual:  0.5077, instrument: 'Trimble S9',     observer: 'Patel, M.',     geoid: 'NAVD88'  },
-  { id: 'WI-MKE-01', state: 'WI', locality: 'Milwaukee, WI',     date: '2024-06-10', azimuth: 180, empirical: 32.0424, residual: -0.3332, instrument: 'Sokkia GP1',     observer: 'Okafor, T.',    geoid: 'EGM2008' },
-  { id: 'WI-GRB-01', state: 'WI', locality: 'Green Bay, WI',     date: '2024-08-27', azimuth: 45,  empirical: 32.3934, residual:  0.0178, instrument: 'ZNT Custom Cam', observer: 'Harmon, J.',    geoid: 'GEOID18' },
-  { id: 'WI-EAU-01', state: 'WI', locality: 'Eau Claire, WI',    date: '2024-06-27', azimuth: 225, empirical: 31.8911, residual: -0.4845, instrument: 'Leica TM6100A',  observer: 'Vasquez, L.',   geoid: 'NAVD88'  },
-  { id: 'MN-MSP-01', state: 'MN', locality: 'Minneapolis, MN',   date: '2024-06-19', azimuth: 45,  empirical: 33.0362, residual:  0.6606, instrument: 'ZNT Custom Cam', observer: 'Kowalski, R.',  geoid: 'GEOID18' },
-  { id: 'MN-STP-01', state: 'MN', locality: 'Saint Paul, MN',    date: '2024-06-28', azimuth: 270, empirical: 32.6538, residual:  0.2782, instrument: 'Sokkia GP1',     observer: 'Harmon, J.',    geoid: 'EGM2008' },
-  { id: 'MN-DUL-01', state: 'MN', locality: 'Duluth, MN',        date: '2024-06-12', azimuth: 0,   empirical: 31.8080, residual: -0.5676, instrument: 'Trimble S9',     observer: 'Patel, M.',     geoid: 'GEOID18' },
-  { id: 'MN-RCH-01', state: 'MN', locality: 'Rochester, MN',     date: '2024-08-12', azimuth: 135, empirical: 32.1440, residual: -0.2316, instrument: 'ZNT Custom Cam', observer: 'Vasquez, L.',   geoid: 'EGM2008' },
-  { id: 'NY-NYC-01', state: 'NY', locality: 'New York, NY',      date: '2024-08-04', azimuth: 90,  empirical: 32.0331, residual: -0.3425, instrument: 'Sokkia GP1',     observer: 'Vasquez, L.',   geoid: 'EGM2008' },
-  { id: 'NY-BUF-01', state: 'NY', locality: 'Buffalo, NY',       date: '2024-09-04', azimuth: 135, empirical: 32.4596, residual:  0.0840, instrument: 'Trimble S9',     observer: 'Vasquez, L.',   geoid: 'GEOID18' },
-  { id: 'NY-ROC-01', state: 'NY', locality: 'Rochester, NY',     date: '2024-08-25', azimuth: 225, empirical: 32.5002, residual:  0.1246, instrument: 'Sokkia GP1',     observer: 'Vasquez, L.',   geoid: 'NAVD88'  },
-  { id: 'NY-ALB-01', state: 'NY', locality: 'Albany, NY',        date: '2024-06-18', azimuth: 315, empirical: 32.8324, residual:  0.4568, instrument: 'Leica TM6100A',  observer: 'Okafor, T.',    geoid: 'EGM2008' },
-  { id: 'CA-LAX-01', state: 'CA', locality: 'Los Angeles, CA',   date: '2024-08-05', azimuth: 45,  empirical: 32.7078, residual:  0.3322, instrument: 'Sokkia GP1',     observer: 'Vasquez, L.',   geoid: 'GEOID18' },
-  { id: 'CA-SFO-01', state: 'CA', locality: 'San Francisco, CA', date: '2024-07-02', azimuth: 180, empirical: 31.3067, residual: -1.0689, instrument: 'Sokkia GP1',     observer: 'Patel, M.',     geoid: 'NAVD88'  },
-  { id: 'CA-SAN-01', state: 'CA', locality: 'San Diego, CA',     date: '2024-06-16', azimuth: 270, empirical: 31.8233, residual: -0.5523, instrument: 'Leica TM6100A',  observer: 'Kowalski, R.',  geoid: 'GEOID18' },
-  { id: 'CA-SAC-01', state: 'CA', locality: 'Sacramento, CA',    date: '2024-09-19', azimuth: 0,   empirical: 32.6065, residual:  0.2309, instrument: 'ZNT Custom Cam', observer: 'Nguyen, A.',    geoid: 'GEOID18' },
-  { id: 'WI-LAC-01', state: 'WI', locality: 'La Crosse, WI',     date: '2024-09-05', azimuth: 30,  empirical: 33.6328, residual:  1.2572, instrument: 'Leica TM6100A',  observer: 'Okafor, T.',    geoid: 'GEOID18' },
-  { id: 'WI-OSH-01', state: 'WI', locality: 'Oshkosh, WI',       date: '2024-06-21', azimuth: 120, empirical: 32.3294, residual: -0.0462, instrument: 'Trimble S9',     observer: 'Lindqvist, S.', geoid: 'NAVD88'  },
-  { id: 'MN-SCD-01', state: 'MN', locality: 'St. Cloud, MN',     date: '2024-07-03', azimuth: 200, empirical: 32.3757, residual:  0.0001, instrument: 'ZNT Custom Cam', observer: 'Patel, M.',     geoid: 'GEOID18' },
-  { id: 'MN-MAN-01', state: 'MN', locality: 'Mankato, MN',       date: '2024-09-08', azimuth: 10,  empirical: 32.6589, residual:  0.2833, instrument: 'Trimble S9',     observer: 'Patel, M.',     geoid: 'GEOID18' },
-  { id: 'NY-SYR-01', state: 'NY', locality: 'Syracuse, NY',      date: '2024-09-13', azimuth: 60,  empirical: 32.3789, residual:  0.0033, instrument: 'ZNT Custom Cam', observer: 'Patel, M.',     geoid: 'GEOID18' },
-  { id: 'CA-SJX-01', state: 'CA', locality: 'San Jose, CA',      date: '2024-09-03', azimuth: 340, empirical: 31.5489, residual: -0.8267, instrument: 'Trimble S9',     observer: 'Harmon, J.',    geoid: 'NAVD88'  },
+  {
+    id: 'WI-MSN-01',
+    state: 'WI',
+    locality: 'Madison, WI',
+    date: '2024-07-27',
+    azimuth: 90,
+    empirical: 32.8833,
+    residual: 0.5077,
+    instrument: 'Trimble S9',
+    observer: 'Patel, M.',
+    geoid: 'NAVD88',
+  },
+  {
+    id: 'WI-MKE-01',
+    state: 'WI',
+    locality: 'Milwaukee, WI',
+    date: '2024-06-10',
+    azimuth: 180,
+    empirical: 32.0424,
+    residual: -0.3332,
+    instrument: 'Sokkia GP1',
+    observer: 'Okafor, T.',
+    geoid: 'EGM2008',
+  },
+  {
+    id: 'WI-GRB-01',
+    state: 'WI',
+    locality: 'Green Bay, WI',
+    date: '2024-08-27',
+    azimuth: 45,
+    empirical: 32.3934,
+    residual: 0.0178,
+    instrument: 'ZNT Custom Cam',
+    observer: 'Harmon, J.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'WI-EAU-01',
+    state: 'WI',
+    locality: 'Eau Claire, WI',
+    date: '2024-06-27',
+    azimuth: 225,
+    empirical: 31.8911,
+    residual: -0.4845,
+    instrument: 'Leica TM6100A',
+    observer: 'Vasquez, L.',
+    geoid: 'NAVD88',
+  },
+  {
+    id: 'MN-MSP-01',
+    state: 'MN',
+    locality: 'Minneapolis, MN',
+    date: '2024-06-19',
+    azimuth: 45,
+    empirical: 33.0362,
+    residual: 0.6606,
+    instrument: 'ZNT Custom Cam',
+    observer: 'Kowalski, R.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'MN-STP-01',
+    state: 'MN',
+    locality: 'Saint Paul, MN',
+    date: '2024-06-28',
+    azimuth: 270,
+    empirical: 32.6538,
+    residual: 0.2782,
+    instrument: 'Sokkia GP1',
+    observer: 'Harmon, J.',
+    geoid: 'EGM2008',
+  },
+  {
+    id: 'MN-DUL-01',
+    state: 'MN',
+    locality: 'Duluth, MN',
+    date: '2024-06-12',
+    azimuth: 0,
+    empirical: 31.808,
+    residual: -0.5676,
+    instrument: 'Trimble S9',
+    observer: 'Patel, M.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'MN-RCH-01',
+    state: 'MN',
+    locality: 'Rochester, MN',
+    date: '2024-08-12',
+    azimuth: 135,
+    empirical: 32.144,
+    residual: -0.2316,
+    instrument: 'ZNT Custom Cam',
+    observer: 'Vasquez, L.',
+    geoid: 'EGM2008',
+  },
+  {
+    id: 'NY-NYC-01',
+    state: 'NY',
+    locality: 'New York, NY',
+    date: '2024-08-04',
+    azimuth: 90,
+    empirical: 32.0331,
+    residual: -0.3425,
+    instrument: 'Sokkia GP1',
+    observer: 'Vasquez, L.',
+    geoid: 'EGM2008',
+  },
+  {
+    id: 'NY-BUF-01',
+    state: 'NY',
+    locality: 'Buffalo, NY',
+    date: '2024-09-04',
+    azimuth: 135,
+    empirical: 32.4596,
+    residual: 0.084,
+    instrument: 'Trimble S9',
+    observer: 'Vasquez, L.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'NY-ROC-01',
+    state: 'NY',
+    locality: 'Rochester, NY',
+    date: '2024-08-25',
+    azimuth: 225,
+    empirical: 32.5002,
+    residual: 0.1246,
+    instrument: 'Sokkia GP1',
+    observer: 'Vasquez, L.',
+    geoid: 'NAVD88',
+  },
+  {
+    id: 'NY-ALB-01',
+    state: 'NY',
+    locality: 'Albany, NY',
+    date: '2024-06-18',
+    azimuth: 315,
+    empirical: 32.8324,
+    residual: 0.4568,
+    instrument: 'Leica TM6100A',
+    observer: 'Okafor, T.',
+    geoid: 'EGM2008',
+  },
+  {
+    id: 'CA-LAX-01',
+    state: 'CA',
+    locality: 'Los Angeles, CA',
+    date: '2024-08-05',
+    azimuth: 45,
+    empirical: 32.7078,
+    residual: 0.3322,
+    instrument: 'Sokkia GP1',
+    observer: 'Vasquez, L.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'CA-SFO-01',
+    state: 'CA',
+    locality: 'San Francisco, CA',
+    date: '2024-07-02',
+    azimuth: 180,
+    empirical: 31.3067,
+    residual: -1.0689,
+    instrument: 'Sokkia GP1',
+    observer: 'Patel, M.',
+    geoid: 'NAVD88',
+  },
+  {
+    id: 'CA-SAN-01',
+    state: 'CA',
+    locality: 'San Diego, CA',
+    date: '2024-06-16',
+    azimuth: 270,
+    empirical: 31.8233,
+    residual: -0.5523,
+    instrument: 'Leica TM6100A',
+    observer: 'Kowalski, R.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'CA-SAC-01',
+    state: 'CA',
+    locality: 'Sacramento, CA',
+    date: '2024-09-19',
+    azimuth: 0,
+    empirical: 32.6065,
+    residual: 0.2309,
+    instrument: 'ZNT Custom Cam',
+    observer: 'Nguyen, A.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'WI-LAC-01',
+    state: 'WI',
+    locality: 'La Crosse, WI',
+    date: '2024-09-05',
+    azimuth: 30,
+    empirical: 33.6328,
+    residual: 1.2572,
+    instrument: 'Leica TM6100A',
+    observer: 'Okafor, T.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'WI-OSH-01',
+    state: 'WI',
+    locality: 'Oshkosh, WI',
+    date: '2024-06-21',
+    azimuth: 120,
+    empirical: 32.3294,
+    residual: -0.0462,
+    instrument: 'Trimble S9',
+    observer: 'Lindqvist, S.',
+    geoid: 'NAVD88',
+  },
+  {
+    id: 'MN-SCD-01',
+    state: 'MN',
+    locality: 'St. Cloud, MN',
+    date: '2024-07-03',
+    azimuth: 200,
+    empirical: 32.3757,
+    residual: 0.0001,
+    instrument: 'ZNT Custom Cam',
+    observer: 'Patel, M.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'MN-MAN-01',
+    state: 'MN',
+    locality: 'Mankato, MN',
+    date: '2024-09-08',
+    azimuth: 10,
+    empirical: 32.6589,
+    residual: 0.2833,
+    instrument: 'Trimble S9',
+    observer: 'Patel, M.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'NY-SYR-01',
+    state: 'NY',
+    locality: 'Syracuse, NY',
+    date: '2024-09-13',
+    azimuth: 60,
+    empirical: 32.3789,
+    residual: 0.0033,
+    instrument: 'ZNT Custom Cam',
+    observer: 'Patel, M.',
+    geoid: 'GEOID18',
+  },
+  {
+    id: 'CA-SJX-01',
+    state: 'CA',
+    locality: 'San Jose, CA',
+    date: '2024-09-03',
+    azimuth: 340,
+    empirical: 31.5489,
+    residual: -0.8267,
+    instrument: 'Trimble S9',
+    observer: 'Harmon, J.',
+    geoid: 'NAVD88',
+  },
 ];
 
 const residuals = sites.map((s) => s.residual);
@@ -107,7 +350,8 @@ const datasetJsonLd = {
     },
     {
       '@type': 'DataDownload',
-      encodingFormat: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      encodingFormat:
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       contentUrl: `${Astro.site.href}data/curvature/source.xlsx`,
       name: 'source.xlsx',
     },
@@ -123,16 +367,16 @@ const datasetJsonLd = {
     set:html={JSON.stringify(datasetJsonLd)}
   />
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-8 border-b border-terminal-border">
       <h2 class="text-terminal-green mb-4">$ geodetic-curvature</h2>
       <p class="text-terminal-fg leading-relaxed mb-3">
-        A 2024 field campaign measuring the angular divergence of the local vertical
-        across <span class="text-terminal-cyan">{sites.length}</span> survey sites in
-        <span class="text-terminal-cyan">{states.length}</span> U.S. states. Each site
-        occupied a <span class="text-terminal-cyan">{baseline} m</span> baseline with
-        measurements at 100 m intervals; the table below is the per-site summary, and
-        the full per-station observations are linked at the bottom.
+        A 2024 field campaign measuring the angular divergence of the local
+        vertical across <span class="text-terminal-cyan">{sites.length}</span> survey
+        sites in
+        <span class="text-terminal-cyan">{states.length}</span> U.S. states. Each
+        site occupied a <span class="text-terminal-cyan">{baseline} m</span> baseline
+        with measurements at 100 m intervals; the table below is the per-site summary,
+        and the full per-station observations are linked at the bottom.
       </p>
       <p class="text-terminal-dim text-sm">
         campaign <span class="text-terminal-amber">{campaign}</span>
@@ -170,11 +414,15 @@ const datasetJsonLd = {
         </div>
         <div>
           <div class="text-terminal-dim text-xs">mean residual</div>
-          <div class="text-terminal-green text-2xl">{meanResidual.toFixed(3)}″</div>
+          <div class="text-terminal-green text-2xl">
+            {meanResidual.toFixed(3)}″
+          </div>
         </div>
         <div>
           <div class="text-terminal-dim text-xs">RMS residual</div>
-          <div class="text-terminal-green text-2xl">{rmsResidual.toFixed(3)}″</div>
+          <div class="text-terminal-green text-2xl">
+            {rmsResidual.toFixed(3)}″
+          </div>
         </div>
         <div>
           <div class="text-terminal-dim text-xs">peak |residual|</div>
@@ -183,12 +431,14 @@ const datasetJsonLd = {
       </div>
       <p class="text-terminal-fg leading-relaxed">
         The empirical mean across all sites lands within
-        <span class="text-terminal-cyan">{Math.abs(meanResidual).toFixed(3)}″</span>
+        <span class="text-terminal-cyan"
+          >{Math.abs(meanResidual).toFixed(3)}″</span
+        >
         of the theoretical {theoretical}″, with an RMS scatter of
         <span class="text-terminal-cyan">{rmsResidual.toFixed(3)}″</span>
-        — consistent with instrument precision rather than any systematic bias.
-        The largest single-site deviation is {maxAbs.toFixed(3)}″ (~1 part in 30 of the
-        expected signal).
+        — consistent with instrument precision rather than any systematic bias. The
+        largest single-site deviation is {maxAbs.toFixed(3)}″ (~1 part in 30 of
+        the expected signal).
       </p>
     </section>
 
@@ -207,30 +457,41 @@ const datasetJsonLd = {
         <span class="w-16 text-right shrink-0">arcsec</span>
       </div>
       <div class="space-y-1">
-        {sites.map((s) => {
-          const pct = (Math.abs(s.residual) / (maxAbs * 1.05)) * 100;
-          return (
-            <div class="flex items-center gap-2 text-xs">
-              <span class="text-terminal-dim w-24 shrink-0">{s.id}</span>
-              <div class="flex-1 flex items-center h-4">
-                <div class="flex-1 flex justify-end">
-                  {s.residual < 0 && (
-                    <div class="h-3 bg-terminal-amber" style={`width: ${pct}%`}></div>
-                  )}
+        {
+          sites.map((s) => {
+            const pct = (Math.abs(s.residual) / (maxAbs * 1.05)) * 100;
+            return (
+              <div class="flex items-center gap-2 text-xs">
+                <span class="text-terminal-dim w-24 shrink-0">{s.id}</span>
+                <div class="flex-1 flex items-center h-4">
+                  <div class="flex-1 flex justify-end">
+                    {s.residual < 0 && (
+                      <div
+                        class="h-3 bg-terminal-amber"
+                        style={`width: ${pct}%`}
+                      />
+                    )}
+                  </div>
+                  <div class="w-px h-4 bg-terminal-fg/40" />
+                  <div class="flex-1">
+                    {s.residual >= 0 && (
+                      <div
+                        class="h-3 bg-terminal-green"
+                        style={`width: ${pct}%`}
+                      />
+                    )}
+                  </div>
                 </div>
-                <div class="w-px h-4 bg-terminal-fg/40"></div>
-                <div class="flex-1">
-                  {s.residual >= 0 && (
-                    <div class="h-3 bg-terminal-green" style={`width: ${pct}%`}></div>
-                  )}
-                </div>
+                <span
+                  class={`w-16 text-right shrink-0 ${s.residual < 0 ? 'text-terminal-amber' : 'text-terminal-green'}`}
+                >
+                  {s.residual > 0 ? '+' : ''}
+                  {s.residual.toFixed(3)}
+                </span>
               </div>
-              <span class={`w-16 text-right shrink-0 ${s.residual < 0 ? 'text-terminal-amber' : 'text-terminal-green'}`}>
-                {s.residual > 0 ? '+' : ''}{s.residual.toFixed(3)}
-              </span>
-            </div>
-          );
-        })}
+            );
+          })
+        }
       </div>
     </section>
 
@@ -249,18 +510,31 @@ const datasetJsonLd = {
             </tr>
           </thead>
           <tbody class="text-terminal-fg">
-            {sites.map((s) => (
-              <tr class="border-b border-terminal-border last:border-b-0">
-                <td class="px-2 py-1 text-terminal-cyan whitespace-nowrap">{s.id}</td>
-                <td class="px-2 py-1 whitespace-nowrap">{s.locality}</td>
-                <td class="px-2 py-1 text-terminal-dim whitespace-nowrap">{s.date}</td>
-                <td class="px-2 py-1 text-right whitespace-nowrap">{s.empirical.toFixed(4)}</td>
-                <td class={`px-2 py-1 text-right whitespace-nowrap ${s.residual < 0 ? 'text-terminal-amber' : 'text-terminal-green'}`}>
-                  {s.residual > 0 ? '+' : ''}{s.residual.toFixed(4)}
-                </td>
-                <td class="px-2 py-1 text-terminal-dim whitespace-nowrap">{s.instrument}</td>
-              </tr>
-            ))}
+            {
+              sites.map((s) => (
+                <tr class="border-b border-terminal-border last:border-b-0">
+                  <td class="px-2 py-1 text-terminal-cyan whitespace-nowrap">
+                    {s.id}
+                  </td>
+                  <td class="px-2 py-1 whitespace-nowrap">{s.locality}</td>
+                  <td class="px-2 py-1 text-terminal-dim whitespace-nowrap">
+                    {s.date}
+                  </td>
+                  <td class="px-2 py-1 text-right whitespace-nowrap">
+                    {s.empirical.toFixed(4)}
+                  </td>
+                  <td
+                    class={`px-2 py-1 text-right whitespace-nowrap ${s.residual < 0 ? 'text-terminal-amber' : 'text-terminal-green'}`}
+                  >
+                    {s.residual > 0 ? '+' : ''}
+                    {s.residual.toFixed(4)}
+                  </td>
+                  <td class="px-2 py-1 text-terminal-dim whitespace-nowrap">
+                    {s.instrument}
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
@@ -270,19 +544,32 @@ const datasetJsonLd = {
       <h3 class="text-terminal-amber mb-4">### data</h3>
       <ul class="space-y-2 text-sm">
         <li>
-          <a href="/data/curvature/site_summary.csv" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          <a
+            href="/data/curvature/site_summary.csv"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >
             site_summary.csv
           </a>
-          <span class="ml-2 text-terminal-dim">one row per site ({sites.length} rows)</span>
+          <span class="ml-2 text-terminal-dim"
+            >one row per site ({sites.length} rows)</span
+          >
         </li>
         <li>
-          <a href="/data/curvature/field_observations.csv" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          <a
+            href="/data/curvature/field_observations.csv"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >
             field_observations.csv
           </a>
-          <span class="ml-2 text-terminal-dim">per-station observations (220 rows, 10 per site)</span>
+          <span class="ml-2 text-terminal-dim"
+            >per-station observations (220 rows, 10 per site)</span
+          >
         </li>
         <li>
-          <a href="/data/curvature/source.xlsx" class="text-terminal-cyan hover:text-terminal-green no-underline">
+          <a
+            href="/data/curvature/source.xlsx"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >
             source.xlsx
           </a>
           <span class="ml-2 text-terminal-dim">combined workbook</span>
@@ -293,12 +580,26 @@ const datasetJsonLd = {
     <section class="py-8">
       <h3 class="text-terminal-amber mb-4">### notes</h3>
       <ul class="space-y-2 text-terminal-dim text-sm leading-relaxed">
-        <li>- Geoid references vary by site ({geoids.join(', ')}); the divergence value is a tangent-vector angle so it doesn't depend on which vertical datum is used.</li>
-        <li>- Baseline azimuths were rotated between sites to avoid any systematic alignment with prevailing wind or refraction gradients.</li>
-        <li>- Field stations flagged <span class="text-terminal-amber">REVIEW</span> in the observations CSV were re-checked but retained in the per-site mean.</li>
-        <li>- {instruments.length} instrument models were used across the campaign ({instruments.join(', ')}) to guard against per-instrument bias.</li>
+        <li>
+          - Geoid references vary by site ({geoids.join(', ')}); the divergence
+          value is a tangent-vector angle so it doesn't depend on which vertical
+          datum is used.
+        </li>
+        <li>
+          - Baseline azimuths were rotated between sites to avoid any systematic
+          alignment with prevailing wind or refraction gradients.
+        </li>
+        <li>
+          - Field stations flagged <span class="text-terminal-amber"
+            >REVIEW</span
+          > in the observations CSV were re-checked but retained in the per-site mean.
+        </li>
+        <li>
+          - {instruments.length} instrument models were used across the campaign ({
+            instruments.join(', ')
+          }) to guard against per-instrument bias.
+        </li>
       </ul>
     </section>
-
   </div>
 </BaseLayout>

@@ -2,32 +2,48 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'PHP-6502 Emulator';
-const description = 'A fully functional 6502 microprocessor emulator written in PHP';
+const description =
+  'A fully functional 6502 microprocessor emulator written in PHP';
 const permalink = `${Astro.site.href}projects/php-6502-emulator`;
 const image = '/assets/projects/php-6502-emulator.webp';
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="projects" image={image}>
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="projects"
+  image={image}
+>
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-12 border-b border-terminal-border">
-      <h2 class="text-terminal-green mb-4">$ PHP-6502 Emulator</h1>
-      
+      <h2 class="text-terminal-green mb-4">$ PHP-6502 Emulator</h2>
+
       <p class="text-terminal-dim text-sm mb-6">
-        <a href="https://github.com/andrewthecodertx/php-6502-Emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/andrewthecodertx/php-6502-Emulator"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           View on GitHub →
         </a>
       </p>
 
       <p class="text-terminal-fg leading-relaxed mb-6">
-        A fully functional 6502 microprocessor emulator written in PHP and distributed as a
-        Composer library. Build custom 6502-based systems with two distinct CPU core
-        implementations - the original MOS 6502 and the enhanced WDC 65C02.
+        A fully functional 6502 microprocessor emulator written in PHP and
+        distributed as a Composer library. Build custom 6502-based systems with
+        two distinct CPU core implementations - the original MOS 6502 and the
+        enhanced WDC 65C02.
       </p>
 
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6">
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-6"
+      >
         <p class="text-terminal-dim text-sm mb-2">install</p>
-        <code class="text-terminal-green">composer require andrewthecoder/6502-emulator</code>
+        <code class="text-terminal-green"
+          >composer require andrewthecoder/6502-emulator</code
+        >
       </div>
     </section>
 
@@ -36,23 +52,38 @@ const image = '/assets/projects/php-6502-emulator.webp';
       <ul class="space-y-3 text-terminal-fg">
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Dual CPU Variants</strong> - MOS 6502 (56 instructions) and WDC 65C02 (70 instructions)</span>
+          <span
+            ><strong class="text-terminal-cyan">Dual CPU Variants</strong> - MOS 6502
+            (56 instructions) and WDC 65C02 (70 instructions)</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Hybrid Execution</strong> - JSON-driven instruction definitions with custom PHP handlers</span>
+          <span
+            ><strong class="text-terminal-cyan">Hybrid Execution</strong> - JSON-driven
+            instruction definitions with custom PHP handlers</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Interrupt Support</strong> - NMI, IRQ, and RESET with proper edge/level triggering</span>
+          <span
+            ><strong class="text-terminal-cyan">Interrupt Support</strong> - NMI,
+            IRQ, and RESET with proper edge/level triggering</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">CPU Monitoring</strong> - Built-in debugging tools with instruction tracing and cycle counting</span>
+          <span
+            ><strong class="text-terminal-cyan">CPU Monitoring</strong> - Built-in
+            debugging tools with instruction tracing and cycle counting</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Full Documentation</strong> - Comprehensive PHPDoc annotations for IDE support</span>
+          <span
+            ><strong class="text-terminal-cyan">Full Documentation</strong> - Comprehensive
+            PHPDoc annotations for IDE support</span
+          >
         </li>
       </ul>
     </section>
@@ -61,13 +92,25 @@ const image = '/assets/projects/php-6502-emulator.webp';
       <h3 class="text-terminal-amber mb-6">### usage</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
         <p>
-          The emulator is designed to be embedded in your own projects. To build a custom
-          6502-based system:
+          The emulator is designed to be embedded in your own projects. To build
+          a custom 6502-based system:
         </p>
         <ol class="space-y-2 list-decimal list-inside text-terminal-fg">
-          <li>Create a custom bus class implementing <code class="text-terminal-green">BusInterface</code></li>
-          <li>Instantiate your preferred CPU variant (<code class="text-terminal-green">MOS6502</code> or <code class="text-terminal-green">WDC65C02</code>)</li>
-          <li>Load machine code and call <code class="text-terminal-green">executeInstruction()</code> in a loop</li>
+          <li>
+            Create a custom bus class implementing <code
+              class="text-terminal-green">BusInterface</code
+            >
+          </li>
+          <li>
+            Instantiate your preferred CPU variant (<code
+              class="text-terminal-green">MOS6502</code
+            > or <code class="text-terminal-green">WDC65C02</code>)
+          </li>
+          <li>
+            Load machine code and call <code class="text-terminal-green"
+              >executeInstruction()</code
+            > in a loop
+          </li>
         </ol>
       </div>
     </section>
@@ -77,14 +120,21 @@ const image = '/assets/projects/php-6502-emulator.webp';
       <div class="space-y-4 text-sm">
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">src/Core/</code>
-          <span class="text-terminal-dim">- Shared interfaces (BusInterface, RAMInterface, etc.)</span>
+          <span class="text-terminal-dim"
+            >- Shared interfaces (BusInterface, RAMInterface, etc.)</span
+          >
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">src/MOS6502/</code>
-          <span class="text-terminal-dim">- Original 6502 CPU implementation</span>
+          <code class="text-terminal-green whitespace-nowrap">src/MOS6502/</code
+          >
+          <span class="text-terminal-dim"
+            >- Original 6502 CPU implementation</span
+          >
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">src/WDC65C02/</code>
+          <code class="text-terminal-green whitespace-nowrap"
+            >src/WDC65C02/</code
+          >
           <span class="text-terminal-dim">- Enhanced 65C02 CPU variant</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
@@ -98,11 +148,15 @@ const image = '/assets/projects/php-6502-emulator.webp';
       <h3 class="text-terminal-amber mb-6">### development</h3>
       <div class="space-y-4 text-sm">
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">./vendor/bin/phpunit</code>
+          <code class="text-terminal-green whitespace-nowrap"
+            >./vendor/bin/phpunit</code
+          >
           <span class="text-terminal-dim">- Run tests</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">./vendor/bin/phpstan analyse src</code>
+          <code class="text-terminal-green whitespace-nowrap"
+            >./vendor/bin/phpstan analyse src</code
+          >
           <span class="text-terminal-dim">- Static analysis</span>
         </div>
       </div>
@@ -111,26 +165,44 @@ const image = '/assets/projects/php-6502-emulator.webp';
     <section class="py-12">
       <h3 class="text-terminal-amber mb-6">### learn more</h3>
       <p class="text-terminal-fg mb-4">
-        Full documentation, examples, and detailed instructions are available in the README.
+        Full documentation, examples, and detailed instructions are available in
+        the README.
       </p>
       <div class="flex gap-4">
-        <a href="https://github.com/andrewthecodertx/php-6502-Emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/andrewthecodertx/php-6502-Emulator"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           GitHub →
         </a>
-        <a href="https://github.com/andrewthecodertx/php-6502-Emulator#readme" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/andrewthecodertx/php-6502-Emulator#readme"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           Documentation →
         </a>
-        <a href="https://packagist.org/packages/andrewthecoder/6502-emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://packagist.org/packages/andrewthecoder/6502-emulator"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           Packagist →
         </a>
       </div>
     </section>
 
     <footer class="py-8 border-t border-terminal-border">
-      <a href="/projects" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">
+      <a
+        href="/projects"
+        class="text-terminal-dim hover:text-terminal-green no-underline text-sm"
+      >
         ← back to projects
       </a>
     </footer>
-
   </div>
 </BaseLayout>

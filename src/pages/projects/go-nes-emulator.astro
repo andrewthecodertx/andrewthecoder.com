@@ -2,35 +2,56 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'Go NES Emulator';
-const description = 'A Nintendo Entertainment System (NES) emulator written in Go.';
+const description =
+  'A Nintendo Entertainment System (NES) emulator written in Go.';
 const permalink = `${Astro.site.href}projects/go-nes-emulator`;
 const image = '/assets/projects/go-nes-emulator.webp';
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="projects" image={image}>
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="projects"
+  image={image}
+>
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-12 border-b border-terminal-border">
       <h2 class="text-terminal-green mb-4">$ {title}</h2>
-      
+
       <p class="text-terminal-dim text-sm mb-6">
-        <a href="https://github.com/andrewthecodertx/go-nes-emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/andrewthecodertx/go-nes-emulator"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           View on GitHub →
         </a>
       </p>
 
       <p class="text-terminal-fg leading-relaxed mb-6">
-        A Nintendo Entertainment System (NES) emulator written in Go. This project brings 
-        classic 8-bit gaming to life with accurate CPU emulation, PPU graphics rendering, 
-        and support for multiple cartridge mappers.
+        A Nintendo Entertainment System (NES) emulator written in Go. This
+        project brings classic 8-bit gaming to life with accurate CPU emulation,
+        PPU graphics rendering, and support for multiple cartridge mappers.
       </p>
 
-        <p class="text-terminal-fg leading-relaxed mb-4">
-          A WebAssembly version of this emulator is available at <a href="/nes" target="_blank" class="text-terminal-cyan hover:text-terminal-green no-underline">/nes</a>.
-          Note that you'll need your own NES ROM files to use the emulator.
-        </p>
+      <p class="text-terminal-fg leading-relaxed mb-4">
+        A WebAssembly version of this emulator is available at <a
+          href="/nes"
+          target="_blank"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >/nes</a
+        >. Note that you'll need your own NES ROM files to use the emulator.
+      </p>
       <p class="text-terminal-dim text-sm mb-6">
-        Looking for ROMs? You can find them at <a href="https://vimm.net/vault/NES" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">Vimm's NES Vault</a>.
+        Looking for ROMs? You can find them at <a
+          href="https://vimm.net/vault/NES"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >Vimm's NES Vault</a
+        >.
       </p>
     </section>
 
@@ -39,23 +60,38 @@ const image = '/assets/projects/go-nes-emulator.webp';
       <ul class="space-y-3 text-terminal-fg">
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Ricoh 2A03 CPU</strong> - Complete emulation of the NES CPU with official and unofficial opcodes</span>
+          <span
+            ><strong class="text-terminal-cyan">Ricoh 2A03 CPU</strong> - Complete
+            emulation of the NES CPU with official and unofficial opcodes</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">PPU Graphics</strong> - Accurate rendering with sprite rendering, background layers, and scrolling</span>
+          <span
+            ><strong class="text-terminal-cyan">PPU Graphics</strong> - Accurate rendering
+            with sprite rendering, background layers, and scrolling</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">Mapper Support</strong> - Supports 6 major mappers covering ~72% of NES games</span>
+          <span
+            ><strong class="text-terminal-cyan">Mapper Support</strong> - Supports
+            6 major mappers covering ~72% of NES games</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">SDL2 Display</strong> - Smooth 60 FPS gameplay with SDL2 for cross-platform graphics</span>
+          <span
+            ><strong class="text-terminal-cyan">SDL2 Display</strong> - Smooth 60
+            FPS gameplay with SDL2 for cross-platform graphics</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span><strong class="text-terminal-cyan">WASM Build</strong> - WebAssembly target for running in browsers</span>
+          <span
+            ><strong class="text-terminal-cyan">WASM Build</strong> - WebAssembly
+            target for running in browsers</span
+          >
         </li>
       </ul>
     </section>
@@ -67,27 +103,43 @@ const image = '/assets/projects/go-nes-emulator.webp';
         <ul class="space-y-2 ml-4">
           <li class="flex gap-2">
             <span class="text-terminal-green">•</span>
-            <span><strong class="text-terminal-cyan">Mapper 0 (NROM)</strong> - Super Mario Bros., Donkey Kong</span>
+            <span
+              ><strong class="text-terminal-cyan">Mapper 0 (NROM)</strong> - Super
+              Mario Bros., Donkey Kong</span
+            >
           </li>
           <li class="flex gap-2">
             <span class="text-terminal-green">•</span>
-            <span><strong class="text-terminal-cyan">Mapper 1 (MMC1)</strong> - Zelda, Metroid</span>
+            <span
+              ><strong class="text-terminal-cyan">Mapper 1 (MMC1)</strong> - Zelda,
+              Metroid</span
+            >
           </li>
           <li class="flex gap-2">
             <span class="text-terminal-green">•</span>
-            <span><strong class="text-terminal-cyan">Mapper 2 (UxROM)</strong> - Mega Man, Castlevania</span>
+            <span
+              ><strong class="text-terminal-cyan">Mapper 2 (UxROM)</strong> - Mega
+              Man, Castlevania</span
+            >
           </li>
           <li class="flex gap-2">
             <span class="text-terminal-green">•</span>
-            <span><strong class="text-terminal-cyan">Mapper 3 (CNROM)</strong> - Arkanoid</span>
+            <span
+              ><strong class="text-terminal-cyan">Mapper 3 (CNROM)</strong> - Arkanoid</span
+            >
           </li>
           <li class="flex gap-2">
             <span class="text-terminal-green">•</span>
-            <span><strong class="text-terminal-cyan">Mapper 4 (MMC3)</strong> - Super Mario Bros. 3, Mega Man 3-6</span>
+            <span
+              ><strong class="text-terminal-cyan">Mapper 4 (MMC3)</strong> - Super
+              Mario Bros. 3, Mega Man 3-6</span
+            >
           </li>
           <li class="flex gap-2">
             <span class="text-terminal-green">•</span>
-            <span><strong class="text-terminal-cyan">Mapper 7 (AxROM)</strong> - Battletoads</span>
+            <span
+              ><strong class="text-terminal-cyan">Mapper 7 (AxROM)</strong> - Battletoads</span
+            >
           </li>
         </ul>
       </div>
@@ -134,23 +186,36 @@ const image = '/assets/projects/go-nes-emulator.webp';
     <section class="py-12">
       <h3 class="text-terminal-amber mb-6">### learn more</h3>
       <p class="text-terminal-fg mb-4">
-        Download pre-built binaries, read the documentation, and explore the source code.
+        Download pre-built binaries, read the documentation, and explore the
+        source code.
       </p>
       <div class="flex gap-4">
-        <a href="https://github.com/andrewthecodertx/go-nes-emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/andrewthecodertx/go-nes-emulator"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           GitHub →
         </a>
-        <a href="https://github.com/andrewthecodertx/go-nes-emulator/releases" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">
+        <a
+          href="https://github.com/andrewthecodertx/go-nes-emulator/releases"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
           Releases →
         </a>
       </div>
     </section>
 
     <footer class="py-8 border-t border-terminal-border">
-      <a href="/projects" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">
+      <a
+        href="/projects"
+        class="text-terminal-dim hover:text-terminal-green no-underline text-sm"
+      >
         ← back to projects
       </a>
     </footer>
-
   </div>
 </BaseLayout>

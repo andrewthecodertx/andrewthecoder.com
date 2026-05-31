@@ -4,68 +4,106 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 export const prerender = true;
 
 const title = "Conway's Game of Life";
-const description = "Interactive in-browser implementation of John Conway's Game of Life. Tap or drag to draw cells, watch them evolve, restart or clear at any time.";
+const description =
+  "Interactive in-browser implementation of John Conway's Game of Life. Tap or drag to draw cells, watch them evolve, restart or clear at any time.";
 const permalink = `${Astro.site.href}demos/conway`;
 
 const patternButtons = [
-  { id: 'pattern-glider', label: 'glider', title: 'Glider: the simplest spaceship. Moves diagonally one cell every 4 generations.' },
-  { id: 'pattern-lwss', label: 'LWSS', title: 'Lightweight Spaceship: moves horizontally, leaving a trail of sparks.' },
-  { id: 'pattern-pulsar', label: 'pulsar', title: 'Pulsar: a period 3 oscillator. The most common oscillator in Life.' },
-  { id: 'pattern-rpentomino', label: 'R-pentomino', title: 'R-pentomino: a tiny pattern that runs for 1103 generations before stabilizing. One of the most famous methuselahs.' },
-  { id: 'pattern-gospergun', label: 'Gosper Gun', title: 'Gosper Glider Gun: the first known finite pattern that grows infinitely. Period 30, emits a steady stream of gliders.' },
+  {
+    id: 'pattern-glider',
+    label: 'glider',
+    title:
+      'Glider: the simplest spaceship. Moves diagonally one cell every 4 generations.',
+  },
+  {
+    id: 'pattern-lwss',
+    label: 'LWSS',
+    title:
+      'Lightweight Spaceship: moves horizontally, leaving a trail of sparks.',
+  },
+  {
+    id: 'pattern-pulsar',
+    label: 'pulsar',
+    title: 'Pulsar: a period 3 oscillator. The most common oscillator in Life.',
+  },
+  {
+    id: 'pattern-rpentomino',
+    label: 'R-pentomino',
+    title:
+      'R-pentomino: a tiny pattern that runs for 1103 generations before stabilizing. One of the most famous methuselahs.',
+  },
+  {
+    id: 'pattern-gospergun',
+    label: 'Gosper Gun',
+    title:
+      'Gosper Glider Gun: the first known finite pattern that grows infinitely. Period 30, emits a steady stream of gliders.',
+  },
 ];
 ---
 
-<DemoLayout title={title} description={description} permalink={permalink} current="demos" image="/assets/conway.png">
-	<div class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border">
-		<h2 class="text-terminal-green">Game of Life</h2>
-		<span class="text-terminal-dim" id="genDisplay">(0)</span>
-		<span class="text-terminal-dim hidden sm:inline">
-			<span class="text-terminal-amber">tap</span> toggle
-			<span class="px-1">·</span>
-			<span class="text-terminal-amber">drag</span> draw
-			<span class="px-1">·</span>
-			<span class="text-terminal-amber">space</span> pause
-			<span class="px-1">·</span>
-			<span class="text-terminal-amber">r</span> restart
-			<span class="px-1">·</span>
-			<span class="text-terminal-amber">c</span> clear
-		</span>
-		<div class="flex gap-2">
-			<button
-				id="pauseButton"
-				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors text-xs"
-			>
-				pause
-			</button>
-			<button
-				id="restartButton"
-				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors text-xs"
-			>
-				restart
-			</button>
-			<button
-				id="clearButton"
-				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors text-xs"
-			>
-				clear
-			</button>
-		</div>
-	</div>
-	<div class="px-4 py-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs border-b border-terminal-border bg-terminal-bg/50">
-		<span class="text-terminal-dim">patterns:</span>
-		{patternButtons.map((p) => (
-			<button
-				id={p.id}
-				title={p.title}
-				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
-			>
-				{p.label}
-			</button>
-		))}
-	</div>
+<DemoLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="demos"
+  image="/assets/conway.png"
+>
+  <div
+    class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border"
+  >
+    <h2 class="text-terminal-green">Game of Life</h2>
+    <span class="text-terminal-dim" id="genDisplay">(0)</span>
+    <span class="text-terminal-dim hidden sm:inline">
+      <span class="text-terminal-amber">tap</span> toggle
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">drag</span> draw
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">space</span> pause
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">r</span> restart
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">c</span> clear
+    </span>
+    <div class="flex gap-2">
+      <button
+        id="pauseButton"
+        class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors text-xs"
+      >
+        pause
+      </button>
+      <button
+        id="restartButton"
+        class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors text-xs"
+      >
+        restart
+      </button>
+      <button
+        id="clearButton"
+        class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors text-xs"
+      >
+        clear
+      </button>
+    </div>
+  </div>
+  <div
+    class="px-4 py-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs border-b border-terminal-border bg-terminal-bg/50"
+  >
+    <span class="text-terminal-dim">patterns:</span>
+    {
+      patternButtons.map((p) => (
+        <button
+          id={p.id}
+          title={p.title}
+          class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-2 py-0.5 cursor-pointer font-mono transition-colors"
+        >
+          {p.label}
+        </button>
+      ))
+    }
+  </div>
 
-	<canvas id="gameCanvas" class="bg-terminal-bg block w-full touch-none"></canvas>
+  <canvas id="gameCanvas" class="bg-terminal-bg block w-full touch-none"
+  ></canvas>
 
-	<script is:inline src="/js/conway.js" data-astro-rerun></script>
+  <script is:inline src="/js/conway.js" data-astro-rerun></script>
 </DemoLayout>

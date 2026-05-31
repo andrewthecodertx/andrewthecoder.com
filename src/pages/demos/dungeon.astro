@@ -3,37 +3,56 @@ import DemoLayout from '../../layouts/DemoLayout.astro';
 
 export const prerender = true;
 
-const title = "Multiplayer Dungeon";
-const description = "A multi-user dungeon proof of concept built with WebSockets. Real-time movement, animated sprites, multiple rooms with door teleports, and per-player color tinting.";
+const title = 'Multiplayer Dungeon';
+const description =
+  'A multi-user dungeon proof of concept built with WebSockets. Real-time movement, animated sprites, multiple rooms with door teleports, and per-player color tinting.';
 const permalink = `${Astro.site.href}demos/dungeon`;
 ---
 
-<DemoLayout title={title} description={description} permalink={permalink} current="demos" image="/dungeon/images/dungeon.png">
-	<div class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border">
-		<h2 class="text-terminal-green">Multiplayer Dungeon</h2>
-		<span class="text-terminal-dim hidden sm:inline">
-			<span class="text-terminal-amber">arrows / hjkl</span> move
-			<span class="px-1">·</span>
-			<span class="text-terminal-amber">shift</span> run
-			<span class="px-1">·</span>
-			<span class="text-terminal-amber">a / s</span> attack
-		</span>
-	</div>
+<DemoLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="demos"
+  image="/dungeon/images/dungeon.png"
+>
+  <div
+    class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border"
+  >
+    <h2 class="text-terminal-green">Multiplayer Dungeon</h2>
+    <span class="text-terminal-dim hidden sm:inline">
+      <span class="text-terminal-amber">arrows / hjkl</span> move
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">shift</span> run
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">a / s</span> attack
+    </span>
+  </div>
 
-	<div id="dungeon-wrap" class="flex flex-col items-center justify-start gap-4 py-6 px-4 bg-terminal-bg">
-		<canvas
-			id="gameCanvas"
-			width="800"
-			height="600"
-			class="block bg-black"
-			style="image-rendering: pixelated; image-rendering: crisp-edges; width: min(100%, 800px); aspect-ratio: 800 / 600; height: auto;"
-		></canvas>
-		<p id="dungeonStatus" class="text-terminal-dim text-sm">connecting...</p>
-		<p class="text-terminal-dim text-xs text-center max-w-xl">
-			Open this page in two tabs (or share it) and watch the other player move in real time. Source on
-			<a href="https://github.com/andrewthecodertx/javascript-dungeon" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">GitHub</a>.
-		</p>
-	</div>
+  <div
+    id="dungeon-wrap"
+    class="flex flex-col items-center justify-start gap-4 py-6 px-4 bg-terminal-bg"
+  >
+    <canvas
+      id="gameCanvas"
+      width="800"
+      height="600"
+      class="block bg-black"
+      style="image-rendering: pixelated; image-rendering: crisp-edges; width: min(100%, 800px); aspect-ratio: 800 / 600; height: auto;"
+    ></canvas>
+    <p id="dungeonStatus" class="text-terminal-dim text-sm">connecting...</p>
+    <p class="text-terminal-dim text-xs text-center max-w-xl">
+      Open this page in two tabs (or share it) and watch the other player move
+      in real time. Source on
+      <a
+        href="https://github.com/andrewthecodertx/javascript-dungeon"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >GitHub</a
+      >.
+    </p>
+  </div>
 
-	<script is:inline src="/dungeon/game.js" data-astro-rerun></script>
+  <script is:inline src="/dungeon/game.js" data-astro-rerun></script>
 </DemoLayout>

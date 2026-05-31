@@ -36,7 +36,7 @@ if (!repo || !repoId || !category || !categoryId) {
 </div>
 
 <script is:inline>
-  (function() {
+  (function () {
     var container = document.querySelector('.giscus');
     if (!container) return;
 
@@ -63,15 +63,22 @@ if (!repo || !repoId || !category || !categoryId) {
     document.body.appendChild(s);
 
     // Update theme on dark mode toggle
-    var observer = new MutationObserver(function() {
+    var observer = new MutationObserver(function () {
       var iframe = document.querySelector('iframe.giscus-frame');
       if (!iframe) return;
       var dark = document.documentElement.classList.contains('dark');
       iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme: dark ? 'dark_tritanopia' : 'light_tritanopia' } } },
+        {
+          giscus: {
+            setConfig: { theme: dark ? 'dark_tritanopia' : 'light_tritanopia' },
+          },
+        },
         'https://giscus.app'
       );
     });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
   })();
 </script>

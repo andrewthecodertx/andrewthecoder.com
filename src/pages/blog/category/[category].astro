@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import CategoryPostList from '../../../components/CategoryPostList.svelte';
 
@@ -7,12 +7,15 @@ export const prerender = true;
 
 export async function getStaticPaths() {
   let allPosts = await getCollection('posts');
-  allPosts = allPosts.filter(post => !post.data.hidden);
+  allPosts = allPosts.filter((post) => !post.data.hidden);
 
   // Collect unique categories and build a map of category slug -> { name, posts }
-  const categoryMap = new Map<string, { name: string; posts: typeof allPosts }>();
+  const categoryMap = new Map<
+    string,
+    { name: string; posts: typeof allPosts }
+  >();
 
-  allPosts.forEach(post => {
+  allPosts.forEach((post) => {
     const categories = post.data.categories || ['Other'];
     categories.forEach((category: string) => {
       const slug = category.toLowerCase().replace(/\s+/g, '-');
@@ -28,7 +31,9 @@ export async function getStaticPaths() {
     props: {
       categoryName: name,
       posts: posts.sort(
-        (a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf()
+        (a, b) =>
+          new Date(b.data.publishDate).valueOf() -
+          new Date(a.data.publishDate).valueOf()
       ),
     },
   }));
@@ -47,24 +52,39 @@ const serializedPosts = posts.map((post: any) => ({
 }));
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="blog">
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="blog"
+>
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-12">
-      <h2 class="text-terminal-green mb-8">$ blog / <span class="text-terminal-cyan">{categoryName}</span></h2>
+      <h2 class="text-terminal-green mb-8">
+        $ blog / <span class="text-terminal-cyan">{categoryName}</span>
+      </h2>
 
       <p class="text-terminal-dim mb-8">
-        <a href="/blog" class="text-terminal-dim hover:text-terminal-green no-underline">← all posts</a>
+        <a
+          href="/blog"
+          class="text-terminal-dim hover:text-terminal-green no-underline"
+          >← all posts</a
+        >
       </p>
 
-      {posts.length > 0 ? (
-        <div class="space-y-10">
-          <CategoryPostList client:load posts={serializedPosts} category={categoryName} />
-        </div>
-      ) : (
-        <p class="text-terminal-dim">No posts found in this category.</p>
-      )}
+      {
+        posts.length > 0 ? (
+          <div class="space-y-10">
+            <CategoryPostList
+              client:load
+              posts={serializedPosts}
+              category={categoryName}
+            />
+          </div>
+        ) : (
+          <p class="text-terminal-dim">No posts found in this category.</p>
+        )
+      }
     </section>
-
   </div>
 </BaseLayout>

@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CategoryPostList from '../../components/CategoryPostList.svelte';
 import { formatDate } from '../../utils/formatDate';
@@ -7,36 +7,43 @@ import { formatDate } from '../../utils/formatDate';
 export const prerender = true;
 
 const title = 'Blog';
-const description = 'Writing on software development, AI, science, theology, and the occasional poem — from Andrew Erwin.';
+const description =
+  'Writing on software development, AI, science, theology, and the occasional poem — from Andrew Erwin.';
 const permalink = `${Astro.site.href}blog`;
 
-let allPosts = await getCollection('posts')
-allPosts = allPosts.filter(post => !post.data.hidden)
-allPosts = allPosts.sort((a, b) =>
-  new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+let allPosts = await getCollection('posts');
+allPosts = allPosts.filter((post) => !post.data.hidden);
+allPosts = allPosts.sort(
+  (a, b) =>
+    new Date(b.data.publishDate).valueOf() -
+    new Date(a.data.publishDate).valueOf()
+);
 
 const authors = await getCollection('authors');
 function getAuthorName(authorSlug: string) {
-  const entry = authors.find(a => a.id === authorSlug);
+  const entry = authors.find((a) => a.id === authorSlug);
   return entry?.data?.name || 'Andrew Erwin';
 }
 
 // Group posts by category
-const postsByCategory = allPosts.reduce((acc, post) => {
-  const categories = post.data.categories || ['Other'];
-  categories.forEach((category: string) => {
-    if (!acc[category]) acc[category] = [];
-    acc[category].push(post);
-  });
-  return acc;
-}, {} as Record<string, typeof allPosts>);
+const postsByCategory = allPosts.reduce(
+  (acc, post) => {
+    const categories = post.data.categories || ['Other'];
+    categories.forEach((category: string) => {
+      if (!acc[category]) acc[category] = [];
+      acc[category].push(post);
+    });
+    return acc;
+  },
+  {} as Record<string, typeof allPosts>
+);
 
 const categoryOrder: Record<string, number> = {
   'Software Development': 1,
   'Artificial Intelligence': 2,
-  'Science': 3,
-  'Theology': 4,
-  'Poetry': 5,
+  Science: 3,
+  Theology: 4,
+  Poetry: 5,
 };
 
 const categories = Object.keys(postsByCategory).sort((a, b) => {
@@ -47,9 +54,13 @@ const categories = Object.keys(postsByCategory).sort((a, b) => {
 });
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="blog">
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="blog"
+>
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-12">
       <h2 class="text-terminal-green mb-8">$ blog</h2>
 
@@ -57,24 +68,32 @@ const categories = Object.keys(postsByCategory).sort((a, b) => {
         Writing about code, philosophy, and whatever else I find interesting.
       </p>
 
-      {allPosts.length > 0 ? (
-        <div class="space-y-10">
-          {categories.map((category) => {
-            const serializedPosts = postsByCategory[category].map((post) => ({
-              title: post.data.title,
-              slug: post.data.slug,
-              publishDate: post.data.publishDate.toString(),
-              author: post.data.author !== 'andrew' ? getAuthorName(post.data.author) : '',
-            }));
-            return (
-              <CategoryPostList client:load posts={serializedPosts} category={category} />
-            );
-          })}
-        </div>
-      ) : (
-        <p class="text-terminal-dim">No posts yet. Check back soon.</p>
-      )}
+      {
+        allPosts.length > 0 ? (
+          <div class="space-y-10">
+            {categories.map((category) => {
+              const serializedPosts = postsByCategory[category].map((post) => ({
+                title: post.data.title,
+                slug: post.data.slug,
+                publishDate: post.data.publishDate.toString(),
+                author:
+                  post.data.author !== 'andrew'
+                    ? getAuthorName(post.data.author)
+                    : '',
+              }));
+              return (
+                <CategoryPostList
+                  client:load
+                  posts={serializedPosts}
+                  category={category}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <p class="text-terminal-dim">No posts yet. Check back soon.</p>
+        )
+      }
     </section>
-
   </div>
 </BaseLayout>

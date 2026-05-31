@@ -2,60 +2,69 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = 'Demos';
-const description = 'Interactive in-browser demos — toys, experiments, and visualizations you can play with right here.';
+const description =
+  'Interactive in-browser demos — toys, experiments, and visualizations you can play with right here.';
 const permalink = `${Astro.site.href}demos`;
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="demos">
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="demos"
+>
   <div class="max-w-3xl mx-auto px-4">
-
     <section class="py-12">
-        <h2 class="text-terminal-green mb-8">$ demos</h2>
+      <h2 class="text-terminal-green mb-8">$ demos</h2>
 
-        <p class="text-terminal-dim mb-8">
-            Interactive things that run right in your browser. Click, tap, drag — they're meant to be played with.
-        </p>
+      <p class="text-terminal-dim mb-8">
+        Interactive things that run right in your browser. Click, tap, drag —
+        they're meant to be played with.
+      </p>
 
-        <ul class="space-y-6">
-            <li>
-                <a href="/demos/conway" class="text-terminal-cyan">Conway's Game of Life</a> is John
-                Conway's classic cellular automaton, rendered to a full-window canvas. Tap or drag to
-                paint cells, watch them evolve under the four rules, or load one of five preset
-                patterns: glider, LWSS, pulsar, R-pentomino, and the Gosper Glider Gun. A
-                surprisingly deep zero-player game that has fascinated programmers and mathematicians
-                since 1970.
-            </li>
-            <li>
-                <a href="/demos/mandelbrot" class="text-terminal-cyan">Mandelbrot Set</a> is an
-                interactive explorer for the most famous fractal in mathematics, rendered live on the
-                GPU with WebGL 2. Tap to zoom in, drag to pan, pinch to scale. Every frame is a fresh
-                computation — up to a billion iterations across the screen — and you can keep zooming
-                until floating-point precision runs out.
-            </li>
-            <li>
-                <a href="/demos/nes" class="text-terminal-cyan">NES Emulator</a> is a
-                Nintendo Entertainment System emulator running entirely in your browser
-                via WebAssembly. Compiled from a Go codebase to a single ~3MB binary, it
-                plays standard <code class="text-terminal-amber">.nes</code> ROMs with
-                keyboard or gamepad. Bring your own ROM, or grab a free homebrew title
-                from NESdev.
-            </li>
-            <li>
-                <a href="/demos/dungeon" class="text-terminal-cyan">Multiplayer Dungeon</a> is a
-                real-time proof of concept for a multi-user dungeon built on Node, Express,
-                and raw WebSockets. Sprite animation, room-to-room door teleports, hitbox
-                collision, and per-player color tinting. Open the page in two tabs and you'll
-                see the other "you" walking around.
-            </li>
-            <li>
-                <a href="/demos/wordle" class="text-terminal-cyan">Wordle</a> is the
-                word-guessing game that took the internet by storm, rebuilt from scratch in pure
-                TypeScript. You get six tries to guess a five-letter word — green means right letter,
-                right place; amber means right letter, wrong place; gray means not in the word.
-                Works with both on-screen and physical keyboards.
-            </li>
-        </ul>
+      <ul class="space-y-6">
+        <li>
+          <a href="/demos/conway" class="text-terminal-cyan"
+            >Conway's Game of Life</a
+          > is John Conway's classic cellular automaton, rendered to a full-window
+          canvas. Tap or drag to paint cells, watch them evolve under the four rules,
+          or load one of five preset patterns: glider, LWSS, pulsar, R-pentomino,
+          and the Gosper Glider Gun. A surprisingly deep zero-player game that has
+          fascinated programmers and mathematicians since 1970.
+        </li>
+        <li>
+          <a href="/demos/mandelbrot" class="text-terminal-cyan"
+            >Mandelbrot Set</a
+          > is an interactive explorer for the most famous fractal in mathematics,
+          rendered live on the GPU with WebGL 2. Tap to zoom in, drag to pan, pinch
+          to scale. Every frame is a fresh computation — up to a billion iterations
+          across the screen — and you can keep zooming until floating-point precision
+          runs out.
+        </li>
+        <li>
+          <a href="/demos/nes" class="text-terminal-cyan">NES Emulator</a> is a Nintendo
+          Entertainment System emulator running entirely in your browser via WebAssembly.
+          Compiled from a Go codebase to a single ~3MB binary, it plays standard <code
+            class="text-terminal-amber">.nes</code
+          > ROMs with keyboard or gamepad. Bring your own ROM, or grab a free homebrew
+          title from NESdev.
+        </li>
+        <li>
+          <a href="/demos/dungeon" class="text-terminal-cyan"
+            >Multiplayer Dungeon</a
+          > is a real-time proof of concept for a multi-user dungeon built on Node,
+          Express, and raw WebSockets. Sprite animation, room-to-room door teleports,
+          hitbox collision, and per-player color tinting. Open the page in two tabs
+          and you'll see the other "you" walking around.
+        </li>
+        <li>
+          <a href="/demos/wordle" class="text-terminal-cyan">Wordle</a> is the word-guessing
+          game that took the internet by storm, rebuilt from scratch in pure TypeScript.
+          You get six tries to guess a five-letter word — green means right letter,
+          right place; amber means right letter, wrong place; gray means not in the
+          word. Works with both on-screen and physical keyboards.
+        </li>
+      </ul>
     </section>
-
   </div>
 </BaseLayout>
