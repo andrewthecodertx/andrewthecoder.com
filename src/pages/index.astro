@@ -44,7 +44,7 @@ const allPosts = await getCollection('posts');
 const featuredPosts = allPosts
   .filter(post => !post.data.hidden && post.data.featured)
   .sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf())
-  .slice(0, 3);
+  .slice(0, 5);
 
 let projects = [];
 try {
@@ -76,6 +76,19 @@ function formatProjectTitle(name: string) {
 
 const hireSubject = encodeURIComponent('Project inquiry');
 const hireMailto = `mailto:${CONTACT_EMAIL}?subject=${hireSubject}`;
+
+const currentFocus = [
+  {
+    name: 'ArcMVC',
+    href: '/projects/arcmvc',
+    description: 'A lightweight, modern PHP MVC framework. Small core, batteries included, built for PHP 8.4+.',
+  },
+  {
+    name: 'Enchanter',
+    href: '/projects/enchanter',
+    description: 'A focused AI agent harness. Single Rust binary, any OpenAI-compatible provider, zero runtime dependencies.',
+  },
+];
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink} current="home">
@@ -91,23 +104,57 @@ const hireMailto = `mailto:${CONTACT_EMAIL}?subject=${hireSubject}`;
     is:inline
     set:html={JSON.stringify(personJsonLd)}
   />
-  <div class="max-w-3xl mx-auto px-4">
+  <div class="max-w-5xl mx-auto px-4">
 
-    <!-- Intro: name, hire badge, CTA -->
-    <section class="py-12 border-b border-terminal-border">
-      <div class="space-y-4">
+    <!-- Main content (80%) + Recent Posts aside (20%) -->
+    <div class="lg:grid lg:grid-cols-[4fr_1fr] lg:gap-8">
+      <div>
+
+    <!-- Intro: ASCII frame, name, titles, CTA -->
+    <section class="py-12">
+      <pre class="text-terminal-dim text-xs sm:text-sm leading-tight mb-6 select-none overflow-x-auto" aria-hidden="true">{`┌────────────────────────────────────────┐
+│ andrew@thecoder:~$ whoami              │
+└────────────────────────────────────────┘`}</pre>
+
+      <div class="space-y-5">
         <div class="flex flex-wrap items-center gap-3">
-          <h2 class="text-terminal-green">$ andrew@thecoder</h2>
+          <h1 class="text-terminal-green">andrew erwin</h1>
           <span class="inline-flex items-center gap-1.5 px-2 py-0.5 border border-terminal-green rounded text-xs text-terminal-green">
             <span class="w-1.5 h-1.5 rounded-full bg-terminal-green animate-pulse"></span>
             available for work
           </span>
         </div>
+
+        <p class="text-terminal-fg text-base sm:text-lg">
+          software engineer
+          <span class="text-terminal-dim px-1">·</span>
+          web developer
+          <span class="text-terminal-dim px-1">·</span>
+          ai researcher
+        </p>
+
+        <p class="text-terminal-fg leading-relaxed">
+          I build full-stack web applications, ship developer tools and frameworks, and research where AI actually earns its keep in software development. Two decades of production code has left me comfortable anywhere in the stack (frontend, backend, infrastructure) and unbothered by whichever language or runtime a project actually needs.
+        </p>
+
         <div class="space-y-1 text-terminal-fg">
-          <p class="text-terminal-dim">&gt; software developer · 25+ years writing code</p>
+          <p class="text-terminal-dim">&gt; 25+ years shipping production software</p>
+          <p class="text-terminal-dim">&gt; previously: capital one, xo communications</p>
+          <p class="text-terminal-dim">
+            &gt; currently building:{' '}
+            {currentFocus.map((p, i) => (
+              <>
+                {i > 0 && (i === currentFocus.length - 1 && currentFocus.length > 1
+                  ? <span>{currentFocus.length > 2 ? ',' : ''} and </span>
+                  : <span>, </span>)}
+                <a href={p.href} title={p.description} class="text-terminal-cyan hover:text-terminal-green no-underline">{p.name}</a>
+              </>
+            ))}
+          </p>
           <p class="text-terminal-dim">&gt; open to freelance, contract, and full-time work</p>
           <p class="text-terminal-dim">&gt; <a href="/blog/resume-for-andrew-s-erwin" class="text-terminal-cyan hover:text-terminal-green no-underline">read my resume →</a></p>
         </div>
+
         <div class="pt-2 flex flex-wrap items-center gap-3 text-sm">
           <a
             href={hireMailto}
@@ -115,34 +162,16 @@ const hireMailto = `mailto:${CONTACT_EMAIL}?subject=${hireSubject}`;
           >
             [hire me]
           </a>
-          <a href={`mailto:${CONTACT_EMAIL}`} class="text-terminal-cyan hover:text-terminal-green no-underline">email</a>
-          <a href="https://github.com/andrewthecodertx" class="text-terminal-cyan hover:text-terminal-green no-underline">github</a>
-          <a href="https://x.com/_andrewthecoder" class="text-terminal-cyan hover:text-terminal-green no-underline">x</a>
-          <a href="https://buymeacoffee.com/andrewerwin" class="text-terminal-cyan hover:text-terminal-green no-underline">buy me a coffee</a>
+          <a href="https://github.com/andrewthecodertx" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">github</a>
+          <a href="https://linkedin.com/in/andrewthecoder" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">linkedin</a>
+          <a href="https://x.com/_andrewthecoder" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">x</a>
+          <a href="https://buymeacoffee.com/andrewerwin" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">buy me a coffee</a>
         </div>
       </div>
     </section>
 
-    <!-- Recent Posts -->
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### recent posts</h3>
-      <ul class="space-y-3">
-        {featuredPosts.map((post) => (
-          <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
-            <a href={`/blog/${post.data.slug}`} class="text-terminal-fg hover:text-terminal-green no-underline">
-              {post.data.title}
-            </a>
-            <span class="text-terminal-dim text-sm">{formatDate(post.data.publishDate)}</span>
-          </li>
-        ))}
-      </ul>
-      <p class="mt-6">
-        <a href="/blog" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">view all posts →</a>
-      </p>
-    </section>
-
     <!-- Playground -->
-    <section class="py-12 border-b border-terminal-border">
+    <section class="py-12">
       <h3 class="text-terminal-amber mb-2">### playground</h3>
       <p class="text-terminal-dim text-sm mb-6">things I've built that you can poke at</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -230,7 +259,7 @@ const hireMailto = `mailto:${CONTACT_EMAIL}?subject=${hireSubject}`;
     </section>
 
     <!-- Projects -->
-    <section class="py-12 border-b border-terminal-border">
+    <section class="py-12">
       <h3 class="text-terminal-amber mb-6">### projects</h3>
       <ul class="space-y-4">
         {projects.map((project) => (
@@ -260,8 +289,8 @@ const hireMailto = `mailto:${CONTACT_EMAIL}?subject=${hireSubject}`;
       <h3 class="text-terminal-amber mb-6">### work with me</h3>
       <p class="text-terminal-fg mb-4">
         I'm available for freelance, contract, and full-time work. If you have
-        something interesting to build — APIs, web apps, data tools, emulators,
-        whatever — let's talk.
+        something interesting to build (APIs, web apps, data tools, emulators,
+        whatever), let's talk.
       </p>
       <div class="flex flex-wrap gap-3 text-sm">
         <a
@@ -275,6 +304,28 @@ const hireMailto = `mailto:${CONTACT_EMAIL}?subject=${hireSubject}`;
         </a>
       </div>
     </section>
+
+      </div>
+
+      <aside class="lg:sticky lg:top-8 lg:self-start lg:border-l lg:border-terminal-border lg:pl-8">
+        <section class="py-12">
+          <h3 class="text-terminal-amber mb-6">### recent posts</h3>
+          <ul class="space-y-4">
+            {featuredPosts.map((post) => (
+              <li class="flex flex-col gap-0.5">
+                <a href={`/blog/${post.data.slug}`} class="text-terminal-fg hover:text-terminal-green no-underline text-sm leading-snug">
+                  {post.data.title}
+                </a>
+                <span class="text-terminal-dim text-xs">{formatDate(post.data.publishDate)}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-6">
+            <a href="/blog" class="text-terminal-dim hover:text-terminal-green no-underline text-sm">view all posts →</a>
+          </p>
+        </section>
+      </aside>
+    </div>
 
   </div>
 

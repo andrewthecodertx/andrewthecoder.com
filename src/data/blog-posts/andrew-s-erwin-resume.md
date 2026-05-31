@@ -71,12 +71,32 @@ Improved performance and reliability of large-scale distributed systems.
 
 ## Featured Projects
 
+### ArcMVC PHP Framework - [ArcMVC](/projects/arcmvc)
+
+Designed and built a lightweight, modern MVC framework for PHP 8.4+. Small,
+focused core with batteries-included tooling for routing, controllers, views,
+and data layer. Distributed as a Composer package for rapid application
+scaffolding and used as the foundation for new client projects.
+
+### Enchanter AI Agent Harness - [Enchanter](/projects/enchanter)
+
+Designed and developed a focused AI agent harness in Rust. Distributed as a
+single binary with zero runtime dependencies, compatible with any
+OpenAI-compatible provider. Implements tool use, conversation state, and
+extensible agent loops for building reliable LLM-driven workflows.
+
 ### ErwinMVC Web Framework - [ErwinMVC](/projects/erwinmvc)
 
 Designed and developed an MVC web framework for Node.js applications, published
 as a reusable npm package for rapid application scaffolding. Implements routing,
 controllers, views, and data layer abstractions, and has been used in production
 for multiple client projects.
+
+### Go Neural Network Implementation – [Go Neural Network](https://github.com/andrewthecoder/go-neural-network)
+
+Implemented a feed-forward neural network from scratch in Go as an educational
+project. Designed for flexibility and adaptability to various datasets while
+demonstrating core machine learning fundamentals.
 
 ### Full-Stack Web Application – [WeighTogether](https://weighttogether.com)
 
@@ -94,12 +114,6 @@ Designed and developed using my own MVC framework (ErwinMVC).
 Created automated deployment and testing pipeline tools integrating with GitHub
 Actions for continuous integration. Streamlined development workflows for team
 projects and reduced deployment friction.
-
-### Go Neural Network Implementation – [Go Neural Network](https://github.com/andrewthecoder/go-neural-network)
-
-Implemented a feed-forward neural network from scratch in Go as an educational
-project. Designed for flexibility and adaptability to various datasets while
-demonstrating core machine learning fundamentals.
 
 ## Open Source & Community
 

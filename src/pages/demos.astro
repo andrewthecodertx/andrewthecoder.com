@@ -33,6 +33,21 @@ const permalink = `${Astro.site.href}demos`;
                 until floating-point precision runs out.
             </li>
             <li>
+                <a href="/demos/nes" class="text-terminal-cyan">NES Emulator</a> is a
+                Nintendo Entertainment System emulator running entirely in your browser
+                via WebAssembly. Compiled from a Go codebase to a single ~3MB binary, it
+                plays standard <code class="text-terminal-amber">.nes</code> ROMs with
+                keyboard or gamepad. Bring your own ROM, or grab a free homebrew title
+                from NESdev.
+            </li>
+            <li>
+                <a href="/demos/dungeon" class="text-terminal-cyan">Multiplayer Dungeon</a> is a
+                real-time proof of concept for a multi-user dungeon built on Node, Express,
+                and raw WebSockets. Sprite animation, room-to-room door teleports, hitbox
+                collision, and per-player color tinting. Open the page in two tabs and you'll
+                see the other "you" walking around.
+            </li>
+            <li>
                 <a href="/demos/wordle" class="text-terminal-cyan">Wordle</a> is the
                 word-guessing game that took the internet by storm, rebuilt from scratch in pure
                 TypeScript. You get six tries to guess a five-letter word — green means right letter,

@@ -1,0 +1,100 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+
+export const prerender = true;
+
+const title = "NES Emulator";
+const description = "A Nintendo Entertainment System emulator running in your browser via WebAssembly. Compiled from Go, ~3MB, plays standard .nes ROMs with keyboard or gamepad.";
+const permalink = `${Astro.site.href}demos/nes`;
+---
+
+<DemoLayout title={title} description={description} permalink={permalink} current="demos">
+	<div class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border">
+		<h2 class="text-terminal-green">NES Emulator</h2>
+		<span class="text-terminal-dim hidden sm:inline">
+			<span class="text-terminal-amber">arrows</span> d-pad
+			<span class="px-1">·</span>
+			<span class="text-terminal-amber">x z</span> a/b
+			<span class="px-1">·</span>
+			<span class="text-terminal-amber">enter</span> start
+			<span class="px-1">·</span>
+			<span class="text-terminal-amber">shift</span> select
+			<span class="px-1">·</span>
+			<span class="text-terminal-amber">p</span> pause
+		</span>
+		<div class="flex gap-2 ml-auto">
+			<input type="file" id="nesRomInput" accept=".nes" class="hidden" />
+			<button
+				id="nesLoadButton"
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors"
+			>
+				[load rom]
+			</button>
+			<button
+				id="nesResetButton"
+				disabled
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-terminal-dim disabled:hover:border-terminal-border"
+			>
+				[reset]
+			</button>
+			<button
+				id="nesPauseButton"
+				disabled
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-terminal-dim disabled:hover:border-terminal-border"
+			>
+				[pause]
+			</button>
+			<button
+				id="nesFullscreenButton"
+				class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors"
+			>
+				[fullscreen]
+			</button>
+		</div>
+	</div>
+
+	<div id="nes-wrap" class="relative w-full flex flex-col items-center justify-center bg-terminal-bg gap-4 py-6 px-4" style="min-height: calc(100vh - 100px); min-height: calc(100dvh - 100px);">
+		<div id="nesCanvasFrame" class="w-full flex justify-center">
+			<canvas
+				id="nes-canvas"
+				width="256"
+				height="240"
+				class="block bg-black"
+				style="image-rendering: pixelated; image-rendering: crisp-edges; width: min(100%, calc((100vh - 280px) * 256 / 240)); width: min(100%, calc((100dvh - 280px) * 256 / 240)); aspect-ratio: 256 / 240; height: auto;"
+			></canvas>
+		</div>
+		<p id="nesStatus" class="text-terminal-dim text-sm">load a rom to start</p>
+		<p class="text-terminal-dim text-xs text-center max-w-xl">
+			Need a ROM? Free legal homebrew is available at
+			<a href="https://nesdev.org/wiki/Homebrew_games" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">NESdev</a>
+			or
+			<a href="https://www.nesworld.com/article.php?system=nes&data=neshomebrew" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">NES World</a>.
+			Source for the emulator is on
+			<a href="https://github.com/andrewthecodertx/go-nes-emulator" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green no-underline">GitHub</a>.
+		</p>
+	</div>
+
+	<script is:inline src="/nes/wasm_exec.js"></script>
+	<script is:inline src="/js/nes.js" data-astro-rerun></script>
+
+	<style is:global>
+		#nesCanvasFrame:fullscreen,
+		#nesCanvasFrame:-webkit-full-screen {
+			background: #000;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0;
+			width: 100vw;
+			height: 100vh;
+		}
+		#nesCanvasFrame:fullscreen canvas,
+		#nesCanvasFrame:-webkit-full-screen canvas {
+			width: min(100vw, calc(100vh * 256 / 240)) !important;
+			height: auto !important;
+			max-width: 100vw !important;
+			max-height: 100vh !important;
+			aspect-ratio: 256 / 240;
+		}
+	</style>
+</DemoLayout>
