@@ -7,6 +7,7 @@ const title = 'Mandelbrot Set';
 const description =
   'Interactive in-browser Mandelbrot set explorer rendered with WebGL 2. Tap or click to zoom in, drag to pan, pinch to scale.';
 const permalink = `${Astro.site.href}demos/mandelbrot`;
+const image = '/assets/demos/mandelbrot.webp';
 
 const vertexShader = `#version 300 es
 in vec2 a_pos;
@@ -52,7 +53,7 @@ void main() {
   description={description}
   permalink={permalink}
   current="demos"
-  image="/assets/mandelbrot.png"
+  image={image}
 >
   <div
     class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border"

@@ -5,6 +5,54 @@ const title = 'Demos';
 const description =
   'Interactive in-browser demos — toys, experiments, and visualizations you can play with right here.';
 const permalink = `${Astro.site.href}demos`;
+
+const demos = [
+  {
+    href: '/demos/conway',
+    title: "Conway's Game of Life",
+    image: '/assets/demos/conway.webp',
+    imageAlt: 'Game of Life cellular automaton running on a canvas',
+    tagline: 'cellular automaton',
+    description:
+      "John Conway's classic cellular automaton, rendered to a full-window canvas. Tap or drag to paint cells, watch them evolve under the four rules, or load one of five preset patterns.",
+  },
+  {
+    href: '/demos/mandelbrot',
+    title: 'Mandelbrot Set',
+    image: '/assets/demos/mandelbrot.webp',
+    imageAlt: 'Mandelbrot set fractal rendered with WebGL',
+    tagline: 'webgl · zoom · pan',
+    description:
+      'An interactive explorer for the most famous fractal in mathematics, rendered live on the GPU with WebGL 2. Tap to zoom in, drag to pan, pinch to scale.',
+  },
+  {
+    href: '/demos/nes',
+    title: 'NES Emulator',
+    image: '/assets/demos/nes.webp',
+    imageAlt: 'NES emulator running Super Mario Bros in the browser',
+    tagline: 'wasm · keyboard · gamepad',
+    description:
+      'A Nintendo Entertainment System emulator running entirely in your browser via WebAssembly. Compiled from a Go codebase to a single ~3MB binary, it plays standard .nes ROMs.',
+  },
+  {
+    href: '/demos/dungeon',
+    title: 'Multiplayer Dungeon',
+    image: '/assets/demos/dungeon.webp',
+    imageAlt: 'Multiplayer dungeon with sprites and room teleports',
+    tagline: 'websockets · real-time · multiplayer',
+    description:
+      'A real-time proof of concept for a multi-user dungeon built on Node, Express, and raw WebSockets. Sprite animation, room-to-room door teleports, hitbox collision, and per-player color tinting.',
+  },
+  {
+    href: '/demos/wordle',
+    title: 'Wordle',
+    image: '/assets/demos/wordle.webp',
+    imageAlt: 'Wordle word-guessing game in the browser',
+    tagline: 'typescript · on-screen keyboard',
+    description:
+      'The word-guessing game that took the internet by storm, rebuilt from scratch in pure TypeScript. Six tries to guess a five-letter word with color-coded feedback.',
+  },
+];
 ---
 
 <BaseLayout
@@ -22,49 +70,33 @@ const permalink = `${Astro.site.href}demos`;
         they're meant to be played with.
       </p>
 
-      <ul class="space-y-6">
-        <li>
-          <a href="/demos/conway" class="text-terminal-cyan"
-            >Conway's Game of Life</a
-          > is John Conway's classic cellular automaton, rendered to a full-window
-          canvas. Tap or drag to paint cells, watch them evolve under the four rules,
-          or load one of five preset patterns: glider, LWSS, pulsar, R-pentomino,
-          and the Gosper Glider Gun. A surprisingly deep zero-player game that has
-          fascinated programmers and mathematicians since 1970.
-        </li>
-        <li>
-          <a href="/demos/mandelbrot" class="text-terminal-cyan"
-            >Mandelbrot Set</a
-          > is an interactive explorer for the most famous fractal in mathematics,
-          rendered live on the GPU with WebGL 2. Tap to zoom in, drag to pan, pinch
-          to scale. Every frame is a fresh computation — up to a billion iterations
-          across the screen — and you can keep zooming until floating-point precision
-          runs out.
-        </li>
-        <li>
-          <a href="/demos/nes" class="text-terminal-cyan">NES Emulator</a> is a Nintendo
-          Entertainment System emulator running entirely in your browser via WebAssembly.
-          Compiled from a Go codebase to a single ~3MB binary, it plays standard <code
-            class="text-terminal-amber">.nes</code
-          > ROMs with keyboard or gamepad. Bring your own ROM, or grab a free homebrew
-          title from NESdev.
-        </li>
-        <li>
-          <a href="/demos/dungeon" class="text-terminal-cyan"
-            >Multiplayer Dungeon</a
-          > is a real-time proof of concept for a multi-user dungeon built on Node,
-          Express, and raw WebSockets. Sprite animation, room-to-room door teleports,
-          hitbox collision, and per-player color tinting. Open the page in two tabs
-          and you'll see the other "you" walking around.
-        </li>
-        <li>
-          <a href="/demos/wordle" class="text-terminal-cyan">Wordle</a> is the word-guessing
-          game that took the internet by storm, rebuilt from scratch in pure TypeScript.
-          You get six tries to guess a five-letter word — green means right letter,
-          right place; amber means right letter, wrong place; gray means not in the
-          word. Works with both on-screen and physical keyboards.
-        </li>
-      </ul>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {
+          demos.map((demo) => (
+            <a
+              href={demo.href}
+              class="border border-terminal-border rounded p-4 bg-terminal-bg hover:border-terminal-cyan transition-colors flex flex-col no-underline group"
+            >
+              <h3 class="text-terminal-green text-sm mb-3">$ {demo.title}</h3>
+              <img
+                src={demo.image}
+                alt={demo.imageAlt}
+                class="w-full block rounded"
+                style="aspect-ratio: 2/1; object-fit: cover;"
+                loading="lazy"
+              />
+              <div class="mt-4 flex items-center justify-between text-xs pt-3 border-t border-terminal-border">
+                <span class="text-terminal-dim group-hover:text-terminal-fg">
+                  {demo.tagline}
+                </span>
+                <span class="text-terminal-cyan group-hover:text-terminal-green">
+                  play →
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
     </section>
   </div>
 </BaseLayout>
