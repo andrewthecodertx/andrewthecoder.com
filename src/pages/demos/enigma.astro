@@ -1,0 +1,486 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+
+export const prerender = true;
+
+const title = 'Enigma Machine';
+const description =
+  'Interactive Enigma M3 cipher machine emulator. Encrypt and decrypt messages using the historical WWII German encryption device.';
+const permalink = `${Astro.site.href}demos/enigma`;
+const image = '/assets/demos/enigma.webp';
+---
+
+<DemoLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="demos"
+  image={image}
+>
+  <div
+    class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border"
+  >
+    <h2 class="text-terminal-green">Enigma M3</h2>
+    <span class="text-terminal-dim">
+      <span class="text-terminal-amber">type</span> or
+      <span class="text-terminal-amber">click</span> keys
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">a-z</span> encrypt
+    </span>
+    <div class="flex gap-2 ml-auto">
+      <a
+        href="https://github.com/andrewthecodertx/M3-Enigma-Machine"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors no-underline"
+      >
+        [source]
+      </a>
+    </div>
+  </div>
+
+  <div class="px-4 py-4 space-y-4">
+    <!-- Rotors -->
+    <div class="space-y-2">
+      <h3 class="text-terminal-amber text-xs">rotors</h3>
+      <div class="flex flex-wrap gap-3">
+        <div class="flex items-center gap-2">
+          <label class="text-terminal-dim text-xs w-10">L</label>
+          <select
+            id="enigma-left-rotor-type"
+            class="bg-terminal-bg border border-terminal-border text-terminal-fg text-xs px-1 py-0.5 font-mono rounded"
+          >
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+            <option value="IV" selected>IV</option>
+            <option value="V">V</option>
+          </select>
+          <span
+            id="enigma-left-pos"
+            class="text-terminal-green font-mono text-lg border border-terminal-border px-2 py-0.5 rounded"
+            >J</span
+          >
+          <label class="text-terminal-dim text-xs">ring</label>
+          <input
+            id="enigma-left-ring"
+            type="number"
+            min="0"
+            max="25"
+            value="0"
+            class="bg-terminal-bg border border-terminal-border text-terminal-fg text-xs w-10 px-1 py-0.5 font-mono rounded"
+          />
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="text-terminal-dim text-xs w-10">M</label>
+          <select
+            id="enigma-middle-rotor-type"
+            class="bg-terminal-bg border border-terminal-border text-terminal-fg text-xs px-1 py-0.5 font-mono rounded"
+          >
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III" selected>III</option>
+            <option value="IV">IV</option>
+            <option value="V">V</option>
+          </select>
+          <span
+            id="enigma-middle-pos"
+            class="text-terminal-green font-mono text-lg border border-terminal-border px-2 py-0.5 rounded"
+            >V</span
+          >
+          <label class="text-terminal-dim text-xs">ring</label>
+          <input
+            id="enigma-middle-ring"
+            type="number"
+            min="0"
+            max="25"
+            value="0"
+            class="bg-terminal-bg border border-terminal-border text-terminal-fg text-xs w-10 px-1 py-0.5 font-mono rounded"
+          />
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="text-terminal-dim text-xs w-10">R</label>
+          <select
+            id="enigma-right-rotor-type"
+            class="bg-terminal-bg border border-terminal-border text-terminal-fg text-xs px-1 py-0.5 font-mono rounded"
+          >
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+            <option value="IV">IV</option>
+            <option value="V" selected>V</option>
+          </select>
+          <span
+            id="enigma-right-pos"
+            class="text-terminal-green font-mono text-lg border border-terminal-border px-2 py-0.5 rounded"
+            >Z</span
+          >
+          <label class="text-terminal-dim text-xs">ring</label>
+          <input
+            id="enigma-right-ring"
+            type="number"
+            min="0"
+            max="25"
+            value="0"
+            class="bg-terminal-bg border border-terminal-border text-terminal-fg text-xs w-10 px-1 py-0.5 font-mono rounded"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Plugboard -->
+    <div class="space-y-2">
+      <h3 class="text-terminal-amber text-xs">plugboard (steckerbrett)</h3>
+      <input
+        id="enigma-plugboard"
+        type="text"
+        value="AZ BY CX TD SW"
+        maxlength="30"
+        placeholder="AZ BY CX"
+        class="bg-terminal-bg border border-terminal-border text-terminal-fg text-sm px-2 py-1 font-mono rounded w-full max-w-md"
+      />
+      <div id="enigma-plugboard-error" class="text-red-400 text-xs"></div>
+    </div>
+
+    <!-- Lampboard -->
+    <div class="space-y-2">
+      <h3 class="text-terminal-amber text-xs">lampboard</h3>
+      <div class="flex flex-col items-center gap-1">
+        <div class="flex gap-1">
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="Q"
+          >
+            Q
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="W"
+          >
+            W
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="E"
+          >
+            E
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="R"
+          >
+            R
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="T"
+          >
+            T
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="Z"
+          >
+            Z
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="U"
+          >
+            U
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="I"
+          >
+            I
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="O"
+          >
+            O
+          </div>
+        </div>
+        <div class="flex gap-1">
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="A"
+          >
+            A
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="S"
+          >
+            S
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="D"
+          >
+            D
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="F"
+          >
+            F
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="G"
+          >
+            G
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="H"
+          >
+            H
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="J"
+          >
+            J
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="K"
+          >
+            K
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="L"
+          >
+            L
+          </div>
+        </div>
+        <div class="flex gap-1">
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="P"
+          >
+            P
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="Y"
+          >
+            Y
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="X"
+          >
+            X
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="C"
+          >
+            C
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="V"
+          >
+            V
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="B"
+          >
+            B
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="N"
+          >
+            N
+          </div>
+          <div
+            class="enigma-lamp w-9 h-9 border border-terminal-border rounded flex items-center justify-center text-sm font-mono transition-colors"
+            data-letter="M"
+          >
+            M
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Keyboard -->
+    <div class="space-y-2">
+      <h3 class="text-terminal-amber text-xs">keyboard</h3>
+      <div class="flex flex-col items-center gap-1">
+        <div class="flex gap-1">
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="Q">Q</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="W">W</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="E">E</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="R">R</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="T">T</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="Z">Z</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="U">U</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="I">I</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="O">O</button
+          >
+        </div>
+        <div class="flex gap-1">
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="A">A</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="S">S</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="D">D</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="F">F</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="G">G</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="H">H</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="J">J</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="K">K</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="L">L</button
+          >
+        </div>
+        <div class="flex gap-1">
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="P">P</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="Y">Y</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="X">X</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="C">C</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="V">V</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="B">B</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="N">N</button
+          >
+          <button
+            class="enigma-key w-9 h-9 border border-terminal-border bg-terminal-bg text-terminal-fg hover:text-terminal-green hover:border-terminal-cyan rounded text-sm font-mono transition-colors"
+            data-key="M">M</button
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Input / Output -->
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="space-y-1">
+        <h3 class="text-terminal-amber text-xs">input</h3>
+        <textarea
+          id="enigma-input"
+          rows="3"
+          placeholder="Type a message..."
+          class="w-full bg-terminal-bg border border-terminal-border text-terminal-fg text-sm p-2 font-mono rounded resize-none focus:border-terminal-cyan focus:outline-none"
+        ></textarea>
+        <div class="flex gap-2">
+          <button
+            id="enigma-process"
+            class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-1 cursor-pointer font-mono transition-colors text-xs"
+            >encrypt/decrypt</button
+          >
+          <button
+            id="enigma-reset"
+            class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-1 cursor-pointer font-mono transition-colors text-xs"
+            >reset</button
+          >
+        </div>
+      </div>
+      <div class="space-y-1">
+        <h3 class="text-terminal-amber text-xs">output</h3>
+        <textarea
+          id="enigma-output"
+          readonly
+          rows="3"
+          class="w-full bg-terminal-bg border border-terminal-border text-terminal-green text-sm p-2 font-mono rounded resize-none focus:outline-none"
+        ></textarea>
+        <button
+          id="enigma-copy"
+          class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-1 cursor-pointer font-mono transition-colors text-xs"
+          >copy</button
+        >
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .enigma-lamp.active {
+      background-color: #4ade80;
+      color: #0a0a0a;
+      border-color: #4ade80;
+      box-shadow: 0 0 8px #4ade8080;
+    }
+    .enigma-key.pressed {
+      background-color: #22d3ee;
+      color: #0a0a0a;
+      border-color: #22d3ee;
+    }
+  </style>
+
+  <script is:inline src="/js/enigma.js" data-astro-rerun></script>
+</DemoLayout>
