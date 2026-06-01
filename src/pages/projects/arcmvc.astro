@@ -105,6 +105,13 @@ const image = '/assets/projects/arcmvc.webp';
           </li>
           <li>
             <a
+              href="#query-builder"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Query Builder</a
+            >
+          </li>
+          <li>
+            <a
               href="#database"
               class="text-terminal-cyan hover:text-terminal-green no-underline"
               >Database</a
@@ -704,6 +711,62 @@ const image = '/assets/projects/arcmvc.webp';
       </div>
     </section>
 
+    <section class="py-12 border-b border-terminal-border" id="query-builder">
+      <h3 class="text-terminal-amber mb-6">### query builder</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          <code class="text-terminal-green">QueryBuilder</code> provides a fluent
+          interface for building parameterized SQL queries. All identifiers are validated
+          against SQL injection.
+        </p>
+
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          use Arc\Database\QueryBuilder;<br /><br />
+          $builder = new QueryBuilder($connection, 'users');<br /><br />
+          // SELECT with WHERE, ORDER BY, LIMIT<br />
+          $users = $builder-&gt;where('active', 1)<br />
+          &nbsp;&nbsp;-&gt;orderBy('name')<br />
+          &nbsp;&nbsp;-&gt;limit(10)<br />
+          &nbsp;&nbsp;-&gt;get();<br /><br />
+          // Operators: =, !=, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=, LIKE, NOT LIKE<br
+          />
+          $expensive = $builder-&gt;where('price', '&gt;', 100)-&gt;get();<br
+          /><br />
+          // NULL checks<br />
+          $builder-&gt;whereNull('deleted_at');<br />
+          $builder-&gt;whereNotNull('email');<br /><br />
+          // IN / NOT IN<br />
+          $builder-&gt;whereIn('role', ['admin', 'editor']);<br />
+          $builder-&gt;whereNotIn('status', ['banned']);<br /><br />
+          // First row (returns null if not found)<br />
+          $user = $builder-&gt;where('id', 1)-&gt;first();<br /><br />
+          // Aggregates<br />
+          $builder-&gt;count();<br />
+          $builder-&gt;exists();<br />
+          $builder-&gt;sum('price');<br />
+          $builder-&gt;avg('price');<br />
+          $builder-&gt;min('price');<br />
+          $builder-&gt;max('price');
+        </code>
+
+        <p class="text-terminal-dim text-sm mt-2">
+          All queries use positional <code class="text-terminal-green">?</code> parameter
+          binding. Table and column names are validated against a strict regex before
+          interpolation.
+        </p>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
     <section class="py-12 border-b border-terminal-border" id="database">
       <h3 class="text-terminal-amber mb-6">### database</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
@@ -727,12 +790,31 @@ const image = '/assets/projects/arcmvc.webp';
             &nbsp;&nbsp;protected array $fillable = ['name', 'email'];<br />
             &#125;<br /><br />
             User::all(limit: 50, offset: 0);<br />
-            User::find($id);<br />
+            User::find($id);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+            null if not found<br />
+            User::findOrFail($id);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// throws
+            if not found<br />
             User::where('email', 'user@example.com');<br />
+            User::where('age', '&gt;', 18);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+            with operator<br />
             User::create(['name' =&gt; 'Arc', 'email' =&gt; '...']);<br />
             User::update($id, ['name' =&gt; 'Updated']);<br />
             User::delete($id);<br />
-            User::count();
+            User::count();<br />
+            User::exists();<br />
+            User::sum('age'); User::avg('age');<br />
+            User::min('age'); User::max('age');
+          </code>
+          <p class="text-terminal-dim text-sm mt-2">
+            Fluent queries via <code class="text-terminal-green">query()</code>:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-2"
+          >
+            User::query()-&gt;where('active',
+            1)-&gt;orderBy('name')-&gt;limit(10)-&gt;get();<br />
+            User::query()-&gt;whereNull('email')-&gt;count();<br />
+            User::query()-&gt;whereIn('role', ['admin', 'editor'])-&gt;get();
           </code>
           <p class="text-terminal-dim text-sm mt-2">
             Column names in <code class="text-terminal-green">where()</code>, <code
