@@ -32,9 +32,10 @@ const image = '/assets/projects/arcmvc.webp';
 
       <p class="text-terminal-fg leading-relaxed mb-6">
         A lightweight, modern PHP MVC framework. Small core, batteries included.
-        No hidden magic — request flow is traceable from <code
+        No hidden magic, request flow is traceable from <code
           class="text-terminal-green">public/index.php</code
-        > to response. Every subsystem is replaceable. Secure defaults everywhere.
+        > to response. Decoupled core with a dedicated DI container. Secure defaults:
+        CSRF protection, XSS escaping, SQL injection prevention, security headers.
       </p>
 
       <div
@@ -42,7 +43,7 @@ const image = '/assets/projects/arcmvc.webp';
       >
         <p class="text-terminal-dim text-sm mb-2">quick start</p>
         <code class="text-terminal-green"
-          >composer require andrewthecoder/arcmvc</code
+          >arc new my-project && cd my-project && arc serve</code
         >
       </div>
     </section>
@@ -118,16 +119,16 @@ const image = '/assets/projects/arcmvc.webp';
           </li>
           <li>
             <a
-              href="#console"
+              href="#session"
               class="text-terminal-cyan hover:text-terminal-green no-underline"
-              >Console Commands</a
+              >Session</a
             >
           </li>
           <li>
             <a
-              href="#project-structure"
+              href="#file-uploads"
               class="text-terminal-cyan hover:text-terminal-green no-underline"
-              >Project Structure</a
+              >File Uploads</a
             >
           </li>
           <li>
@@ -146,9 +147,30 @@ const image = '/assets/projects/arcmvc.webp';
           </li>
           <li>
             <a
-              href="#testing"
+              href="#error-handling"
               class="text-terminal-cyan hover:text-terminal-green no-underline"
-              >Testing</a
+              >Error Handling</a
+            >
+          </li>
+          <li>
+            <a
+              href="#cors"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >CORS</a
+            >
+          </li>
+          <li>
+            <a
+              href="#method-override"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >HTTP Method Override</a
+            >
+          </li>
+          <li>
+            <a
+              href="#console"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Console Commands</a
             >
           </li>
         </ul>
@@ -167,11 +189,17 @@ const image = '/assets/projects/arcmvc.webp';
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span>Every subsystem is replaceable.</span>
+          <span
+            >Decoupled core with a dedicated DI container for service
+            management.</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
-          <span>Secure defaults everywhere.</span>
+          <span
+            >Secure defaults: CSRF, XSS escaping, SQL injection prevention,
+            security headers.</span
+          >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
@@ -229,27 +257,56 @@ const image = '/assets/projects/arcmvc.webp';
       <h3 class="text-terminal-amber mb-6">### getting started</h3>
       <div class="space-y-6 text-terminal-fg">
         <div>
-          <p class="text-terminal-cyan font-mono mb-2">1. Install</p>
+          <p class="text-terminal-cyan font-mono mb-2">1. Create a project</p>
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
           >
-            composer require andrewthecoder/arcmvc
+            arc new my-project<br />
+            cd my-project<br />
+            arc serve
           </code>
           <p class="text-terminal-dim text-sm">
-            Or scaffold from the skeleton:
+            Or add Arc to an existing project:
           </p>
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-2"
           >
+            composer require andrewthecoder/arcmvc<br />
             cp -r vendor/andrewthecoder/arcmvc/skeleton/* .
           </code>
         </div>
 
         <div>
-          <p class="text-terminal-cyan font-mono mb-2">2. Entry point</p>
+          <p class="text-terminal-cyan font-mono mb-2">2. Environment</p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
+            cp .env.example .env
+          </code>
+          <p class="text-terminal-dim text-sm">
+            Arc includes a built-in <code class="text-terminal-green"
+              >EnvLoader</code
+            >. Load it early in your bootstrap:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-2"
+          >
+            use Arc\Config\EnvLoader;<br />
+            EnvLoader::load(__DIR__ . '/../.env');
+          </code>
+          <p class="text-terminal-dim text-sm mt-2">
+            Variables are available via <code class="text-terminal-green"
+              >$_ENV</code
+            > and <code class="text-terminal-green">getenv()</code>. Existing
+            env vars are never overwritten.
+          </p>
+        </div>
+
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">3. Entry point</p>
           <p class="text-terminal-dim text-sm mb-2">
             <code class="text-terminal-green">public/index.php</code> is the entry
-            point — everything flows through here:
+            point, everything flows through here:
           </p>
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
@@ -264,7 +321,7 @@ const image = '/assets/projects/arcmvc.webp';
         </div>
 
         <div>
-          <p class="text-terminal-cyan font-mono mb-2">3. Bootstrap</p>
+          <p class="text-terminal-cyan font-mono mb-2">4. Bootstrap</p>
           <p class="text-terminal-dim text-sm mb-2">
             <code class="text-terminal-green">bootstrap/app.php</code> wires things
             together:
@@ -275,33 +332,16 @@ const image = '/assets/projects/arcmvc.webp';
             &lt;?php<br /><br />
             declare(strict_types=1);<br /><br />
             use Arc\Application;<br />
-            use Arc\Http\Middleware\SecurityMiddleware;<br /><br />
+            use Arc\Http\Middleware\SecurityMiddleware;<br />
+            use Arc\Http\Middleware\CsrfMiddleware;<br /><br />
             $app = new Application(__DIR__ . '/../config', dirname(__DIR__));<br
             />
-            $app-&gt;addMiddleware(SecurityMiddleware::class);<br /><br />
+            $app-&gt;addMiddleware(SecurityMiddleware::class);<br />
+            $app-&gt;addMiddleware(new CsrfMiddleware());<br /><br />
             $router = $app-&gt;router();<br />
             require __DIR__ . '/../routes/web.php';<br /><br />
             return $app;
           </code>
-        </div>
-
-        <div>
-          <p class="text-terminal-cyan font-mono mb-2">
-            4. Start the dev server
-          </p>
-          <code
-            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
-          >
-            arc serve
-          </code>
-          <p class="text-terminal-dim text-sm">
-            Visit <a
-              href="http://localhost:8080"
-              class="text-terminal-cyan hover:text-terminal-green"
-              target="_blank"
-              rel="noopener noreferrer">http://localhost:8080</a
-            >
-          </p>
         </div>
 
         <div>
@@ -317,6 +357,25 @@ const image = '/assets/projects/arcmvc.webp';
           >
             $router-&gt;get('/', [HomeController::class, 'index']);
           </code>
+        </div>
+
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">
+            6. Start the dev server
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
+          >
+            arc serve
+          </code>
+          <p class="text-terminal-dim text-sm">
+            Visit <a
+              href="http://localhost:8080"
+              class="text-terminal-cyan hover:text-terminal-green"
+              target="_blank"
+              rel="noopener noreferrer">http://localhost:8080</a
+            >
+          </p>
         </div>
       </div>
 
@@ -338,37 +397,13 @@ const image = '/assets/projects/arcmvc.webp';
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
           >
             $router-&gt;get('/', [HomeController::class, 'index']);<br />
+            $router-&gt;get('/users/&#123;id&#125;', [UserController::class, 'show']);<br
+            />
             $router-&gt;post('/users', [UserController::class, 'store']);<br />
             $router-&gt;put('/users/&#123;id&#125;', [UserController::class, 'update']);<br
             />
-            $router-&gt;delete('/users/&#123;id&#125;', [UserController::class, 'delete']);
+            $router-&gt;delete('/users/&#123;id&#125;', [UserController::class, 'destroy']);
           </code>
-        </div>
-
-        <div>
-          <p class="text-terminal-cyan font-mono mb-2">Parameterized routes</p>
-          <code
-            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-          >
-            $router-&gt;get('/users/&#123;id&#125;', [UserController::class,
-            'show']);
-          </code>
-          <p class="text-terminal-dim text-sm mt-2">
-            Route parameters are passed as method arguments.
-          </p>
-        </div>
-
-        <div>
-          <p class="text-terminal-cyan font-mono mb-2">Closures</p>
-          <code
-            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-          >
-            $router-&gt;get('/hello/&#123;name&#125;', fn (Request $req, string
-            $name) =&gt; "Hello, &#123;$name&#125;!");
-          </code>
-          <p class="text-terminal-dim text-sm mt-2">
-            Return a string and it's wrapped in a Response automatically.
-          </p>
         </div>
 
         <div>
@@ -376,13 +411,19 @@ const image = '/assets/projects/arcmvc.webp';
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
           >
-            $router-&gt;group(['prefix' =&gt; '/admin', 'middleware' =&gt;
-            AuthMiddleware::class], function (Router $r) &#123;<br />
-            &nbsp;&nbsp;$r-&gt;get('/dashboard', [AdminController::class, 'dashboard']);<br
+            $router-&gt;group(['prefix' =&gt; 'admin', 'middleware' =&gt;
+            AuthMiddleware::class], function ($router) &#123;<br />
+            &nbsp;&nbsp;$router-&gt;get('/dashboard', [AdminController::class, 'index']);<br
             />
             &#125;);
           </code>
         </div>
+
+        <p class="text-terminal-dim text-sm">
+          Controllers are resolved through the DI container, enabling
+          constructor injection. Route parameters are passed as method
+          arguments.
+        </p>
       </div>
 
       <div class="py-4">
@@ -405,18 +446,19 @@ const image = '/assets/projects/arcmvc.webp';
         <code
           class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
         >
-          class HomeController extends Controller<br />
+          class UserController extends Controller<br />
           &#123;<br />
-          &nbsp;&nbsp;public function index(Request $request): Response<br />
+          &nbsp;&nbsp;public function show(Request $request, string $id): Response<br
+          />
           &nbsp;&nbsp;&#123;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;view('home.index', ['title' =&gt;
-          'Welcome']);<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;$user = User::find($id);<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;view('users.show', ['user' =&gt;
+          $user]);<br />
           &nbsp;&nbsp;&#125;<br />
           <br />
-          &nbsp;&nbsp;public function api(Request $request): Response<br />
+          &nbsp;&nbsp;public function store(Request $request): Response<br />
           &nbsp;&nbsp;&#123;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;json(['status' =&gt; 'ok']);<br
-          />
+          &nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;redirect('/users');<br />
           &nbsp;&nbsp;&#125;<br />
           &#125;
         </code>
@@ -426,7 +468,8 @@ const image = '/assets/projects/arcmvc.webp';
             class="text-terminal-green">json()</code
           >, <code class="text-terminal-green">redirect()</code>, <code
             class="text-terminal-green">back()</code
-          >.
+          >. The <code class="text-terminal-green">back()</code> helper only redirects
+          to same-origin URLs, preventing open redirect attacks.
         </p>
       </div>
 
@@ -443,9 +486,11 @@ const image = '/assets/projects/arcmvc.webp';
       <h3 class="text-terminal-amber mb-6">### views &amp; layouts</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
         <p>
-          Views are <code class="text-terminal-green">.phtml</code> files. <code
-            class="text-terminal-green">$this</code
-          > is bound to a <code class="text-terminal-green">Template</code> object.
+          Views are <code class="text-terminal-green">.phtml</code> files in <code
+            class="text-terminal-green">resources/views/</code
+          >. <code class="text-terminal-green">$this</code> is bound to a <code
+            class="text-terminal-green">Template</code
+          > object.
         </p>
 
         <div>
@@ -453,10 +498,9 @@ const image = '/assets/projects/arcmvc.webp';
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
           >
-            &lt;?php /** @var \Arc\View\Template $this */ ?&gt;<br />
             &lt;?php $this-&gt;extend('main') ?&gt;<br />
-            &lt;?php $this-&gt;section('title', 'Home') ?&gt;<br />
-            &lt;h1&gt;Welcome&lt;/h1&gt;
+            &lt;?php $this-&gt;section('title', 'Home Page') ?&gt;<br />
+            &lt;p&gt;Page content here&lt;/p&gt;
           </code>
         </div>
 
@@ -467,24 +511,8 @@ const image = '/assets/projects/arcmvc.webp';
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
           >
-            &lt;?php /** @var \Arc\View\Template $this */ ?&gt;<br />
-            &lt;!DOCTYPE html&gt;<br />
-            &lt;html&gt;<br />
-            &lt;head&gt;&lt;title&gt;<!--?= $this-&gt;yield('title', 'Arc') ?&gt;&lt;/title&gt;&lt;/head&gt;<br/-->
-            &lt;body&gt;<!--?= $this-&gt;yield('content') ?&gt;&lt;/body&gt;<br/-->
-            &lt;/html&gt;
-          </code>
-        </div>
-
-        <div>
-          <p class="text-terminal-cyan font-mono mb-2">
-            Standalone view (no layout)
-          </p>
-          <code
-            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-          >
-            &lt;h1&gt;<!--?= $title ?&gt;&lt;/h1&gt;<br/-->
-            &lt;p&gt;No layout call, renders as-is.&lt;/p&gt;
+            &lt;title&gt;<!--?= $this-&gt;yield('title', 'Arc') ?&gt;&lt;/title&gt;<br/-->
+            <!--?= $this-&gt;yield('content') ?&gt;
           </code>
         </div>
 
@@ -493,45 +521,66 @@ const image = '/assets/projects/arcmvc.webp';
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
             <span
-              ><code class="text-terminal-green">extend('main')</code> — wrap this
+              ><code class="text-terminal-green">extend('main')</code> wrap this
               view in a layout</span
             >
           </li>
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
             <span
-              ><code class="text-terminal-green">section('title', 'Home')</code> —
-              define a named section</span
+              ><code class="text-terminal-green">section('title', 'Home')</code> define a named section</span
             >
           </li>
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
             <span
               ><code class="text-terminal-green">yield('title', 'Default')</code
-              > — output a section or its default</span
+              > output a section or its default</span
             >
           </li>
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
             <span
-              ><code class="text-terminal-green">yield('content')</code> — output
-              the view's rendered content</span
+              ><code class="text-terminal-green">e($userInput)</code> escape output for XSS prevention</span
             >
           </li>
           <li class="flex gap-3">
             <span class="text-terminal-green">-</span>
             <span
-              ><code class="text-terminal-green">partial('nav.main')</code> — render
-              a sub-template</span
+              ><code class="text-terminal-green">csrfField()</code> render a hidden CSRF token input</span
+            >
+          </li>
+          <li class="flex gap-3">
+            <span class="text-terminal-green">-</span>
+            <span
+              ><code class="text-terminal-green">partial('nav.main')</code> render a sub-template</span
             >
           </li>
         </ul>
 
+        <div class="mt-4">
+          <p class="text-terminal-cyan font-mono mb-2">CSRF in forms</p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            &lt;form method="POST" action="/users"&gt;<br />
+            &nbsp;&nbsp;<!--?= $this-&gt;csrfField() ?&gt;<br/-->
+            <br />
+            &nbsp;&nbsp;&lt;input name="name" /&gt;<br />
+            &lt;/form&gt;
+          </code>
+          <p class="text-terminal-dim text-sm mt-2">
+            <code class="text-terminal-green">CsrfMiddleware</code> validates the
+            token on POST, PUT, PATCH, and DELETE. It uses the double-submit cookie
+            pattern with SameSite=Strict and HttpOnly.
+          </p>
+        </div>
+
         <p class="text-terminal-dim text-sm mt-4">
-          The <code class="text-terminal-green">@var</code> annotation helps IDEs
-          and static analysis understand <code class="text-terminal-green"
-            >$this</code
-          >.
+          Content and named sections yielded via <code
+            class="text-terminal-green">yield()</code
+          > are <strong>raw</strong> by design (trusted template HTML). Always escape
+          user data with <code class="text-terminal-green">e()</code>.
         </p>
       </div>
 
@@ -547,49 +596,103 @@ const image = '/assets/projects/arcmvc.webp';
     <section class="py-12 border-b border-terminal-border" id="middleware">
       <h3 class="text-terminal-amber mb-6">### middleware</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
-        <p>
-          Implement <code class="text-terminal-green">MiddlewareInterface</code
-          >:
-        </p>
+        <p>Register global middleware in your bootstrap:</p>
 
         <code
           class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
         >
-          class AuthMiddleware implements MiddlewareInterface<br />
-          &#123;<br />
-          &nbsp;&nbsp;public function handle(Request $request, callable $next): Response<br
-          />
-          &nbsp;&nbsp;&#123;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;if (!$this-&gt;isLoggedIn()) &#123;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new Response('', 401);<br
-          />
-          &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;return $next($request);<br />
-          &nbsp;&nbsp;&#125;<br />
-          &#125;
+          use Arc\Http\Middleware\SecurityMiddleware;<br />
+          use Arc\Http\Middleware\CsrfMiddleware;<br />
+          use Arc\Http\Middleware\RateLimitMiddleware;<br /><br />
+          $app-&gt;addMiddleware(SecurityMiddleware::class);<br />
+          $app-&gt;addMiddleware(new CsrfMiddleware());<br />
+          $app-&gt;addMiddleware(new RateLimitMiddleware(maxRequests: 60, windowSeconds:
+          60));
         </code>
 
-        <div class="mt-4 space-y-2">
-          <p>Register globally:</p>
+        <div class="mt-4">
+          <p class="text-terminal-cyan font-mono mb-2">Security Headers</p>
+          <p class="text-terminal-dim text-sm">
+            <code class="text-terminal-green">SecurityMiddleware</code> sets <code
+              class="text-terminal-green">Content-Security-Policy</code
+            >, <code class="text-terminal-green">Strict-Transport-Security</code
+            >, <code class="text-terminal-green">X-Content-Type-Options</code>, <code
+              class="text-terminal-green">X-Frame-Options</code
+            >, <code class="text-terminal-green">Referrer-Policy</code>, and
+            disables <code class="text-terminal-green">X-XSS-Protection</code>.
+            CSP and HSTS are configurable:
+          </p>
           <code
-            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-2"
           >
-            $app-&gt;addMiddleware(AuthMiddleware::class);
-          </code>
-          <p class="mt-3">Or on a route group:</p>
-          <code
-            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-          >
-            $router-&gt;group(['middleware' =&gt; AuthMiddleware::class],
-            function (Router $r) &#123; ... &#125;);
+            new SecurityMiddleware(<br />
+            &nbsp;&nbsp;csp: "default-src 'self'; script-src 'self' cdn.example.com",<br
+            />
+            &nbsp;&nbsp;hsts: 'max-age=63072000; includeSubDomains; preload'<br
+            />
+            );
           </code>
         </div>
 
-        <p class="text-terminal-dim text-sm mt-4">
-          Security headers are on by default via <code
-            class="text-terminal-green">SecurityMiddleware</code
-          >.
-        </p>
+        <div class="mt-4">
+          <p class="text-terminal-cyan font-mono mb-2">CSRF Protection</p>
+          <p class="text-terminal-dim text-sm">
+            <code class="text-terminal-green">CsrfMiddleware</code> uses the double-submit
+            cookie pattern with SameSite=Strict and HttpOnly. The token is attached
+            to the request as <code class="text-terminal-green"
+              >_csrf_token</code
+            > and automatically passed to views via <code
+              class="text-terminal-green">Controller::view()</code
+            >.
+          </p>
+        </div>
+
+        <div class="mt-4">
+          <p class="text-terminal-cyan font-mono mb-2">Rate Limiting</p>
+          <p class="text-terminal-dim text-sm">
+            <code class="text-terminal-green">RateLimitMiddleware</code> tracks requests
+            per client IP:
+          </p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-2"
+          >
+            new RateLimitMiddleware(maxRequests: 100, windowSeconds: 60);
+          </code>
+          <p class="text-terminal-dim text-sm mt-2">
+            Behind a reverse proxy, pass <code class="text-terminal-green"
+              >trustedProxies</code
+            > to read the client IP from <code class="text-terminal-green"
+              >X-Forwarded-For</code
+            >. For distributed deployments, implement <code
+              class="text-terminal-green">RateLimitStoreInterface</code
+            > with Redis or a database backend.
+          </p>
+        </div>
+
+        <div class="mt-4">
+          <p class="text-terminal-cyan font-mono mb-2">Custom middleware</p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            class AuthMiddleware implements MiddlewareInterface<br />
+            &#123;<br />
+            &nbsp;&nbsp;public function handle(Request $request, callable $next):
+            Response<br />
+            &nbsp;&nbsp;&#123;<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;if (!$this-&gt;isLoggedIn()) &#123;<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new Response('', 401);<br
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;return $next($request);<br />
+            &nbsp;&nbsp;&#125;<br />
+            &#125;
+          </code>
+          <p class="text-terminal-dim text-sm mt-2">
+            Register globally with <code class="text-terminal-green"
+              >$app->addMiddleware()</code
+            > or on a route group.
+          </p>
+        </div>
       </div>
 
       <div class="py-4">
@@ -605,65 +708,10 @@ const image = '/assets/projects/arcmvc.webp';
       <h3 class="text-terminal-amber mb-6">### database</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
         <p>
-          PDO under the hood. Configure in <code class="text-terminal-green"
+          Configure in <code class="text-terminal-green"
             >config/database.php</code
-          >. Supports MySQL and SQLite.
+          >. Supports MySQL and SQLite via PDO.
         </p>
-
-        <div>
-          <p class="text-terminal-cyan font-mono mb-2">Full config</p>
-          <code
-            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-          >
-            &lt;?php<br /><br />
-            declare(strict_types=1);<br /><br />
-            return [<br />
-            &nbsp;&nbsp;'default' =&gt; $_ENV['DB_CONNECTION'] ?? 'mysql',<br />
-            &nbsp;&nbsp;'connections' =&gt; [<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;'mysql' =&gt; [<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'driver' =&gt; 'mysql',<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'host' =&gt; $_ENV['DB_HOST'] ?? '127.0.0.1',<br
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'port' =&gt; $_ENV['DB_PORT'] ?? '3306',<br
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'database' =&gt; $_ENV['DB_DATABASE']
-            ?? 'arc',<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'username' =&gt; $_ENV['DB_USERNAME']
-            ?? 'root',<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'password' =&gt; $_ENV['DB_PASSWORD']
-            ?? '',<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'charset' =&gt; 'utf8mb4',<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;],<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;'sqlite' =&gt; [<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'driver' =&gt; 'sqlite',<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'database' =&gt; __DIR__ . '/../database/arc.sqlite',<br
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;],<br />
-            &nbsp;&nbsp;],<br />
-            ];
-          </code>
-        </div>
-
-        <div>
-          <p class="text-terminal-cyan font-mono mb-2">Connection usage</p>
-          <code
-            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-          >
-            $conn = $app-&gt;make(Connection::class);<br />
-            <br />
-            $users = $conn-&gt;select('SELECT * FROM users WHERE active = :active',
-            ['active' =&gt; 1]);<br />
-            $id = $conn-&gt;insert('INSERT INTO users (name, email) VALUES (:name,
-            :email)', [...]);<br />
-            $affected = $conn-&gt;update('UPDATE users SET name = :name WHERE id =
-            :id', [...]);<br />
-            <br />
-            $conn-&gt;transaction(function (Connection $c) &#123;<br />
-            &nbsp;&nbsp;$c-&gt;insert(...);<br />
-            &nbsp;&nbsp;$c-&gt;update(...);<br />
-            &#125;);
-          </code>
-        </div>
 
         <div>
           <p class="text-terminal-cyan font-mono mb-2">
@@ -675,14 +723,50 @@ const image = '/assets/projects/arcmvc.webp';
             class User extends Model<br />
             &#123;<br />
             &nbsp;&nbsp;protected string $table = 'users';<br />
+            &nbsp;&nbsp;protected string $primaryKey = 'id';<br />
             &nbsp;&nbsp;protected array $fillable = ['name', 'email'];<br />
-            &#125;<br />
-            <br />
-            User::all();<br />
-            User::find(1);<br />
-            User::create(['name' =&gt; 'Arc', 'email' =&gt; 'arc@example.com']);
+            &#125;<br /><br />
+            User::all(limit: 50, offset: 0);<br />
+            User::find($id);<br />
+            User::where('email', 'user@example.com');<br />
+            User::create(['name' =&gt; 'Arc', 'email' =&gt; '...']);<br />
+            User::update($id, ['name' =&gt; 'Updated']);<br />
+            User::delete($id);<br />
+            User::count();
+          </code>
+          <p class="text-terminal-dim text-sm mt-2">
+            Column names in <code class="text-terminal-green">where()</code>, <code
+              class="text-terminal-green">create()</code
+            >, and <code class="text-terminal-green">update()</code> are validated
+            against a strict regex to prevent SQL injection. Invalid identifiers throw
+            <code class="text-terminal-green">InvalidArgumentException</code>.
+          </p>
+        </div>
+
+        <div>
+          <p class="text-terminal-cyan font-mono mb-2">Raw queries</p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            $conn = $app-&gt;make(Connection::class);<br /><br />
+            $users = $conn-&gt;select('SELECT * FROM users WHERE active = :active',
+            ['active' =&gt; 1]);<br />
+            $id = $conn-&gt;insert('INSERT INTO users (name, email) VALUES (:name,
+            :email)', [...]);<br /><br />
+            $conn-&gt;transaction(function (Connection $c) &#123;<br />
+            &nbsp;&nbsp;$c-&gt;insert(...);<br />
+            &nbsp;&nbsp;$c-&gt;update(...);<br />
+            &#125;);
           </code>
         </div>
+
+        <p class="text-terminal-dim text-sm mt-2">
+          PDO errors are wrapped in <code class="text-terminal-green"
+            >DatabaseException</code
+          > to prevent sensitive SQL and table names from leaking in production. Use
+          <code class="text-terminal-green">Connection::ping()</code> for connection
+          health checks.
+        </p>
       </div>
 
       <div class="py-4">
@@ -703,14 +787,11 @@ const image = '/assets/projects/arcmvc.webp';
           $v = Validator::make($_POST, [<br />
           &nbsp;&nbsp;'name' =&gt; 'required|string|min:2',<br />
           &nbsp;&nbsp;'email' =&gt; 'required|email',<br />
-          &nbsp;&nbsp;'password' =&gt; 'required|min:8',<br />
-          &nbsp;&nbsp;'password_confirm' =&gt; 'required|same:password',<br />
-          ]);<br />
-          <br />
+          &nbsp;&nbsp;'age' =&gt; 'integer|min:18',<br />
+          ]);<br /><br />
           if ($v-&gt;fails()) &#123;<br />
           &nbsp;&nbsp;$errors = $v-&gt;errors();<br />
           &#125;<br />
-          <br />
           $validated = $v-&gt;validated();
         </code>
 
@@ -736,16 +817,254 @@ const image = '/assets/projects/arcmvc.webp';
           >.
         </p>
 
-        <p class="mt-3">Custom messages:</p>
+        <div class="mt-3">
+          <p>Custom messages:</p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            Validator::make($data, $rules, [<br />
+            &nbsp;&nbsp;'email.required' =&gt; 'Please enter your email',<br />
+            ]);
+          </code>
+        </div>
+
+        <p class="text-terminal-dim text-sm mt-3">
+          <code class="text-terminal-green">ValidationException</code> produces human-readable
+          error messages (not raw JSON).
+        </p>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="session">
+      <h3 class="text-terminal-amber mb-6">### session</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
         <code
           class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
         >
-          Validator::make($data, $rules, [<br />
-          &nbsp;&nbsp;'name.required' =&gt; 'Please enter your name.',<br />
-          &nbsp;&nbsp;'email.email' =&gt; 'That does not look like an email.',<br
-          />
-          ]);
+          use Arc\Http\Session;<br /><br />
+          $session = new Session();<br />
+          $session-&gt;start();<br />
+          $session-&gt;set('user_id', 42);<br />
+          $session-&gt;get('user_id');&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+          42<br />
+          $session-&gt;has('user_id');&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+          true<br /><br />
+          // Flash messages (persist for one request)<br />
+          $session-&gt;setFlash('status', 'Saved!');<br />
+          $session-&gt;flash('status');&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 'Saved!'
+          (then cleared)<br /><br />
+          $session-&gt;regenerate();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// prevent session
+          fixation<br />
+          $session-&gt;destroy();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+          end session
         </code>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="file-uploads">
+      <h3 class="text-terminal-amber mb-6">### file uploads</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          // Simple access<br />
+          $file = $request-&gt;getFile('avatar');<br /><br />
+          // Validated access (throws InvalidArgumentException on failure)<br />
+          $file = $request-&gt;validateFile('avatar', maxBytes: 5_242_880, allowedMimes:
+          ['image/jpeg', 'image/png']);
+        </code>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="configuration">
+      <h3 class="text-terminal-amber mb-6">### configuration</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          Config files in <code class="text-terminal-green">config/</code>,
+          accessed with dot notation:
+        </p>
+
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          $app-&gt;config()-&gt;get('app.name');&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+          'Arc'<br />
+          $app-&gt;config()-&gt;get('app.debug');&nbsp;&nbsp;&nbsp;// false<br
+          />
+          $app-&gt;config()-&gt;set('app.theme', 'dark');<br />
+          $app-&gt;config()-&gt;has('app.timezone');&nbsp;&nbsp;// true
+        </code>
+
+        <p class="mt-4">
+          Environment variables via <code class="text-terminal-green">.env</code
+          >:
+        </p>
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          APP_NAME=Arc<br />
+          APP_ENV=local<br />
+          APP_DEBUG=true<br />
+          DB_CONNECTION=mysql<br />
+          DB_HOST=127.0.0.1
+        </code>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="container">
+      <h3 class="text-terminal-amber mb-6">### dependency container</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>Bind interfaces to implementations, resolve dependencies:</p>
+
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          // Explicit binding<br />
+          $app-&gt;bind(PaymentGateway::class, StripeGateway::class);<br /><br
+          />
+          // Singleton (resolved once)<br />
+          $app-&gt;singleton(Logger::class, FileLogger::class);<br /><br />
+          // Auto-wiring (resolves constructor dependencies)<br />
+          $controller = $app-&gt;make(UserController::class);
+        </code>
+
+        <p class="text-terminal-dim text-sm mt-4">
+          Constructor parameters with class types are resolved from the
+          container. Scalar parameters require defaults or explicit bindings.
+          Use <code class="text-terminal-green">bind()</code> for transient instances
+          and <code class="text-terminal-green">singleton()</code> for one shared
+          instance across the request lifecycle.
+        </p>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="error-handling">
+      <h3 class="text-terminal-amber mb-6">### error handling</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          In production (<code class="text-terminal-green">APP_DEBUG=false</code
+          >), errors are logged and a generic error page is shown. In debug
+          mode, full stack traces are displayed.
+        </p>
+        <p class="mt-2">
+          Database errors are wrapped in <code class="text-terminal-green"
+            >DatabaseException</code
+          > to prevent sensitive SQL and table names from leaking.
+        </p>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="cors">
+      <h3 class="text-terminal-amber mb-6">### cors</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          use Arc\Http\Middleware\CorsMiddleware;<br /><br />
+          // Allow specific origins<br />
+          $app-&gt;addMiddleware(new CorsMiddleware(allowedOrigins: ['https://app.example.com']));<br
+          /><br />
+          // Allow all origins (for APIs)<br />
+          $app-&gt;addMiddleware(new CorsMiddleware(allowedOrigins: '*'));<br
+          /><br />
+          // With credentials and custom headers<br />
+          $app-&gt;addMiddleware(new CorsMiddleware(<br />
+          &nbsp;&nbsp;allowedOrigins: ['https://app.example.com'],<br />
+          &nbsp;&nbsp;allowCredentials: true,<br />
+          &nbsp;&nbsp;allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-TOKEN'],<br
+          />
+          ));
+        </code>
+        <p class="text-terminal-dim text-sm mt-2">
+          Handles preflight OPTIONS requests automatically.
+        </p>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="method-override">
+      <h3 class="text-terminal-amber mb-6">### http method override</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>
+          Browser forms only support GET and POST. Arc supports method spoofing:
+        </p>
+
+        <code
+          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+        >
+          &lt;form method="POST" action="/users/1"&gt;<br />
+          &nbsp;&nbsp;&lt;input type="hidden" name="_method" value="PUT"&gt;<br
+          />
+          &nbsp;&nbsp;&lt;input name="name" value="Updated"&gt;<br />
+          &lt;/form&gt;
+        </code>
+
+        <p class="mt-3">
+          Or via API header: <code class="text-terminal-green"
+            >X-HTTP-Method-Override: PATCH</code
+          >
+        </p>
+
+        <p class="text-terminal-dim text-sm mt-2">
+          Only POST requests can be overridden to PUT, PATCH, or DELETE. Use <code
+            class="text-terminal-green">getOriginalMethod()</code
+          > to see the actual HTTP method.
+        </p>
       </div>
 
       <div class="py-4">
@@ -763,42 +1082,42 @@ const image = '/assets/projects/arcmvc.webp';
         <code
           class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
         >
-          arc serve
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+          arc new my-project&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Create
+          new Arc project (scaffold + composer install)<br />
+          arc serve&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
           Start dev server (port 8080)<br />
-          arc serve --port=3000 &nbsp;&nbsp;&nbsp;&nbsp;# Custom port<br />
-          arc serve --detach &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Run in background<br
-          />
-          arc serve:stop &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+          arc serve --port=3000&nbsp;&nbsp;&nbsp;&nbsp;# Custom port<br />
+          arc serve --detach&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Run
+          in background<br />
+          arc serve:stop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
           Stop detached server<br />
-          arc make:controller User &nbsp;&nbsp;&nbsp;# Generate controller<br />
-          arc make:model User &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Generate
-          model<br />
-          arc routes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+          arc route:list&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
           List registered routes<br />
-          arc help &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
-          Show help
+          arc make:controller UserController<br />
+          arc make:model User
         </code>
 
-        <p class="mt-4">Custom commands:</p>
-        <code
-          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-        >
-          class MigrateCommand extends Command<br />
-          &#123;<br />
-          &nbsp;&nbsp;public function name(): string &#123; return 'migrate'; &#125;<br
-          />
-          &nbsp;&nbsp;public function description(): string &#123; return 'Run migrations';
-          &#125;<br />
-          &nbsp;&nbsp;public function run(array $args): int &#123;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;info('Running migrations...');<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br />
-          &nbsp;&nbsp;&#125;<br />
-          &#125;<br />
-          <br />
-          // Register in bootstrap/app.php:<br />
-          $kernel-&gt;register(new MigrateCommand());
-        </code>
+        <div class="mt-4">
+          <p>Custom commands:</p>
+          <code
+            class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
+          >
+            class MigrateCommand extends Command<br />
+            &#123;<br />
+            &nbsp;&nbsp;public function name(): string &#123; return 'migrate'; &#125;<br
+            />
+            &nbsp;&nbsp;public function description(): string &#123; return 'Run migrations';
+            &#125;<br />
+            &nbsp;&nbsp;public function run(array $args): int &#123;<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;info('Running migrations...');<br
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br />
+            &nbsp;&nbsp;&#125;<br />
+            &#125;<br /><br />
+            // Register in bootstrap/app.php:<br />
+            $kernel-&gt;register(new MigrateCommand());
+          </code>
+        </div>
       </div>
 
       <div class="py-4">
@@ -810,10 +1129,7 @@ const image = '/assets/projects/arcmvc.webp';
       </div>
     </section>
 
-    <section
-      class="py-12 border-b border-terminal-border"
-      id="project-structure"
-    >
+    <section class="py-12 border-b border-terminal-border">
       <h3 class="text-terminal-amber mb-6">### project structure</h3>
       <div class="text-terminal-fg leading-relaxed">
         <code
@@ -854,83 +1170,7 @@ const image = '/assets/projects/arcmvc.webp';
       </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border" id="configuration">
-      <h3 class="text-terminal-amber mb-6">### configuration</h3>
-      <div class="space-y-4 text-terminal-fg leading-relaxed">
-        <p>
-          Config files in <code class="text-terminal-green">config/</code>.
-          Access with dot notation:
-        </p>
-
-        <code
-          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-        >
-          $app-&gt;config()-&gt;get('app.name');<br />
-          $app-&gt;config()-&gt;get('database.default');<br />
-          $app-&gt;config()-&gt;set('app.debug', true);<br />
-          $app-&gt;config()-&gt;has('app.timezone');
-        </code>
-
-        <p class="mt-4">
-          Environment variables via <code class="text-terminal-green">.env</code
-          >:
-        </p>
-        <code
-          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-        >
-          APP_NAME=Arc<br />
-          APP_ENV=local<br />
-          APP_DEBUG=true<br />
-          DB_CONNECTION=mysql<br />
-          DB_HOST=127.0.0.1
-        </code>
-      </div>
-
-      <div class="py-4">
-        <a
-          href="#"
-          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
-          >↑ back to top</a
-        >
-      </div>
-    </section>
-
-    <section class="py-12 border-b border-terminal-border" id="container">
-      <h3 class="text-terminal-amber mb-6">### dependency container</h3>
-      <div class="space-y-4 text-terminal-fg leading-relaxed">
-        <p>Bind interfaces to implementations, resolve dependencies:</p>
-
-        <code
-          class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
-        >
-          // Bind a new instance each time<br />
-          $app-&gt;bind(PaymentGateway::class, StripeGateway::class);<br />
-          <br />
-          // Bind a singleton<br />
-          $app-&gt;singleton(DatabaseConnection::class, fn ($app) =&gt; new DatabaseConnection($app-&gt;config()));<br
-          />
-          <br />
-          // Resolve<br />
-          $gateway = $app-&gt;make(PaymentGateway::class);
-        </code>
-
-        <p class="text-terminal-dim text-sm mt-4">
-          Use <code class="text-terminal-green">bind()</code> for transient instances
-          and <code class="text-terminal-green">singleton()</code> when you need one
-          shared instance across the request lifecycle.
-        </p>
-      </div>
-
-      <div class="py-4">
-        <a
-          href="#"
-          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
-          >↑ back to top</a
-        >
-      </div>
-    </section>
-
-    <section class="py-12 border-b border-terminal-border" id="testing">
+    <section class="py-12 border-b border-terminal-border">
       <h3 class="text-terminal-amber mb-6">### testing</h3>
       <div class="space-y-4 text-terminal-fg leading-relaxed">
         <p>Run the test suite with PHPUnit:</p>
@@ -942,10 +1182,12 @@ const image = '/assets/projects/arcmvc.webp';
         </code>
 
         <p class="text-terminal-dim text-sm mt-4">
-          Arc ships with a test suite covering routing, middleware, database,
-          validation, and views. Add your own tests in <code
+          Arc ships with 270+ tests covering routing, middleware, database,
+          validation, views, session, and more. Add your own tests in <code
             class="text-terminal-green">tests/</code
-          >.
+          >. Use <code class="text-terminal-green"
+            >Application::resetInstance()</code
+          > for test isolation.
         </p>
       </div>
 
@@ -956,6 +1198,24 @@ const image = '/assets/projects/arcmvc.webp';
           >↑ back to top</a
         >
       </div>
+    </section>
+
+    <section class="py-12">
+      <p class="text-terminal-dim text-sm">
+        License: MIT, see <a
+          href="https://github.com/andrewthecodertx/php-arcmvc/blob/main/LICENSE"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >LICENSE</a
+        >. Report vulnerabilities to <a
+          href="https://github.com/andrewthecodertx/php-arcmvc/security"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >Security</a
+        >. PRs welcome, see <a
+          href="https://github.com/andrewthecodertx/php-arcmvc/blob/main/CONTRIBUTING.md"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >CONTRIBUTING.md</a
+        >.
+      </p>
     </section>
   </div>
 </BaseLayout>
