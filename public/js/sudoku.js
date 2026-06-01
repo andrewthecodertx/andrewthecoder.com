@@ -399,11 +399,14 @@
       selectedCell.col !== -1
     ) {
       if (initialPuzzle[selectedCell.row][selectedCell.col] !== 0) return;
-      const text = e.target.textContent;
+      const text = e.target.textContent.trim();
       if (text === 'C') {
         puzzle[selectedCell.row][selectedCell.col] = 0;
       } else {
-        puzzle[selectedCell.row][selectedCell.col] = parseInt(text);
+        const num = parseInt(text, 10);
+        if (!isNaN(num) && num >= 1 && num <= 9) {
+          puzzle[selectedCell.row][selectedCell.col] = num;
+        }
       }
       redraw();
       updateButtonStates();
