@@ -317,7 +317,8 @@
   solveButton.addEventListener('click', () => {
     puzzle = solveSudoku(puzzle);
     solveButton.disabled = true;
-    checkButton.disabled = true;
+    checkButton.disabled = false;
+    generateButton.disabled = false;
     redraw();
   });
   clearButton.addEventListener('click', () => {
@@ -380,13 +381,13 @@
     }
   }
   function updateButtonStates() {
-    if (
-      generateButton.disabled &&
-      puzzle.some((row) => row.some((cell) => cell === 0))
-    ) {
-      solveButton.disabled = false;
+    const hasEmpty = puzzle.some((row) => row.some((cell) => cell === 0));
+    if (generateButton.disabled) {
+      // A puzzle is active
+      solveButton.disabled = !hasEmpty;
       checkButton.disabled = false;
-    } else if (!generateButton.disabled) {
+    } else {
+      // No puzzle loaded
       solveButton.disabled = true;
       checkButton.disabled = true;
     }
