@@ -79,8 +79,8 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span
-            ><strong class="text-terminal-cyan">S-100 Bus</strong> - Card-based I/O
-            dispatch</span
+            ><strong class="text-terminal-cyan">S-100 Bus</strong> - Port-mapped I/O
+            dispatch to inline cards (no dynamic dispatch)</span
           >
         </li>
         <li class="flex gap-3">
@@ -140,11 +140,21 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">F2</code>
-          <span class="text-terminal-dim">- Program loader</span>
+          <span class="text-terminal-dim">- Load program (.json picker)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F3</code>
+          <span class="text-terminal-dim">- Save memory to file</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F4</code>
+          <span class="text-terminal-dim"
+            >- Mount disk image into drive A (.img/.dsk picker)</span
+          >
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">R</code>
-          <span class="text-terminal-dim">- Cold reset</span>
+          <span class="text-terminal-dim">- Cold reset (when stopped)</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">Ctrl+K</code>
@@ -153,7 +163,7 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
           >
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">Ctrl+]</code>
+          <code class="text-terminal-green whitespace-nowrap">Ctrl+D</code>
           <span class="text-terminal-dim">- Exit (CLI)</span>
         </div>
       </div>
