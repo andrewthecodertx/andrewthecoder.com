@@ -31,23 +31,18 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
       </p>
 
       <p class="text-terminal-fg leading-relaxed mb-6">
-        A Rust emulator for the IMSAI 8080, the iconic 1975 S-100 bus computer
-        made famous in the movie <em>WarGames</em>. This project emulates the
-        complete hardware stack: Intel 8080 CPU, 64KB RAM, Tarbell FD1771 floppy
-        disk controller, and IMSAI SIO-2 dual serial board with 8251A UARTs. Two
-        front ends are available: a raylib-based interactive front panel GUI
-        with toggle switches and LEDs, and a CLI terminal mode.
+        A Rust emulator for the IMSAI 8080, the 1975 S-100 bus computer made
+        famous in the movie <em>WarGames</em>. Emulates the Intel 8080 CPU, 64KB
+        RAM, Tarbell FD1771 floppy disk controller, and IMSAI SIO-2 dual serial
+        board with 8251A UARTs. Two front ends: a raylib interactive front panel
+        GUI with toggle switches and LEDs, and a CLI terminal mode.
       </p>
 
       <img
         src="/assets/projects/imsai-8080-emulator-screenshot.png"
         alt="IMSAI 8080 Emulator front panel GUI"
-        class="w-full rounded border border-terminal-border mb-2"
+        class="w-full rounded border border-terminal-border mb-6"
       />
-      <p class="text-terminal-dim text-sm mb-6">
-        The front panel GUI with toggle switches, address/data LEDs, and CRT
-        terminal display.
-      </p>
     </section>
 
     <section class="py-12 border-b border-terminal-border">
@@ -57,42 +52,42 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
           <span class="text-terminal-green">-</span>
           <span
             ><strong class="text-terminal-cyan">Intel 8080 CPU</strong> - Full instruction
-            set emulation at register level</span
+            set emulation</span
           >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span
             ><strong class="text-terminal-cyan">64KB RAM</strong> - Initialized to
-            0xFF on power-up, matching floating bus behavior</span
+            0xFF on power-up (floating bus)</span
           >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span
-            ><strong class="text-terminal-cyan">Tarbell 1011 FDC</strong> - WD FD1771
-            floppy disk controller, 8" SSSD format (ports 0x48-0x4B)</span
+            ><strong class="text-terminal-cyan">Tarbell 1011 FDC</strong> - WD FD1771,
+            8" SSSD format (ports 0x48-0x4B)</span
           >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span
-            ><strong class="text-terminal-cyan">IMSAI SIO-2</strong> - Dual Intel
-            8251A UART serial board (ports 0x00-0x03)</span
+            ><strong class="text-terminal-cyan">IMSAI SIO-2</strong> - Dual 8251A
+            UART serial board (ports 0x00-0x03)</span
           >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span
             ><strong class="text-terminal-cyan">S-100 Bus</strong> - Card-based I/O
-            dispatch with memory-mapped address bus</span
+            dispatch</span
           >
         </li>
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span
             ><strong class="text-terminal-cyan">Front Panel</strong> - Toggle switches,
-            LED displays, EXAMINE/DEPOSIT/RUN/STOP controls</span
+            LEDs, EXAMINE/DEPOSIT/RUN/STOP</span
           >
         </li>
       </ul>
@@ -109,20 +104,15 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
       <div
         class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
       >
-        <p class="text-terminal-dim text-sm mb-2">terminal mode (cli)</p>
+        <p class="text-terminal-dim text-sm mb-2">terminal mode</p>
         <code class="text-terminal-green"
           >cargo run --bin imsai-cli -- --program programs/hello-world.json</code
         >
       </div>
-      <p class="text-terminal-dim text-sm mt-4">
-        Binaries: <code class="text-terminal-green">imsai-gui</code> (raylib front
-        panel) and
-        <code class="text-terminal-green">imsai-cli</code> (terminal mode).
-      </p>
     </section>
 
     <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### gui controls</h3>
+      <h3 class="text-terminal-amber mb-6">### controls</h3>
       <div class="space-y-2 text-sm">
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap"
@@ -134,65 +124,37 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
           <code class="text-terminal-green whitespace-nowrap"
             >RUN/STOP or F5</code
           >
-          <span class="text-terminal-dim">- Start or stop CPU execution</span>
+          <span class="text-terminal-dim">- Start/stop CPU</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">STEP</code>
-          <span class="text-terminal-dim">- Execute one instruction</span>
+          <span class="text-terminal-dim">- Single instruction</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">EXAMINE</code>
-          <span class="text-terminal-dim"
-            >- Read byte at address into data LEDs</span
+          <code class="text-terminal-green whitespace-nowrap"
+            >EXAMINE / DEPOSIT</code
           >
-        </div>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">DEPOSIT</code>
           <span class="text-terminal-dim"
-            >- Write data switches into memory</span
+            >- Read/write memory at address switches</span
           >
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">F2</code>
-          <span class="text-terminal-dim">- Open program loader</span>
+          <span class="text-terminal-dim">- Program loader</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">R</code>
-          <span class="text-terminal-dim">- Cold reset (clear RAM)</span>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">Keyboard</code>
-          <span class="text-terminal-dim"
-            >- Send characters to console UART when running</span
-          >
-        </div>
-      </div>
-    </section>
-
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### terminal mode controls</h3>
-      <div class="space-y-2 text-sm">
-        <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">Letters</code>
-          <span class="text-terminal-dim">- Sent as uppercase</span>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">Enter</code>
-          <span class="text-terminal-dim">- Sends CR (0x0D)</span>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <code class="text-terminal-green whitespace-nowrap">Backspace</code>
-          <span class="text-terminal-dim">- Sends DEL (0x7F)</span>
+          <span class="text-terminal-dim">- Cold reset</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">Ctrl+K</code>
           <span class="text-terminal-dim"
-            >- Command mode (load, mount, reset, quit)</span
+            >- Command mode (CLI: load, mount, reset, quit)</span
           >
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">Ctrl+]</code>
-          <span class="text-terminal-dim">- Exit emulator</span>
+          <span class="text-terminal-dim">- Exit (CLI)</span>
         </div>
       </div>
     </section>
@@ -228,32 +190,7 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
       </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### project stats</h3>
-      <div class="space-y-2 text-sm">
-        <div class="flex flex-col sm:flex-row gap-2">
-          <span class="text-terminal-dim whitespace-nowrap">Language:</span>
-          <span class="text-terminal-fg">Rust (~8,000 lines)</span>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <span class="text-terminal-dim whitespace-nowrap">Tests:</span>
-          <span class="text-terminal-fg">131 passing</span>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <span class="text-terminal-dim whitespace-nowrap">Binaries:</span>
-          <span class="text-terminal-fg"
-            >imsai-gui (raylib), imsai-cli (terminal)</span
-          >
-        </div>
-      </div>
-    </section>
-
     <section class="py-12">
-      <h3 class="text-terminal-amber mb-6">### learn more</h3>
-      <p class="text-terminal-fg mb-4">
-        Explore the source code, read the documentation, and learn about the
-        S-100 bus architecture that defined early personal computing.
-      </p>
       <div class="flex gap-4">
         <a
           href="https://github.com/andrewthecodertx/rust-imsai-emulator"
