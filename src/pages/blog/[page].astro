@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../utils/formatDate';
 
 const title = 'Blog';
 const description = 'Latest articles.';
@@ -48,7 +49,9 @@ function getAuthorName(authorSlug: string) {
               </h3>
               <p>{post.data.description}</p>
               <div class="post-item-footer">
-                <span class="post-item-date">— {post.data.publishDate}</span>
+                <span class="post-item-date">
+                  — {formatDate(post.data.publishDate)}
+                </span>
                 <span class="post-item-author">
                   by {getAuthorName(post.data.author)}
                 </span>

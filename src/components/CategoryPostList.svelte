@@ -14,11 +14,27 @@
 
     $: categorySlug = category.toLowerCase().replace(/\s+/g, '-');
 
-    // formatDate is passed from parent Astro context; reimplemented here for Svelte
+    // Reimplemented for Svelte — Astro serializes publishDate as a string
+    // which may be ISO format ("2026-05-23") or Date.toString() format.
+    // Parse year/month/day manually to avoid the UTC offset bug.
     function formatDate(dateString) {
-        const datePart = dateString.split('T')[0];
-        const [year, month, day] = datePart.split('-').map(Number);
-        return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+        let year, month, day;
+
+        // Try ISO format first: "2026-05-23" or "2026-05-23T12:00"
+        const isoMatch = dateString.match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (isoMatch) {
+            year = Number(isoMatch[1]);
+            month = Number(isoMatch[2]) - 1;
+            day = Number(isoMatch[3]);
+        } else {
+            // Date.toString() format: "Thu Jun 04 2026 19:00:00 GMT-0500 ..."
+            const d = new Date(dateString);
+            year = d.getUTCFullYear();
+            month = d.getUTCMonth();
+            day = d.getUTCDate();
+        }
+
+        return new Date(year, month, day).toLocaleDateString("en-US", {
             year: "numeric",
             month: "short",
             day: "numeric",

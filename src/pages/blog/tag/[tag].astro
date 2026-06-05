@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { formatDate } from '../../../utils/formatDate';
 
 export const prerender = true;
 export async function getStaticPaths() {
@@ -50,7 +51,9 @@ const permalink = `${Astro.site.href}blog/tag/${tag}`;
               </h2>
               <p>{post.data.description}</p>
               <div class="post-item-footer">
-                <span class="post-item-date">— {post.data.publishDate}</span>
+                <span class="post-item-date">
+                  — {formatDate(post.data.publishDate)}
+                </span>
               </div>
             </div>
           </div>
