@@ -3,12 +3,12 @@ title: 'Arc 0.9.1: Immutable-friendly HTTP and safer middleware'
 slug: 'arc-0-9-1-immutable-http'
 publishDate: 2026-06-05
 description: "Request::withAttribute() and Response::with* make middleware safer and easier to reason about. Plus a note on PHP 8.5's clone-chain pitfall."
-categories: ['Programming']
+categories: ['Software Development']
 tags: ['PHP', 'Arc', 'Frameworks', 'Middleware']
 comments_enabled: true
 author: 'tim'
 featured: true
-hidden: true
+hidden: false
 image: ''
 github: 'https://github.com/andrewthecodertx/php-arcmvc/releases/tag/v0.9.1'
 ---
