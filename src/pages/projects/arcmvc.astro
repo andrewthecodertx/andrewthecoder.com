@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'ArcMVC';
 const description =
-  'A lightweight, modern PHP MVC framework. Small core, batteries included, built for PHP 8.4+.';
+  'A lightweight, modern PHP MVC framework. Small core, batteries included, built for PHP 8.4+. Immutable-friendly HTTP primitives.';
 const permalink = `${Astro.site.href}projects/arcmvc`;
 const image = '/assets/projects/arcmvc.webp';
 ---
@@ -17,7 +17,7 @@ const image = '/assets/projects/arcmvc.webp';
 >
   <div class="max-w-3xl mx-auto px-4">
     <section class="py-12 border-b border-terminal-border">
-      <h2 class="text-terminal-green mb-4">$ {title}</h2>
+      <h2 class="text-terminal-green mb-4">${title}</h2>
       <p class="text-terminal-dim text-sm mb-6">
         <a
           href="https://github.com/andrewthecodertx/php-arcmvc"
@@ -101,6 +101,13 @@ const image = '/assets/projects/arcmvc.webp';
               href="#middleware"
               class="text-terminal-cyan hover:text-terminal-green no-underline"
               >Middleware</a
+            >
+          </li>
+          <li>
+            <a
+              href="#http-request-response"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >HTTP Request &amp; Response</a
             >
           </li>
           <li>
@@ -382,6 +389,70 @@ const image = '/assets/projects/arcmvc.webp';
               target="_blank"
               rel="noopener noreferrer">http://localhost:8080</a
             >
+          </p>
+        </div>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section
+      class="py-12 border-b border-terminal-border"
+      id="http-request-response"
+    >
+      <h3 class="text-terminal-amber mb-6">### HTTP request & response</h3>
+      <div class="space-y-4 text-terminal-fg leading-relaxed">
+        <p>Arc's HTTP primitives now support immutable-friendly patterns:</p>
+        <ul class="space-y-2">
+          <li>
+            <span class="text-terminal-green">-</span>
+            <span
+              ><code class="text-terminal-cyan"
+                >Request::withAttribute(key, value)</code
+              > returns a cloned instance with the attribute set. <code
+                >setAttribute()</code
+              > still exists and mutates in place; prefer <code
+                >withAttribute()</code
+              > in middleware pipelines.</span
+            >
+          </li>
+          <li>
+            <span class="text-terminal-green">-</span>
+            <span
+              ><code class="text-terminal-cyan">Response</code> adds immutable variants
+              alongside the existing mutators: <code>withStatusCode(int)</code>, <code
+                >withHeader(name, value)</code
+              >, <code>withContent(string)</code>, <code
+                >withAddedCookie(Cookie)</code
+              >.</span
+            >
+          </li>
+          <li>
+            <span class="text-terminal-green">-</span>
+            <span
+              >When writing middleware that decorates the response (e.g.,
+              security headers), prefer the immutable methods so
+              upstream/downstream layers don't observe unexpected mutations.</span
+            >
+          </li>
+        </ul>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">PHP 8.5 note</p>
+          <p class="text-terminal-fg text-sm">
+            PHP 8.5 has a clone-chain pitfall: <code class="text-terminal-green"
+              >return clone($this)->method()</code
+            > may mutate <code>$this</code> instead of the clone. Arc's <code
+              >with*</code
+            > methods use the safer two-statement pattern (<code
+              >$new = clone $this; ...; return $new;</code
+            >). If you author your own immutable helpers, avoid one-line
+            clone-chains on PHP 8.5.
           </p>
         </div>
       </div>
