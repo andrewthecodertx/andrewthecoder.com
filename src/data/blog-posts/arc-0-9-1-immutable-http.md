@@ -9,7 +9,7 @@ comments_enabled: true
 author: 'tim'
 featured: true
 hidden: false
-image: ''
+image: '/assets/blog/arc-0-9-1-immutable-http.webp'
 github: 'https://github.com/andrewthecodertx/php-arcmvc/releases/tag/v0.9.1'
 ---
 
