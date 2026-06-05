@@ -38,11 +38,9 @@ const authorEntry = authors.find((a) => a.id === author);
 const postCategories = categories || [];
 const postTags = tags || [];
 const authorName = authorEntry?.data?.name || 'Andrew Erwin';
-const [pubYear, pubMonth, pubDay] = publishDate
-  .split('T')[0]
-  .split('-')
-  .map(Number);
-const publishedIso = new Date(pubYear, pubMonth - 1, pubDay).toISOString();
+const publishedDateObj =
+  publishDate instanceof Date ? publishDate : new Date(publishDate);
+const publishedIso = publishedDateObj.toISOString();
 const siteUrl = Astro.site?.href || 'https://andrewthecoder.com';
 const ogImage = image
   ? new URL(image, siteUrl).href
