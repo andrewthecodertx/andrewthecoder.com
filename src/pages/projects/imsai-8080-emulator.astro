@@ -94,42 +94,6 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
     </section>
 
     <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### running</h3>
-      <p class="text-terminal-fg text-sm mb-4">
-        From a release binary, just extract and run. From source, use
-        <code class="text-terminal-green">cargo</code>.
-      </p>
-      <div
-        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
-      >
-        <p class="text-terminal-dim text-sm mb-2">front panel gui (binary)</p>
-        <code class="text-terminal-green">./imsai-gui</code>
-      </div>
-      <div
-        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
-      >
-        <p class="text-terminal-dim text-sm mb-2">terminal mode (binary)</p>
-        <code class="text-terminal-green"
-          >./imsai-cli --program programs/hello-world.json</code
-        >
-      </div>
-      <div
-        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
-      >
-        <p class="text-terminal-dim text-sm mb-2">front panel gui (source)</p>
-        <code class="text-terminal-green">cargo run --bin imsai-gui</code>
-      </div>
-      <div
-        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
-      >
-        <p class="text-terminal-dim text-sm mb-2">terminal mode (source)</p>
-        <code class="text-terminal-green"
-          >cargo run --bin imsai-cli -- --program programs/hello-world.json</code
-        >
-      </div>
-    </section>
-
-    <section class="py-12 border-b border-terminal-border">
       <h3 class="text-terminal-amber mb-6">### downloads</h3>
       <p class="text-terminal-fg text-sm mb-4">
         Pre-built binaries from the
@@ -175,6 +139,73 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
             >- imsai-8080-emulator-x86_64-pc-windows-msvc.zip</span
           >
         </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### building from source</h3>
+      <div class="space-y-3 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <span class="text-terminal-dim whitespace-nowrap"
+            >Rust toolchain (1.80+)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <span class="text-terminal-dim whitespace-nowrap"
+            >raylib development libraries (for GUI)</span
+          >
+        </div>
+      </div>
+      <div class="mt-6 space-y-4">
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">ubuntu/debian</p>
+          <code class="text-terminal-green">sudo apt install libraylib-dev</code
+          >
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">arch linux</p>
+          <code class="text-terminal-green">sudo pacman -S raylib</code>
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">macos</p>
+          <code class="text-terminal-green">brew install raylib</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### running</h3>
+      <p class="text-terminal-fg text-sm mb-4">
+        From a release binary, just extract and run. From source, use
+        <code class="text-terminal-green">cargo</code>.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">front panel gui (binary)</p>
+        <code class="text-terminal-green">./imsai-gui</code>
+      </div>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">terminal mode (binary)</p>
+        <code class="text-terminal-green"
+          >./imsai-cli --program programs/hello-world.json</code
+        >
+      </div>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">front panel gui (source)</p>
+        <code class="text-terminal-green">cargo run --bin imsai-gui</code>
+      </div>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">terminal mode (source)</p>
+        <code class="text-terminal-green"
+          >cargo run --bin imsai-cli -- --program programs/hello-world.json</code
+        >
       </div>
     </section>
 
@@ -232,37 +263,6 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
         <div class="flex flex-col sm:flex-row gap-2">
           <code class="text-terminal-green whitespace-nowrap">Ctrl+D</code>
           <span class="text-terminal-dim">- Exit (CLI)</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-12 border-b border-terminal-border">
-      <h3 class="text-terminal-amber mb-6">### building from source</h3>
-      <div class="space-y-3 text-sm">
-        <div class="flex flex-col sm:flex-row gap-2">
-          <span class="text-terminal-dim whitespace-nowrap"
-            >Rust toolchain (1.80+)</span
-          >
-        </div>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <span class="text-terminal-dim whitespace-nowrap"
-            >raylib development libraries (for GUI)</span
-          >
-        </div>
-      </div>
-      <div class="mt-6 space-y-4">
-        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-          <p class="text-terminal-dim text-sm mb-2">ubuntu/debian</p>
-          <code class="text-terminal-green">sudo apt install libraylib-dev</code
-          >
-        </div>
-        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-          <p class="text-terminal-dim text-sm mb-2">arch linux</p>
-          <code class="text-terminal-green">sudo pacman -S raylib</code>
-        </div>
-        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-          <p class="text-terminal-dim text-sm mb-2">macos</p>
-          <code class="text-terminal-green">brew install raylib</code>
         </div>
       </div>
     </section>
