@@ -43,7 +43,8 @@ const image = '/assets/projects/arcmvc.webp';
       >
         <p class="text-terminal-dim text-sm mb-2">quick start</p>
         <code class="text-terminal-green"
-          >arc new my-project && cd my-project && arc serve</code
+          >composer create-project andrewthecoder/arcmvc my-project && cd
+          my-project && php bin/arc serve</code
         >
       </div>
     </section>
@@ -275,9 +276,9 @@ const image = '/assets/projects/arcmvc.webp';
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
           >
-            arc new my-project<br />
+            composer create-project andrewthecoder/arcmvc my-project<br />
             cd my-project<br />
-            arc serve
+            php bin/arc serve
           </code>
           <p class="text-terminal-dim text-sm">
             Or add Arc to an existing project:
@@ -285,7 +286,7 @@ const image = '/assets/projects/arcmvc.webp';
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mt-2"
           >
-            composer require andrewthecoder/arcmvc<br />
+            composer require andrewthecoder/arcmvc:^0.9<br />
             cp -r vendor/andrewthecoder/arcmvc/skeleton/* .
           </code>
         </div>
@@ -380,7 +381,7 @@ const image = '/assets/projects/arcmvc.webp';
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
           >
-            arc serve
+            php bin/arc serve
           </code>
           <p class="text-terminal-dim text-sm">
             Visit <a

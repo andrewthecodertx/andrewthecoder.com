@@ -19,12 +19,21 @@ const image = '/assets/projects/erwinmvc.webp';
       <h2 class="text-terminal-green mb-4">$ ErwinMVC</h2>
       <p class="text-terminal-dim text-sm mb-6">
         <a
-          href="https://github.com/erwininteractive/typescript-erwinmvc"
+          href="https://github.com/andrewthecodertx/erwinmvc"
           target="_blank"
           rel="noopener noreferrer"
           class="text-terminal-cyan hover:text-terminal-green no-underline"
         >
           View on GitHub →
+        </a>
+        <span class="mx-2">·</span>
+        <a
+          href="https://www.npmjs.com/package/@andrewthecoder/erwinmvc"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
+          View on npm →
         </a>
       </p>
 
@@ -40,7 +49,7 @@ const image = '/assets/projects/erwinmvc.webp';
       >
         <p class="text-terminal-dim text-sm mb-2">quick start</p>
         <code class="text-terminal-green"
-          >npx @erwininteractive/mvc init myapp</code
+          >npx @andrewthecoder/erwinmvc init myapp</code
         >
       </div>
     </section>
@@ -192,7 +201,7 @@ const image = '/assets/projects/erwinmvc.webp';
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
           >
-            npx @erwininteractive/mvc init myapp<br />
+            npx @andrewthecoder/erwinmvc init myapp<br />
             cd myapp
           </code>
           <p class="text-terminal-dim text-sm">
@@ -685,8 +694,8 @@ const image = '/assets/projects/erwinmvc.webp';
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs"
           >
-            import &#123; getPrismaClient &#125; from "@erwininteractive/mvc";<br
-            /><br />
+            import &#123; getPrismaClient &#125; from
+            "@andrewthecoder/erwinmvc";<br /><br />
             const prisma = getPrismaClient();<br /><br />
             app.get("/posts", async (req, res) &#123;<br />
             &nbsp;&nbsp;const posts = await prisma.post.findMany();<br />
@@ -726,7 +735,7 @@ const image = '/assets/projects/erwinmvc.webp';
             &nbsp;&nbsp;signToken,<br />
             &nbsp;&nbsp;verifyToken,<br />
             &nbsp;&nbsp;authenticate,<br />
-            &#125; from "@erwininteractive/mvc";<br /><br />
+            &#125; from "@andrewthecoder/erwinmvc";<br /><br />
             const hash = await hashPassword("secret123");<br />
             const isValid = await verifyPassword("secret123", hash);<br />
             const token = signToken(&#123; userId: 1, email: "user@example.com" &#125;);<br
@@ -793,7 +802,7 @@ const image = '/assets/projects/erwinmvc.webp';
               <tr>
                 <td class="py-2 px-2"
                   ><code class="text-terminal-cyan"
-                    >npx @erwininteractive/mvc init &lt;dir&gt;</code
+                    >npx @andrewthecoder/erwinmvc init &lt;dir&gt;</code
                   ></td
                 >
                 <td class="py-2 px-2">Create a new app</td>
@@ -933,7 +942,7 @@ const image = '/assets/projects/erwinmvc.webp';
           <code
             class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3"
           >
-            npx @erwininteractive/mvc init myapp --with-tailwind
+            npx @andrewthecoder/erwinmvc init myapp --with-tailwind
           </code>
           <p class="text-terminal-dim text-sm">
             Includes pre-built Tailwind CSS (no build step needed)
@@ -1074,7 +1083,7 @@ const image = '/assets/projects/erwinmvc.webp';
       <code
         class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-4"
       >
-        npx @erwininteractive/mvc init myapp --with-ci
+        npx @andrewthecoder/erwinmvc init myapp --with-ci
       </code>
       <p class="text-terminal-fg mb-4 text-sm">
         Or add CI to an existing project by creating <code
@@ -1220,7 +1229,7 @@ const image = '/assets/projects/erwinmvc.webp';
       </p>
       <div class="flex gap-4">
         <a
-          href="https://github.com/erwininteractive/typescript-erwinmvc"
+          href="https://github.com/andrewthecodertx/erwinmvc"
           target="_blank"
           rel="noopener noreferrer"
           class="text-terminal-cyan hover:text-terminal-green no-underline"
@@ -1236,7 +1245,7 @@ const image = '/assets/projects/erwinmvc.webp';
           Documentation →
         </a>
         <a
-          href="https://www.npmjs.com/package/@erwininteractive/mvc"
+          href="https://www.npmjs.com/package/@andrewthecoder/erwinmvc"
           target="_blank"
           rel="noopener noreferrer"
           class="text-terminal-cyan hover:text-terminal-green no-underline"
