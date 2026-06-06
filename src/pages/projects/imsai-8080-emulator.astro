@@ -177,114 +177,116 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
         </div>
       </div>
     </section>
-  </div>
 
-  <section class="py-12 border-b border-terminal-border">
-    <h3 class="text-terminal-amber mb-6">### controls</h3>
-    <div class="space-y-2 text-sm">
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap"
-          >Mouse on switches</code
-        >
-        <span class="text-terminal-dim">- Toggle address/data bits</span>
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### controls</h3>
+      <div class="space-y-2 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap"
+            >Mouse on switches</code
+          >
+          <span class="text-terminal-dim">- Toggle address/data bits</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap"
+            >RUN/STOP or F5</code
+          >
+          <span class="text-terminal-dim">- Start/stop CPU</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">STEP</code>
+          <span class="text-terminal-dim">- Single instruction</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap"
+            >EXAMINE / DEPOSIT</code
+          >
+          <span class="text-terminal-dim"
+            >- Read/write memory at address switches</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F2</code>
+          <span class="text-terminal-dim">- Load program (.json picker)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F3</code>
+          <span class="text-terminal-dim">- Save memory to file</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F4</code>
+          <span class="text-terminal-dim"
+            >- Mount disk image into drive A (.img/.dsk picker)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">R</code>
+          <span class="text-terminal-dim">- Cold reset (when stopped)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Ctrl+K</code>
+          <span class="text-terminal-dim"
+            >- Command mode (CLI: load, mount, reset, quit)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Ctrl+D</code>
+          <span class="text-terminal-dim">- Exit (CLI)</span>
+        </div>
       </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap">RUN/STOP or F5</code
-        >
-        <span class="text-terminal-dim">- Start/stop CPU</span>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap">STEP</code>
-        <span class="text-terminal-dim">- Single instruction</span>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap"
-          >EXAMINE / DEPOSIT</code
-        >
-        <span class="text-terminal-dim"
-          >- Read/write memory at address switches</span
-        >
-      </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap">F2</code>
-        <span class="text-terminal-dim">- Load program (.json picker)</span>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap">F3</code>
-        <span class="text-terminal-dim">- Save memory to file</span>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap">F4</code>
-        <span class="text-terminal-dim"
-          >- Mount disk image into drive A (.img/.dsk picker)</span
-        >
-      </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap">R</code>
-        <span class="text-terminal-dim">- Cold reset (when stopped)</span>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap">Ctrl+K</code>
-        <span class="text-terminal-dim"
-          >- Command mode (CLI: load, mount, reset, quit)</span
-        >
-      </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <code class="text-terminal-green whitespace-nowrap">Ctrl+D</code>
-        <span class="text-terminal-dim">- Exit (CLI)</span>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-12 border-b border-terminal-border">
-    <h3 class="text-terminal-amber mb-6">### building from source</h3>
-    <div class="space-y-3 text-sm">
-      <div class="flex flex-col sm:flex-row gap-2">
-        <span class="text-terminal-dim whitespace-nowrap"
-          >Rust toolchain (1.80+)</span
-        >
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### building from source</h3>
+      <div class="space-y-3 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <span class="text-terminal-dim whitespace-nowrap"
+            >Rust toolchain (1.80+)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <span class="text-terminal-dim whitespace-nowrap"
+            >raylib development libraries (for GUI)</span
+          >
+        </div>
       </div>
-      <div class="flex flex-col sm:flex-row gap-2">
-        <span class="text-terminal-dim whitespace-nowrap"
-          >raylib development libraries (for GUI)</span
-        >
+      <div class="mt-6 space-y-4">
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">ubuntu/debian</p>
+          <code class="text-terminal-green">sudo apt install libraylib-dev</code
+          >
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">arch linux</p>
+          <code class="text-terminal-green">sudo pacman -S raylib</code>
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">macos</p>
+          <code class="text-terminal-green">brew install raylib</code>
+        </div>
       </div>
-    </div>
-    <div class="mt-6 space-y-4">
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-        <p class="text-terminal-dim text-sm mb-2">ubuntu/debian</p>
-        <code class="text-terminal-green">sudo apt install libraylib-dev</code>
-      </div>
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-        <p class="text-terminal-dim text-sm mb-2">arch linux</p>
-        <code class="text-terminal-green">sudo pacman -S raylib</code>
-      </div>
-      <div class="bg-terminal-bg border border-terminal-border rounded p-4">
-        <p class="text-terminal-dim text-sm mb-2">macos</p>
-        <code class="text-terminal-green">brew install raylib</code>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-12">
-    <div class="flex gap-4">
+    <section class="py-12">
+      <div class="flex gap-4">
+        <a
+          href="https://github.com/andrewthecodertx/rust-imsai-emulator"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
+          GitHub →
+        </a>
+      </div>
+    </section>
+
+    <footer class="py-8 border-t border-terminal-border">
       <a
-        href="https://github.com/andrewthecodertx/rust-imsai-emulator"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-terminal-cyan hover:text-terminal-green no-underline"
+        href="/projects"
+        class="text-terminal-dim hover:text-terminal-green no-underline text-sm"
       >
-        GitHub →
+        ← back to projects
       </a>
-    </div>
-  </section>
-
-  <footer class="py-8 border-t border-terminal-border">
-    <a
-      href="/projects"
-      class="text-terminal-dim hover:text-terminal-green no-underline text-sm"
-    >
-      ← back to projects
-    </a>
-  </footer>
+    </footer>
+  </div>
 </BaseLayout>
