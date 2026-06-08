@@ -139,6 +139,27 @@ const image = '/assets/projects/enchanter.webp';
           </li>
           <li>
             <a
+              href="#security-sandbox"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Security Sandbox</a
+            >
+          </li>
+          <li>
+            <a
+              href="#context-compaction"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Context Compaction</a
+            >
+          </li>
+          <li>
+            <a
+              href="#tui-mode"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >TUI Mode</a
+            >
+          </li>
+          <li>
+            <a
               href="#daemon-mode"
               class="text-terminal-cyan hover:text-terminal-green no-underline"
               >Daemon Mode</a
@@ -313,6 +334,34 @@ const image = '/assets/projects/enchanter.webp';
             ><strong class="text-terminal-cyan">Daemon Mode</strong> — Background
             process keeps MCP servers warm, eliminating 3–15s cold starts. Linux &amp;
             macOS only.</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">TUI Mode</strong> — Multi-pane terminal
+            UI with sidebar (skills + memory), chat area, and input bar. Keyboard-driven,
+            all REPL slash commands work.</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">Security Sandbox</strong> — On Linux,
+            <code
+              class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+              >exec_command</code
+            >
+            runs under a Landlock kernel sandbox confined to allowed paths. File tools
+            check the path allowlist on all platforms.</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">Context Compaction</strong> — Rolling
+            compaction keeps long sessions within the model's context window. Older
+            turns are summarized; recent turns are always preserved verbatim.</span
           >
         </li>
       </ul>
@@ -600,12 +649,21 @@ const image = '/assets/projects/enchanter.webp';
             &nbsp;&nbsp;&nbsp;&nbsp;api_key: &#36;&#123;OPENROUTER_API_KEY&#125;<br
             />
             <br />
+            security:<br />
+            &nbsp;&nbsp;allowed_paths:<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;- ~/Projects<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;- /tmp<br />
+            &nbsp;&nbsp;allow_unsandboxed_exec: false<br />
+            <br />
             agent:<br />
             &nbsp;&nbsp;max_turns: 30<br />
             &nbsp;&nbsp;summarize_on_exit: true<br />
             &nbsp;&nbsp;memory:<br />
             &nbsp;&nbsp;&nbsp;&nbsp;max_entries: 50<br />
             &nbsp;&nbsp;&nbsp;&nbsp;summarize_threshold: 40<br />
+            &nbsp;&nbsp;context:<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;max_tokens: 96000<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;keep_last_turns: 20<br />
             <br />
             mcp:<br />
             &nbsp;&nbsp;servers:<br />
@@ -671,9 +729,10 @@ const image = '/assets/projects/enchanter.webp';
                     ><code class="text-terminal-cyan">agent.max_turns</code></td
                   >
                   <td class="py-2 px-2"
-                    ><code class="text-terminal-fg">60</code></td
+                    ><code class="text-terminal-fg">150</code></td
                   >
-                  <td class="py-2 px-2">Max agent loop turns before stopping</td
+                  <td class="py-2 px-2"
+                    >Max agent loop turns. Set to 0 for unlimited.</td
                   >
                 </tr>
                 <tr>
@@ -713,6 +772,58 @@ const image = '/assets/projects/enchanter.webp';
                   >
                   <td class="py-2 px-2"
                     >Summarize older entries when count exceeds this</td
+                  >
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"
+                    ><code class="text-terminal-cyan"
+                      >agent.context.max_tokens</code
+                    ></td
+                  >
+                  <td class="py-2 px-2">—</td>
+                  <td class="py-2 px-2"
+                    >Compact older turns when estimated tokens exceed this. No
+                    compaction if unset.</td
+                  >
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"
+                    ><code class="text-terminal-cyan"
+                      >agent.context.keep_last_turns</code
+                    ></td
+                  >
+                  <td class="py-2 px-2"
+                    ><code class="text-terminal-fg">20</code></td
+                  >
+                  <td class="py-2 px-2"
+                    >Always keep this many recent messages verbatim during
+                    compaction</td
+                  >
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"
+                    ><code class="text-terminal-cyan"
+                      >security.allowed_paths</code
+                    ></td
+                  >
+                  <td class="py-2 px-2">home dir</td>
+                  <td class="py-2 px-2"
+                    >Directories the agent may read/write. Defaults to home
+                    directory if empty.</td
+                  >
+                </tr>
+                <tr>
+                  <td class="py-2 px-2"
+                    ><code class="text-terminal-cyan"
+                      >security.allow_unsandboxed_exec</code
+                    ></td
+                  >
+                  <td class="py-2 px-2"
+                    ><code class="text-terminal-fg">false</code></td
+                  >
+                  <td class="py-2 px-2"
+                    >Allow unsandboxed shell execution when Landlock is
+                    unavailable. Escape hatch — use with care.</td
                   >
                 </tr>
               </tbody>
@@ -1420,6 +1531,299 @@ const image = '/assets/projects/enchanter.webp';
       </div>
     </section>
 
+    <section
+      class="py-12 border-b border-terminal-border"
+      id="security-sandbox"
+    >
+      <h3 class="text-terminal-amber mb-6">### security sandbox</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        On Linux, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >exec_command</code
+        >
+        (shell execution) runs under a <strong class="text-terminal-cyan"
+          >Landlock</strong
+        >
+        kernel sandbox that confines the spawned shell to an allowlist of directories.
+        The sandboxed process can read/write within
+        <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >allowed_paths</code
+        >
+        and read/execute system directories (<code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >/usr</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >/bin</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >/lib</code
+        >, etc.), but write access to system dirs is denied.
+      </p>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        File tools (<code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >read_file</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >write_file</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >edit_file</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >search_files</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >list_directory</code
+        >) check <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >allowed_paths</code
+        >
+        on all platforms.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-cyan font-mono mb-2">Config</p>
+        <code class="block text-terminal-fg text-xs">
+          security:<br />
+          &nbsp;&nbsp;allowed_paths:<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;- ~/Projects<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;- /tmp<br />
+          &nbsp;&nbsp;allow_unsandboxed_exec: false
+        </code>
+      </div>
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+        <p class="text-terminal-amber text-sm">
+          ⚠ On macOS and Windows, Landlock is unavailable. If <code
+            class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+            >allow_unsandboxed_exec</code
+          >
+          is <code
+            class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+            >false</code
+          >
+          (the default), <code
+            class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+            >exec_command</code
+          >
+          will refuse to run. Set it to <code
+            class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+            >true</code
+          >
+          to allow unsandboxed shell execution — this means the LLM can run any command
+          your user can.
+        </p>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section
+      class="py-12 border-b border-terminal-border"
+      id="context-compaction"
+    >
+      <h3 class="text-terminal-amber mb-6">### context compaction</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        For long sessions, the conversation window can grow beyond the model's
+        context limit. Rolling compaction keeps the live context within bounds:
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-cyan font-mono mb-2">Config</p>
+        <code class="block text-terminal-fg text-xs">
+          agent:<br />
+          &nbsp;&nbsp;context:<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;max_tokens: 96000&nbsp;&nbsp;# Compact older turns
+          when est. tokens exceed this<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;keep_last_turns: 20&nbsp;&nbsp;# Always keep this
+          many recent messages verbatim
+        </code>
+      </div>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        When the estimated token count exceeds <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >max_tokens</code
+        >, older turns are summarized into a single compact message. The most
+        recent <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >keep_last_turns</code
+        >
+        messages are always preserved verbatim. Both values are optional — without
+        them, no compaction occurs and the full conversation is sent.
+      </p>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="tui-mode">
+      <h3 class="text-terminal-amber mb-6">
+        ### tui mode <span class="text-terminal-dim text-sm font-normal"
+          >(optional feature)</span
+        >
+      </h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        The terminal UI provides a multi-pane interface with a sidebar (skills +
+        memory), main chat area, and input bar. A header shows the model,
+        provider, and session info; a footer shows tool/skill counts and quick
+        key hints.
+      </p>
+
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">launch the tui</p>
+        <code class="text-terminal-green">enchanter tui</code>
+      </div>
+
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        All REPL slash commands work in the TUI (<code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >/help</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >/clear</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >/model</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >/undo</code
+        >, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >/retry</code
+        >, etc.). On exit, the TUI generates a session summary to memory just
+        like the REPL.
+      </p>
+
+      <div class="space-y-3 mb-6">
+        <p class="text-terminal-cyan font-mono mb-2">Focus and navigation</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-terminal-fg text-xs">
+            <thead>
+              <tr class="border-b border-terminal-border">
+                <th class="text-left py-2 px-2">Key</th>
+                <th class="text-left py-2 px-2">Action</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-terminal-border">
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">Tab</code></td
+                >
+                <td class="py-2 px-2">Cycle focus forward through panes</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">Shift+Tab</code></td
+                >
+                <td class="py-2 px-2">Cycle focus backward</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">1</code>–<code
+                    class="text-terminal-cyan">4</code
+                  ></td
+                >
+                <td class="py-2 px-2">Jump to Skills / Memory / Chat / Input</td
+                >
+              </tr>
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">/</code></td
+                >
+                <td class="py-2 px-2">Jump to input and start a command</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">Esc</code></td
+                >
+                <td class="py-2 px-2">Return focus to input pane</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-terminal-cyan font-mono mb-2 mt-4">Input bar</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-terminal-fg text-xs">
+            <thead>
+              <tr class="border-b border-terminal-border">
+                <th class="text-left py-2 px-2">Key</th>
+                <th class="text-left py-2 px-2">Action</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-terminal-border">
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">Enter</code></td
+                >
+                <td class="py-2 px-2"
+                  >Send message (multiline off) / newline (multiline on)</td
+                >
+              </tr>
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">Ctrl+Enter</code></td
+                >
+                <td class="py-2 px-2"
+                  >Newline (multiline off) / send (multiline on)</td
+                >
+              </tr>
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">Ctrl+M</code></td
+                >
+                <td class="py-2 px-2">Toggle multiline mode</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">Ctrl+C</code></td
+                >
+                <td class="py-2 px-2">Cancel streaming response</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">Ctrl+Q</code></td
+                >
+                <td class="py-2 px-2">Quit</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p class="text-terminal-dim text-sm">
+        The TUI is enabled by default. Build without it: <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >cargo build --no-default-features</code
+        >.
+      </p>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
     <section class="py-12 border-b border-terminal-border" id="daemon-mode">
       <h3 class="text-terminal-amber mb-6">
         ### daemon mode <span class="text-terminal-dim text-sm font-normal"
@@ -1640,6 +2044,18 @@ const image = '/assets/projects/enchanter.webp';
                   >Show daemon status: model, MCP servers, uptime <span
                     class="text-terminal-dim">(Linux/macOS)</span
                   ></td
+                >
+              </tr>
+              <tr>
+                <td class="py-2 px-2"
+                  ><code class="text-terminal-cyan">enchanter init</code></td
+                >
+                <td class="py-2 px-2"
+                  >Scaffold <code
+                    class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+                    >.enchanter/</code
+                  >
+                  overlay in current directory</td
                 >
               </tr>
             </tbody>
