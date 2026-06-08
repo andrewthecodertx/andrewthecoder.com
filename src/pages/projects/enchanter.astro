@@ -104,6 +104,13 @@ const image = '/assets/projects/enchanter.webp';
           </li>
           <li>
             <a
+              href="#knowledge-store"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Knowledge Store</a
+            >
+          </li>
+          <li>
+            <a
               href="#session-continuity"
               class="text-terminal-cyan hover:text-terminal-green no-underline"
               >Session Continuity &amp; History</a
@@ -213,6 +220,15 @@ const image = '/assets/projects/enchanter.webp';
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span
+            ><strong class="text-terminal-cyan">Knowledge Store</strong> — Structured
+            key-value facts that persist across sessions. Unlike memory (narrative
+            text), knowledge entries are typed, searchable, and organized by category.
+            The agent learns once and never asks again.</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
             ><strong class="text-terminal-cyan">Persistent Memory</strong> — Memories
             persist across sessions with automatic summarization when the store grows.</span
           >
@@ -280,7 +296,8 @@ const image = '/assets/projects/enchanter.webp';
           <span class="text-terminal-green">-</span>
           <span
             ><strong class="text-terminal-cyan">Built-in Tools</strong> — exec_command,
-            read_file, write_file, edit_file, search_files, list_directory, memory.</span
+            read_file, write_file, edit_file, search_files, list_directory, memory,
+            knowledge.</span
           >
         </li>
         <li class="flex gap-3">
@@ -790,7 +807,8 @@ const image = '/assets/projects/enchanter.webp';
     >
       <h3 class="text-terminal-amber mb-6">### soul, memory & skills</h3>
       <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
-        The system prompt is assembled in six layers, each with a distinct role:
+        The system prompt is assembled in seven layers, each with a distinct
+        role:
       </p>
       <ul class="space-y-3 text-terminal-fg text-sm mb-6">
         <li class="flex gap-3">
@@ -824,12 +842,19 @@ const image = '/assets/projects/enchanter.webp';
         <li class="flex gap-3">
           <span class="text-terminal-green">5.</span>
           <span
+            ><strong class="text-terminal-cyan">KNOWLEDGE</strong> — Structured key-value
+            facts from the knowledge store. Compact and searchable.</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">6.</span>
+          <span
             ><strong class="text-terminal-cyan">VOLATILE</strong> — Memory entries
             and user profile. Changes frequently, fully replaceable.</span
           >
         </li>
         <li class="flex gap-3">
-          <span class="text-terminal-green">6.</span>
+          <span class="text-terminal-green">7.</span>
           <span
             ><strong class="text-terminal-cyan">SESSION</strong> — Current date and
             session start timestamp.</span
@@ -919,6 +944,98 @@ const image = '/assets/projects/enchanter.webp';
             &nbsp;&nbsp;&nbsp;&nbsp;image-generation/SKILL.md
           </code>
         </div>
+      </div>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="knowledge-store">
+      <h3 class="text-terminal-amber mb-6">### knowledge store</h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        Unlike memory (free-form narrative text), the knowledge store captures
+        discrete, typed facts that persist across sessions. Keys use
+        dot-namespaced identifiers like
+        <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >project.rust_version</code
+        >
+        or
+        <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >user.email</code
+        >. Values are short strings organized into five categories:
+      </p>
+
+      <ul class="space-y-3 text-terminal-fg text-sm mb-6">
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">environment</strong> — Runtime and
+            system facts (OS, shell, tool versions)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">project</strong> — Project-specific
+            details (language, framework, conventions)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">preference</strong> — User preferences
+            and style (code style, commit conventions)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">decision</strong> — Architectural
+            or design decisions (chosen approach, rationale)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">fact</strong> — General facts that
+            don't fit other categories</span
+          >
+        </li>
+      </ul>
+
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        Each entry tracks its source:
+        <strong class="text-terminal-cyan">observed</strong> (detected from tool output),
+        <strong class="text-terminal-cyan">told</strong> (explicitly stated by the
+        user), or
+        <strong class="text-terminal-cyan">inferred</strong> (concluded by the agent
+        from context).
+      </p>
+
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        The agent uses the knowledge tool internally to store, retrieve, search,
+        and forget facts. This means your agent can learn once and never ask
+        again, reducing token waste on repeated questions.
+      </p>
+
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-cyan font-mono mb-2">Store file</p>
+        <code class="block text-terminal-fg text-xs">
+          ~/.enchanter/knowledge/kstore.json
+        </code>
+        <p class="text-terminal-dim text-sm mt-2">
+          Human-readable JSON. Edit directly, commit to git, or let the agent
+          manage it. The store is loaded at startup and saved on every change.
+        </p>
       </div>
 
       <div class="py-4">
@@ -1041,8 +1158,9 @@ const image = '/assets/projects/enchanter.webp';
       <h3 class="text-terminal-amber mb-6">### prompt inspection</h3>
       <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
         Enchanter assembles the system prompt in explicit layers: SOUL → CONTEXT
-        → SKILLS → INSTRUCTIONS → VOLATILE → SESSION. You can inspect exactly
-        what the model receives and how it changes between turns.
+        → SKILLS → INSTRUCTIONS → KNOWLEDGE → VOLATILE → SESSION. You can
+        inspect exactly what the model receives and how it changes between
+        turns.
       </p>
 
       <div
@@ -1721,6 +1839,8 @@ const image = '/assets/projects/enchanter.webp';
           │ ├── USER.md # §-delimited user profile entries<br />
           │ ├── MEMORY.md # §-delimited agent memory entries<br />
           │ └── SUMMARY.md # Auto-summarized older entries<br />
+          ├── knowledge/<br />
+          │ └── kstore.json # Structured key-value facts<br />
           ├── sessions/<br />
           │ └── &lt;uuid&gt;.jsonl # Conversation history (auto-saved)<br />
           └── skills/<br />
