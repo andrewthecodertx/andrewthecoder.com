@@ -1020,9 +1020,15 @@ const image = '/assets/projects/enchanter.webp';
       </p>
 
       <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
-        The agent uses the knowledge tool internally to store, retrieve, search,
-        and forget facts. This means your agent can learn once and never ask
-        again, reducing token waste on repeated questions.
+        The agent proactively stores facts it discovers during conversation.
+        When it learns a version number, a project path, a user preference, or a
+        bug workaround, it stores it with the
+        <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >knowledge</code
+        >
+        tool so it never has to ask again. The INSTRUCTIONS prompt layer directs this
+        behavior automatically.
       </p>
 
       <div
@@ -1034,7 +1040,7 @@ const image = '/assets/projects/enchanter.webp';
         </code>
         <p class="text-terminal-dim text-sm mt-2">
           Human-readable JSON. Edit directly, commit to git, or let the agent
-          manage it. The store is loaded at startup and saved on every change.
+          manage it. Persists to disk on every write so crashes don't lose data.
         </p>
       </div>
 
