@@ -1044,6 +1044,35 @@ const image = '/assets/projects/enchanter.webp';
         </p>
       </div>
 
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-cyan font-mono mb-2">Project-level knowledge</p>
+        <p class="text-terminal-fg leading-relaxed text-sm mb-3">
+          When enchanter runs inside a project with a
+          <code
+            class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+            >.enchanter/</code
+          >
+          directory, project-level knowledge is merged on top of the global store.
+          Project entries override global entries with the same key.
+        </p>
+        <code class="block text-terminal-fg text-xs">
+          my-project/<br />
+          &nbsp;&nbsp;.enchanter/<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;knowledge/<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kstore.json&nbsp;&nbsp;# project-specific
+          facts
+        </code>
+        <p class="text-terminal-dim text-sm mt-2">
+          Running <code
+            class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+            >enchanter init</code
+          >
+          in a project directory creates the knowledge directory automatically.
+        </p>
+      </div>
+
       <div class="py-4">
         <a
           href="#"
