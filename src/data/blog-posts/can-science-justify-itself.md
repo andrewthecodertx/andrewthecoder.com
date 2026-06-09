@@ -5,7 +5,7 @@ publishDate: '2026-01-17'
 description: 'Exploring the problem of induction and the limits of science.'
 categories: ['Science']
 tags: ['philosophy of science', 'science', 'induction']
-author: andrew
+author: Andrew
 comments_enabled: true
 featured: false
 image: '/assets/blog/science.webp'

@@ -5,7 +5,7 @@ publishDate: '2026-01-30'
 description: 'An interactive Mandelbrot set viewer built in OCaml with SDL2, exploring the math behind one of the most famous fractals.'
 categories: ['Software Development']
 tags: ['mandelbrot', 'fractal', 'ocaml', 'math', 'sdl2']
-author: andrew
+author: Andrew
 comments_enabled: true
 featured: true
 github: 'https://github.com/andrewthecodertx/ocaml-mandelbrot_set'

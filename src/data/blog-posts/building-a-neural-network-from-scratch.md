@@ -5,7 +5,7 @@ publishDate: '2025-09-10'
 description: 'A feed-forward neural network implementation in Go with support for multiple activation functions, model persistence, and an interactive TUI.'
 categories: ['Software Development']
 tags: ['neural network', 'machine learning', 'go']
-author: andrew
+author: Andrew
 comments_enabled: true
 featured: true
 github: 'https://github.com/andrewthecodertx/go-neural-network'

@@ -5,7 +5,7 @@ publishDate: '2026-01-01'
 description: 'A technical deep dive into WeighTogether, a full-stack weight loss tracking application built with TypeScript, Express, and Prisma—intentionally avoiding heavy frameworks.'
 categories: ['Software Development']
 tags: ['typescript', 'express', 'prisma', 'postgresql', 'web development']
-author: andrew
+author: Andrew
 comments_enabled: true
 featured: true
 github: 'https://github.com/erwininteractive/weightloss.watch'

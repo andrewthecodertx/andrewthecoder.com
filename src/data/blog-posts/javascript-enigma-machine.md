@@ -5,7 +5,7 @@ publishDate: '2025-07-29'
 description: "A deep dive into the Enigma machine's mathematics and how to simulate its complex cryptographic processes using JavaScript."
 categories: ['Software Development']
 tags: ['cryptography', 'enigma machine', 'javascript']
-author: andrew
+author: Andrew
 comments_enabled: true
 featured: true
 github: 'https://github.com/andrewthecodertx/javascript-enigma-machine'
