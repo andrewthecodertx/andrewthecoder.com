@@ -35,7 +35,8 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
         famous in the movie <em>WarGames</em>. Emulates the Intel 8080 CPU, 64KB
         RAM, Tarbell FD1771 floppy disk controller, and IMSAI SIO-2 dual serial
         board with 8251A UARTs. Two front ends: a raylib interactive front panel
-        GUI with toggle switches and LEDs, and a CLI terminal mode.
+        GUI with toggle switches, LEDs, and a live hex memory editor, and a CLI
+        terminal mode.
       </p>
 
       <img
@@ -632,6 +633,18 @@ OUT  0x01      ;</code></pre>
           <code class="text-terminal-green whitespace-nowrap">F4</code>
           <span class="text-terminal-dim"
             >- Mount disk image into drive A (.img/.dsk picker)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F6</code>
+          <span class="text-terminal-dim"
+            >- Toggle CONSOLE / live memory editor (read-only while running)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Ctrl+Enter</code>
+          <span class="text-terminal-dim"
+            >- Run from cursor address in memory editor</span
           >
         </div>
         <div class="flex flex-col sm:flex-row gap-2">
