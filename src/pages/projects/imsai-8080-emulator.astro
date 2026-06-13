@@ -83,6 +83,13 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span
+            ><strong class="text-terminal-cyan">Video Display</strong> - 80x24 CRT
+            terminal (Channel A UART output)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
             ><strong class="text-terminal-cyan">S-100 Bus</strong> - Port-mapped I/O
             dispatch to inline cards (no dynamic dispatch)</span
           >
@@ -288,6 +295,46 @@ const image = '/assets/projects/imsai-8080-emulator.webp';
 OUT  0x01      ;
 MVI A, 0x05    ; command: enable TX and RX
 OUT  0x01      ;</code></pre>
+      </div>
+
+      <h4 class="text-terminal-cyan text-sm mb-2 mt-6">
+        video display (80x24 crt terminal)
+      </h4>
+      <p class="text-terminal-fg text-sm mb-3">
+        Characters written to UART Channel A (OUT port 0x00) appear on the video
+        display. The display is an 80-column by 24-row CRT terminal — it is the
+        output side of the console UART, not a separate I/O device.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-terminal-dim">
+              <th class="text-left py-1">Feature</th>
+              <th class="text-left py-1">Value</th>
+            </tr>
+          </thead>
+          <tbody class="text-terminal-fg">
+            <tr><td class="py-1">Columns</td><td class="py-1">80</td></tr>
+            <tr><td class="py-1">Rows</td><td class="py-1">24</td></tr>
+            <tr
+              ><td class="py-1">Input</td><td class="py-1"
+                >Channel A TX output (port 0x00 writes)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">Control characters</td><td class="py-1"
+                >CR (0x0D), LF (0x0A), BS (0x08)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">Scrolling</td><td class="py-1"
+                >Automatic when cursor passes the last row</td
+              ></tr
+            >
+          </tbody>
+        </table>
       </div>
 
       <h4 class="text-terminal-cyan text-sm mb-2 mt-6">
