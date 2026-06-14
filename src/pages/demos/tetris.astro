@@ -630,6 +630,10 @@ const image = '/assets/demos/tetris.webp';
 
       run(t = 0) {
         if (this.gameOver) return;
+        console.log(
+          '[Tetris] run() called, piece:',
+          this.gameState.getGamePiece()
+        );
         const delta = t - this.time;
         this.dropCounter += delta;
         if (this.dropCounter > this.gameState.getDropSpeed()) {
