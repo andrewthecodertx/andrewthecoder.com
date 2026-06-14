@@ -208,6 +208,10 @@ const image = '/assets/demos/tetris.webp';
         return this.standbyPiece;
       }
 
+      getDropSpeed() {
+        return this.stats.dropSpeed;
+      }
+
       updateScore(rows) {
         this.stats.score += rows * 10;
         this.stats.lines += rows;
