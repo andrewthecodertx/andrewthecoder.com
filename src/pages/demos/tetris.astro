@@ -40,49 +40,51 @@ const image = '/assets/demos/tetris.webp';
     </div>
   </div>
 
-  <div
-    class="tetris-game flex flex-col items-center py-6 px-4"
-    style="background-color: #1a1a1a;"
-  >
+  <div class="tetris-game flex flex-col items-center py-6 px-4">
     <div
       class="flex flex-col md:flex-row w-full max-w-4xl justify-around"
       id="tetris"
-      style="background-color: #202020;"
     >
       <div class="flex flex-col justify-items-center w-[260px]" id="left">
         <div
-          class="flex flex-col bg-black text-white border-4 border-cyan-500 justify-center p-1"
+          class="flex flex-col justify-center p-2 bg-terminal-bg border border-terminal-border"
         >
-          <p class="justify-center m-auto">STATISTICS</p>
-          <div class="p-4 m-auto" id="stats">
+          <p
+            class="justify-center m-auto text-terminal-amber font-mono text-xs uppercase tracking-widest"
+          >
+            Statistics
+          </p>
+          <div class="p-2 m-auto" id="stats">
             <ul></ul>
           </div>
         </div>
 
-        <div class="font-sans text-terminal-dim">
-          <p>CONTROLS</p>
-          <p>Press SPACE to start</p>
-          <p>Arrow keys to move</p>
-          <p>VIM keys (H,J,L) also move</p>
-          <p>A and D rotate</p>
+        <div class="mt-4">
+          <p
+            class="text-terminal-amber font-mono text-xs uppercase tracking-widest mb-2"
+          >
+            Controls
+          </p>
+          <p class="text-terminal-dim text-sm">Press SPACE to start</p>
+          <p class="text-terminal-dim text-sm">Arrow keys to move</p>
+          <p class="text-terminal-dim text-sm">VIM keys (H,J,L) also move</p>
+          <p class="text-terminal-dim text-sm">A and D rotate</p>
         </div>
       </div>
 
       <div class="flex flex-col" id="center">
         <div
-          class="w-full p-2 m-auto flex justify-center border-4 border-cyan-500 bg-black text-white mb-2"
+          class="w-full p-2 m-auto flex justify-center border border-terminal-border bg-terminal-bg text-terminal-fg mb-2"
         >
-          <p>
+          <p class="font-mono text-sm">
             LINES-<span id="lines" class="text-terminal-green">000</span>
           </p>
         </div>
         <canvas
-          class="border-cyan-500 border-4"
+          class="border border-terminal-border"
           id="gamearena"
           height="600"
-          width="300"
-          style="image-rendering: pixelated; image-rendering: crisp-edges;"
-        ></canvas>
+          width="300"></canvas>
       </div>
 
       <div class="w-[260px]" id="right">
@@ -100,8 +102,7 @@ const image = '/assets/demos/tetris.webp';
               id="bullpen"
               height="80"
               width="80"
-              class="mt-2 border border-terminal-border"
-              style="background-color: #000;"></canvas>
+              class="mt-2 border border-terminal-border"></canvas>
           </div>
           <div class="bg-terminal-bg border border-terminal-border p-3 mt-2">
             <p class="text-terminal-amber font-mono text-xs">LEVEL</p>
@@ -114,14 +115,10 @@ const image = '/assets/demos/tetris.webp';
       </div>
 
       <div id="mobile-controls" class="md:hidden flex justify-center mt-4">
-        <button id="left-btn" class="p-4 mx-2 bg-gray-300 rounded">Left</button>
-        <button id="right-btn" class="p-4 mx-2 bg-gray-300 rounded">
-          Right
-        </button>
-        <button id="rotate-btn" class="p-4 mx-2 bg-gray-300 rounded">
-          Rotate
-        </button>
-        <button id="down-btn" class="p-4 mx-2 bg-gray-300 rounded">Down</button>
+        <button id="left-btn">Left</button>
+        <button id="right-btn">Right</button>
+        <button id="rotate-btn">Rotate</button>
+        <button id="down-btn">Down</button>
       </div>
     </div>
   </div>
