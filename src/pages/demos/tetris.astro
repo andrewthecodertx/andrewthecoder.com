@@ -1,0 +1,648 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+
+export const prerender = true;
+
+const title = 'Tetris';
+const description =
+  'Classic Tetris clone written in TypeScript. Play with keyboard (arrows, Space, A/D) or on-screen controls. Built with HTML5 Canvas.';
+const permalink = `${Astro.site.href}demos/tetris`;
+const image = '/assets/demos/tetris.webp';
+---
+
+<DemoLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="demos"
+  image={image}
+>
+  <div
+    class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border"
+  >
+    <h2 class="text-terminal-green">Tetris</h2>
+    <span class="text-terminal-dim">
+      <span class="text-terminal-amber">Space</span> start
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">arrows</span> move
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">A/D</span> rotate
+    </span>
+    <div class="flex gap-2 ml-auto">
+      <a
+        href="https://github.com/andrewthecodertx/typescript-tetris"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors no-underline"
+      >
+        [source]
+      </a>
+    </div>
+  </div>
+
+  <div class="px-4 py-6 max-w-4xl mx-auto">
+    <div class="flex flex-col md:flex-row gap-4 justify-center items-start">
+      <!-- Left Panel: Stats & Controls -->
+      <div class="flex flex-col w-full md:w-[260px] gap-4">
+        <div class="flex justify-center">
+          <span
+            class="bg-terminal-bg border border-terminal-cyan text-terminal-fg px-3 py-1"
+          >
+            <span class="font-mono text-sm">A-TYPE</span>
+          </span>
+        </div>
+
+        <div class="bg-terminal-bg border border-terminal-cyan p-3">
+          <p class="text-center text-terminal-amber font-mono text-xs mb-2">
+            STATISTICS
+          </p>
+          <div id="stats">
+            <ul class="space-y-1"></ul>
+          </div>
+        </div>
+
+        <div class="bg-terminal-bg/30 border border-terminal-border p-3">
+          <p class="text-terminal-amber font-mono text-xs mb-2">CONTROLS</p>
+          <ul class="space-y-1 text-xs">
+            <li><span class="text-terminal-fg">Space</span> to start</li>
+            <li><span class="text-terminal-fg">Arrow keys</span> to move</li>
+            <li><span class="text-terminal-fg">H J L</span> also move</li>
+            <li><span class="text-terminal-fg">A</span> rotate left</li>
+            <li><span class="text-terminal-fg">D</span> rotate right</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Center: Game Arena -->
+      <div class="flex flex-col items-center">
+        <div class="text-terminal-amber font-mono text-xs mb-2">
+          LINES-<span id="lines" class="text-terminal-green">000</span>
+        </div>
+        <canvas
+          id="gamearena"
+          class="border-4 border-terminal-cyan bg-black"
+          width="300"
+          height="600"
+          style="image-rendering: pixelated; image-rendering: crisp-edges;"
+        ></canvas>
+      </div>
+
+      <!-- Right Panel: Score & Next -->
+      <div class="w-full md:w-[260px]">
+        <div id="scoreboard" class="space-y-3">
+          <div class="bg-terminal-bg border border-terminal-border p-3">
+            <p class="text-terminal-amber font-mono text-xs">SCORE</p>
+            <span
+              id="score"
+              class="text-terminal-green font-mono text-2xl block mt-1">0</span
+            >
+          </div>
+          <div class="bg-terminal-bg border border-terminal-border p-3">
+            <p class="text-terminal-amber font-mono text-xs">NEXT</p>
+            <canvas
+              id="bullpen"
+              width="80"
+              height="80"
+              class="mt-2 border border-terminal-border"></canvas>
+          </div>
+          <div class="bg-terminal-bg border border-terminal-border p-3">
+            <p class="text-terminal-amber font-mono text-xs">LEVEL</p>
+            <span
+              id="level"
+              class="text-terminal-green font-mono text-2xl block mt-1">00</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Controls -->
+    <div id="mobile-controls" class="md:hidden flex justify-center gap-2 mt-4">
+      <button
+        id="left-btn"
+        class="bg-terminal-bg border border-terminal-border px-4 py-2 rounded font-mono text-sm"
+      >
+        Left
+      </button>
+      <button
+        id="right-btn"
+        class="bg-terminal-bg border border-terminal-border px-4 py-2 rounded font-mono text-sm"
+      >
+        Right
+      </button>
+      <button
+        id="rotate-btn"
+        class="bg-terminal-bg border border-terminal-border px-4 py-2 rounded font-mono text-sm"
+      >
+        Rotate
+      </button>
+      <button
+        id="down-btn"
+        class="bg-terminal-bg border border-terminal-border px-4 py-2 rounded font-mono text-sm"
+      >
+        Down
+      </button>
+    </div>
+  </div>
+
+  <script is:inline type="module">
+    // Tetris game logic
+    const colors = [
+      null,
+      '0, 255, 255', // I cyan
+      '0, 0, 255', // J blue
+      '255, 165, 0', // L orange
+      '255, 255, 0', // O yellow
+      '0, 128, 0', // S green
+      '128, 0, 128', // T purple
+      '255, 0, 0', // Z red
+    ];
+
+    const pieceImages = {
+      I: '/tetris/images/I.png',
+      J: '/tetris/images/J.png',
+      L: '/tetris/images/L.png',
+      O: '/tetris/images/O.png',
+      S: '/tetris/images/S.png',
+      T: '/tetris/images/T.png',
+      Z: '/tetris/images/Z.png',
+    };
+
+    // GameState
+    function createCanvas(height, width) {
+      return Array.from({ length: height }, () => new Array(width).fill(0));
+    }
+
+    class GameState {
+      constructor() {
+        this.gamearena = createCanvas(20, 10);
+        this.bullpen = createCanvas(4, 2);
+        this.gamepiece = null;
+        this.bullpenpiece = null;
+        this.standbyPiece = '';
+        this.stats = {
+          score: 0,
+          level: 1,
+          lines: 0,
+          dropSpeed: 1000,
+          pieceStats: { I: 0, J: 0, L: 0, O: 0, S: 0, T: 0, Z: 0 },
+        };
+      }
+
+      getGameArena() {
+        return this.gamearena;
+      }
+      getBullpen() {
+        return this.bullpen;
+      }
+      getGamePiece() {
+        return this.gamepiece;
+      }
+      getBullpenPiece() {
+        return this.bullpenpiece;
+      }
+      getStats() {
+        return { ...this.stats };
+      }
+      getStandbyPiece() {
+        return this.standbyPiece;
+      }
+
+      updateScore(rows) {
+        this.stats.score += rows * 10;
+        this.stats.lines += rows;
+        if (this.stats.score > 49 * this.stats.level) {
+          this.stats.level++;
+          this.stats.dropSpeed = Math.max(this.stats.dropSpeed - 200, 200);
+        }
+      }
+
+      updatePieceStats(piece) {
+        this.stats.pieceStats[piece] = (this.stats.pieceStats[piece] || 0) + 1;
+      }
+
+      setGamePiece(piece) {
+        this.gamepiece = piece;
+      }
+      setBullpenPiece(piece) {
+        this.bullpenpiece = piece;
+      }
+
+      moveGamePiece(offset) {
+        if (this.gamepiece) {
+          this.gamepiece.position.x += offset.x;
+          this.gamepiece.position.y += offset.y;
+        }
+      }
+
+      fuseGamePiece() {
+        if (this.gamepiece && this.gamepiece.position) {
+          this.gamepiece.matrix.forEach((row, y) => {
+            row.forEach((value, x) => {
+              if (value !== 0 && this.gamepiece && this.gamepiece.position) {
+                this.gamearena[y + this.gamepiece.position.y][
+                  x + this.gamepiece.position.x
+                ] = value;
+              }
+            });
+          });
+        }
+      }
+
+      clearRows() {
+        let rowsCleared = 0;
+        loop: for (let y = this.gamearena.length - 1; y > 0; --y) {
+          for (let x = 0; x < this.gamearena[y].length; ++x) {
+            if (this.gamearena[y][x] === 0) continue loop;
+          }
+          const row = this.gamearena.splice(y, 1)[0].fill(0);
+          this.gamearena.unshift(row);
+          ++y;
+          rowsCleared++;
+        }
+        return rowsCleared;
+      }
+
+      assignPiece() {
+        const pieces = 'TJLOSZI';
+        return pieces.charAt(Math.floor(Math.random() * pieces.length));
+      }
+
+      nextStandbyPiece() {
+        this.standbyPiece = this.assignPiece();
+      }
+
+      reset() {
+        this.gamearena = createCanvas(20, 10);
+        this.gamepiece = null;
+        this.bullpenpiece = null;
+        this.stats = {
+          score: 0,
+          level: 1,
+          lines: 0,
+          dropSpeed: 1000,
+          pieceStats: { I: 0, J: 0, L: 0, O: 0, S: 0, T: 0, Z: 0 },
+        };
+      }
+    }
+
+    // Piece
+    class Piece {
+      constructor(shape, position) {
+        this.position = position;
+        this.matrix = this.createPiece(shape);
+      }
+
+      createPiece(shape) {
+        switch (shape) {
+          case 'I':
+            return [
+              [0, 0, 0, 0],
+              [1, 1, 1, 1],
+              [0, 0, 0, 0],
+              [0, 0, 0, 0],
+            ];
+          case 'J':
+            return [
+              [2, 0, 0],
+              [2, 2, 2],
+              [0, 0, 0],
+            ];
+          case 'L':
+            return [
+              [0, 0, 3],
+              [3, 3, 3],
+              [0, 0, 0],
+            ];
+          case 'O':
+            return [
+              [4, 4],
+              [4, 4],
+            ];
+          case 'S':
+            return [
+              [0, 5, 5],
+              [5, 5, 0],
+              [0, 0, 0],
+            ];
+          case 'T':
+            return [
+              [0, 6, 0],
+              [6, 6, 6],
+              [0, 0, 0],
+            ];
+          case 'Z':
+            return [
+              [7, 7, 0],
+              [0, 7, 7],
+              [0, 0, 0],
+            ];
+          default:
+            throw new Error('Invalid piece shape');
+        }
+      }
+    }
+
+    // Renderer
+    class Renderer {
+      constructor(canvas, bpcanvas) {
+        this.ctx = canvas.getContext('2d');
+        this.ctx.scale(30, 30);
+        this.bpctx = bpcanvas.getContext('2d');
+        this.bpctx.scale(20, 20);
+      }
+
+      renderElement(element, offset, context) {
+        if (!element) return;
+        element.forEach((row, ypos) => {
+          row.forEach((color, xpos) => {
+            if (color !== 0) {
+              context.fillStyle = `rgba(${colors[color]}, 0.4)`;
+              context.fillRect(xpos + offset.x, ypos + offset.y, 1, 1);
+            }
+          });
+        });
+      }
+
+      redrawCanvases(gameState) {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+        this.ctx.fillRect(0, 0, 10, 20);
+        this.renderElement(gameState.getGameArena(), { x: 0, y: 0 }, this.ctx);
+        const piece = gameState.getGamePiece();
+        if (piece) {
+          this.renderElement(piece.matrix, piece.position, this.ctx);
+        }
+      }
+
+      loadBullpen(gameState) {
+        this.bpctx.clearRect(
+          0,
+          0,
+          this.bpctx.canvas.width,
+          this.bpctx.canvas.height
+        );
+        this.bpctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        this.bpctx.fillRect(
+          0,
+          0,
+          this.bpctx.canvas.width,
+          this.bpctx.canvas.height
+        );
+        this.renderElement(gameState.getBullpen(), { x: 0, y: 1 }, this.bpctx);
+        const bullpenPiece = gameState.getBullpenPiece();
+        if (bullpenPiece) {
+          this.renderElement(bullpenPiece.matrix, { x: 0, y: 0 }, this.bpctx);
+        }
+      }
+
+      displayScore(gameState) {
+        const stats = gameState.getStats();
+        const scoreEl = document.getElementById('score');
+        const levelEl = document.getElementById('level');
+        const linesEl = document.getElementById('lines');
+        if (scoreEl && levelEl && linesEl) {
+          scoreEl.innerText = stats.score.toString();
+          levelEl.innerText = stats.level.toString();
+          linesEl.innerText = stats.lines.toString();
+        }
+      }
+
+      updateStatistics(gameState) {
+        const statsEl = document.getElementById('stats');
+        if (!statsEl) return;
+        const { pieceStats } = gameState.getStats();
+        statsEl.innerHTML = `
+          <ul>
+            ${Object.entries(pieceStats)
+              .map(
+                ([shape, count]) =>
+                  `<li><img src="${pieceImages[shape]}" alt="${shape}" width="20" height="20"> <span>${count}</span></li>`
+              )
+              .join('')}
+          </ul>
+        `;
+      }
+
+      drawGameOver() {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        this.ctx.fillRect(0, 0, 10, 20);
+        this.ctx.font = "1px 'Press Start 2P'";
+        this.ctx.fillStyle = 'white';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText('GAME OVER', 5, 10);
+      }
+    }
+
+    // InputHandler
+    class InputHandler {
+      constructor(shiftShape, dropShape, rotateShape, startGame) {
+        this.shiftShape = shiftShape;
+        this.dropShape = dropShape;
+        this.rotateShape = rotateShape;
+        this.startGame = startGame;
+        this.setupKeyboard();
+        this.setupTouch();
+      }
+
+      setupKeyboard() {
+        document.addEventListener('keydown', (event) => {
+          if (event.code === 'Space') {
+            this.startGame();
+          }
+        });
+
+        document.addEventListener('keydown', (event) => {
+          switch (event.code) {
+            case 'ArrowLeft':
+            case 'KeyH':
+              this.shiftShape(-1);
+              break;
+            case 'ArrowRight':
+            case 'KeyL':
+              this.shiftShape(1);
+              break;
+            case 'ArrowDown':
+            case 'KeyJ':
+              this.dropShape();
+              break;
+            case 'KeyD':
+              this.rotateShape(1);
+              break;
+            case 'KeyA':
+              this.rotateShape(-1);
+              break;
+          }
+        });
+      }
+
+      setupTouch() {
+        document
+          .getElementById('left-btn')
+          ?.addEventListener('click', () => this.shiftShape(-1));
+        document
+          .getElementById('right-btn')
+          ?.addEventListener('click', () => this.shiftShape(1));
+        document
+          .getElementById('rotate-btn')
+          ?.addEventListener('click', () => this.rotateShape(1));
+        document
+          .getElementById('down-btn')
+          ?.addEventListener('click', () => this.dropShape());
+      }
+    }
+
+    // Game
+    class Game {
+      constructor(canvas, bpcanvas) {
+        this.gameState = new GameState();
+        this.renderer = new Renderer(canvas, bpcanvas);
+        this.inputHandler = new InputHandler(
+          (offset) => this.shiftShape(offset),
+          () => this.dropShape(),
+          (direction) => this.rotateShape(direction),
+          () => this.startGame()
+        );
+        this.dropCounter = 0;
+        this.time = 0;
+        this.standby = this.gameState.assignPiece();
+        this.gameOver = false;
+        this.animationId = null;
+
+        this.renderer.redrawCanvases(this.gameState);
+        this.renderer.updateStatistics(this.gameState);
+        this.renderer.displayScore(this.gameState);
+      }
+
+      collision() {
+        const piece = this.gameState.getGamePiece();
+        const arena = this.gameState.getGameArena();
+        if (!piece) return false;
+        for (let y = 0; y < piece.matrix.length; ++y) {
+          for (let x = 0; x < piece.matrix[y].length; ++x) {
+            if (
+              piece.matrix[y][x] !== 0 &&
+              (arena[y + piece.position.y] &&
+                arena[y + piece.position.y][x + piece.position.x]) !== 0
+            ) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      rotate(shape, direction) {
+        let rotated = shape.map((row) => [...row]);
+        for (let y = 0; y < rotated.length; ++y) {
+          for (let x = 0; x < y; ++x) {
+            [rotated[x][y], rotated[y][x]] = [rotated[y][x], rotated[x][y]];
+          }
+        }
+        if (direction > 0) rotated.forEach((row) => row.reverse());
+        else rotated.reverse();
+        return rotated;
+      }
+
+      rotateShape(direction) {
+        const piece = this.gameState.getGamePiece();
+        if (!piece) return;
+        const rotatedMatrix = this.rotate(piece.matrix, direction);
+        let offset = 1;
+        const originalMatrix = piece.matrix;
+        piece.matrix = rotatedMatrix;
+        this.gameState.setGamePiece(piece);
+        while (this.collision()) {
+          this.gameState.moveGamePiece({ x: offset, y: 0 });
+          offset = -(offset + (offset > 0 ? 1 : -1));
+          if (Math.abs(offset) > piece.matrix[0].length) {
+            piece.matrix = originalMatrix;
+            this.gameState.setGamePiece(piece);
+            return;
+          }
+        }
+      }
+
+      shiftShape(offset) {
+        this.gameState.moveGamePiece({ x: offset, y: 0 });
+        if (this.collision()) {
+          this.gameState.moveGamePiece({ x: -offset, y: 0 });
+        }
+      }
+
+      dropShape() {
+        this.gameState.moveGamePiece({ x: 0, y: 1 });
+        if (this.collision()) {
+          this.gameState.moveGamePiece({ x: 0, y: -1 });
+          this.gameState.fuseGamePiece();
+          this.initiateNewGamePiece(this.gameState.getStandbyPiece());
+          this.loadBullpen();
+          const clearedRows = this.gameState.clearRows();
+          if (clearedRows > 0) {
+            this.gameState.updateScore(clearedRows);
+            this.renderer.displayScore(this.gameState);
+          }
+        }
+        this.dropCounter = 0;
+      }
+
+      initiateNewGamePiece(shape) {
+        this.gameState.updatePieceStats(shape);
+        this.renderer.updateStatistics(this.gameState);
+        const newPiece = new Piece(shape, {
+          x: Math.floor(
+            (this.gameState.getGameArena()[0].length -
+              new Piece(shape, { x: 0, y: 0 }).matrix[0].length) /
+              2
+          ),
+          y: 0,
+        });
+        this.gameState.setGamePiece(newPiece);
+        if (this.collision()) {
+          this.gameOver = true;
+          this.renderer.drawGameOver();
+        }
+      }
+
+      loadBullpen() {
+        this.gameState.nextStandbyPiece();
+        const newPiece = new Piece(this.gameState.getStandbyPiece(), {
+          x: 0,
+          y: 0,
+        });
+        this.gameState.setBullpenPiece(newPiece);
+        this.renderer.loadBullpen(this.gameState);
+      }
+
+      run(t = 0) {
+        if (this.gameOver) return;
+        const delta = t - this.time;
+        this.dropCounter += delta;
+        if (this.dropCounter > this.gameState.getDropSpeed()) {
+          this.dropShape();
+        }
+        this.time = t;
+        this.renderer.redrawCanvases(this.gameState);
+        this.animationId = requestAnimationFrame(this.run.bind(this));
+      }
+
+      startGame() {
+        if (this.gameOver) {
+          this.gameOver = false;
+          this.animationId = null;
+        }
+        this.gameState.reset();
+        this.standby = this.gameState.assignPiece();
+        this.renderer.displayScore(this.gameState);
+        this.renderer.updateStatistics(this.gameState);
+        this.initiateNewGamePiece(this.standby);
+        this.loadBullpen();
+        this.run();
+      }
+    }
+
+    // Initialize
+    const canvas = document.getElementById('gamearena');
+    const bpcanvas = document.getElementById('bullpen');
+    const game = new Game(canvas, bpcanvas);
+  </script>
+</DemoLayout>
