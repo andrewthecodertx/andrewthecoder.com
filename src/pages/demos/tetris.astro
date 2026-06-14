@@ -357,6 +357,13 @@ const image = '/assets/demos/tetris.webp';
         element.forEach((row, ypos) => {
           row.forEach((color, xpos) => {
             if (color !== 0) {
+              console.log(
+                '[Tetris] renderElement: drawing cell at',
+                { x: xpos + offset.x, y: ypos + offset.y },
+                'color:',
+                color,
+                'rgba(' + colors[color] + ', 0.4)'
+              );
               context.fillStyle = `rgba(${colors[color]}, 0.4)`;
               context.fillRect(xpos + offset.x, ypos + offset.y, 1, 1);
             }
