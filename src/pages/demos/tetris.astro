@@ -41,11 +41,13 @@ const image = '/assets/demos/tetris.webp';
   </div>
 
   <div
-    class="tetris-game font-retro flex flex-col items-center bg-gray-700 py-6 px-4"
+    class="tetris-game flex flex-col items-center py-6 px-4"
+    style="background-color: #1a1a1a;"
   >
     <div
-      class="flex flex-col md:flex-row w-full max-w-4xl bg-zinc-50 justify-around"
+      class="flex flex-col md:flex-row w-full max-w-4xl justify-around"
       id="tetris"
+      style="background-color: #202020;"
     >
       <div class="flex flex-col justify-items-center w-[260px]" id="left">
         <div class="flex justify-center mt-5 mb-9">
@@ -137,5 +139,9 @@ const image = '/assets/demos/tetris.webp';
     href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
   />
   <link rel="stylesheet" href="/tetris/assets/tetris.css" />
-  <script is:inline src="/tetris/assets/tetris.js" data-astro-rerun></script>
+  <script
+    is:inline
+    type="module"
+    src="/tetris/assets/tetris.js"
+    data-astro-rerun></script>
 </DemoLayout>
