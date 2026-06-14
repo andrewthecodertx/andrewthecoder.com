@@ -630,10 +630,16 @@ const image = '/assets/demos/tetris.webp';
 
       run(t = 0) {
         if (this.gameOver) return;
+        const gamePiece = this.gameState.getGamePiece();
         console.log(
           '[Tetris] run() called, piece:',
-          this.gameState.getGamePiece()
+          gamePiece,
+          'dropCounter:',
+          this.dropCounter
         );
+        if (!gamePiece) {
+          console.error('[Tetris] ERROR: Game piece is null in run()!');
+        }
         const delta = t - this.time;
         this.dropCounter += delta;
         if (this.dropCounter > this.gameState.getDropSpeed()) {
