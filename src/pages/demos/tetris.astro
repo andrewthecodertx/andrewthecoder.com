@@ -440,39 +440,9 @@ const image = '/assets/demos/tetris.webp';
         this.dropShape = dropShape;
         this.rotateShape = rotateShape;
         this.startGame = startGame;
-        this.setupKeyboard();
+        this.keydownHandler = this.kbcontrols.bind(this);
+        document.addEventListener('keydown', this.keydownHandler);
         this.setupTouch();
-      }
-
-      setupKeyboard() {
-        document.addEventListener('keydown', (event) => {
-          if (event.code === 'Space') {
-            this.startGame();
-          }
-        });
-
-        document.addEventListener('keydown', (event) => {
-          switch (event.code) {
-            case 'ArrowLeft':
-            case 'KeyH':
-              this.shiftShape(-1);
-              break;
-            case 'ArrowRight':
-            case 'KeyL':
-              this.shiftShape(1);
-              break;
-            case 'ArrowDown':
-            case 'KeyJ':
-              this.dropShape();
-              break;
-            case 'KeyD':
-              this.rotateShape(1);
-              break;
-            case 'KeyA':
-              this.rotateShape(-1);
-              break;
-          }
-        });
       }
 
       setupTouch() {
@@ -488,6 +458,48 @@ const image = '/assets/demos/tetris.webp';
         document
           .getElementById('down-btn')
           ?.addEventListener('click', () => this.dropShape());
+      }
+
+      playercontrols(event) {
+        switch (event.code) {
+          case 'ArrowLeft':
+          case 'KeyH':
+            this.shiftShape(-1);
+            break;
+          case 'ArrowRight':
+          case 'KeyL':
+            this.shiftShape(1);
+            break;
+          case 'ArrowDown':
+          case 'KeyJ':
+            this.dropShape();
+            break;
+          case 'KeyD':
+            this.rotateShape(1);
+            break;
+          case 'KeyA':
+            this.rotateShape(-1);
+            break;
+        }
+      }
+
+      kbcontrols(event) {
+        if (event.code === 'Space') {
+          this.enableGameControls();
+          this.startGame();
+        }
+      }
+
+      enableGameControls() {
+        document.removeEventListener('keydown', this.keydownHandler);
+        this.keydownHandler = this.playercontrols.bind(this);
+        document.addEventListener('keydown', this.keydownHandler);
+      }
+
+      disableGameControls() {
+        document.removeEventListener('keydown', this.keydownHandler);
+        this.keydownHandler = this.kbcontrols.bind(this);
+        document.addEventListener('keydown', this.keydownHandler);
       }
     }
 
