@@ -520,6 +520,7 @@ const image = '/assets/demos/tetris.webp';
         this.gameOver = false;
         this.animationId = null;
 
+        console.log('[Tetris] Game created, standby piece:', this.standby);
         this.renderer.redrawCanvases(this.gameState);
         this.renderer.updateStatistics(this.gameState);
         this.renderer.displayScore(this.gameState);
@@ -598,6 +599,7 @@ const image = '/assets/demos/tetris.webp';
       }
 
       initiateNewGamePiece(shape) {
+        console.log('[Tetris] initiateNewGamePiece called with shape:', shape);
         this.gameState.updatePieceStats(shape);
         this.renderer.updateStatistics(this.gameState);
         const newPiece = new Piece(shape, {
@@ -609,6 +611,7 @@ const image = '/assets/demos/tetris.webp';
           y: 0,
         });
         this.gameState.setGamePiece(newPiece);
+        console.log('[Tetris] Game piece set:', this.gameState.getGamePiece());
         if (this.collision()) {
           this.gameOver = true;
           this.renderer.drawGameOver();
