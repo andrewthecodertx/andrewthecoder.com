@@ -50,15 +50,6 @@ const image = '/assets/demos/tetris.webp';
       style="background-color: #202020;"
     >
       <div class="flex flex-col justify-items-center w-[260px]" id="left">
-        <div class="flex justify-center mt-5 mb-9">
-          <span
-            class="bg-black text-white border-4 border-cyan-500 w-fit py-1 px-2 mb-2"
-            id="type"
-          >
-            <p>A-TYPE</p>
-          </span>
-        </div>
-
         <div
           class="flex flex-col bg-black text-white border-4 border-cyan-500 justify-center p-1"
         >
@@ -109,7 +100,8 @@ const image = '/assets/demos/tetris.webp';
               id="bullpen"
               height="80"
               width="80"
-              class="mt-2 border border-terminal-border"></canvas>
+              class="mt-2 border border-terminal-border"
+              style="background-color: #000;"></canvas>
           </div>
           <div class="bg-terminal-bg border border-terminal-border p-3 mt-2">
             <p class="text-terminal-amber font-mono text-xs">LEVEL</p>
