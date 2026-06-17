@@ -1,0 +1,132 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CategoryPostList from '../../../components/CategoryPostList.svelte';
+import { formatDate } from '../../../utils/formatDate';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts');
+  const authors = await getCollection('authors');
+
+  // Build a slug-to-name map from author collection
+  const authorSlugs = new Map<string, string>();
+  authors.forEach((a) => {
+    authorSlugs.set(a.id, a.data.name);
+  });
+
+  // Also accept common variants as aliases
+  authorSlugs.set('Andrew', 'andrew');
+  authorSlugs.set('Andrew S Erwin', 'andrew');
+
+  // Normalize author field to slug
+  function normalizeAuthor(author: string): string {
+    const lower = author.toLowerCase().trim();
+    // Remove quotes if present
+    return lower.replace(/['"]/g, '');
+  }
+
+  // Collect unique author slugs from posts
+  const authorSlugSet = new Set<string>();
+  allPosts.forEach((post) => {
+    const slug = normalizeAuthor(post.data.author);
+    authorSlugSet.add(slug);
+  });
+
+  return Array.from(authorSlugSet).map((slug) => {
+    const authorEntry = authors.find((a) => a.id === slug);
+    const authorName = authorEntry?.data?.name || 'Andrew Erwin';
+    const authorBio = authorEntry?.data?.bio || '';
+    const authorImage = authorEntry?.data?.image || '';
+
+    const posts = allPosts
+      .filter(
+        (post) =>
+          !post.data.hidden && normalizeAuthor(post.data.author) === slug
+      )
+      .sort(
+        (a, b) =>
+          new Date(b.data.publishDate).valueOf() -
+          new Date(a.data.publishDate).valueOf()
+      );
+
+    return {
+      params: { author: slug },
+      props: { authorName, authorBio, authorImage, posts },
+    };
+  });
+}
+
+const { authorName, authorBio, authorImage, posts } = Astro.props;
+const title = `${authorName} — Blog`;
+const description = `Posts by ${authorName} on andrewthecoder.com`;
+const permalink = `${Astro.site.href}blog/author/${Astro.params.author}`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="blog"
+>
+  <div class="max-w-3xl mx-auto px-4">
+    <section class="py-12">
+      <h2 class="text-terminal-green mb-6">
+        $ blog / author / <span class="text-terminal-cyan">{authorName}</span>
+      </h2>
+
+      <div
+        class="flex items-center gap-4 mb-8 p-4 bg-[#111] border border-terminal-border rounded"
+      >
+        {
+          authorImage && (
+            <img
+              src={authorImage}
+              alt={authorName}
+              class="w-14 h-14 rounded-full border border-terminal-border object-cover"
+            />
+          )
+        }
+        <div>
+          <div class="text-terminal-fg font-medium">{authorName}</div>
+          {
+            authorBio && (
+              <div class="text-terminal-dim text-sm">{authorBio}</div>
+            )
+          }
+        </div>
+      </div>
+
+      <p class="text-terminal-dim mb-8">
+        <a
+          href="/blog"
+          class="text-terminal-dim hover:text-terminal-green no-underline"
+          >← all posts</a
+        >
+      </p>
+
+      {
+        posts.length > 0 ? (
+          <ul class="space-y-3">
+            {posts.map((post: any) => (
+              <li class="flex flex-col sm:flex-row sm:justify-between gap-1">
+                <a
+                  href={`/blog/${post.data.slug}`}
+                  class="text-terminal-fg hover:text-terminal-green no-underline"
+                >
+                  {post.data.title}
+                </a>
+                <span class="text-terminal-dim text-sm shrink-0">
+                  {formatDate(post.data.publishDate)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-terminal-dim">No posts found by this author.</p>
+        )
+      }
+    </section>
+  </div>
+</BaseLayout>

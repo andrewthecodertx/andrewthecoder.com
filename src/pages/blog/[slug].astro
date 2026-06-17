@@ -37,6 +37,7 @@ const authorEntry = authors.find((a) => a.id === author);
 
 const postCategories = categories || [];
 const postTags = tags || [];
+const authorSlug = authorEntry?.id || 'andrew';
 const authorName = authorEntry?.data?.name || 'Andrew Erwin';
 const publishedDateObj =
   publishDate instanceof Date ? publishDate : new Date(publishDate);
@@ -57,7 +58,7 @@ const blogPostingJsonLd = {
   author: {
     '@type': 'Person',
     name: authorName,
-    url: siteUrl,
+    url: `${siteUrl}blog/author/${authorSlug}`,
   },
   publisher: {
     '@type': 'Person',
@@ -95,7 +96,11 @@ const blogPostingJsonLd = {
   <article class="max-w-3xl mx-auto px-4">
     <header class="py-8 border-b border-[#2a2a2a] mb-8">
       <div class="text-[#6b7280] text-sm mb-4">
-        {formatDate(publishDate)} · {readingTimeEstimate} · by {authorName}
+        {formatDate(publishDate)} · {readingTimeEstimate} · by <a
+          href="/blog/author/{authorSlug}"
+          class="text-[#22d3ee] hover:text-[#4ade80] no-underline"
+          >{authorName}</a
+        >
       </div>
 
       <h1 class="text-2xl sm:text-3xl text-[#e0e0e0] font-medium mb-4">

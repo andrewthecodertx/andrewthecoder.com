@@ -27,6 +27,10 @@ function getAuthorName(authorSlug: string) {
   const entry = authors.find((a) => a.id === authorSlug);
   return entry?.data?.name || 'Andrew Erwin';
 }
+
+function normalizeAuthor(author: string): string {
+  return author.toLowerCase().trim().replace(/['"]/g, '');
+}
 ---
 
 <BaseLayout
@@ -53,7 +57,13 @@ function getAuthorName(authorSlug: string) {
                   — {formatDate(post.data.publishDate)}
                 </span>
                 <span class="post-item-author">
-                  by {getAuthorName(post.data.author)}
+                  by{' '}
+                  <a
+                    href="/blog/author/{normalizeAuthor(post.data.author)}"
+                    class="text-[#22d3ee] hover:text-[#4ade80] no-underline"
+                  >
+                    {getAuthorName(normalizeAuthor(post.data.author))}
+                  </a>
                 </span>
               </div>
             </div>

@@ -71,7 +71,10 @@
                     {post.title}
                 </a>
                 <span class="text-terminal-dim text-sm shrink-0">
-                    {formatDate(post.publishDate)}{post.author ? ` · ${post.author}` : ''}
+                    {formatDate(post.publishDate)}
+                    {#if post.author}
+                        · <a href="/blog/author/{post.authorSlug}" class="text-terminal-cyan hover:text-terminal-green no-underline">{post.author}</a>
+                    {/if}
                 </span>
             </li>
         {/each}

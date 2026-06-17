@@ -15,6 +15,16 @@ export async function getStaticPaths() {
   }));
 }
 
+const authors = await getCollection('authors');
+function getAuthorName(authorSlug: string) {
+  const entry = authors.find((a) => a.id === authorSlug);
+  return entry?.data?.name || 'Andrew Erwin';
+}
+
+function normalizeAuthor(author: string): string {
+  return author.toLowerCase().trim().replace(/['"]/g, '');
+}
+
 const { tag } = Astro.props;
 const allPosts = await getCollection('posts');
 const postsWithTag = allPosts.filter(
@@ -54,6 +64,12 @@ const permalink = `${Astro.site.href}blog/tag/${tag}`;
                 <span class="post-item-date">
                   — {formatDate(post.data.publishDate)}
                 </span>
+                <span class="post-item-author">
+                  by{' '}
+                  <a href="/blog/author/{normalizeAuthor(post.data.author)}">
+                    {getAuthorName(normalizeAuthor(post.data.author))}
+                  </a>
+                </span>
               </div>
             </div>
           </div>
@@ -75,6 +91,21 @@ const permalink = `${Astro.site.href}blog/tag/${tag}`;
     text-align: left;
     text-transform: uppercase;
     margin-right: 16px;
+  }
+
+  .post-item-author {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .post-item-author a {
+    color: #22d3ee;
+    text-decoration: none;
+  }
+
+  .post-item-author a:hover {
+    color: #4ade80;
   }
 
   hr {
