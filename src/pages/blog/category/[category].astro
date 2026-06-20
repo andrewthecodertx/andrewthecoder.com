@@ -49,6 +49,8 @@ const serializedPosts = posts.map((post: any) => ({
   title: post.data.title,
   slug: post.data.slug,
   publishDate: post.data.publishDate.toString(),
+  author: post.data.author,
+  authorSlug: post.data.author.toLowerCase().trim().replace(/['"]/g, ''),
 }));
 ---
 
