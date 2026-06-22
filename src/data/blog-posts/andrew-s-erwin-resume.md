@@ -11,113 +11,59 @@ featured: false
 hidden: true
 ---
 
-Kiel, WI - (920) 306-5189  
-andrewerwin73@gmail.com - [andrewthecoder.com](https://andrewthecoder.com)  
-[github](https://github.com/andrewthecodertx) -
-[linkedin](https://linkedin.com/in/andrewthecoder)
+Kiel, WI • (920) 306-5189  
+andrewerwin73@gmail.com • [andrewthecoder.com](https://andrewthecoder.com)  
+[github.com/andrewthecodertx](https://github.com/andrewthecodertx) • [linkedin.com/in/andrewthecoder](https://linkedin.com/in/andrewthecoder)
 
-## Professional Summary
+#### Software Engineer | Web Developer | AI Researcher
 
-Experienced software engineer with 20+ years of broad expertise across full-stack
-web development, systems architecture, and infrastructure. Comfortable working
-anywhere in the stack, from frontend interfaces to backend services, databases,
-and deployment automation. Passionate about building robust applications, developer
-tools, and maintainable systems used in real production environments.
+Experienced software engineer with 25+ years building production web applications, APIs, and developer tooling. Broad full-stack background from frontend interfaces to backend services, data stores, and deployment automation. Strong track record designing secure, scalable systems, improving developer workflows (CI/CD), and mentoring teams. Seeking senior engineering roles where I can own end-to-end features, improve observability and reliability, and drive technical direction.
 
-## Technical Skills
+#### Core Skills
 
-**Languages:** TypeScript, JavaScript, C/C++, PHP, Ruby, Rust, Go, OCaml, Python,
-Zig
+- **Languages:** TypeScript, JavaScript, Node.js, Ruby, Rails, Django, PHP, Go, Rust, OCaml, Python, C/C++
+- **Frontend:** Vue, HTML, CSS, EJS - Responsive & accessible UI development
+- **APIs & Services:** RESTful API design, server-side MVC, microservices patterns, authentication/authorization
+- **Databases:** PostgreSQL, MySQL, SQLite, MongoDB - schema design & data modeling
+- **DevOps & Delivery:** CI/CD pipelines, automated testing, deployment automation, GitHub Actions, Linux server ops, cloud providers
+- **Architecture & Practices:** System design, scalability, performance optimization, security best practices, observability, on-call readiness
+- **Collaboration:** Technical leadership, code reviews, mentoring, cross-functional collaboration, documentation
 
-**Frameworks/Tools:** Rails, Django, Gin, Express, Vue, Symfony, Laravel, WordPress
+#### Professional Experience
 
-**Databases:** PostgreSQL, MySQL, SQLite, MongoDB
+##### Owner / Lead Developer - Erwin Interactive
 
-**Specializations:** MVC, OOP, Web development, API design
+United States • 2013 - Present
 
-## Professional Experience
+- Founded and run a custom web application agency delivering full-stack products and internal developer tools for multiple clients.
+- Architect and implement scalable web platforms using TypeScript/Node.js, Ruby on Rails, PHP, and modern frontend frameworks (Vue). Emphasize performance, accessibility, and maintainability.
+- Design and implement RESTful APIs, authentication flows, and data models for multi-tenant and user-facing systems.
+- Build CI/CD pipelines and automated testing workflows (GitHub Actions, scripted deployment) to reduce deployment friction and improve release reliability.
+- Manage Linux-based cloud infrastructure and deployment automation across several client projects; own operational runbooks and incident response procedures.
+- Mentor contractors and junior developers; lead code reviews and establish coding standards and developer tooling.
 
-### Owner / Lead Developer – Erwin Interactive
+##### Software Architect - Capital One
 
-United States - 2013 – Present
+Plano, TX • June 2012 - January 2013
 
-Founded and operate an interactive agency specializing in custom web applications
-and developer tools. Design and implement full-stack solutions using modern JavaScript
-frameworks, Ruby on Rails, PHP, and the Node.js ecosystem. Build and maintain client
-websites and applications with a focus on performance, accessibility, and user
-experience. Develop internal tools and frameworks to streamline development workflows,
-automate testing, and improve deployment reliability. Manage cloud infrastructure
-and deployment pipelines for multiple client projects across Linux servers
-and cloud providers.
+- Led technical design and architecture for enterprise financial applications, focusing on secure, scalable service design and data protection.
+- Defined coding standards, architecture patterns, and integration strategies used across development teams.
+- Collaborated with product, security, and QA to deliver high-impact features in regulated environments.
 
-### Software Architect – Capital One
+##### Principal Engineer - XO Communications
 
-Plano, TX - June 2012 – January 2013
+Plano, TX • February 2012 - June 2012
 
-Architected enterprise-scale software solutions for financial services applications.
-Led technical design decisions and established coding standards for development
-teams. Designed and implemented secure, scalable systems handling sensitive financial
-data. Collaborated with cross-functional teams to deliver high-impact features in
-complex environments.
+- Technical lead for core network and infrastructure projects. Designed and delivered production services with emphasis on reliability and performance.
+- Mentored engineering teams on system design and coding best practices; introduced patterns to improve maintainability and operational stability.
 
-### Principal Engineer – XO Communications
+#### Selected Projects
 
-Plano, TX - February 2012 – June 2012
+- **ErwinMVC** (Node.js / TypeScript, npm) - Designed and published an MVC scaffolding framework for Node.js to accelerate app bootstrapping and enforce architecture patterns (routing, controllers, views, data layer).
+- **WeightTogether.com** - Full-stack wellness platform with user auth, realtime updates, and data visualization. Implemented custom TypeScript backend and automated CI/CD/deployment.
+- **Pipeline.Kit** - CI/CD tooling integrating with GitHub Actions for automated testing and deployments to streamline team workflows and reduce manual release steps.
+- **Go Neural Network Implementation** (Go) - Educational feed-forward neural network implementation demonstrating algorithmic fundamentals and extensible design.
 
-Served as technical lead on core network and infrastructure projects. Designed
-and implemented critical telecommunications systems used in production environments.
-Mentored engineering teams on best practices, code quality, and system design patterns.
-Improved performance and reliability of large-scale distributed systems.
+#### Open Source & Community
 
-## Featured Projects
-
-### ArcMVC PHP Framework - [ArcMVC](/projects/arcmvc)
-
-Designed and built a lightweight, modern MVC framework for PHP 8.4+. Small,
-focused core with batteries-included tooling for routing, controllers, views,
-and data layer. Distributed as a Composer package for rapid application
-scaffolding and used as the foundation for new client projects.
-
-### Enchanter AI Agent Harness - [Enchanter](/projects/enchanter)
-
-Designed and developed a focused AI agent harness in Rust. Distributed as a
-single binary with zero runtime dependencies, compatible with any
-OpenAI-compatible provider. Implements tool use, conversation state, and
-extensible agent loops for building reliable LLM-driven workflows.
-
-### ErwinMVC Web Framework - [ErwinMVC](/projects/erwinmvc)
-
-Designed and developed an MVC web framework for Node.js applications, published
-as a reusable npm package for rapid application scaffolding. Implements routing,
-controllers, views, and data layer abstractions, and has been used in production
-for multiple client projects.
-
-### Go Neural Network Implementation – [Go Neural Network](https://github.com/andrewthecoder/go-neural-network)
-
-Implemented a feed-forward neural network from scratch in Go as an educational
-project. Designed for flexibility and adaptability to various datasets while
-demonstrating core machine learning fundamentals.
-
-### Full-Stack Web Application – [WeighTogether](https://weighttogether.com)
-
-Built a collaborative weight tracking and wellness platform with user authentication,
-data visualization, and social features. No frameworks! Hand rolled TypeScript
-and EJS. Deployed on cloud infrastructure with automated CI/CD pipelines, handling
-real-time updates and notifications.
-
-### Full-Stack Web Site – [Bruisers Legacy](https://bruiseurslegacy.org)
-
-Designed and developed using my own MVC framework (ErwinMVC).
-
-### CI/CD Tooling – Pipeline.Kit
-
-Created automated deployment and testing pipeline tools integrating with GitHub
-Actions for continuous integration. Streamlined development workflows for team
-projects and reduced deployment friction.
-
-## Open Source & Community
-
-Active contributor on GitHub with numerous public repositories. Share technical
-knowledge through blog posts and documentation. Participate in developer
-communities and explore emerging technologies including Zig, Bun, and machine
-learning concepts.
+Active GitHub contributor with multiple public repositories; publish technical blog posts and documentation. Participate in developer communities and explore emerging technologies and best practices.
