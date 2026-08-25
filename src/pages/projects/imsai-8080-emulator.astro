@@ -1,0 +1,689 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'IMSAI 8080 Emulator';
+const description =
+  'A Rust emulator for the IMSAI 8080 computer with Tarbell FD1771 floppy controller, S-100 bus, and raylib front panel GUI.';
+const permalink = `${Astro.site.href}projects/imsai-8080-emulator`;
+const image = '/assets/projects/imsai-8080-emulator.webp';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="projects"
+  image={image}
+>
+  <div class="max-w-3xl mx-auto px-4">
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-green mb-4">$ {title}</h2>
+
+      <p class="text-terminal-dim text-sm mb-6">
+        <a
+          href="https://github.com/andrewthecodertx/rust-imsai-emulator"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
+          View on GitHub →
+        </a>
+      </p>
+
+      <p class="text-terminal-fg leading-relaxed mb-6">
+        A Rust emulator for the IMSAI 8080, the 1975 S-100 bus computer made
+        famous in the movie <em>WarGames</em>. Emulates the Intel 8080 CPU, 64KB
+        RAM, Tarbell FD1771 floppy disk controller, and IMSAI SIO-2 dual serial
+        board with 8251A UARTs. Two front ends: a raylib interactive front panel
+        GUI with toggle switches, LEDs, and a live hex memory editor, and a CLI
+        terminal mode.
+      </p>
+
+      <img
+        src="/assets/projects/imsai-8080-emulator-screenshot.png"
+        alt="IMSAI 8080 Emulator front panel GUI"
+        class="w-full rounded border border-terminal-border mb-6"
+      />
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### hardware emulated</h3>
+      <ul class="space-y-3 text-terminal-fg">
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">Intel 8080 CPU</strong> - Full instruction
+            set emulation (<a
+              href="https://pastraiser.com/cpu/i8080/i8080_opcodes.html"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >opcode table</a
+            >, <a
+              href="https://altairclone.com/downloads/manuals/8080%20Programmers%20Manual.pdf"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >programmer's manual</a
+            >)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">64KB RAM</strong> - Initialized to
+            0xFF on power-up (floating bus)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">Tarbell 1011 FDC</strong> - WD FD1771,
+            8" SSSD format (ports 0x48-0x4B)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">IMSAI SIO-2</strong> - Dual 8251A
+            UART serial board (ports 0x00-0x03)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">Video Display</strong> - 80x24 CRT
+            terminal (Channel A UART output)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">S-100 Bus</strong> - Port-mapped I/O
+            dispatch to inline cards (no dynamic dispatch)</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">Front Panel</strong> - Toggle switches,
+            LEDs, EXAMINE/DEPOSIT/RUN/STOP</span
+          >
+        </li>
+      </ul>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-4">### hardware reference</h3>
+
+      <h4 class="text-terminal-cyan text-sm mb-2 mt-6">memory map</h4>
+      <p class="text-terminal-fg text-sm mb-3">
+        The full 64K address space is RAM. There is no ROM, no BIOS, no
+        firmware. Memory initializes to 0xFF (floating bus). Programs should not
+        assume memory is zeroed.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-terminal-dim">
+              <th class="text-left py-1">Address Range</th>
+              <th class="text-left py-1">Contents</th>
+            </tr>
+          </thead>
+          <tbody class="text-terminal-fg">
+            <tr>
+              <td class="py-1"
+                ><code class="text-terminal-green">0x0000-0xFFFF</code></td
+              >
+              <td class="py-1">64K RAM (0xFF on power-up)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="text-terminal-cyan text-sm mb-2 mt-6">i/o port map</h4>
+      <p class="text-terminal-fg text-sm mb-3">
+        Unclaimed ports return 0xFF on read and ignore writes.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4 overflow-x-auto"
+      >
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-terminal-dim">
+              <th class="text-left py-1">Port(s)</th>
+              <th class="text-left py-1">Card</th>
+              <th class="text-left py-1">Register</th>
+            </tr>
+          </thead>
+          <tbody class="text-terminal-fg">
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x00</code></td
+              ><td class="py-1">SIO-2</td><td class="py-1"
+                >Channel A data (console in/out)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x01</code></td
+              ><td class="py-1">SIO-2</td><td class="py-1"
+                >Channel A status/command</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x02</code></td
+              ><td class="py-1">SIO-2</td><td class="py-1">Channel B data</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x03</code></td
+              ><td class="py-1">SIO-2</td><td class="py-1"
+                >Channel B command/status</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x48</code></td
+              ><td class="py-1">Tarbell</td><td class="py-1"
+                >FD1771 status (read) / command (write)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x49</code></td
+              ><td class="py-1">Tarbell</td><td class="py-1"
+                >FD1771 track register</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x4A</code></td
+              ><td class="py-1">Tarbell</td><td class="py-1"
+                >FD1771 sector register</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x4B</code></td
+              ><td class="py-1">Tarbell</td><td class="py-1"
+                >FD1771 data register</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x79</code></td
+              ><td class="py-1">SIO-2</td><td class="py-1"
+                >Channel A status alias</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0x7B</code></td
+              ><td class="py-1">SIO-2</td><td class="py-1"
+                >Channel A data alias</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0xF8-0xFB</code></td
+              ><td class="py-1">Tarbell</td><td class="py-1"
+                >FD1771 register aliases</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0xFC</code></td
+              ><td class="py-1">Tarbell</td><td class="py-1"
+                >DRQ/wait status (bit 7)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0xFD</code></td
+              ><td class="py-1">Tarbell</td><td class="py-1">Fixed 0x00</td></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">0xFF</code></td
+              ><td class="py-1">Tarbell</td><td class="py-1">Fixed 0x03</td></tr
+            >
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="text-terminal-cyan text-sm mb-2 mt-6">
+        console uart (intel 8251a)
+      </h4>
+      <p class="text-terminal-fg text-sm mb-3">
+        The console is an Intel 8251A UART at ports 0x00 and 0x01. It must be
+        initialized before use.
+        <strong class="text-terminal-amber"
+          >TxRDY is bit 0 (0x01), not bit 1.</strong
+        >
+        Using <code class="text-terminal-green">ANI 0x02</code> when you mean
+        <code class="text-terminal-green">ANI 0x01</code> checks the wrong flag and
+        hangs.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">port 0x01 status bits</p>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-terminal-dim">
+              <th class="text-left py-1">Bit</th>
+              <th class="text-left py-1">Value</th>
+              <th class="text-left py-1">Meaning</th>
+            </tr>
+          </thead>
+          <tbody class="text-terminal-fg">
+            <tr
+              ><td class="py-1">0</td><td class="py-1"
+                ><code class="text-terminal-green">0x01</code></td
+              ><td class="py-1">TxRDY - transmitter ready</td></tr
+            >
+            <tr
+              ><td class="py-1">1</td><td class="py-1"
+                ><code class="text-terminal-green">0x02</code></td
+              ><td class="py-1">RxRDY - character available to read</td></tr
+            >
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">initialization sequence</p>
+        <pre
+          class="text-terminal-green text-sm"><code>MVI A, 0x4E    ; mode: 8N1, 16x baud
+OUT  0x01      ;
+MVI A, 0x05    ; command: enable TX and RX
+OUT  0x01      ;</code></pre>
+      </div>
+
+      <h4 class="text-terminal-cyan text-sm mb-2 mt-6">
+        video display (80x24 crt terminal)
+      </h4>
+      <p class="text-terminal-fg text-sm mb-3">
+        Characters written to UART Channel A (OUT port 0x00) appear on the video
+        display. The display is an 80-column by 24-row CRT terminal — it is the
+        output side of the console UART, not a separate I/O device.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-terminal-dim">
+              <th class="text-left py-1">Feature</th>
+              <th class="text-left py-1">Value</th>
+            </tr>
+          </thead>
+          <tbody class="text-terminal-fg">
+            <tr><td class="py-1">Columns</td><td class="py-1">80</td></tr>
+            <tr><td class="py-1">Rows</td><td class="py-1">24</td></tr>
+            <tr
+              ><td class="py-1">Input</td><td class="py-1"
+                >Channel A TX output (port 0x00 writes)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">Control characters</td><td class="py-1"
+                >CR (0x0D), LF (0x0A), BS (0x08)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">Scrolling</td><td class="py-1"
+                >Automatic when cursor passes the last row</td
+              ></tr
+            >
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="text-terminal-cyan text-sm mb-2 mt-6">
+        floppy controller (wd fd1771)
+      </h4>
+      <p class="text-terminal-fg text-sm mb-3">
+        The Tarbell 1011 board wraps the FD1771 at ports 0x48-0x4B (aliases at
+        0xF8-0xFB). Disk format: 8" SSSD, 77 tracks, 26 sectors/track, 128
+        bytes/sector. Sectors numbered 1-26. Tracks 0-1 reserved for system.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-terminal-dim">
+              <th class="text-left py-1">Offset</th>
+              <th class="text-left py-1">Read</th>
+              <th class="text-left py-1">Write</th>
+            </tr>
+          </thead>
+          <tbody class="text-terminal-fg">
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">+0</code> (0x48)</td
+              ><td class="py-1">Status</td><td class="py-1">Command</td></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">+1</code> (0x49)</td
+              ><td class="py-1">Track register</td><td class="py-1"
+                >Track register</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">+2</code> (0x4A)</td
+              ><td class="py-1">Sector register</td><td class="py-1"
+                >Sector register</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1"
+                ><code class="text-terminal-green">+3</code> (0x4B)</td
+              ><td class="py-1">Data register</td><td class="py-1"
+                >Data register</td
+              ></tr
+            >
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="text-terminal-cyan text-sm mb-2 mt-6">front panel</h4>
+      <p class="text-terminal-fg text-sm mb-3">
+        The front panel is <strong>not on the I/O bus</strong>. It directly
+        accesses the address bus, data bus, and CPU control lines. It works even
+        with no software loaded.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">status leds</p>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-terminal-dim">
+              <th class="text-left py-1">LED</th>
+              <th class="text-left py-1">Meaning</th>
+            </tr>
+          </thead>
+          <tbody class="text-terminal-fg">
+            <tr
+              ><td class="py-1">ADDRESS (16)</td><td class="py-1"
+                >Current address bus value</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">DATA (8)</td><td class="py-1"
+                >Current data bus value</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">PROG OUT (8)</td><td class="py-1"
+                >Latched from data bus on every OUT instruction (active-low on
+                real hardware, inverted in emulator: 1 = LED on)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">RUN</td><td class="py-1">CPU is executing</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">WAIT</td><td class="py-1">CPU in wait state</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">M1</td><td class="py-1"
+                >Instruction fetch cycle</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">HLTA</td><td class="py-1"
+                >CPU halted (HLT instruction)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">INT</td><td class="py-1">Interrupt pending</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">HLDA</td><td class="py-1">Hold acknowledge</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">MEMR</td><td class="py-1">Memory read active</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">WO</td><td class="py-1"
+                >Write-output (lit when NOT writing)</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">IOR</td><td class="py-1">I/O read active</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">IOW</td><td class="py-1">I/O write active</td
+              ></tr
+            >
+            <tr
+              ><td class="py-1">POWER</td><td class="py-1">System powered on</td
+              ></tr
+            >
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### downloads</h3>
+      <p class="text-terminal-fg text-sm mb-4">
+        Pre-built binaries from the
+        <a
+          href="https://github.com/andrewthecodertx/rust-imsai-emulator/releases/latest"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >latest release</a
+        >. Each archive contains both
+        <code class="text-terminal-green">imsai-cli</code> (terminal) and
+        <code class="text-terminal-green">imsai-gui</code> (front panel).
+      </p>
+      <div class="space-y-3">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <a
+            href="https://github.com/andrewthecodertx/rust-imsai-emulator/releases/latest/download/imsai-8080-emulator-x86_64-unknown-linux-gnu.tar.gz"
+            class="text-terminal-cyan hover:text-terminal-green no-underline whitespace-nowrap"
+          >
+            Linux (x86_64)
+          </a>
+          <span class="text-terminal-dim"
+            >- imsai-8080-emulator-x86_64-unknown-linux-gnu.tar.gz</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <a
+            href="https://github.com/andrewthecodertx/rust-imsai-emulator/releases/latest/download/imsai-8080-emulator-aarch64-apple-darwin.tar.gz"
+            class="text-terminal-cyan hover:text-terminal-green no-underline whitespace-nowrap"
+          >
+            macOS (Apple Silicon)
+          </a>
+          <span class="text-terminal-dim"
+            >- imsai-8080-emulator-aarch64-apple-darwin.tar.gz</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <a
+            href="https://github.com/andrewthecodertx/rust-imsai-emulator/releases/latest/download/imsai-8080-emulator-x86_64-pc-windows-msvc.zip"
+            class="text-terminal-cyan hover:text-terminal-green no-underline whitespace-nowrap"
+          >
+            Windows (x86_64)
+          </a>
+          <span class="text-terminal-dim"
+            >- imsai-8080-emulator-x86_64-pc-windows-msvc.zip</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### building from source</h3>
+      <div class="space-y-3 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <span class="text-terminal-dim whitespace-nowrap"
+            >Rust toolchain (1.80+)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <span class="text-terminal-dim whitespace-nowrap"
+            >raylib development libraries (for GUI)</span
+          >
+        </div>
+      </div>
+      <div class="mt-6 space-y-4">
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">ubuntu/debian</p>
+          <code class="text-terminal-green">sudo apt install libraylib-dev</code
+          >
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">arch linux</p>
+          <code class="text-terminal-green">sudo pacman -S raylib</code>
+        </div>
+        <div class="bg-terminal-bg border border-terminal-border rounded p-4">
+          <p class="text-terminal-dim text-sm mb-2">macos</p>
+          <code class="text-terminal-green">brew install raylib</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### running</h3>
+      <p class="text-terminal-fg text-sm mb-4">
+        From a release binary, just extract and run. From source, use
+        <code class="text-terminal-green">cargo</code>.
+      </p>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">front panel gui (binary)</p>
+        <code class="text-terminal-green">./imsai-gui</code>
+      </div>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">terminal mode (binary)</p>
+        <code class="text-terminal-green"
+          >./imsai-cli --program programs/hello-world.json</code
+        >
+      </div>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">front panel gui (source)</p>
+        <code class="text-terminal-green">cargo run --bin imsai-gui</code>
+      </div>
+      <div
+        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
+      >
+        <p class="text-terminal-dim text-sm mb-2">terminal mode (source)</p>
+        <code class="text-terminal-green"
+          >cargo run --bin imsai-cli -- --program programs/hello-world.json</code
+        >
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### controls</h3>
+      <div class="space-y-2 text-sm">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap"
+            >Mouse on switches</code
+          >
+          <span class="text-terminal-dim">- Toggle address/data bits</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap"
+            >RUN/STOP or F5</code
+          >
+          <span class="text-terminal-dim">- Start/stop CPU</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">STEP</code>
+          <span class="text-terminal-dim">- Single instruction</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap"
+            >EXAMINE / DEPOSIT</code
+          >
+          <span class="text-terminal-dim"
+            >- Read/write memory at address switches</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F2</code>
+          <span class="text-terminal-dim">- Load program (.json picker)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F3</code>
+          <span class="text-terminal-dim">- Save memory to file</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F4</code>
+          <span class="text-terminal-dim"
+            >- Mount disk image into drive A (.img/.dsk picker)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">F6</code>
+          <span class="text-terminal-dim"
+            >- Toggle CONSOLE / live memory editor (read-only while running)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Ctrl+Enter</code>
+          <span class="text-terminal-dim"
+            >- Run from cursor address in memory editor</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">R</code>
+          <span class="text-terminal-dim">- Cold reset (when stopped)</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Ctrl+K</code>
+          <span class="text-terminal-dim"
+            >- Command mode (CLI: load, mount, reset, quit)</span
+          >
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <code class="text-terminal-green whitespace-nowrap">Ctrl+D</code>
+          <span class="text-terminal-dim">- Exit (CLI)</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <div class="flex gap-4">
+        <a
+          href="https://github.com/andrewthecodertx/rust-imsai-emulator"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
+          GitHub →
+        </a>
+      </div>
+    </section>
+
+    <footer class="py-8 border-t border-terminal-border">
+      <a
+        href="/projects"
+        class="text-terminal-dim hover:text-terminal-green no-underline text-sm"
+      >
+        ← back to projects
+      </a>
+    </footer>
+  </div>
+</BaseLayout>

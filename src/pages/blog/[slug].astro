@@ -1,0 +1,194 @@
+---
+import { getCollection, render } from 'astro:content';
+import readingTime from 'reading-time';
+import { formatDate } from '../../utils/formatDate';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import Giscus from '../../components/Giscus.astro';
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((p) => ({
+    params: { slug: p.data.slug },
+    props: { post: p },
+  }));
+}
+
+const { post } = Astro.props;
+const {
+  title,
+  slug,
+  description,
+  publishDate,
+  image,
+  github,
+  demo,
+  categories,
+  tags,
+  author,
+  comments_enabled,
+} = post.data;
+const readingTimeEstimate = readingTime(post.body).text;
+const permalink = `${Astro.site.href}blog/${slug}`;
+const { Content } = await render(post);
+
+const authors = await getCollection('authors');
+const authorEntry = authors.find((a) => a.id === author);
+
+const postCategories = categories || [];
+const postTags = tags || [];
+const authorSlug = authorEntry?.id || 'andrew';
+const authorName = authorEntry?.data?.name || 'Andrew Erwin';
+const publishedDateObj =
+  publishDate instanceof Date ? publishDate : new Date(publishDate);
+const publishedIso = publishedDateObj.toISOString();
+const siteUrl = Astro.site?.href || 'https://andrewthecoder.com';
+const ogImage = image
+  ? new URL(image, siteUrl).href
+  : new URL('/assets/social.png', siteUrl).href;
+
+const blogPostingJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  image: ogImage,
+  datePublished: publishedIso,
+  dateModified: publishedIso,
+  author: {
+    '@type': 'Person',
+    name: authorName,
+    url: `${siteUrl}blog/author/${authorSlug}`,
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'Andrew Erwin',
+    url: siteUrl,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': permalink,
+  },
+  keywords: [...postCategories, ...postTags].join(', '),
+  articleSection: postCategories[0],
+};
+---
+
+<BlogLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  image={image}
+  current="blog"
+  type="article"
+  publishedTime={publishDate}
+  author={authorName}
+  section={postCategories[0]}
+  tags={postTags}
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(blogPostingJsonLd)}
+  />
+
+  <article class="max-w-3xl mx-auto px-4">
+    <header class="py-8 border-b border-[#2a2a2a] mb-8">
+      <div class="text-[#6b7280] text-sm mb-4">
+        {formatDate(publishDate)} · {readingTimeEstimate} · by <a
+          href={`/blog/author/${authorSlug}`}
+          class="text-[#22d3ee] hover:text-[#4ade80] no-underline"
+          >{authorName}</a
+        >
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl text-[#e0e0e0] font-medium mb-4">
+        {title}
+      </h1>
+
+      {
+        postCategories.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-4">
+            {postCategories.map((category: string) => (
+              <a
+                href={`/blog/category/${category.toLowerCase().replace(/\s+/g, '-')}`}
+                class="text-[#6b7280] hover:text-[#4ade80] text-sm no-underline"
+              >
+                [{category}]
+              </a>
+            ))}
+          </div>
+        )
+      }
+
+      {
+        (github || demo) && (
+          <div class="flex gap-4 text-sm">
+            {github && (
+              <a
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-[#22d3ee] hover:text-[#4ade80] no-underline"
+              >
+                source →
+              </a>
+            )}
+            {demo && (
+              <a
+                href={demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-[#22d3ee] hover:text-[#4ade80] no-underline"
+              >
+                demo →
+              </a>
+            )}
+          </div>
+        )
+      }
+    </header>
+
+    {
+      image && (
+        <div class="mb-8">
+          <img
+            src={image}
+            alt={`Image for ${title}`}
+            class="w-full rounded border border-[#2a2a2a]"
+          />
+        </div>
+      )
+    }
+
+    <div
+      class="prose prose-invert max-w-none
+      prose-headings:text-[#e0e0e0] prose-headings:font-medium
+      prose-p:text-[#b0b0b0] prose-p:leading-relaxed
+      prose-a:text-[#22d3ee] hover:prose-a:text-[#4ade80] prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-[#e0e0e0]
+      prose-code:before:content-none prose-code:after:content-none
+      prose-code:bg-[#1a1a1a] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[#4ade80] prose-code:text-sm
+      prose-blockquote:border-l-[#4ade80] prose-blockquote:bg-[#1a1a1a] prose-blockquote:py-1 prose-blockquote:px-4
+      prose-blockquote:text-[#b0b0b0]
+      prose-li:text-[#b0b0b0]
+      prose-hr:border-[#2a2a2a]
+      prose-img:rounded prose-img:border prose-img:border-[#2a2a2a]
+      prose-pre:bg-[#1a1a1a] prose-pre:border prose-pre:border-[#2a2a2a]"
+    >
+      <Content />
+    </div>
+
+    {comments_enabled !== false && <Giscus pageId={slug} />}
+
+    <footer class="mt-12 pt-8 border-t border-[#2a2a2a]">
+      <a
+        href="/blog"
+        class="text-[#6b7280] hover:text-[#4ade80] no-underline text-sm"
+      >
+        ← back to all posts
+      </a>
+    </footer>
+  </article>
+</BlogLayout>

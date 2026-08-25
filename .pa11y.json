@@ -1,0 +1,11 @@
+{
+  "defaults": {
+    "standard": "WCAG2AAA",
+    "concurrency": 1,
+    "ignoreWarnings": false,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox"]
+    }
+  },
+  "urls": ["http://localhost:4321/", "http://localhost:4321/blog"]
+}

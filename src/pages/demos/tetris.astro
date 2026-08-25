@@ -1,0 +1,132 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+
+export const prerender = true;
+
+const title = 'Tetris';
+const description =
+  'Classic Tetris clone written in TypeScript. Play with keyboard (arrows, Space, A/D) or on-screen controls. Built with HTML5 Canvas.';
+const permalink = `${Astro.site.href}demos/tetris`;
+const image = '/assets/demos/tetris.webp';
+---
+
+<DemoLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="demos"
+  image={image}
+>
+  <div
+    class="px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm border-b border-terminal-border"
+  >
+    <h2 class="text-terminal-green">Tetris</h2>
+    <span class="text-terminal-dim">
+      <span class="text-terminal-amber">Space</span> start
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">arrows</span> move
+      <span class="px-1">·</span>
+      <span class="text-terminal-amber">A/D</span> rotate
+    </span>
+    <div class="flex gap-2 ml-auto">
+      <a
+        href="https://github.com/andrewthecodertx/typescript-tetris"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border border-terminal-border bg-terminal-bg text-terminal-dim hover:text-terminal-green hover:border-terminal-green px-3 py-0.5 cursor-pointer font-mono transition-colors no-underline"
+      >
+        [source]
+      </a>
+    </div>
+  </div>
+
+  <div class="tetris-game flex flex-col items-center py-6 px-4">
+    <div
+      class="flex flex-col md:flex-row w-full max-w-4xl justify-around"
+      id="tetris"
+    >
+      <div class="flex flex-col justify-items-center w-[260px]" id="left">
+        <div
+          class="flex flex-col justify-center p-2 bg-terminal-bg border border-terminal-border"
+        >
+          <p
+            class="justify-center m-auto text-terminal-amber font-mono text-xs uppercase tracking-widest"
+          >
+            Statistics
+          </p>
+          <div class="p-2 m-auto" id="stats">
+            <ul></ul>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <p
+            class="text-terminal-amber font-mono text-xs uppercase tracking-widest mb-2"
+          >
+            Controls
+          </p>
+          <p class="text-terminal-dim text-sm">Press SPACE to start</p>
+          <p class="text-terminal-dim text-sm">Arrow keys to move</p>
+          <p class="text-terminal-dim text-sm">VIM keys (H,J,L) also move</p>
+          <p class="text-terminal-dim text-sm">A and D rotate</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col" id="center">
+        <div
+          class="w-full p-2 m-auto flex justify-center border border-terminal-border bg-terminal-bg text-terminal-fg mb-2"
+        >
+          <p class="font-mono text-sm">
+            LINES-<span id="lines" class="text-terminal-green">000</span>
+          </p>
+        </div>
+        <canvas
+          class="border border-terminal-border"
+          id="gamearena"
+          height="600"
+          width="300"></canvas>
+      </div>
+
+      <div class="w-[260px]" id="right">
+        <div id="scoreboard">
+          <div class="bg-terminal-bg border border-terminal-border p-3">
+            <p class="text-terminal-amber font-mono text-xs">SCORE</p>
+            <span
+              id="score"
+              class="text-terminal-green font-mono text-2xl block mt-1">0</span
+            >
+          </div>
+          <div class="bg-terminal-bg border border-terminal-border p-3 mt-2">
+            <p class="text-terminal-amber font-mono text-xs">NEXT</p>
+            <canvas
+              id="bullpen"
+              height="80"
+              width="80"
+              class="mt-2 border border-terminal-border"></canvas>
+          </div>
+          <div class="bg-terminal-bg border border-terminal-border p-3 mt-2">
+            <p class="text-terminal-amber font-mono text-xs">LEVEL</p>
+            <span
+              id="level"
+              class="text-terminal-green font-mono text-2xl block mt-1">00</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div id="mobile-controls" class="md:hidden flex justify-center mt-4">
+        <button id="left-btn">Left</button>
+        <button id="right-btn">Right</button>
+        <button id="rotate-btn">Rotate</button>
+        <button id="down-btn">Down</button>
+      </div>
+    </div>
+  </div>
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+  />
+  <link rel="stylesheet" href="/tetris/assets/tetris.css" />
+  <script is:inline type="module" src="/tetris/assets/tetris.js"></script>
+</DemoLayout>

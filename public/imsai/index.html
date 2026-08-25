@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMSAI 8080 — Front Panel</title>
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+
+      :root {
+        --panel-bg: #1a1a1a;
+        --panel-face: #2a2a2a;
+        --panel-border: #111;
+        --led-on: #ff3333;
+        --led-off: #331111;
+        --led-green-on: #33ff33;
+        --led-green-off: #113311;
+        --led-amber-on: #ffaa00;
+        --led-amber-off: #332200;
+        --switch-up: #c0c0c0;
+        --switch-down: #808080;
+        --switch-bg: #444;
+        --switch-border: #222;
+        --label-color: #aaa;
+        --chassis: #222;
+        --chassis-hi: #333;
+        --terminal-bg: #0a0a0a;
+        --terminal-fg: #33ff33;
+        --terminal-dim: #116611;
+        --terminal-border: #333;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'IBM Plex Mono', monospace;
+        background: #000;
+        color: #ccc;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Top nav bar */
+      .nav-bar {
+        width: 100%;
+        background: var(--chassis);
+        border-bottom: 2px solid #444;
+        padding: 8px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .nav-bar h1 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #888;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .nav-bar a {
+        color: #888;
+        text-decoration: none;
+        font-size: 12px;
+      }
+      .nav-bar a:hover {
+        color: #ccc;
+      }
+      .nav-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .nav-actions button {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        padding: 4px 12px;
+        background: #333;
+        color: #aaa;
+        border: 1px solid #555;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .nav-actions button:hover {
+        background: #444;
+        color: #fff;
+      }
+
+      /* Main chassis */
+      .chassis {
+        width: 100%;
+        max-width: 1100px;
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      /* ===== FRONT PANEL ===== */
+      .front-panel {
+        background: var(--panel-bg);
+        border: 3px solid var(--panel-border);
+        border-radius: 8px;
+        padding: 24px 28px 28px;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.05),
+          0 4px 20px rgba(0, 0, 0, 0.8);
+        user-select: none;
+      }
+
+      /* Panel face label */
+      .panel-label {
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      .panel-label .model {
+        font-size: 22px;
+        font-weight: 700;
+        color: #ddd;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+      }
+      .panel-label .sub {
+        font-size: 11px;
+        color: #666;
+        letter-spacing: 3px;
+        margin-top: 2px;
+      }
+
+      /* ===== STATUS LEDs ROW ===== */
+      .status-row {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .status-led {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+      .status-led .led {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        transition:
+          background 0.05s,
+          box-shadow 0.05s;
+      }
+      .status-led .led.on {
+        background: var(--led-on);
+        box-shadow:
+          0 0 8px var(--led-on),
+          0 0 16px rgba(255, 51, 51, 0.3);
+      }
+      .status-led .led.off {
+        background: var(--led-off);
+        box-shadow: none;
+      }
+      .status-led .led.green-on {
+        background: var(--led-green-on);
+        box-shadow:
+          0 0 8px var(--led-green-on),
+          0 0 16px rgba(51, 255, 51, 0.3);
+      }
+      .status-led .led.green-off {
+        background: var(--led-green-off);
+        box-shadow: none;
+      }
+      .status-led .led.amber-on {
+        background: var(--led-amber-on);
+        box-shadow:
+          0 0 8px var(--led-amber-on),
+          0 0 16px rgba(255, 170, 0, 0.3);
+      }
+      .status-led .led.amber-off {
+        background: var(--led-amber-off);
+        box-shadow: none;
+      }
+      .status-led .lbl {
+        font-size: 9px;
+        color: var(--label-color);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      /* ===== ADDRESS + DATA LEDs ===== */
+      .led-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+      .led-section .section-label {
+        font-size: 10px;
+        color: #555;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .led-row {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+      }
+      .led-bit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+      }
+      .led-bit .bit-led {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        transition:
+          background 0.05s,
+          box-shadow 0.05s;
+      }
+      .led-bit .bit-led.on {
+        background: var(--led-on);
+        box-shadow: 0 0 6px var(--led-on);
+      }
+      .led-bit .bit-led.off {
+        background: var(--led-off);
+      }
+      .led-bit .bit-num {
+        font-size: 8px;
+        color: #444;
+      }
+      .led-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      /* Hex readout */
+      .hex-readout {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--led-on);
+        letter-spacing: 4px;
+        text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+        min-width: 4ch;
+        text-align: center;
+      }
+      .hex-readout.byte {
+        min-width: 2ch;
+      }
+
+      /* ===== SWITCH ROWS ===== */
+      .switch-section {
+        margin-top: 16px;
+        margin-bottom: 8px;
+      }
+      .switch-section .section-label {
+        font-size: 10px;
+        color: #555;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 6px;
+      }
+      .switch-row {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+      }
+      .switch-bit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+      .switch-bit .bit-num {
+        font-size: 8px;
+        color: #444;
+        margin-bottom: 1px;
+      }
+      .toggle-switch {
+        width: 18px;
+        height: 36px;
+        background: var(--switch-bg);
+        border: 2px solid var(--switch-border);
+        border-radius: 3px;
+        cursor: pointer;
+        position: relative;
+        transition: background 0.1s;
+      }
+      .toggle-switch::after {
+        content: '';
+        position: absolute;
+        left: 2px;
+        width: 10px;
+        height: 14px;
+        border-radius: 2px;
+        background: var(--switch-down);
+        bottom: 2px;
+        transition: all 0.1s;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .toggle-switch.up::after {
+        bottom: auto;
+        top: 2px;
+        background: var(--switch-up);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .toggle-switch:hover {
+        background: #4a4a4a;
+      }
+
+      /* ===== FUNCTION BUTTONS ===== */
+      .function-row {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+      }
+      .func-btn {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 1px;
+        padding: 10px 18px;
+        background: var(--chassis);
+        color: #aaa;
+        border: 2px solid #444;
+        border-radius: 4px;
+        cursor: pointer;
+        min-width: 100px;
+        text-transform: uppercase;
+        transition: all 0.1s;
+      }
+      .func-btn:hover {
+        background: var(--chassis-hi);
+        color: #fff;
+        border-color: #666;
+      }
+      .func-btn:active {
+        transform: translateY(1px);
+        background: #444;
+      }
+      .func-btn.run-stop {
+        border-color: #880000;
+        color: #cc4444;
+      }
+      .func-btn.run-stop:hover {
+        border-color: #aa0000;
+        color: #ff4444;
+      }
+
+      /* ===== DIVIDER ===== */
+      .panel-divider {
+        height: 1px;
+        background: #333;
+        margin: 16px 0;
+      }
+
+      /* ===== TERMINAL ===== */
+      .terminal-section {
+        margin-top: 16px;
+        background: var(--terminal-bg);
+        border: 2px solid var(--terminal-border);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .terminal-header {
+        padding: 6px 12px;
+        background: #181818;
+        border-bottom: 1px solid var(--terminal-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .terminal-header span {
+        font-size: 10px;
+        color: #555;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .terminal-screen {
+        padding: 12px;
+        height: 260px;
+        overflow-y: auto;
+        font-size: 13px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        color: var(--terminal-fg);
+        cursor: text;
+      }
+      .terminal-screen::-webkit-scrollbar {
+        width: 8px;
+      }
+      .terminal-screen::-webkit-scrollbar-track {
+        background: var(--terminal-bg);
+      }
+      .terminal-screen::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 4px;
+      }
+      .terminal-input-row {
+        display: flex;
+        border-top: 1px solid var(--terminal-border);
+      }
+      .terminal-input-row .prompt {
+        padding: 8px 0 8px 12px;
+        color: var(--terminal-dim);
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+      .terminal-input {
+        flex: 1;
+        padding: 8px 12px;
+        background: transparent;
+        border: none;
+        color: var(--terminal-fg);
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 13px;
+        outline: none;
+        caret-color: var(--terminal-fg);
+      }
+
+      /* ===== PROGRAMMED OUTPUT LEDs ===== */
+      .prog-out-section {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+      .prog-out-section .section-label {
+        font-size: 10px;
+        color: #555;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      /* ===== FOOTER ===== */
+      .footer-bar {
+        width: 100%;
+        padding: 12px 20px;
+        background: var(--chassis);
+        border-top: 1px solid #444;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .footer-bar span {
+        font-size: 10px;
+        color: #555;
+        letter-spacing: 1px;
+      }
+      .footer-bar a {
+        color: #777;
+        text-decoration: none;
+      }
+      .footer-bar a:hover {
+        color: #aaa;
+      }
+
+      /* Responsive */
+      @media (max-width: 700px) {
+        .chassis {
+          padding: 10px;
+        }
+        .front-panel {
+          padding: 16px;
+        }
+        .status-row {
+          gap: 10px;
+        }
+        .led-row {
+          gap: 4px;
+        }
+        .switch-row {
+          gap: 4px;
+        }
+        .toggle-switch {
+          width: 14px;
+          height: 30px;
+        }
+        .toggle-switch::after {
+          width: 7px;
+          height: 11px;
+        }
+        .func-btn {
+          padding: 8px 12px;
+          min-width: 80px;
+          font-size: 10px;
+        }
+        .hex-readout {
+          font-size: 16px;
+        }
+        .terminal-screen {
+          height: 200px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Nav bar -->
+    <div class="nav-bar">
+      <h1>IMSAI 8080</h1>
+      <div class="nav-actions">
+        <button
+          id="btn-load-program"
+          title="Load a front-panel program (.json)"
+        >
+          Load Program
+        </button>
+        <button id="btn-load-disk" title="Mount a disk image (.img)">
+          Mount Disk
+        </button>
+        <button id="btn-save" title="Save memory as program (.json)">
+          Save
+        </button>
+        <button id="btn-reset" title="Cold reset — clear all memory">
+          Reset
+        </button>
+        <a
+          href="/projects/imsai-8080-emulator"
+          style="font-size: 11px; color: #666; text-decoration: none"
+          >← back</a
+        >
+      </div>
+    </div>
+
+    <div class="chassis">
+      <!-- Front Panel -->
+      <div class="front-panel">
+        <!-- Label -->
+        <div class="panel-label">
+          <div class="model">IMSAI 8080</div>
+          <div class="sub">Microcomputer System</div>
+        </div>
+
+        <!-- Status LEDs -->
+        <div class="status-row">
+          <div class="status-led">
+            <div class="led green-on" id="led-power"></div>
+            <div class="lbl">power</div>
+          </div>
+          <div class="status-led">
+            <div class="led green-off" id="led-run"></div>
+            <div class="lbl">run</div>
+          </div>
+          <div class="status-led">
+            <div class="led off" id="led-wait"></div>
+            <div class="lbl">wait</div>
+          </div>
+          <div class="status-led">
+            <div class="led off" id="led-m1"></div>
+            <div class="lbl">m1</div>
+          </div>
+          <div class="status-led">
+            <div class="led off" id="led-hlta"></div>
+            <div class="lbl">hlta</div>
+          </div>
+          <div class="status-led">
+            <div class="led off" id="led-int"></div>
+            <div class="lbl">int</div>
+          </div>
+          <div class="status-led">
+            <div class="led off" id="led-hlda"></div>
+            <div class="lbl">hlda</div>
+          </div>
+          <div class="status-led">
+            <div class="led amber-off" id="led-memr"></div>
+            <div class="lbl">memr</div>
+          </div>
+          <div class="status-led">
+            <div class="led amber-off" id="led-iore"></div>
+            <div class="lbl">ior</div>
+          </div>
+          <div class="status-led">
+            <div class="led amber-off" id="led-iow"></div>
+            <div class="lbl">iow</div>
+          </div>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <!-- Address LEDs + Switches -->
+        <div class="led-group">
+          <div class="led-section">
+            <div class="section-label">address</div>
+            <div class="led-row" id="addr-leds">
+              <!-- A15..A0 generated by JS -->
+            </div>
+            <div class="hex-readout" id="addr-hex">FFFF</div>
+          </div>
+          <div class="switch-section">
+            <div class="section-label">address switches</div>
+            <div class="switch-row" id="addr-switches">
+              <!-- A15..A0 generated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Data LEDs + Switches -->
+        <div class="led-group">
+          <div class="led-section">
+            <div class="section-label">data</div>
+            <div class="led-row" id="data-leds">
+              <!-- D7..D0 generated by JS -->
+            </div>
+            <div class="hex-readout byte" id="data-hex">FF</div>
+          </div>
+          <div class="switch-section">
+            <div class="section-label">data switches</div>
+            <div class="switch-row" id="data-switches">
+              <!-- D7..D0 generated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Programmed Output -->
+        <div class="prog-out-section">
+          <div class="section-label">programmed output</div>
+          <div class="led-row" id="prog-leds">
+            <!-- P7..P0 generated by JS -->
+          </div>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <!-- Function buttons -->
+        <div class="function-row">
+          <button class="func-btn run-stop" id="btn-runstop">RUN / STOP</button>
+          <button class="func-btn" id="btn-step">SINGLE STEP</button>
+          <button class="func-btn" id="btn-examine">EXAMINE</button>
+          <button class="func-btn" id="btn-examine-next">EXAMINE NEXT</button>
+          <button class="func-btn" id="btn-deposit">DEPOSIT</button>
+          <button class="func-btn" id="btn-deposit-next">DEPOSIT NEXT</button>
+        </div>
+      </div>
+
+      <!-- Console Terminal -->
+      <div class="terminal-section">
+        <div class="terminal-header">
+          <span>console</span>
+          <span id="emu-status">stopped</span>
+        </div>
+        <div class="terminal-screen" id="terminal"></div>
+        <div class="terminal-input-row">
+          <div class="prompt">&gt;</div>
+          <input
+            class="terminal-input"
+            id="term-input"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="type to send to UART…"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-bar">
+      <span
+        >IMSAI 8080 Emulator —
+        <a href="/projects/imsai-8080-emulator">project page</a></span
+      >
+      <span>WASM backend coming soon — panel UI functional</span>
+    </div>
+
+    <!-- Hidden file inputs -->
+    <input type="file" id="file-program" accept=".json" style="display: none" />
+    <input
+      type="file"
+      id="file-disk"
+      accept=".img,.dsk"
+      style="display: none"
+    />
+
+    <script>
+      // ============================================================
+      // IMSAI 8080 Web Front Panel — UI only (WASM backend pending)
+      // ============================================================
+
+      // --- Build LED/switch elements ---
+      function buildBits(containerId, count, type) {
+        const container = document.getElementById(containerId);
+        for (let i = 0; i < count; i++) {
+          const bit = document.createElement('div');
+          bit.className = type === 'led' ? 'led-bit' : 'switch-bit';
+
+          if (type === 'led') {
+            const led = document.createElement('div');
+            led.className = 'bit-led off';
+            led.id = `${containerId}-${i}`;
+            bit.appendChild(led);
+          } else {
+            const num = document.createElement('div');
+            num.className = 'bit-num';
+            num.textContent = count - 1 - i;
+            bit.appendChild(num);
+
+            const sw = document.createElement('div');
+            sw.className = 'toggle-switch';
+            sw.id = `${containerId}-${i}`;
+            sw.dataset.bit = i;
+            bit.appendChild(sw);
+          }
+
+          container.appendChild(bit);
+        }
+      }
+
+      buildBits('addr-leds', 16, 'led');
+      buildBits('data-leds', 8, 'led');
+      buildBits('addr-switches', 16, 'switch');
+      buildBits('data-switches', 8, 'switch');
+      buildBits('prog-leds', 8, 'led');
+
+      // --- State ---
+      const state = {
+        address: 0xffff, // 16-bit address switches
+        data: 0xff, // 8-bit data switches
+        addrLeds: 0xffff, // displayed address
+        dataLeds: 0xff, // displayed data
+        progOut: 0x00, // programmed output
+        running: false,
+        power: true,
+        wait: true,
+        m1: false,
+        hlta: false,
+        intIn: false,
+        hlda: false,
+        memr: false,
+        ior: false,
+        iow: false,
+      };
+
+      // --- Switch toggling ---
+      document.querySelectorAll('.toggle-switch').forEach((sw) => {
+        sw.addEventListener('click', () => {
+          sw.classList.toggle('up');
+          readSwitches();
+        });
+      });
+
+      function readSwitches() {
+        let addr = 0;
+        for (let i = 0; i < 16; i++) {
+          const sw = document.getElementById(`addr-switches-${i}`);
+          if (sw.classList.contains('up')) addr |= 1 << (15 - i); // bit 0 = A15
+        }
+        state.address = addr;
+
+        let data = 0;
+        for (let i = 0; i < 8; i++) {
+          const sw = document.getElementById(`data-switches-${i}`);
+          if (sw.classList.contains('up')) data |= 1 << (7 - i); // bit 0 = D7
+        }
+        state.data = data;
+      }
+
+      // --- Render LEDs ---
+      function renderLeds() {
+        // Address LEDs
+        for (let i = 0; i < 16; i++) {
+          const led = document.getElementById(`addr-leds-${i}`);
+          const on = (state.addrLeds >> (15 - i)) & 1;
+          led.className = `bit-led ${on ? 'on' : 'off'}`;
+        }
+        document.getElementById('addr-hex').textContent = state.addrLeds
+          .toString(16)
+          .toUpperCase()
+          .padStart(4, '0');
+
+        // Data LEDs
+        for (let i = 0; i < 8; i++) {
+          const led = document.getElementById(`data-leds-${i}`);
+          const on = (state.dataLeds >> (7 - i)) & 1;
+          led.className = `bit-led ${on ? 'on' : 'off'}`;
+        }
+        document.getElementById('data-hex').textContent = state.dataLeds
+          .toString(16)
+          .toUpperCase()
+          .padStart(2, '0');
+
+        // Programmed output LEDs
+        for (let i = 0; i < 8; i++) {
+          const led = document.getElementById(`prog-leds-${i}`);
+          const on = (state.progOut >> (7 - i)) & 1;
+          led.className = `bit-led ${on ? 'on' : 'off'}`;
+        }
+
+        // Status LEDs
+        setLed('led-power', state.power, 'green');
+        setLed('led-run', state.running, 'green');
+        setLed('led-wait', state.wait);
+        setLed('led-m1', state.m1);
+        setLed('led-hlta', state.hlta);
+        setLed('led-int', state.intIn);
+        setLed('led-hlda', state.hlda);
+        setLed('led-memr', state.memr, 'amber');
+        setLed('led-iore', state.ior, 'amber');
+        setLed('led-iow', state.iow, 'amber');
+
+        // Status text
+        document.getElementById('emu-status').textContent = state.running
+          ? 'running'
+          : 'stopped';
+        document.getElementById('emu-status').style.color = state.running
+          ? '#33ff33'
+          : '#888';
+      }
+
+      function setLed(id, on, color) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (color === 'green') {
+          el.className = `led ${on ? 'green-on' : 'green-off'}`;
+        } else if (color === 'amber') {
+          el.className = `led ${on ? 'amber-on' : 'amber-off'}`;
+        } else {
+          el.className = `led ${on ? 'on' : 'off'}`;
+        }
+      }
+
+      // --- Terminal ---
+      const terminal = document.getElementById('terminal');
+      const termInput = document.getElementById('term-input');
+
+      function termPrint(text) {
+        terminal.textContent += text;
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+
+      // Click terminal to focus input
+      terminal.addEventListener('click', () => termInput.focus());
+
+      // Terminal input — queue keystrokes for WASM UART
+      let keyQueue = [];
+      termInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const text = termInput.value + '\r';
+          for (const ch of text) keyQueue.push(ch.charCodeAt(0));
+          termPrint('> ' + termInput.value + '\n');
+          termInput.value = '';
+          e.preventDefault();
+        }
+      });
+
+      // --- Front panel actions (stub — will be wired to WASM) ---
+      function setAllSwitchesDown(containerId) {
+        for (let i = 0; i < 16; i++) {
+          const sw = document.getElementById(`${containerId}-${i}`);
+          if (sw) sw.classList.remove('up');
+        }
+        readSwitches();
+      }
+
+      document.getElementById('btn-runstop').addEventListener('click', () => {
+        state.running = !state.running;
+        state.wait = !state.running;
+        termPrint(state.running ? '[RUN]\n' : '[STOP]\n');
+        renderLeds();
+      });
+
+      document.getElementById('btn-step').addEventListener('click', () => {
+        termPrint('[STEP]\n');
+        renderLeds();
+      });
+
+      document.getElementById('btn-examine').addEventListener('click', () => {
+        readSwitches();
+        state.addrLeds = state.address;
+        // In real hardware: read memory at address. Stub: show FF.
+        state.dataLeds = 0xff;
+        termPrint(
+          `[EXAMINE ${state.address.toString(16).toUpperCase().padStart(4, '0')}] = FF\n`
+        );
+        renderLeds();
+      });
+
+      document
+        .getElementById('btn-examine-next')
+        .addEventListener('click', () => {
+          state.addrLeds = (state.addrLeds + 1) & 0xffff;
+          state.dataLeds = 0xff;
+          termPrint(
+            `[EXAMINE NEXT ${state.addrLeds.toString(16).toUpperCase().padStart(4, '0')}] = FF\n`
+          );
+          renderLeds();
+        });
+
+      document.getElementById('btn-deposit').addEventListener('click', () => {
+        readSwitches();
+        state.addrLeds = state.address;
+        state.dataLeds = state.data;
+        termPrint(
+          `[DEPOSIT ${state.address.toString(16).toUpperCase().padStart(4, '0')}] <- ${state.data.toString(16).toUpperCase().padStart(2, '0')}\n`
+        );
+        renderLeds();
+      });
+
+      document
+        .getElementById('btn-deposit-next')
+        .addEventListener('click', () => {
+          state.addrLeds = (state.addrLeds + 1) & 0xffff;
+          state.dataLeds = state.data;
+          termPrint(
+            `[DEPOSIT NEXT ${state.addrLeds.toString(16).toUpperCase().padStart(4, '0')}] <- ${state.data.toString(16).toUpperCase().padStart(2, '0')}\n`
+          );
+          renderLeds();
+        });
+
+      document.getElementById('btn-reset').addEventListener('click', () => {
+        state.running = false;
+        state.wait = true;
+        state.m1 = false;
+        state.hlta = false;
+        state.intIn = false;
+        state.hlda = false;
+        state.memr = false;
+        state.ior = false;
+        state.iow = false;
+        state.addrLeds = 0xffff;
+        state.dataLeds = 0xff;
+        state.progOut = 0x00;
+        setAllSwitchesDown('addr-switches');
+        setAllSwitchesDown('data-switches');
+        readSwitches();
+        termPrint('[COLD RESET]\n');
+        renderLeds();
+      });
+
+      // --- File loading stubs ---
+      document
+        .getElementById('btn-load-program')
+        .addEventListener('click', () => {
+          document.getElementById('file-program').click();
+        });
+      document.getElementById('btn-load-disk').addEventListener('click', () => {
+        document.getElementById('file-disk').click();
+      });
+      document
+        .getElementById('file-program')
+        .addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          termPrint(`[LOAD PROGRAM] ${file.name}\n`);
+          // TODO: parse JSON panel program and execute via WASM
+          e.target.value = '';
+        });
+      document.getElementById('file-disk').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        termPrint(`[MOUNT DISK] ${file.name}\n`);
+        // TODO: load disk image bytes and mount via WASM
+        e.target.value = '';
+      });
+
+      // --- Save stub ---
+      document.getElementById('btn-save').addEventListener('click', () => {
+        // TODO: dump memory from WASM, create PanelProgram JSON
+        const stub = {
+          name: 'imsai-memory-dump',
+          description: 'Dumped from web front panel',
+          steps: [{ action: 'load', address: '0000', data: 'FF FF FF FF' }],
+        };
+        const blob = new Blob([JSON.stringify(stub, null, 2)], {
+          type: 'application/json',
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'imsai-program.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        termPrint('[SAVE] Downloaded imsai-program.json\n');
+      });
+
+      // --- Initial render ---
+      renderLeds();
+      termPrint('IMSAI 8080 Front Panel — UI active (WASM backend pending)\n');
+      termPrint('Toggle switches and press EXAMINE/DEPOSIT to explore.\n\n');
+    </script>
+  </body>
+</html>
