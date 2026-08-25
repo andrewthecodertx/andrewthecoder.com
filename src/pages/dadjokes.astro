@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+const title = 'Dad Jokes API';
+const description =
+  'Free dad jokes REST API: fetch a random joke or submit your own. No API key required.';
+const permalink = `${Astro.site.href}dadjokes`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="dadjokes"
+>
+  <div class="max-w-3xl mx-auto px-4">
+    <section class="py-12 border-b border-terminal-border">
+      <h2 class="text-terminal-green mb-6">$ dad-jokes-api</h2>
+      <div class="space-y-4 text-terminal-fg">
+        <p>
+          A free, no-key REST API for dad jokes. Fetch a random joke, or
+          submit your own to the collection. Written in Go, backed by
+          PostgreSQL.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### base url</h3>
+      <p class="text-terminal-fg mb-4">
+        All endpoints are relative to this base URL:
+      </p>
+      <pre
+        class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>https://andrewthecoder.com/api/v2</code></pre>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### get a random joke</h3>
+      <p class="text-terminal-fg mb-4">
+        Returns a random joke from the database.
+      </p>
+      <p class="mb-4">
+        <span class="text-terminal-green">[GET]</span>
+        <span class="text-terminal-cyan">/api/v2/randomjoke</span>
+      </p>
+
+      <h4 class="text-terminal-dim mb-2">curl</h4>
+      <pre
+        class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>curl https://andrewthecoder.com/api/v2/randomjoke</code></pre>
+
+      <h4 class="text-terminal-dim mb-2 mt-4">response</h4>
+      <pre
+        class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>&#123;
+  "id": 1,
+  "entry_date": "2024-01-06T12:00:00Z",
+  "author": "John Doe",
+  "joke_text": "Why don't eggs tell jokes? They'd crack up!"
+&#125;</code></pre>
+
+      <p class="text-terminal-dim text-sm mt-4">
+        If the database is empty, you'll get a
+        <span class="text-terminal-amber">404</span> with
+        <span class="text-terminal-amber">"No jokes found in the database."</span>
+      </p>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### submit a joke</h3>
+      <p class="text-terminal-fg mb-4">
+        Adds a joke to the collection. Rate-limited per IP.
+      </p>
+      <p class="mb-4">
+        <span class="text-terminal-amber">[POST]</span>
+        <span class="text-terminal-cyan">/api/v2/writejoke</span>
+        <span class="text-terminal-dim text-sm">
+          — Content-Type: application/json
+        </span>
+      </p>
+
+      <h4 class="text-terminal-dim mb-2">curl</h4>
+      <pre
+        class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>curl -X POST https://andrewthecoder.com/api/v2/writejoke \
+  -H "Content-Type: application/json" \
+  -d '&#123;"author": "Jane Doe", "joke_text": "Why don't programmers like nature? It has too many bugs!"&#125;'</code></pre>
+
+      <h4 class="text-terminal-dim mb-2 mt-4">response</h4>
+      <pre
+        class="bg-terminal-border p-3 rounded text-sm text-terminal-dim overflow-x-auto"><code>&#123;
+  "id": 2,
+  "entry_date": "2024-01-06T12:01:00Z",
+  "author": "Jane Doe",
+  "joke_text": "Why don't programmers like nature? It has too many bugs!"
+&#125;</code></pre>
+
+      <div class="space-y-2 text-terminal-dim text-sm mt-4">
+        <p>Validation rules:</p>
+        <ul class="list-disc list-inside space-y-1 ml-4">
+          <li>
+            <span class="text-terminal-fg">author</span> — required, max 255
+            characters
+          </li>
+          <li>
+            <span class="text-terminal-fg">joke_text</span> — required, max
+            2000 characters
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### errors</h3>
+      <ul class="list-disc list-inside space-y-2 text-terminal-dim ml-4">
+        <li>
+          <span class="text-terminal-amber">400</span> Bad Request — missing or
+          invalid fields, e.g. <span class="text-terminal-amber"
+            >"Author cannot be empty."</span
+          >
+        </li>
+        <li>
+          <span class="text-terminal-amber">404</span> Not Found — no jokes in
+          the database yet
+        </li>
+        <li>
+          <span class="text-terminal-amber">429</span> Too Many Requests —
+          submission rate limit exceeded
+        </li>
+        <li>
+          <span class="text-terminal-amber">500</span> Internal Server Error —
+          something broke on our end
+        </li>
+      </ul>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border">
+      <h3 class="text-terminal-amber mb-6">### rate limits</h3>
+      <div class="space-y-4 text-terminal-fg">
+        <p>
+          <span class="text-terminal-green">POST /api/v2/writejoke</span> is
+          rate-limited per IP: a burst of 3 requests, refilling at 1 request
+          per second.
+        </p>
+        <p>
+          <span class="text-terminal-green">GET /api/v2/randomjoke</span> is
+          unlimited.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <h3 class="text-terminal-amber mb-6">### source code</h3>
+      <p class="text-terminal-fg">
+        The API is open source (MIT). Contribute a joke or report an issue on
+        GitHub:
+      </p>
+      <p class="mt-2">
+        <a
+          href="https://github.com/andrewthecodertx/go-dadjokes-api"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+        >
+          github.com/andrewthecodertx/go-dadjokes-api
+        </a>
+      </p>
+    </section>
+  </div>
+</BaseLayout>
