@@ -17,7 +17,7 @@ export const GET: APIRoute = async () => {
   } catch (e) {
     return new Response(
       JSON.stringify({
-        joke_text: 'this is not funny... but there was an error: {e.message}',
+        joke_text: "this is not funny... but there was an error: {e.message}",
         author: 'anonymous',
       }),
       {
