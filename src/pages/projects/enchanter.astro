@@ -207,6 +207,13 @@ const image = '/assets/projects/enchanter.webp';
           </li>
           <li>
             <a
+              href="#download"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Download</a
+            >
+          </li>
+          <li>
+            <a
               href="#data-directory"
               class="text-terminal-cyan hover:text-terminal-green no-underline"
               >Data Directory</a
@@ -221,6 +228,87 @@ const image = '/assets/projects/enchanter.webp';
           </li>
         </ul>
       </div>
+    </section>
+
+    <section class="py-12 border-b border-terminal-border" id="download">
+      <h3 class="text-terminal-amber mb-6">### download</h3>
+      <p class="text-terminal-fg mb-4">
+        Grab a prebuilt v1.0.1 binary directly — no GitHub account, no Rust
+        toolchain required. Pick your platform:
+      </p>
+      <div class="space-y-2 text-terminal-fg text-sm mb-4">
+        <div class="flex justify-between items-center bg-terminal-dim rounded p-3">
+          <span class="text-terminal-fg">Linux · x86_64</span>
+          <a
+            href="/enchanter/enchanter-linux-x86_64"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+            >download →</a
+          >
+        </div>
+        <div class="flex justify-between items-center bg-terminal-dim rounded p-3">
+          <span class="text-terminal-fg">Linux · arm64</span>
+          <a
+            href="/enchanter/enchanter-linux-arm64"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+            >download →</a
+          >
+        </div>
+        <div class="flex justify-between items-center bg-terminal-dim rounded p-3">
+          <span class="text-terminal-fg">macOS · x86_64</span>
+          <a
+            href="/enchanter/enchanter-macos-x86_64"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+            >download →</a
+          >
+        </div>
+        <div class="flex justify-between items-center bg-terminal-dim rounded p-3">
+          <span class="text-terminal-fg">macOS · arm64</span>
+          <a
+            href="/enchanter/enchanter-macos-arm64"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+            >download →</a
+          >
+        </div>
+        <div class="flex justify-between items-center bg-terminal-dim rounded p-3">
+          <span class="text-terminal-fg">Windows · x86_64</span>
+          <a
+            href="/enchanter/enchanter-windows-x86_64.exe"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+            >download →</a
+          >
+        </div>
+        <div class="flex justify-between items-center bg-terminal-dim rounded p-3">
+          <span class="text-terminal-fg">Windows · arm64</span>
+          <a
+            href="/enchanter/enchanter-windows-arm64.exe"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+            >download →</a
+          >
+        </div>
+      </div>
+      <p class="text-terminal-dim text-sm mb-2">
+        Verify integrity with the
+        <a
+          href="/enchanter/SHA256SUMS"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >SHA256SUMS</a
+        >
+        file:
+      </p>
+      <code class="block bg-terminal-dim rounded p-3 text-terminal-fg text-xs mb-3">
+        sha256sum -c SHA256SUMS
+      </code>
+      <p class="text-terminal-dim text-xs">
+        ARM builds are cross-compiled (experimental). The same files are always
+        available on
+        <a
+          href="https://github.com/andrewthecodertx/enchanter/releases/latest"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >GitHub Releases</a
+        >.
+      </p>
     </section>
 
     <section class="py-12 border-b border-terminal-border" id="features">
