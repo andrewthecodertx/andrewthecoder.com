@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'Enchanter';
 const description =
-  'A focused AI agent harness. Single Rust binary, any OpenAI-compatible provider, zero runtime dependencies.';
+  'A focused AI agent harness. Single Rust binary, any OpenAI-compatible provider, zero runtime dependencies. Latest release: v1.0.1.';
 const permalink = `${Astro.site.href}projects/enchanter`;
 const image = '/assets/projects/enchanter.webp';
 ---
@@ -33,7 +33,9 @@ const image = '/assets/projects/enchanter.webp';
       <p class="text-terminal-fg leading-relaxed mb-6">
         A focused AI agent harness. Single Rust binary, any OpenAI-compatible
         provider, zero runtime dependencies. Reads your SOUL, loads your memory,
-        finds your skills, talks to your model. Nothing more.
+        finds your skills, talks to your model. Nothing more. Ships with a
+        REPL, an optional web UI (<code class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan">enchanter serve</code>),
+        a daemon mode, and a Landlock security sandbox.
       </p>
 
       <div
@@ -41,8 +43,18 @@ const image = '/assets/projects/enchanter.webp';
       >
         <p class="text-terminal-dim text-sm mb-2">quick start</p>
         <code class="text-terminal-green"
-          >git clone https://github.com/andrewthecodertx/enchanter.git && cd
-          enchanter && make install</code
+          >git clone https://github.com/andrewthecodertx/enchanter.git &amp;&amp;
+          cd enchanter &amp;&amp; make install &amp;&amp; enchanter</code
+        >
+        <p class="text-terminal-dim text-xs mt-2"
+          >or grab a prebuilt binary from the
+          <a
+            href="https://github.com/andrewthecodertx/enchanter/releases/latest"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-terminal-cyan hover:text-terminal-green no-underline"
+            >latest release</a
+          >.</p
         >
       </div>
     </section>
@@ -153,9 +165,16 @@ const image = '/assets/projects/enchanter.webp';
           </li>
           <li>
             <a
-              href="#tui-mode"
+              href="#web-ui"
               class="text-terminal-cyan hover:text-terminal-green no-underline"
-              >TUI Mode</a
+              >Web UI</a
+            >
+          </li>
+          <li>
+            <a
+              href="#tool-approval"
+              class="text-terminal-cyan hover:text-terminal-green no-underline"
+              >Tool Approval</a
             >
           </li>
           <li>
@@ -338,9 +357,21 @@ const image = '/assets/projects/enchanter.webp';
         <li class="flex gap-3">
           <span class="text-terminal-green">-</span>
           <span
-            ><strong class="text-terminal-cyan">TUI Mode</strong> — Multi-pane terminal
-            UI with sidebar (skills + memory), chat area, and input bar. Keyboard-driven,
-            all REPL slash commands work.</span
+            ><strong class="text-terminal-cyan">Web UI</strong> — Opt-in browser
+            interface (<code class="text-terminal-green">enchanter serve</code>)
+            with streaming chat, tool-call side panel, session resume, model
+            switching, and token/context display. Binds to 127.0.0.1 by default;
+            optional bearer-token auth.</span
+          >
+        </li>
+        <li class="flex gap-3">
+          <span class="text-terminal-green">-</span>
+          <span
+            ><strong class="text-terminal-cyan">Tool Approval</strong> — Opt-in
+            human-in-the-loop gate (<code class="text-terminal-green"
+              >security.require_tool_approval</code
+            >). Asks y/N in the REPL or Approve/Reject cards in the web UI before
+            running dangerous tools.</span
           >
         </li>
         <li class="flex gap-3">
@@ -1663,303 +1694,77 @@ const image = '/assets/projects/enchanter.webp';
       </div>
     </section>
 
-    <section class="py-12 border-b border-terminal-border" id="tui-mode">
+    <section class="py-12 border-b border-terminal-border" id="web-ui">
       <h3 class="text-terminal-amber mb-6">
-        ### tui mode <span class="text-terminal-dim text-sm font-normal"
-          >(optional feature)</span
+        ### web ui <span class="text-terminal-dim text-sm font-normal"
+          >(optional)</span
         >
       </h3>
       <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
-        The terminal UI provides a multi-pane interface with a sidebar (skills +
-        memory), main chat area, and input bar. A header shows the model,
-        provider, and session info; a footer shows tool/skill counts and quick
-        key hints.
+        The web UI is a self-hosted browser interface served by the Enchanter
+        binary itself — no separate app, no deployment needed. It provides
+        streaming chat, a left-side panel showing live tool calls, session
+        resume, model switching, and a token/context status line.
       </p>
 
-      <div
-        class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4"
-      >
-        <p class="text-terminal-dim text-sm mb-2">launch the tui</p>
-        <code class="text-terminal-green">enchanter tui</code>
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
+        <p class="text-terminal-dim text-sm mb-2">launch the web ui</p>
+        <code class="text-terminal-green">enchanter serve</code>
       </div>
 
       <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
-        All REPL slash commands work in the TUI (<code
+        By default the server binds <code
           class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
-          >/help</code
-        >, <code
-          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
-          >/clear</code
-        >, <code
-          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
-          >/model</code
-        >, <code
-          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
-          >/undo</code
-        >, <code
-          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
-          >/retry</code
-        >, etc.). On exit, the TUI generates a session summary to memory just
-        like the REPL.
+          >127.0.0.1</code
+        > and opens your browser. Configure the port, host, and browser
+        behavior with flags:
       </p>
 
-      <div class="space-y-3 mb-6">
-        <p class="text-terminal-cyan font-mono mb-2">Focus and navigation</p>
-        <div class="overflow-x-auto">
-          <table class="w-full text-terminal-fg text-xs">
-            <thead>
-              <tr class="border-b border-terminal-border">
-                <th class="text-left py-2 px-2">Key</th>
-                <th class="text-left py-2 px-2">Action</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-terminal-border">
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Tab</code></td
-                >
-                <td class="py-2 px-2">Cycle focus forward through panes</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Shift+Tab</code></td
-                >
-                <td class="py-2 px-2">Cycle focus backward</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">1</code>–<code
-                    class="text-terminal-cyan">4</code
-                  ></td
-                >
-                <td class="py-2 px-2">Jump to Skills / Memory / Chat / Input</td
-                >
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">/</code></td
-                >
-                <td class="py-2 px-2">Jump to input and start a command</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Esc</code></td
-                >
-                <td class="py-2 px-2">Return focus to input pane</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p class="text-terminal-cyan font-mono mb-2 mt-4">Input bar</p>
-        <div class="overflow-x-auto">
-          <table class="w-full text-terminal-fg text-xs">
-            <thead>
-              <tr class="border-b border-terminal-border">
-                <th class="text-left py-2 px-2">Key</th>
-                <th class="text-left py-2 px-2">Action</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-terminal-border">
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Enter</code></td
-                >
-                <td class="py-2 px-2"
-                  >Send message (multiline off) / newline (multiline on)</td
-                >
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Ctrl+Enter</code></td
-                >
-                <td class="py-2 px-2"
-                  >Newline (multiline off) / send (multiline on)</td
-                >
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Ctrl+M</code></td
-                >
-                <td class="py-2 px-2">Toggle multiline mode</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Ctrl+A</code> / <code
-                    class="text-terminal-cyan">Home</code
-                  ></td
-                >
-                <td class="py-2 px-2">Move cursor to start</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Ctrl+E</code> / <code
-                    class="text-terminal-cyan">End</code
-                  ></td
-                >
-                <td class="py-2 px-2">Move cursor to end</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Ctrl+U</code></td
-                >
-                <td class="py-2 px-2">Clear input line</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">←</code> / <code
-                    class="text-terminal-cyan">→</code
-                  ></td
-                >
-                <td class="py-2 px-2">Move cursor</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2">
-                  <code class="text-terminal-cyan">Backspace</code> / <code
-                    class="text-terminal-cyan">Delete</code
-                  >
-                </td>
-                <td class="py-2 px-2">Delete character</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Ctrl+C</code></td
-                >
-                <td class="py-2 px-2">Cancel streaming response</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Ctrl+Q</code></td
-                >
-                <td class="py-2 px-2">Quit</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p class="text-terminal-cyan font-mono mb-2 mt-4">
-          Sidebar (Skills / Memory)
-        </p>
-        <div class="overflow-x-auto">
-          <table class="w-full text-terminal-fg text-xs">
-            <thead>
-              <tr class="border-b border-terminal-border">
-                <th class="text-left py-2 px-2">Key</th>
-                <th class="text-left py-2 px-2">Action</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-terminal-border">
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">↑</code> / <code
-                    class="text-terminal-cyan">↓</code
-                  > or <code class="text-terminal-cyan">j</code>/<code
-                    class="text-terminal-cyan">k</code
-                  ></td
-                >
-                <td class="py-2 px-2">Navigate items</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Enter</code></td
-                >
-                <td class="py-2 px-2">Show details in chat</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">?</code></td
-                >
-                <td class="py-2 px-2">Show help in chat</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p class="text-terminal-cyan font-mono mb-2 mt-4">Chat pane</p>
-        <div class="overflow-x-auto">
-          <table class="w-full text-terminal-fg text-xs">
-            <thead>
-              <tr class="border-b border-terminal-border">
-                <th class="text-left py-2 px-2">Key</th>
-                <th class="text-left py-2 px-2">Action</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-terminal-border">
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">↑</code> / <code
-                    class="text-terminal-cyan">↓</code
-                  > or <code class="text-terminal-cyan">j</code>/<code
-                    class="text-terminal-cyan">k</code
-                  ></td
-                >
-                <td class="py-2 px-2">Scroll up / down one line</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">PageUp</code> / <code
-                    class="text-terminal-cyan">PageDown</code
-                  ></td
-                >
-                <td class="py-2 px-2">Scroll by page</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">End</code></td
-                >
-                <td class="py-2 px-2">Jump to bottom / re-enable auto-scroll</td
-                >
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">?</code></td
-                >
-                <td class="py-2 px-2">Show help in chat</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p class="text-terminal-cyan font-mono mb-2 mt-4">During streaming</p>
-        <div class="overflow-x-auto">
-          <table class="w-full text-terminal-fg text-xs">
-            <thead>
-              <tr class="border-b border-terminal-border">
-                <th class="text-left py-2 px-2">Key</th>
-                <th class="text-left py-2 px-2">Action</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-terminal-border">
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Ctrl+C</code></td
-                >
-                <td class="py-2 px-2">Cancel streaming response</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Ctrl+Q</code></td
-                >
-                <td class="py-2 px-2">Quit</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-2"
-                  ><code class="text-terminal-cyan">Tab</code> / <code
-                    class="text-terminal-cyan">Shift+Tab</code
-                  ></td
-                >
-                <td class="py-2 px-2">Cycle focus (even while streaming)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
+        <code class="text-terminal-green text-xs leading-relaxed block"
+          >enchanter serve --port 3005 --host 127.0.0.1 --no-browser</code
+        >
       </div>
 
-      <p class="text-terminal-dim text-sm">
-        The TUI is enabled by default. Build without it: <code
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        Endpoints under <code
           class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
-          >cargo build --no-default-features</code
-        >.
+          >/api/*</code
+        > cover status, sessions, history, model switching, chat (SSE
+        streaming), undo, clear, stop, and tool approval. Chat streams
+        server-sent events, so tool calls and results appear live.
+      </p>
+
+      <h4 class="text-terminal-cyan font-mono mb-2 mt-6">Token auth</h4>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        On a shared machine, require a bearer token on all API routes:
+      </p>
+
+      <div class="bg-terminal-bg border border-terminal-border rounded p-4 mb-4">
+        <code class="text-terminal-green text-xs leading-relaxed block"
+          >enchanter serve --token "$(openssl rand -hex 32)"</code
+        >
+        <p class="text-terminal-dim text-xs mt-2"
+          >or set <code class="text-terminal-cyan">web.auth_token</code> in
+          config.yaml</p
+        >
+      </div>
+
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        When set, every <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >/api/*</code
+        > route requires <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >Authorization: Bearer &lt;token&gt;</code
+        >. SSE endpoints also accept <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >?token=</code
+        >. The frontend stores the token in
+        <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >localStorage</code
+        > (use the 🔑 button).
       </p>
 
       <div class="py-4">
@@ -1971,6 +1776,57 @@ const image = '/assets/projects/enchanter.webp';
       </div>
     </section>
 
+    <section class="py-12 border-b border-terminal-border" id="tool-approval">
+      <h3 class="text-terminal-amber mb-6">
+        ### tool approval <span class="text-terminal-dim text-sm font-normal"
+          >(opt-in)</span
+        >
+      </h3>
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        set <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >security.require_tool_approval</code
+        > to <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >true</code
+        > and the agent pauses before running dangerous tools —<code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >exec_command</code>, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >write_file</code>, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >edit_file</code>, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >memory</code>, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >knowledge</code>, and all MCP tools. Read-only tools
+        (<code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >read_file</code>, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >search_files</code>, <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >list_directory</code
+        >) run freely.
+      </p>
+
+      <p class="text-terminal-fg leading-relaxed mb-4 text-sm">
+        The REPL prompts <code
+          class="bg-terminal-dim rounded px-1 py-0.5 text-xs text-terminal-cyan"
+          >y/N</code
+        >; the web UI renders Approve/Reject cards. Calls are
+        rejected (fail-closed) if no approval channel is connected — a
+        timeout or rejection denies the call.
+      </p>
+
+      <div class="py-4">
+        <a
+          href="#"
+          class="text-terminal-dim text-sm hover:text-terminal-green no-underline"
+          >↑ back to top</a
+        >
+      </div>
+    </section>
     <section class="py-12 border-b border-terminal-border" id="daemon-mode">
       <h3 class="text-terminal-amber mb-6">
         ### daemon mode <span class="text-terminal-dim text-sm font-normal"
@@ -2474,6 +2330,17 @@ const image = '/assets/projects/enchanter.webp';
 
     <section class="py-12" id="learn-more">
       <h3 class="text-terminal-amber mb-6">### learn more</h3>
+      <p class="text-terminal-fg mb-4">
+        Current release:
+        <a
+          href="https://github.com/andrewthecodertx/enchanter/releases/latest"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-terminal-cyan hover:text-terminal-green no-underline"
+          >v1.0.1</a
+        >
+        — prebuilt binaries for Linux, macOS, and Windows (x86_64 + arm64).
+      </p>
       <p class="text-terminal-fg mb-4">
         Read the source, explore the skills spec, or just run it and start
         talking. Or read about the time the AI agent that runs on Enchanter
