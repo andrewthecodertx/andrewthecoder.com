@@ -40,11 +40,13 @@ jobs:
             npm ci
             npm run astro build
             # Reload the running service so the freshly built dist/ is served.
-            # Falls back to a plain restart if the unit is inactive/failed.
-            if systemctl is-active --quiet ${{ secrets.SYSTEMD_SERVICE_NAME }}; then
-              systemctl restart ${{ secrets.SYSTEMD_SERVICE_NAME }}
+            # Uses passwordless sudo (restricted to this unit via sudoers drop-in
+            # /etc/sudoers.d/enchanter-deploy). Falls back to a plain start if the
+            # unit is inactive/failed.
+            if sudo systemctl is-active --quiet ${{ secrets.SYSTEMD_SERVICE_NAME }}; then
+              sudo systemctl restart ${{ secrets.SYSTEMD_SERVICE_NAME }}
             else
-              systemctl start ${{ secrets.SYSTEMD_SERVICE_NAME }}
+              sudo systemctl start ${{ secrets.SYSTEMD_SERVICE_NAME }}
             fi
             journalctl -u ${{ secrets.SYSTEMD_SERVICE_NAME }} --no-pager -n 30 --since "1 min ago" || true
 
