@@ -15,7 +15,7 @@ For 15 years, the dominant pattern in language models has been attention.
 
 It was a radical departure when the Transformer replaced RNNs and LSTMs in 2017. The insight was elegant: instead of processing tokens sequentially and carrying a hidden state through time, every token attends directly to every other token. This made training massively parallelizable and eliminated the vanishing gradient problem that plagued recurrent architectures.
 
-But attention has a cost. It scales quadratically with sequence length. A model processing 4,000 tokens needs 16 million attention weight computations. At 32,000 tokens, that jumps to over a billion. This is why your 8-billion-parameter model still struggles with a 100-page document.
+But attention has a cost. It scales quadratically with sequence length. A model processing 4,000 tokens needs 16 million attention weight computations. At 32,000 tokens, that jumps to over a billion. This is why your 8-billion-parameter model still struggles with a 100-page document.[^6]
 
 The deeper issue is that attention is a lookup mechanism, not a memory system. Every time you feed a prompt into a Transformer, it wakes up with no memory of our conversation. It treats the context window as an expensive working-memory scratchpad, not a durable, structured memory. This is why the most advanced models today still forget what you told them three screens ago.
 
@@ -159,3 +159,7 @@ The real question is not whether some new architecture will displace the Transfo
 [^5]:
     Repeat after me: Transformers are better than state space models at copying.
     http://kempnerinstitute.harvard.edu/research/deeper-learning/repeat-after-me-transformers-are-better-than-state-space-models-at-copying/
+
+[^6]:
+    Michael Brenndoerfer, Language AI Handbook, "Quadratic Attention Bottleneck" (Part XVII: Efficient Attention).
+    https://mbrenndoerfer.com/books/language-ai-handbook
