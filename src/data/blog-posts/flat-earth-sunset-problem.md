@@ -149,15 +149,5 @@ That's the flat-earth sunset problem. The model can handle noon. It can handle
 the sun's angular speed. It falls apart at the horizon, which is to say, it
 falls apart at the exact moment it needs to explain something.
 
-[^1]:
-    The 3,000-mile sun height is a commonly cited figure in flat-earth
-    communities, though there is no single agreed-upon value. Some proponents
-    claim heights ranging from 3,000 to 4,000 miles. The exact value doesn't
-    matter for this argument because the sensitivity problem scales linearly
-    with $h$.
-
-[^2]:
-    The average Earth-Sun distance is approximately 1 AU, or 92,955,807
-    miles (149,597,870 km), as established by radar ranging and spacecraft
-    telemetry. See: NASA, "Sun Fact Sheet," _Planetary Science_, NASA Space
-    Science Data Coordinated Archive.
+[^1]: The 3,000-mile sun height is a commonly cited figure in flat-earth communities, though there is no single agreed-upon value. Some proponents claim heights ranging from 3,000 to 4,000 miles. The exact value doesn't matter for this argument because the sensitivity problem scales linearly with $h$.
+[^2]: The average Earth-Sun distance is approximately 1 AU, or 92,955,807 miles (149,597,870 km), as established by radar ranging and spacecraft telemetry. See: NASA, "Sun Fact Sheet," _Planetary Science_, NASA Space Science Data Coordinated Archive.

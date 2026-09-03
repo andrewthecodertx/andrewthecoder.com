@@ -203,74 +203,15 @@ includes, rather than excludes, the vulnerability required for
 genuine relationship.
 
 [^1]: Thomas Aquinas, _Summa Theologica_, I, Q. 13, Art. 7.
-
-[^2]:
-    Charles Hartshorne, _Man's Vision of God and the Logic of
-    Theism_ (1941). Hartshorne argues that classical theism fails
-    to see that terms like "absolute" and "relative" are
-    correlative and that a truly perfect being must encompass
-    both poles.
-
-[^3]:
-    Alfred North Whitehead, _Process and Reality_ (New York:
-    The Free Press, 1978), 14.
-
-[^4]:
-    Charles Hartshorne, _The Divine Relativity: A Social
-    Conception of God_ (1948). In this key work, Hartshorne
-    argues that God's perfection is social and that God is
-    "surrelative," meaning God is related to all, but nothing
-    is related to God in the same way.
-
+[^2]: Charles Hartshorne, _Man's Vision of God and the Logic of Theism_ (1941). Hartshorne argues that classical theism fails to see that terms like "absolute" and "relative" are correlative and that a truly perfect being must encompass both poles.
+[^3]: Alfred North Whitehead, _Process and Reality_ (New York: The Free Press, 1978), 14.
+[^4]: Charles Hartshorne, _The Divine Relativity: A Social Conception of God_ (1948). In this key work, Hartshorne argues that God's perfection is social and that God is "surrelative," meaning God is related to all, but nothing is related to God in the same way.
 [^5]: Alfred North Whitehead, _Process and Reality_, 351.
-
-[^6]:
-    Charles Hartshorne, _Omnipotence and Other Theological
-    Mistakes_ (Albany: SUNY Press, 1984). Hartshorne identifies
-    omnipotence as the primary "theological mistake" and rejects
-    what he calls the "tyrant conception of God."
-
-[^7]:
-    Whitehead describes God as "the lure for feeling, the
-    eternal urge of desire." Alfred North Whitehead, _Process
-    and Reality_, 344.
-
-[^8]:
-    David Ray Griffin, _God, Power, and Evil: A Process
-    Theodicy_ (Philadelphia: Westminster Press, 1976), 269–270.
-    Griffin distinguishes coercive omnipotence from persuasive
-    power, arguing that it is not logically possible for God to
-    unilaterally control self-determining beings.
-
-[^9]:
-    Whitehead, _Process and Reality_, 244. God is the source
-    of the "initial aim from which [the subject's]
-    self-causation starts."
-
-[^10]:
-    John B. Cobb Jr. and David Ray Griffin, _Process Theology:
-    An Introductory Exposition_ (Philadelphia: Westminster
-    Press, 1976), 52–56.
-
-[^11]:
-    Griffin, _God, Power, and Evil_, 280–281. See also Cobb
-    and Griffin, _Process Theology_, 74–75: "Process theism
-    cannot provide the assurance that God's will is always done.
-    It does affirm that, no matter how great the evil in the
-    world, God acts persuasively upon the wreckage to bring from
-    it whatever good is possible."
-
-[^12]:
-    Whitehead, _Process and Reality_, 346. God "prehends every
-    actuality for what it can be in such a perfected system—its
-    sufferings, its sorrows, its failures, its triumphs, its
-    immediacies of joy—woven by rightness of feeling into the
-    harmony of the universal feeling."
-
-[^13]:
-    Cobb and Griffin, _Process Theology_, ch. 3, "God as
-    Creative-Responsive Love." See also Whitehead, _Process and
-    Reality_, 343, where Whitehead contrasts his vision of God
-    with imperial imagery, suggesting that "the Galilean origin
-    of Christianity" points to a God whose power lies not in
-    ruling force but in "a tender care that nothing be lost."
+[^6]: Charles Hartshorne, _Omnipotence and Other Theological Mistakes_ (Albany: SUNY Press, 1984). Hartshorne identifies omnipotence as the primary "theological mistake" and rejects what he calls the "tyrant conception of God."
+[^7]: Whitehead describes God as "the lure for feeling, the eternal urge of desire." Alfred North Whitehead, _Process and Reality_, 344.
+[^8]: David Ray Griffin, _God, Power, and Evil: A Process Theodicy_ (Philadelphia: Westminster Press, 1976), 269–270. Griffin distinguishes coercive omnipotence from persuasive power, arguing that it is not logically possible for God to unilaterally control self-determining beings.
+[^9]: Whitehead, _Process and Reality_, 244. God is the source of the "initial aim from which [the subject's] self-causation starts."
+[^10]: John B. Cobb Jr. and David Ray Griffin, _Process Theology: An Introductory Exposition_ (Philadelphia: Westminster Press, 1976), 52–56.
+[^11]: Griffin, _God, Power, and Evil_, 280–281. See also Cobb and Griffin, _Process Theology_, 74–75: "Process theism cannot provide the assurance that God's will is always done. It does affirm that, no matter how great the evil in the world, God acts persuasively upon the wreckage to bring from it whatever good is possible."
+[^12]: Whitehead, _Process and Reality_, 346. God "prehends every actuality for what it can be in such a perfected system—its sufferings, its sorrows, its failures, its triumphs, its immediacies of joy—woven by rightness of feeling into the harmony of the universal feeling."
+[^13]: Cobb and Griffin, _Process Theology_, ch. 3, "God as Creative-Responsive Love." See also Whitehead, _Process and Reality_, 343, where Whitehead contrasts his vision of God with imperial imagery, suggesting that "the Galilean origin of Christianity" points to a God whose power lies not in ruling force but in "a tender care that nothing be lost."

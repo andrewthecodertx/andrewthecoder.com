@@ -140,26 +140,9 @@ This is analogous to how modern CPUs did not replace caches, registers, pipeline
 
 The real question is not whether some new architecture will displace the Transformer. It is how quickly the field moves from treating the Transformer as the entire computer to treating it as a component inside a larger one.
 
-[^1]:
-    Mamba: Linear-time sequence modeling with selective state spaces.
-    https://openreview.net/forum?id=tEYskw1VY2
-
-[^2]:
-    Titans: Learning to memorize at test time.
-    https://arxiv.org/abs/2501.00663
-
-[^3]:
-    Recurrent-depth language models: Scaling test-time compute via latent-space reasoning.
-    https://arxiv.org/abs/2502.05171
-
-[^4]:
-    Applying mixture of experts to LLM architectures.
-    https://developer.nvidia.com/blog/applying-mixture-of-experts-in-llm-architectures/
-
-[^5]:
-    Repeat after me: Transformers are better than state space models at copying.
-    http://kempnerinstitute.harvard.edu/research/deeper-learning/repeat-after-me-transformers-are-better-than-state-space-models-at-copying/
-
-[^6]:
-    Michael Brenndoerfer, Language AI Handbook, "Quadratic Attention Bottleneck" (Part XVII: Efficient Attention).
-    https://mbrenndoerfer.com/books/language-ai-handbook
+[^1]: Albert Gu and Tri Dao, _Mamba: Linear-Time Sequence Modeling with Selective State Spaces_ (2023).
+[^2]: Ali Behrouz, Peilin Zhong, and Vahab Mirrokni, _Titans: Learning to Memorize at Test Time_ (2025).
+[^3]: Jonas Geiping et al., _Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach_ (2025).
+[^4]: NVIDIA Technical Blog, "Applying Mixture of Experts in LLM Architectures."
+[^5]: Samy Jelassi, David Brandfonbrener, Sham Kakade, and Eran Malach, "Repeat After Me: Transformers are Better than State Space Models at Copying" (Kempner Institute, 2024).
+[^6]: Michael Brenndoerfer, _Language AI Handbook_, "Quadratic Attention Bottleneck" (Part XVII: Efficient Attention).

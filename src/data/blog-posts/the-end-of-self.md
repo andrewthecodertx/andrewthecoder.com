@@ -164,93 +164,19 @@ unilaterally determine the future, then perhaps God also cannot unilaterally
 guarantee that every person will survive death, and the refusal to pretend
 otherwise may itself be a form of integrity.
 
-[^1]:
-    See the closing sections of both earlier posts: divine power reframed
-    as persuasive love in "God and Contingency," and providence reconceived
-    as responsive rather than controlling in "Process, Time, and the Self."
-
-[^2]:
-    Alfred North Whitehead, _Process and Reality_ (New York: The Free Press,
-    1978), 345–351. The doctrine of the consequent nature of God holds that
-    God prehends every actuality and weaves it into the divine harmony.
-
-[^3]:
-    Charles Hartshorne, _The Divine Relativity: A Social Conception of God_
-    (1948). Hartshorne argues that objective immortality, the preservation of
-    our experiences in God, is sufficient for eschatological hope and that
-    subjective immortality introduces metaphysical difficulties that process
-    thought cannot support.
-
-[^4]:
-    This critique has been pressed from both within and outside the process
-    tradition. See David Ray Griffin, "A Whiteheadian Conception of
-    Immortality," _Process Studies_ 18 (1989), and John Hick, _Death and
-    Eternal Life_ (New York: Harper & Row, 1976), 324–330, where Hick
-    argues that any immortality worth having must include personal continuity.
-
-[^5]:
-    Marjorie Hewitt Suchocki, _The End of Evil: Process Eschatology in
-    Historical Context_ (Albany: SUNY Press, 1988). Suchocki develops a
-    process eschatology in which even evil, preserved in God's consequent
-    nature, is progressively transformed.
-
-[^6]:
-    The classical tradition here is diverse, ranging from Aquinas's doctrine
-    of the beatific vision (Summa Theologica, Supplement, Q. 75–86) to
-    Barth's emphasis on resurrection as the act of God in which the person
-    is restored (_Church Dogmatics_, III/3, §47). What unites these accounts
-    is the insistence that the one who suffers is also the one who is
-    redeemed.
-
-[^7]:
-    Suchocki, _The End of Evil_, 117–143. Suchocki argues that evil has an
-    ending not through a final judgment that annihilates it, but through
-    God's ongoing creative transformation of what has been into new
-    possibilities for value.
-
-[^8]:
-    This is not a criticism of Suchocki so much as an observation about the
-    limits of even the most developed accounts of objective immortality. The
-    question of personal survival remains open.
-
-[^9]:
-    David Ray Griffin, "A Whiteheadian Conception of Immortality," _Process
-    Studies_ 18 (1989). See also his later elaboration in _Reenchantment
-    without Supernaturalism: A Process Philosophy of Religion_ (Ithaca:
-    Cornell University Press, 2001), 292–298.
-
-[^10]:
-    Griffin, _Reenchantment without Supernaturalism_, 295. Griffin frames
-    subjective immortality as a possibility grounded in God's provision of
-    initial aims, not as a logical certainty.
-
-[^11]:
-    Nancey Murphy, _Bodies and Souls, or Spirited Bodies?_ (Cambridge:
-    Cambridge University Press, 2006), offers a non-reductive physicalist
-    account of the person that shares some structural similarities with
-    Griffin's proposal while remaining within a broadly Christian framework.
-
-[^12]:
-    Griffin, "A Whiteheadian Conception of Immortality," 11–13. The key
-    metaphysical move is that what survives is not an enduring substance but
-    a persisting pattern of experiential occasions, each occasion inheriting
-    from its predecessors in the same way that occasions in this life do.
-
-[^13]:
-    Whitehead, _Process and Reality_, 348. "God is the great companion, the
-    fellow-sufferer who understands."
-
-[^14]:
-    Hartshorne makes this point explicitly in _Omnipotence and Other
-    Theological Mistakes_ (Albany: SUNY Press, 1984), 78–80, arguing that
-    objective immortality is a stronger basis for meaning than secular
-    accounts that treat death as final and value as contingent.
-
-[^15]:
-    Whitehead, _Process and Reality_, 351. The consequent nature of God is
-    not merely cognitive but affective: God _feels_ what the world feels.
-
-[^16]:
-    Hartshorne, _Omnipotence and Other Theological Mistakes_, 13–23. The
-    incoherence of coercive omnipotence was the starting point of the first
-    post in this series.
+[^1]: See the closing sections of both earlier posts: divine power reframed as persuasive love in "God and Contingency," and providence reconceived as responsive rather than controlling in "Process, Time, and the Self."
+[^2]: Alfred North Whitehead, _Process and Reality_ (New York: The Free Press, 1978), 345–351. The doctrine of the consequent nature of God holds that God prehends every actuality and weaves it into the divine harmony.
+[^3]: Charles Hartshorne, _The Divine Relativity: A Social Conception of God_ (1948). Hartshorne argues that objective immortality, the preservation of our experiences in God, is sufficient for eschatological hope and that subjective immortality introduces metaphysical difficulties that process thought cannot support.
+[^4]: This critique has been pressed from both within and outside the process tradition. See David Ray Griffin, "A Whiteheadian Conception of Immortality," _Process Studies_ 18 (1989), and John Hick, _Death and Eternal Life_ (New York: Harper & Row, 1976), 324–330, where Hick argues that any immortality worth having must include personal continuity.
+[^5]: Marjorie Hewitt Suchocki, _The End of Evil: Process Eschatology in Historical Context_ (Albany: SUNY Press, 1988). Suchocki develops a process eschatology in which even evil, preserved in God's consequent nature, is progressively transformed.
+[^6]: The classical tradition here is diverse, ranging from Aquinas's doctrine of the beatific vision (Summa Theologica, Supplement, Q. 75–86) to Barth's emphasis on resurrection as the act of God in which the person is restored (_Church Dogmatics_, III/3, §47). What unites these accounts is the insistence that the one who suffers is also the one who is redeemed.
+[^7]: Suchocki, _The End of Evil_, 117–143. Suchocki argues that evil has an ending not through a final judgment that annihilates it, but through God's ongoing creative transformation of what has been into new possibilities for value.
+[^8]: This is not a criticism of Suchocki so much as an observation about the limits of even the most developed accounts of objective immortality. The question of personal survival remains open.
+[^9]: David Ray Griffin, "A Whiteheadian Conception of Immortality," _Process Studies_ 18 (1989). See also his later elaboration in _Reenchantment without Supernaturalism: A Process Philosophy of Religion_ (Ithaca: Cornell University Press, 2001), 292–298.
+[^10]: Griffin, _Reenchantment without Supernaturalism_, 295. Griffin frames subjective immortality as a possibility grounded in God's provision of initial aims, not as a logical certainty.
+[^11]: Nancey Murphy, _Bodies and Souls, or Spirited Bodies?_ (Cambridge: Cambridge University Press, 2006), offers a non-reductive physicalist account of the person that shares some structural similarities with Griffin's proposal while remaining within a broadly Christian framework.
+[^12]: Griffin, "A Whiteheadian Conception of Immortality," 11–13. The key metaphysical move is that what survives is not an enduring substance but a persisting pattern of experiential occasions, each occasion inheriting from its predecessors in the same way that occasions in this life do.
+[^13]: Whitehead, _Process and Reality_, 348. "God is the great companion, the fellow-sufferer who understands."
+[^14]: Hartshorne makes this point explicitly in _Omnipotence and Other Theological Mistakes_ (Albany: SUNY Press, 1984), 78–80, arguing that objective immortality is a stronger basis for meaning than secular accounts that treat death as final and value as contingent.
+[^15]: Whitehead, _Process and Reality_, 351. The consequent nature of God is not merely cognitive but affective: God _feels_ what the world feels.
+[^16]: Hartshorne, _Omnipotence and Other Theological Mistakes_, 13–23. The incoherence of coercive omnipotence was the starting point of the first post in this series.

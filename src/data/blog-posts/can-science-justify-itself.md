@@ -239,61 +239,13 @@ That tension - the spectacular success of science sitting atop an unresolved
 foundational problem - is exactly what makes the problem of induction worth
 returning to.
 
-[^1]:
-    For an accessible introduction, see the Stanford Encyclopedia of
-    Philosophy entry on [The Problem of Induction](https://plato.stanford.edu/entries/induction-problem/).
-
-[^2]:
-    [David Hume](https://en.wikipedia.org/wiki/David_Hume), _An Enquiry
-    Concerning Human Understanding_ (1748), Sections IV-V. Hume's argument remains
-    the canonical statement of the problem.
-
-[^3]:
-    [Norwood Russell
-    Hanson](https://en.wikipedia.org/wiki/Norwood_Russell_Hanson), _Patterns of
-    Discovery_ (1958); [Thomas Kuhn](https://en.wikipedia.org/wiki/Thomas_Kuhn),
-    _The Structure of Scientific Revolutions_ (1962); [Paul
-    Feyerabend](https://en.wikipedia.org/wiki/Paul_Feyerabend), _Against Method_
-    (1975).
-
-[^4]:
-    For a review of top-down effects on perception, see Firestone and Scholl,
-    "Cognition does not affect perception: Evaluating the evidence for 'top-down'
-    effects," _Behavioral and Brain Sciences_ (2016). The debate continues, but
-    moderate versions of theory-ladenness are widely accepted.
-
-[^5]:
-    [Karl Popper](https://en.wikipedia.org/wiki/Karl_Popper), _The Logic of
-    Scientific Discovery_ (1934/1959). Popper argued that science proceeds by
-    conjecture and refutation, not by inductive confirmation.
-
-[^6]:
-    See the Duhem-Quine thesis: [Pierre
-    Duhem](https://en.wikipedia.org/wiki/Pierre_Duhem), _The Aim and Structure of
-    Physical Theory_ (1906); [W.V.O.
-    Quine](https://en.wikipedia.org/wiki/Willard_Van_Orman_Quine), "Two Dogmas of
-    Empiricism," _The Philosophical Review_ (1951).
-
-[^7]:
-    [Alvin Goldman](https://en.wikipedia.org/wiki/Alvin_Goldman), "What Is
-    Justified Belief?" in _Justification and Knowledge_ (1979). Goldman's process
-    reliabilism holds that a belief is justified if produced by a reliable
-    cognitive process.
-
-[^8]:
-    [Frank Ramsey](<https://en.wikipedia.org/wiki/Frank_Ramsey_(mathematician)>),
-    "Truth and Probability" (1926), in _The Foundations of Mathematics and Other
-    Logical Essays_ (1931). Ramsey anticipated many themes in pragmatist and
-    reliabilist epistemology.
-
-[^9]:
-    [Hans Reichenbach](https://en.wikipedia.org/wiki/Hans_Reichenbach),
-    _Experience and Prediction_ (1938), offers a classic pragmatic vindication of
-    induction: if any method works, induction will.
-
-[^10]:
-    For Bayesian approaches, see [Richard
-    Jeffrey](https://en.wikipedia.org/wiki/Richard_Jeffrey), _The Logic of
-    Decision_ (1965); for objective chance, [David
-    Lewis](<https://en.wikipedia.org/wiki/David_Lewis_(philosopher)>), "A
-    Subjectivist's Guide to Objective Chance" (1980).
+[^1]: For an accessible introduction, see the Stanford Encyclopedia of Philosophy entry on The Problem of Induction.
+[^2]: David Hume, _An Enquiry Concerning Human Understanding_ (1748), Sections IV-V. Hume's argument remains the canonical statement of the problem.
+[^3]: Norwood Russell Hanson, _Patterns of Discovery_ (1958); Thomas Kuhn, _The Structure of Scientific Revolutions_ (1962); Paul Feyerabend, _Against Method_ (1975).
+[^4]: For a review of top-down effects on perception, see Firestone and Scholl, "Cognition does not affect perception: Evaluating the evidence for 'top-down' effects," _Behavioral and Brain Sciences_ (2016). The debate continues, but moderate versions of theory-ladenness are widely accepted.
+[^5]: Karl Popper, _The Logic of Scientific Discovery_ (1934/1959). Popper argued that science proceeds by conjecture and refutation, not by inductive confirmation.
+[^6]: See the Duhem-Quine thesis: Pierre Duhem, _The Aim and Structure of Physical Theory_ (1906); W.V.O. Quine, "Two Dogmas of Empiricism," _The Philosophical Review_ (1951).
+[^7]: Alvin Goldman, "What Is Justified Belief?" in _Justification and Knowledge_ (1979). Goldman's process reliabilism holds that a belief is justified if produced by a reliable cognitive process.
+[^8]: Frank Ramsey, "Truth and Probability" (1926), in _The Foundations of Mathematics and Other Logical Essays_ (1931). Ramsey anticipated many themes in pragmatist and reliabilist epistemology.
+[^9]: Hans Reichenbach, _Experience and Prediction_ (1938), offers a classic pragmatic vindication of induction: if any method works, induction will.
+[^10]: For Bayesian approaches, see Richard Jeffrey, _The Logic of Decision_ (1965); for objective chance, David Lewis, "A Subjectivist's Guide to Objective Chance" (1980).

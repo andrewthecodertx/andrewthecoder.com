@@ -285,90 +285,21 @@ hypothesis with genuine explanatory reach, held rationally by people who,
 following Plantinga, decline to demand more certainty from it than they
 demand from their confidence that their neighbors possess minds at all.
 
-[^1]:
-    See ["God and Contingency"](https://andrewthecoder.com/blog/god-and-contingency),
-    ["Process, Time, and the Self"](https://andrewthecoder.com/blog/process-time-and-the-self),
-    and ["The End of Self"](https://andrewthecoder.com/blog/the-end-of-self),
-    which develop a process-theological account of God's nature, action,
-    and eschatological hope.
-
-[^2]:
-    Stanford Encyclopedia of Philosophy, "Cosmological Argument,"
-    https://plato.stanford.edu/entries/cosmological-argument/.
-
-[^3]:
-    G. W. Leibniz, _The Principles of Nature and of Grace, Based on Reason_
-    (1714), in _Philosophical Papers and Letters_, ed. Leroy E. Loemker,
-    2nd ed. (Dordrecht: Kluwer, 1989), 636–642.
-
-[^4]:
-    Aquinas, _Summa Theologiae_ I, q. 2, a. 3. The SEP entry cited above
-    distinguishes first-cause, sustaining-cause, necessary-being, and
-    unmoved-mover versions of the argument; the Thomistic version is
-    explicitly about present dependence rather than a first moment in time.
-
-[^5]:
-    Stanford Encyclopedia of Philosophy, "Fine-Tuning,"
-    https://plato.stanford.edu/entries/fine-tuning/.
-
-[^6]:
-    Internet Encyclopedia of Philosophy, "Design Arguments for the Existence
-    of God," https://iep.utm.edu/design-arguments-for-existence-of-god/.
-
-[^7]:
-    Stanford Encyclopedia of Philosophy, "Teleological Arguments for God's
-    Existence," https://plato.stanford.edu/entries/teleological-arguments/.
-
-[^8]:
-    Eugene P. Wigner, "The Unreasonable Effectiveness of Mathematics in the
-    Natural Sciences," _Communications on Pure and Applied Mathematics_ 13
-    (1960): 1–14.
-
-[^9]:
-    Thomas Nagel, "What Is It Like to Be a Bat?", _Philosophical Review_ 83
-    (1974): 435–450; David J. Chalmers, "Facing Up to the Problem of
-    Consciousness," _Journal of Consciousness Studies_ 2 (1995): 200–219.
-
-[^10]:
-    Stanford Encyclopedia of Philosophy, "Panpsychism,"
-    https://plato.stanford.edu/entries/panpsychism/, surveys the third
-    option and its motivations alongside idealist and theist readings of
-    consciousness.
-
-[^11]:
-    Alvin Plantinga, _God and Other Minds: A Study of the Rational
-    Justification of Belief in God_ (Ithaca: Cornell University Press,
-    1967).
-
-[^12]:
-    Plantinga, _God and Other Minds_, chaps. 7–10. The comparison between
-    belief in God and belief in other minds occupies the final part of the
-    book; Plantinga concludes that the two beliefs are in relevantly similar
-    epistemic positions.
-
-[^13]:
-    Alvin Plantinga, "Reason and Belief in God," in _Faith and Rationality:
-    Reason and Belief in God_, ed. Alvin Plantinga and Nicholas
-    Wolterstorff (Notre Dame: University of Notre Dame Press, 1983),
-    16–93; developed fully in _Warranted Christian Belief_ (New York:
-    Oxford University Press, 2000).
-
-[^14]:
-    Stanford Encyclopedia of Philosophy, "Moral Arguments for the Existence
-    of God," https://plato.stanford.edu/entries/moral-arguments-god/.
-
+[^1]: See "God and Contingency," "Process, Time, and the Self," and "The End of Self," which develop a process-theological account of God's nature, action, and eschatological hope.
+[^2]: Stanford Encyclopedia of Philosophy, "Cosmological Argument."
+[^3]: G. W. Leibniz, _The Principles of Nature and of Grace, Based on Reason_ (1714), in _Philosophical Papers and Letters_, ed. Leroy E. Loemker, 2nd ed. (Dordrecht: Kluwer, 1989), 636–642.
+[^4]: Aquinas, _Summa Theologiae_ I, q. 2, a. 3. The SEP entry cited above distinguishes first-cause, sustaining-cause, necessary-being, and unmoved-mover versions of the argument; the Thomistic version is explicitly about present dependence rather than a first moment in time.
+[^5]: Stanford Encyclopedia of Philosophy, "Fine-Tuning."
+[^6]: Internet Encyclopedia of Philosophy, "Design Arguments for the Existence of God."
+[^7]: Stanford Encyclopedia of Philosophy, "Teleological Arguments for God's Existence."
+[^8]: Eugene P. Wigner, "The Unreasonable Effectiveness of Mathematics in the Natural Sciences," _Communications on Pure and Applied Mathematics_ 13 (1960): 1–14.
+[^9]: Thomas Nagel, "What Is It Like to Be a Bat?," _Philosophical Review_ 83 (1974): 435–450; David J. Chalmers, "Facing Up to the Problem of Consciousness," _Journal of Consciousness Studies_ 2 (1995): 200–219.
+[^10]: Stanford Encyclopedia of Philosophy, "Panpsychism," surveys the third option and its motivations alongside idealist and theist readings of consciousness. See also the encyclopedia's survey of "Theories of Consciousness."
+[^11]: Alvin Plantinga, _God and Other Minds: A Study of the Rational Justification of Belief in God_ (Ithaca: Cornell University Press, 1967).
+[^12]: Plantinga, _God and Other Minds_, chaps. 7–10. The comparison between belief in God and belief in other minds occupies the final part of the book; Plantinga concludes that the two beliefs are in relevantly similar epistemic positions.
+[^13]: Alvin Plantinga, "Reason and Belief in God," in _Faith and Rationality: Reason and Belief in God_, ed. Alvin Plantinga and Nicholas Wolterstorff (Notre Dame: University of Notre Dame Press, 1983), 16–93; developed fully in _Warranted Christian Belief_ (New York: Oxford University Press, 2000).
+[^14]: Stanford Encyclopedia of Philosophy, "Moral Arguments for the Existence of God."
 [^15]: Plato, _Euthyphro_ 10a–11b.
-
-[^16]:
-    William James, _The Varieties of Religious Experience_ (New York:
-    Longmans, Green, 1902), esp. lecture III, "The Reality of the Unseen."
-
-[^17]:
-    Richard Swinburne, _The Existence of God_, 2nd ed. (Oxford: Clarendon
-    Press, 2004). Swinburne applies Bayesian reasoning cumulatively across
-    cosmology, order, consciousness, providence, history, and religious
-    experience.
-
-[^18]:
-    Stanford Encyclopedia of Philosophy, "Problem of Evil,"
-    https://plato.stanford.edu/entries/evil/.
+[^16]: William James, _The Varieties of Religious Experience_ (New York: Longmans, Green, 1902), esp. lecture III, "The Reality of the Unseen."
+[^17]: Richard Swinburne, _The Existence of God_, 2nd ed. (Oxford: Clarendon Press, 2004). Swinburne applies Bayesian reasoning cumulatively across cosmology, order, consciousness, providence, history, and religious experience.
+[^18]: Stanford Encyclopedia of Philosophy, "Problem of Evil."

@@ -274,126 +274,25 @@ universe and believing that my life, and the lives of those I love, matter
 eternally to the one in whom that universe lives and moves and has its
 being.
 
-[^1]:
-    For continuity, see "God and Contingency," "Process, Time, and the
-    Self," and "The End of Self," which develop the basic metaphysical
-    and eschatological claims that this essay presupposes.
-
-[^2]:
-    Alfred North Whitehead, _Process and Reality_, corrected edition
-    (New York: The Free Press, 1978), 348, 351. "God is the great
-    companion, the fellow-sufferer who understands" (348); "He is the
-    poet of the world, with tender patience leading it by his vision of
-    truth, beauty, and goodness" (351).
-
-[^3]:
-    Donald W. Viney, "Process Theism," _Stanford Encyclopedia of
-    Philosophy_ (Summer 2020 Edition), emphasizes that process theism
-    begins from becoming and temporal passage rather than from timeless
-    substance metaphysics.
-
-[^4]:
-    Whitehead, _Process and Reality_, 21–28, 222. Whitehead calls
-    actual occasions "the final real things of which this world is made
-    up" (18) and describes the universe as a "creative advance into
-    novelty" (222).
-
-[^5]:
-    Charles Hartshorne, _The Divine Relativity: A Social Conception of
-    God_ (New Haven: Yale University Press, 1948). Hartshorne's
-    "neoclassical" theism combines an abstract, immutable pole with a
-    concrete, responsive pole.
-
-[^6]:
-    John B. Cobb Jr. and David Ray Griffin, _Process Theology: An
-    Introductory Exposition_ (Philadelphia: Westminster Press, 1976),
-    46–56, on God as the source of possibilities and the recipient of
-    all actualities, and 48–56, on God's integration of the world's
-    actualities into new possibilities.
-
-[^7]:
-    Marjorie Hewitt Suchocki, _A Process Spirituality: Christian and
-    Transreligious Resources for Transformation_ (Cleveland: Pilgrim
-    Press, 2012). Suchocki develops the spiritual and ethical
-    implications of process thought and the shape of a daily
-    spirituality of attentiveness and compassion.
-
-[^8]:
-    Thomas Aquinas, _Summa Theologica_, I, Q. 22, on providence as the
-    ordering of all things by the divine intellect, is the classical
-    statement of the view being described.
-
-[^9]:
-    Cobb and Griffin, _Process Theology_, 52–56. See also Viney,
-    "Process Theism," sec. "Divine Knowledge and the Problem of Future
-    Contingents," on why an open future rules out a completed script.
-
-[^10]:
-    Whitehead, _Process and Reality_, 244. God provides "the initial
-    aim from which [the subject's] self-causation starts."
-
-[^11]:
-    Cobb and Griffin, _Process Theology_, ch. 3, "God as
-    Creative-Responsive Love."
-
-[^12]:
-    John B. Cobb Jr., "Prayer," Process & Faith Q&A, April 2000. Cobb
-    argues that prayer is more intelligible on a relational view of
-    divine power than on classical views of unilateral control.
-
-[^13]:
-    Marjorie Hewitt Suchocki, _In God's Presence: Theological
-    Reflections on Prayer_ (St. Louis: Chalice Press, 1996). Suchocki
-    develops a process account of prayer as relational cooperation and
-    squarely rejects magical understandings of prayer.
-
-[^14]:
-    Suchocki, _In God's Presence_, chs. 3–5. The quoted line
-    encapsulates her account of God's work with the world's actual
-    condition; prayer changes the "isness" of the world by altering the
-    relational field within which God works.
-
-[^15]:
-    Whitehead, _Process and Reality_, 346. The consequent nature of God
-    is "the judgment of a tenderness which loses nothing that can be
-    saved." See also 345–351 on the consequent nature as a whole.
-
-[^16]:
-    Marjorie Hewitt Suchocki, _The End of Evil: Process Eschatology in
-    Historical Context_ (Albany: SUNY Press, 1988). Even evil,
-    preserved in God's consequent nature, is progressively transformed
-    rather than merely remembered.
-
-[^17]:
-    Viney, "Process Theism," sec. "Immortality." See also David Ray
-    Griffin, "A Whiteheadian Conception of Immortality," _Process
-    Studies_ 18 (1989), and _Reenchantment without Supernaturalism: A
-    Process Philosophy of Religion_ (Ithaca: Cornell University Press,
-    2001), 292–298.
-
-[^18]:
-    John Hick, _Death and Eternal Life_ (New York: Harper & Row, 1976),
-    324–330, presses the importance of personal continuity for
-    eschatological hope.
-
-[^19]:
-    N. T. Wright, _Surprised by Hope_ (New York: HarperOne, 2008), a
-    contemporary defense of bodily resurrection and the renewal of
-    creation.
-
-[^20]:
-    Charles Hartshorne, _Omnipotence and Other Theological Mistakes_
-    (Albany: SUNY Press, 1984), 13–23. See also David Ray Griffin,
-    _God, Power, and Evil: A Process Theodicy_ (Philadelphia:
-    Westminster Press, 1976), 269–281, on the incoherence of unilateral
-    coercive control over self-determining beings.
-
-[^21]:
-    Griffin, _Reenchantment without Supernaturalism_, 292–298. Griffin
-    frames subjective immortality as a genuine metaphysical possibility,
-    not a logical certainty.
-
-[^22]:
-    Cobb and Griffin, _Process Theology_, 74–75, on God's persuasive
-    action upon what Whitehead called "the wreckage" of the world, and
-    on the creaturely cooperation that some goods require.
+[^1]: For continuity, see "God and Contingency," "Process, Time, and the Self," and "The End of Self," which develop the basic metaphysical and eschatological claims that this essay presupposes.
+[^2]: Alfred North Whitehead, _Process and Reality_, corrected edition (New York: The Free Press, 1978), 348, 351. "God is the great companion, the fellow-sufferer who understands" (348); "He is the poet of the world, with tender patience leading it by his vision of truth, beauty, and goodness" (351).
+[^3]: Donald W. Viney, "Process Theism," _Stanford Encyclopedia of Philosophy_ (Summer 2020 Edition), emphasizes that process theism begins from becoming and temporal passage rather than from timeless substance metaphysics.
+[^4]: Whitehead, _Process and Reality_, 21–28, 222. Whitehead calls actual occasions "the final real things of which this world is made up" (18) and describes the universe as a "creative advance into novelty" (222).
+[^5]: Charles Hartshorne, _The Divine Relativity: A Social Conception of God_ (New Haven: Yale University Press, 1948). Hartshorne's "neoclassical" theism combines an abstract, immutable pole with a concrete, responsive pole.
+[^6]: John B. Cobb Jr. and David Ray Griffin, _Process Theology: An Introductory Exposition_ (Philadelphia: Westminster Press, 1976), 46–56, on God as the source of possibilities and the recipient of all actualities, and 48–56, on God's integration of the world's actualities into new possibilities.
+[^7]: Marjorie Hewitt Suchocki, _A Process Spirituality: Christian and Transreligious Resources for Transformation_ (Cleveland: Pilgrim Press, 2012). Suchocki develops the spiritual and ethical implications of process thought and the shape of a daily spirituality of attentiveness and compassion.
+[^8]: Thomas Aquinas, _Summa Theologica_, I, Q. 22, on providence as the ordering of all things by the divine intellect, is the classical statement of the view being described.
+[^9]: Cobb and Griffin, _Process Theology_, 52–56. See also Viney, "Process Theism," sec. "Divine Knowledge and the Problem of Future Contingents," on why an open future rules out a completed script.
+[^10]: Whitehead, _Process and Reality_, 244. God provides "the initial aim from which [the subject's] self-causation starts."
+[^11]: Cobb and Griffin, _Process Theology_, ch. 3, "God as Creative-Responsive Love."
+[^12]: John B. Cobb Jr., "Prayer," Process & Faith Q&A, April 2000. Cobb argues that prayer is more intelligible on a relational view of divine power than on classical views of unilateral control.
+[^13]: Marjorie Hewitt Suchocki, _In God's Presence: Theological Reflections on Prayer_ (St. Louis: Chalice Press, 1996). Suchocki develops a process account of prayer as relational cooperation and squarely rejects magical understandings of prayer.
+[^14]: Suchocki, _In God's Presence_, chs. 3–5. The quoted line encapsulates her account of God's work with the world's actual condition; prayer changes the "isness" of the world by altering the relational field within which God works.
+[^15]: Whitehead, _Process and Reality_, 346. The consequent nature of God is "the judgment of a tenderness which loses nothing that can be saved." See also 345–351 on the consequent nature as a whole.
+[^16]: Marjorie Hewitt Suchocki, _The End of Evil: Process Eschatology in Historical Context_ (Albany: SUNY Press, 1988). Even evil, preserved in God's consequent nature, is progressively transformed rather than merely remembered.
+[^17]: Viney, "Process Theism," sec. "Immortality." See also David Ray Griffin, "A Whiteheadian Conception of Immortality," _Process Studies_ 18 (1989), and _Reenchantment without Supernaturalism: A Process Philosophy of Religion_ (Ithaca: Cornell University Press, 2001), 292–298.
+[^18]: John Hick, _Death and Eternal Life_ (New York: Harper & Row, 1976), 324–330, presses the importance of personal continuity for eschatological hope.
+[^19]: N. T. Wright, _Surprised by Hope_ (New York: HarperOne, 2008), a contemporary defense of bodily resurrection and the renewal of creation.
+[^20]: Charles Hartshorne, _Omnipotence and Other Theological Mistakes_ (Albany: SUNY Press, 1984), 13–23. See also David Ray Griffin, _God, Power, and Evil: A Process Theodicy_ (Philadelphia: Westminster Press, 1976), 269–281, on the incoherence of unilateral coercive control over self-determining beings.
+[^21]: Griffin, _Reenchantment without Supernaturalism_, 292–298. Griffin frames subjective immortality as a genuine metaphysical possibility, not a logical certainty.
+[^22]: Cobb and Griffin, _Process Theology_, 74–75, on God's persuasive action upon what Whitehead called "the wreckage" of the world, and on the creaturely cooperation that some goods require.
