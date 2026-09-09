@@ -20,12 +20,11 @@ and tries the next one. This post walks through a complete Python solver from
 scratch, step by step, so you can see exactly how the recursion works and why
 it is so fast in practice.
 
-This is the hands-on companion to my earlier overview, [Sudoku and
-Backtracking](https://andrewthecoder.com/blog/sudoku-and-backtracking), which
-explains the algorithm conceptually. Here we get into the code. You can also
-play with a live, interactive version of exactly this solver on the
-[sudoku demo](https://andrewthecoder.com/demos/sudoku) page, which runs the
-same backtracking logic in your browser.
+This post walks through a complete Python solver from scratch, step by step,
+so you can see exactly how the recursion works and why it is so fast in
+practice. You can also play with a live, interactive version of exactly this
+solver on the [sudoku demo](https://andrewthecoder.com/demos/sudoku) page,
+which runs the same backtracking logic in your browser.
 
 ## The Board
 
