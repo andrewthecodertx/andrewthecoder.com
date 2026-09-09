@@ -4,6 +4,7 @@ slug: sudoku-backtracking-in-python
 publishDate: '2026-09-08'
 description: 'A step-by-step Python tutorial on solving Sudoku puzzles with recursive backtracking: the board model, validity checks, search, solution counting, and a generator that proves uniqueness.'
 image: '/assets/blog/sudoku-backtracking-in-python.webp'
+demo: 'https://andrewthecoder.com/demos/sudoku'
 categories: ['Tutorials']
 tags: ['python', 'backtracking', 'sudoku', 'algorithms', 'recursion']
 author: Andrew
@@ -21,7 +22,10 @@ it is so fast in practice.
 
 This is the hands-on companion to my earlier overview, [Sudoku and
 Backtracking](https://andrewthecoder.com/blog/sudoku-and-backtracking), which
-explains the algorithm conceptually. Here we get into the code.
+explains the algorithm conceptually. Here we get into the code. You can also
+play with a live, interactive version of exactly this solver on the
+[sudoku demo](https://andrewthecoder.com/demos/sudoku) page, which runs the
+same backtracking logic in your browser.
 
 ## The Board
 
