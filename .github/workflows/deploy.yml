@@ -22,7 +22,12 @@ jobs:
 
       - name: Rsync files to server
         run: |
-          rsync -avz \
+          rsync -avz --delete \
+            --exclude '.git/' \
+            --exclude 'dist/' \
+            --exclude 'node_modules/' \
+            --exclude '.astro/' \
+            --exclude '.output/' \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
             ./ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DEPLOY_LOCATION }}
 
