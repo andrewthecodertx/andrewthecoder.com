@@ -26,12 +26,12 @@ the Rust we will write).
 
 John Horton Conway was a British mathematician, and in 1970 he asked a
 question that sounds almost like a party trick: can a small set of rules
-produce behavior that is arbitrarily complex? He wanted a cellular automaton
+produce behavior that is arbitrarily complex?[^1] He wanted a cellular automaton
 that was predictable enough to study, yet rich enough that nobody could
 look at a configuration and say "obviously it will do X."
 
 Conway's rules were published in _Scientific American_'s October 1970 issue,
-in Martin Gardner's "Mathematical Games" column. There is an urban legend
+in Martin Gardner's "Mathematical Games" column.[^2] There is an urban legend
 that Gardner had to beg Conway for material; the truth is that Gardner's
 column made Life an overnight phenomenon. Within months, computer labs and
 math departments everywhere were running Life on whatever hardware they had,
@@ -49,7 +49,7 @@ three properties before he would accept a candidate:
 
 The rules he settled on are now famous. A cell in a two-dimensional grid is
 either **alive** or **dead**, and at each tick of the clock (each
-"generation") every cell looks at its eight neighbors:
+"generation") every cell looks at its eight neighbors:[^4]
 
 - A live cell with fewer than 2 live neighbors dies of loneliness
   (underpopulation).
@@ -64,7 +64,7 @@ at all: the only thing you do is choose the starting pattern, and then you
 just watch.
 
 Conway died in April 2020, from complications of COVID-19, and the
-programming community (this one included) is still in his debt. He also
+programming community (this one included) is still in his debt.[^3] He also
 invented the surreal numbers, the look-and-say sequence, and a great deal of
 recreational mathematics, but Life is the thing that escaped the journals
 and became part of the culture.
@@ -404,7 +404,7 @@ empty cells.
 - The next level up, which I will mention but not implement here, is
   **Hashlife**, Bill Gosper's algorithm, which encodes the board as a
   quadtree of precomputed patches and can leap forward trillions of
-  generations by exponentiating the time step. It is spectacular, slightly
+  generations by exponentiating the time step.[^5] It is spectacular, slightly
   terrifying, and overkill for a tutorial; but it is the direct descendant
   of the sparse idea above, so the family tree is clear.
 
@@ -426,7 +426,7 @@ Still lifes are patterns that never change. The **block** is the simplest:
 Four cells in a square. Every cell has exactly three neighbors, so nothing
 ever dies, and every dead cell adjacent to the block has at most two live
 neighbors, so nothing is ever born. A block is a rock in the stream of
-generations.
+generations.[^6]
 
 The **beehive** is six cells, and the **loaf** is seven; both are still
 lifes. The queue of still lifes is infinite, which is itself a result worth
@@ -466,7 +466,7 @@ programmatically from a single quadrant, which is exactly what the
 The **glider** is the most famous object in Life: five cells that move
 diagonally one cell every four generations. It is the smallest spaceship
 (it was first described by Richard K. Guy in 1969, while Conway's group was
-tracking the R-pentomino), and it is why "glider" appears in half of all
+tracking the R-pentomino),[^7] and it is why "glider" appears in half of all
 Life lore, including the opening of Douglas Adams's _The Hitchhiker's Guide
 to the Galaxy_ (the GUIDE ships with a hologram of a glider).
 
@@ -486,7 +486,7 @@ many had assumed was a hard ceiling on Life's speed.
 ### The R-Pentomino and Methuselahs
 
 A **methuselah** is a tiny pattern that runs for a very long time before
-stabilizing. The champion small one is the **R-pentomino**: five cells in a
+stabilizing.[^8] The champion small one is the **R-pentomino**: five cells in a
 shape like a capital R. It takes 1103 generations to settle, and along the
 way it emits gliders in every direction. You can load it in the demo above;
 it looks like a spark that slowly learns to make halos.
@@ -494,13 +494,13 @@ it looks like a spark that slowly learns to make halos.
 ### Gosper's Glider Gun
 
 The **Glider Gun**, discovered by Bill Gosper in 1970, is the most
-important pattern in Life history. It is a finite pattern that emits a
+important pattern in Life history.[^9] It is a finite pattern that emits a
 glider every 30 generations, forever, which means the universe _does_ grow
 without bound. This was the discovery that overturned Conway's conjecture
 that no infinite growth was possible.
 
 Conway had offered a prize (fifty dollars, and some versions say a bottle
-of something) for a pattern that grows without limit. Gosper's gun won it.
+of something) for a pattern that grows without limit. Gosper's gun won it.[^10]
 The gun is a 36-cell pattern, and it is on display in the demo page's
 pattern menu.
 
@@ -620,12 +620,12 @@ internalized the rules; everything else is performance theater on top of it.
 There is one more thing Life teaches, and it is the reason Conway kept
 coming back to it. Because gliders can act as counters, and a pair of
 two-counter machines has the same computational power as a universal Turing
-machine, Life turned out to be **Turing complete**: with enough space and
+machine, Life turned out to be **Turing complete**:[^11] with enough space and
 time, a Life universe can simulate any possible computation, including a
 universal computer and, in principle, a copy of the very Rust program that
 implements Life. Since then, constructors have built actual Turing machines
 and general-purpose computers inside Life; a famous construction by Paul
-Rendell realized a working universal Turing machine in the grid itself.
+Rendell realized a working universal Turing machine in the grid itself.[^12]
 
 That means Life is not a toy. It is a proof, in the most concrete form
 imaginable, that a handful of simple local rules can encode every
@@ -634,8 +634,22 @@ today's cellular automata in physics, biology, and machine learning, where
 local rules over a grid keep producing surprisingly global behavior.
 
 Back in 1970, Conway wanted a pattern that nobody could just _look_ at and
-predict. He got one: Life is mathematically undecidable in general, which
-is a polite way of saying you cannot write a program that tells you whether
-an arbitrary starting pattern will go on forever. You have to run it. That
-is why Life is such a lovely first project in any language: being forced
-to simulate it is not a limitation, it is the point.
+predict. He got one: Life is mathematically undecidable in general,[^13]
+which is a polite way of saying you cannot write a program that tells you
+whether an arbitrary starting pattern will go on forever. You have to run
+it. That is why Life is such a lovely first project in any language: being
+forced to simulate it is not a limitation, it is the point.
+
+[^1]: John Horton Conway, "The Game of Life" (unpublished notes, 1970), as presented in Martin Gardner, "Mathematical Games," _Scientific American_ 223 (October 1970). For Conway's life and work, see Siobhan Roberts, _Genius at Play: The Curious Mind of John Conway_ (New York: Bloomsbury, 2015).
+[^2]: Martin Gardner, "Mathematical Games: The Fantastic Combinations of John Conway's New Solitaire Game 'Life'," _Scientific American_ 223 (October 1970). The column gave Life its first public appearance and made it a cultural phenomenon.
+[^3]: Conway died of complications of COVID-19 in April 2020. See Siobhan Roberts, "John Conway, 82, Dies; Mathematician Who Invented the Game of Life," _The New York Times_ (April 2020).
+[^4]: The four rules appear in Gardner, "Mathematical Games," _Scientific American_ 223 (October 1970), and are restated in Elwyn Berlekamp, John Conway, and Richard Guy, _Winning Ways for Your Mathematical Plays_, vol. 4 (Wellesley: A K Peters, 2004), ch. 25.
+[^5]: Bill Gosper described Hashlife in the early 1980s at Xerox PARC; the algorithm is documented in the Life community literature, most accessibly in the "Hashlife" entry of _LifeWiki_ (2026).
+[^6]: The block, beehive, and loaf are the three smallest still lifes. The block, as a 2x2 square, is the only still life with exactly four cells; see the "Still Life" entry in _LifeWiki_ (2026).
+[^7]: Richard K. Guy discovered the glider in 1969 while Conway's group was tracking the R-pentomino; see the "Glider" entry in the Life Lexicon, compiled by Stephen A. Silver (2026).
+[^8]: Martin Gardner defines methuselahs as patterns of fewer than ten live cells that take longer than 50 generations to stabilize; see the "Methuselah" entry in the Life Lexicon, compiled by Stephen A. Silver (2026).
+[^9]: Bill Gosper discovered the Glider Gun in November 1970; the gun is a period-30 oscillator emitting a glider every 30 generations. See the "Glider Gun" entry in _LifeWiki_ (2026).
+[^10]: Conway offered fifty dollars in the October 1970 column for a proof or disproof of his no-infinite-growth conjecture; the prize was won in November 1970 by an MIT team that constructed the glider gun. See the "Gun" and "Glider Gun" entries in _LifeWiki_ (2026).
+[^11]: Turing completeness of Life follows from constructing a two-counter machine in the grid; see Paul Chapman, "Life Universal Computer" (2002) and the citations in the "Turing completeness" section of _LifeWiki_ (2026).
+[^12]: Paul Rendell, "A Turing Machine in Conway's Game of Life" (2005), implemented a working universal Turing machine inside Life; see also the "Turing Machine" entry in _LifeWiki_ (2026).
+[^13]: By the halting problem, determining whether an arbitrary Life configuration terminates is undecidable; see the "Turing completeness" section of _LifeWiki_ (2026).
