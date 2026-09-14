@@ -20,7 +20,22 @@ export async function getStaticPaths({ paginate }) {
   return paginate(visiblePosts, { pageSize: 5 });
 }
 
-const { page } = Astro.props;
+// paginate() supplies a typed `page` prop, but with a JS content config the
+// generated types don't infer it; declare the shape we actually use.
+const { page } = Astro.props as {
+  page: {
+    data: Array<{
+      data: {
+        slug: string;
+        title: string;
+        description: string;
+        publishDate: string;
+        author: string;
+      };
+    }>;
+    url: { prev: string | undefined; next: string | undefined };
+  };
+};
 
 const authors = await getCollection('authors');
 function getAuthorName(authorSlug: string) {
