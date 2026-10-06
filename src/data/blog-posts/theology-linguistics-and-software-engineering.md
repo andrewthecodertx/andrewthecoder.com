@@ -1,5 +1,5 @@
 ---
-title: 'Greek, Theology, and the Shape of Good Software'
+title: 'Linguistics, Theology, and the Shape of Good Software'
 slug: theology-linguistics-and-software-engineering
 publishDate: '2026-10-05'
 description: 'My education was in theology and linguistics; my trade is software engineering. The connection is not that these fields are the same, but that each taught me to work carefully with meaning, assumptions, and complex systems.'
@@ -15,8 +15,8 @@ My formal education was in theology and linguistics. My trade is software
 engineering. People sometimes hear that combination as an odd bit of biography,
 something to mention after the useful qualifications are out of the way.
 
-I don't think of it that way. I spent time studying Greek when I could have
-been learning Python, which felt like a strange detour at the time. Those
+I don't think of it that way. I spent time studying Greek and
+Hebrew when I could have been learning Python, which felt like a strange detour at the time. Those
 subjects didn't teach me how to write a web server or debug a race condition.
 They did teach me habits of thought that I use all the time: pay attention to
 what words mean, ask what assumptions a system rests on, and don't confuse a
